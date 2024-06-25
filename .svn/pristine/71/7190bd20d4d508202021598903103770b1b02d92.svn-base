@@ -1,0 +1,18 @@
+import type { ExtractPropTypes } from "vue";
+
+export const formProps = {
+  model: Object,
+  labelWidth: {
+    type: String,
+    default: '80px'
+  },
+  labelPosition: {
+    type: String,
+    default: 'right'
+  },
+  rules: Object,
+  size: String
+} as const
+
+export type FormProps = ExtractPropTypes<typeof formProps>
+

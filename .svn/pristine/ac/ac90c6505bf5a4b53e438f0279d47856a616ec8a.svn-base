@@ -1,0 +1,42 @@
+<template>
+  <a
+    class="cu-link"
+    :href="disabled || !href ? undefined : href"
+    :target="target"
+    :class="[type ? 'cu-link--' + type : null, { underline }]"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <slot></slot>
+  </a>
+</template>
+
+<script setup lang="ts">
+import '../style/css';
+defineOptions({
+  name: 'CuLink'
+});
+
+const emit = defineEmits(['click']);
+
+const props = defineProps({
+  href: {
+    type: String,
+    default: ''
+  },
+  type: {
+    type: String
+  },
+  disabled: Boolean,
+  underline: Boolean,
+  target: {
+    type: String,
+    default: '_blank'
+  }
+});
+
+function handleClick(e) {
+  if (props.disabled) return;
+  emit('click');
+}
+</script>

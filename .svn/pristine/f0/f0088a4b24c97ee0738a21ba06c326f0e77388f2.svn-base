@@ -1,0 +1,20 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+
+export const checkboxGroupProps = {
+  modelValue: {
+    type: Array as PropType<string[]>,
+    required: true,
+    default: []
+  },
+} as const
+
+export type CheckboxGroupProps = ExtractPropTypes<typeof checkboxGroupProps>
+
+
+export const checkboxGroupEmits = {
+  ['update:modelValue']: (val: string[]) => Array.isArray(val),
+  change: (val: string[]) => Array.isArray(val)
+}
+
+export type CheckboxGroupEmits = typeof checkboxGroupEmits

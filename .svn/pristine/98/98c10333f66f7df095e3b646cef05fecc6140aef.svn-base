@@ -1,0 +1,107 @@
+<template>
+  <form class="cu-form" :class="['label-' + labelPosition, size]" onsubmit="return false">
+    <slot></slot>
+  </form>
+</template>
+
+<script setup lang="ts">
+import { provide, ref, onMounted, computed } from 'vue';
+import '../style/css';
+import { formProps } from './main.props';
+defineOptions({
+  name: 'CuForm'
+});
+
+const props = defineProps(formProps);
+
+const itemInfoList = ref([]);
+const originData = ref({});
+
+const provideSize = computed(() => {
+  return props.size;
+});
+
+interface itemInfoProp {
+  uid: number;
+  prop: string;
+  validate: Function;
+  clearValidate: Function;
+}
+function validate(callback: Function) {
+  const promises = itemInfoList.value.map((item: itemInfoProp) => item.validate());
+  Promise.all(promises)
+    .then(() => {
+      callback(true);
+    })
+    .catch(() => {
+      callback(false);
+    });
+}
+
+function validateFields(names: string[], callback: Function) {
+  if (!props.rules) return;
+  const promises = itemInfoList.value
+    .filter((item: itemInfoProp) => names.includes(item.prop))
+    .map((item: itemInfoProp) => item.validate());
+  Promise.all(promises)
+    .then(() => {
+      callback(true);
+    })
+    .catch(() => {
+      callback(false);
+    });
+}
+
+function clearValidates(names: string[] | undefined) {
+  const promises = itemInfoList.value.filter(names ? (item: itemInfoProp) => names.includes(item.prop) : Boolean);
+  promises.forEach((field: itemInfoProp) => {
+    field.clearValidate();
+  });
+}
+
+function resetFields(names: string[] | undefined) {
+  const promises = itemInfoList.value.filter(names ? (item: itemInfoProp) => names.includes(item.prop) : Boolean);
+  promises.forEach((field: itemInfoProp) => {
+    field.clearValidate();
+  });
+  Object.assign(props.model, originData.value);
+}
+
+function itemValidatePush(item: itemInfoProp) {
+  let index = itemInfoList.value.findIndex((v: itemInfoProp) => v.prop === item.prop);
+  if (index >= 0) {
+    itemInfoList.value.splice(index, 1);
+  }
+  itemInfoList.value.push(item);
+}
+
+function itemValidateDelete(uid: number) {
+  let index = itemInfoList.value.findIndex((v) => v.uid === uid);
+  if (index >= 0) {
+    itemInfoList.value.splice(index, 1);
+  }
+}
+
+const provideLabelWidth = computed(() => {
+  return props.labelWidth;
+});
+
+const provideLabelPosition = computed(() => {
+  return props.labelPosition;
+});
+
+provide('form:labelWidth', provideLabelWidth);
+provide('form:labelPosition', provideLabelPosition);
+provide('form:rules', props.rules);
+provide('form:validatepush', itemValidatePush);
+provide('form:validatedelete', itemValidateDelete);
+
+provide('form:model', props.model);
+provide('form:size', provideSize);
+
+defineExpose({ validate, validateFields, clearValidates, resetFields });
+
+onMounted(() => {
+  originData.value = JSON.parse(JSON.stringify(props.model));
+});
+</script>

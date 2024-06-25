@@ -1,0 +1,4 @@
+const ELEVATOR_PROVIDE = Symbol("ELEVATOR_PROVIDE");
+export {
+  ELEVATOR_PROVIDE
+};

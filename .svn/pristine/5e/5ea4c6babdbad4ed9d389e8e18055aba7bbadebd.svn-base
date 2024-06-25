@@ -1,0 +1,29 @@
+<template>
+  <div class="cu-carousel-item" v-show="show">
+    <slot></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { getCurrentInstance, inject, onMounted, onBeforeUnmount, computed } from 'vue';
+import '../style/css';
+import type { CarouselProvide } from './type';
+
+defineOptions({
+  name: 'CuCarouselItem'
+});
+const instance = getCurrentInstance()!;
+
+const parent = inject<CarouselProvide>('carousel:parent');
+
+const show = computed(() => {
+  return parent?.current.value == instance.uid;
+});
+
+onMounted(() => {
+  parent?.addItem && parent.addItem(instance.uid);
+});
+onBeforeUnmount(() => {
+  parent?.removeItem && parent.removeItem(instance.uid);
+});
+</script>

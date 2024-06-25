@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Backtop from './src/main.vue'
+
+export const CuBacktop = useComponets(Backtop)

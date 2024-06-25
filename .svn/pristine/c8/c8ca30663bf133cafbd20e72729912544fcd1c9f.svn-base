@@ -1,0 +1,775 @@
+<template>
+  <div class="content">
+    <cu-button-group>
+      <cu-button @click="open(false)">打开confirm</cu-button>
+      <cu-button @click="show = !show" type="success">打开dianlog</cu-button>
+      <cu-button type="warning" @click="openMessage">基础消息提示</cu-button>
+      <cu-button type="danger" @click="previewImg">图片预览</cu-button>
+      <cu-button type="danger" @click="notice">notice</cu-button>
+    </cu-button-group>
+    <cu-badge :value="5">
+      <span>文本</span>
+    </cu-badge>
+    <cu-breadcrumb separator="-">
+      <cu-breadcrumb-item>首页</cu-breadcrumb-item>
+      <cu-breadcrumb-item>
+        <a>按钮</a>
+      </cu-breadcrumb-item>
+      <cu-breadcrumb-item active>面包屑</cu-breadcrumb-item>
+    </cu-breadcrumb>
+    <cu-card-group card-hover-effect="filter">
+      <cu-card class="cardbox" v-for="item in cardlist">
+        <cu-image style="width: 178px; height: 178px" fit="cover" :src="item"></cu-image>
+        <div>
+          <div>comic-plus单方面宣布</div>
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span style="font-size: 12px; color: #999">哈吉米是世界上最可爱的动物</span>
+            <cu-tag>盖章</cu-tag>
+          </div>
+        </div>
+      </cu-card>
+    </cu-card-group>
+    <cu-carousel height="400px">
+      <cu-carousel-item v-for="(item, index) in list">
+        <div class="itemdiv" :style="{ backgroundColor: item }">{{ index + 1 }}</div>
+      </cu-carousel-item>
+    </cu-carousel>
+    <cu-cascader :options="options" v-model="values" class="demoinput"></cu-cascader>
+    <cu-checkbox-group v-model="checkList">
+      <cu-checkbox label="复选框1"></cu-checkbox>
+      <cu-checkbox label="复选框2"></cu-checkbox>
+      <cu-checkbox label="复选框3"></cu-checkbox>
+    </cu-checkbox-group>
+    <cu-collapse v-model="actives">
+      <cu-collapse-item label="基础折叠面板" name="1">
+        <template #default>
+          <div>基础折叠面板</div>
+          <div>基础折叠面板</div>
+          <div>基础折叠面板</div>
+          <div>基础折叠面板</div>
+        </template>
+      </cu-collapse-item>
+      <cu-collapse-item label="基础折叠面板" name="2">
+        <template #default>
+          <div>基础折叠面板</div>
+        </template>
+      </cu-collapse-item>
+      <cu-collapse-item label="基础折叠面板" name="3">
+        <template #default>
+          <div>基础折叠面板</div>
+        </template>
+      </cu-collapse-item>
+    </cu-collapse>
+    <cu-color-picker v-model="colors"></cu-color-picker>
+    <cu-container class="demo-container">
+      <cu-header>header</cu-header>
+      <cu-container>
+        <cu-aside width="200px">aside</cu-aside>
+        <cu-container>
+          <cu-main>main</cu-main>
+          <cu-footer>footer</cu-footer>
+        </cu-container>
+      </cu-container>
+    </cu-container>
+    <cu-countdown :value="time"></cu-countdown>
+    <cu-dialog v-model="show" header="基础对话框">
+      <div style="width: 100%; height: 400px"></div>
+    </cu-dialog>
+    <cu-date-picker v-model="value" placeholder="请选择日期" class="demoinput" clearable></cu-date-picker>
+    <cu-backtop target=".content"></cu-backtop>
+    <cu-divider></cu-divider>
+    <cu-elevator height="300px">
+      <cu-elevator-item v-for="item in elevatorList" :name="item.id" :label="item.label">
+        <div class="itemdiv" :style="{ backgroundColor: item.color }">{{ item.label }}</div>
+      </cu-elevator-item>
+    </cu-elevator>
+    <cu-ellipsis type="data" :data="tableData" :clamp="3">
+      <template #default="{ row }">
+        <cu-card class="ellipsis-box">
+          <div style="display: flex">
+            <cu-image :src="row.avator" fit="cover"></cu-image>
+            <div>
+              <div class="head">用户信息</div>
+              <span class="col">
+                <span>姓名:</span>
+                <span>{{ row.name }}</span>
+              </span>
+              <span class="col">
+                <span>年龄:</span>
+                <span>{{ row.age }}</span>
+              </span>
+              <span class="col">
+                <span>性别:</span>
+                <span>{{ row.sex }}</span>
+              </span>
+              <span class="col row">
+                <span>地址:</span>
+                <span>{{ row.address }}</span>
+              </span>
+            </div>
+          </div>
+        </cu-card>
+      </template>
+    </cu-ellipsis>
+    <cu-empty description="没有数据"></cu-empty>
+    <cu-form :model="form2">
+      <cu-form-item label="练习生姓名">
+        <cu-input v-model="form2.name" placeholder="请输入练习生姓名"></cu-input>
+      </cu-form-item>
+      <cu-form-item label="练习时长">
+        <cu-input v-model="form2.time" placeholder="请输入练习时长"></cu-input>
+      </cu-form-item>
+      <cu-form-item label="性别">
+        <cu-radio label="man" v-model="form2.sex">男</cu-radio>
+        <cu-radio label="women" v-model="form2.sex">女</cu-radio>
+        <cu-radio label="manwomen" v-model="form2.sex">娘炮</cu-radio>
+      </cu-form-item>
+    </cu-form>
+    <cu-image
+      src="https://img1.baidu.com/it/u=1173557936,3508278217&fm=253"
+      style="width: 100px; height: 100px"></cu-image>
+    <cu-input-number v-model="valuenumber" class="demoinput"></cu-input-number>
+    <cu-link>文字链接</cu-link>
+    <div v-loading="true">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptates blanditiis rerum possimus aliquam eum
+      assumenda recusandae eveniet est consequuntur doloremque natus nobis, optio tempora ut voluptate error soluta.
+      Maxime cumque quas praesentium! Voluptatum, odio? Repudiandae sint laboriosam ipsam nesciunt eos saepe facilis
+      animi eius? Repellendus harum sapiente quod obcaecati praesentium quis culpa dolorem rerum sequi quibusdam. Magnam
+      et laudantium dolores voluptatibus enim quos obcaecati at odit saepe eligendi, earum in corporis rem debitis vero
+      doloribus sit natus nam nostrum error consectetur. Ipsam quidem magnam sint facilis facere veniam deserunt maxime,
+      odio, iure nobis reiciendis amet excepturi debitis similique unde?
+    </div>
+    <cu-menu v-model="activeValue" width="200px">
+      <cu-menu-item label="菜单1" index="1"></cu-menu-item>
+      <cu-menu-item label="菜单2" index="2"></cu-menu-item>
+      <cu-sub-menu label="二级菜单">
+        <cu-menu-item label="菜单3-2" index="3-2"></cu-menu-item>
+        <cu-menu-item label="菜单3-3" index="3-3"></cu-menu-item>
+      </cu-sub-menu>
+      <cu-menu-item label="菜单4" index="4"></cu-menu-item>
+    </cu-menu>
+    <cu-pagination :total="50"></cu-pagination>
+    <cu-progress :progress="100" class="demo-progress"></cu-progress>
+    <cu-select v-model="value" placeholder="请选择..." class="demoinput">
+      <cu-option v-for="item in option" :label="item.label" :value="item.value"></cu-option>
+    </cu-select>
+    <cu-slider v-model="valueslider"></cu-slider>
+    <cu-step :active="1">
+      <cu-step-item title="步骤1"> </cu-step-item>
+      <cu-step-item title="步骤2"> </cu-step-item>
+      <cu-step-item title="步骤3"> </cu-step-item>
+    </cu-step>
+    <cu-step :active="1" center active-color="#ff7900">
+      <cu-step-card title="第一步" icon="cu-icon-card">划水</cu-step-card>
+      <cu-step-card title="第二步">还是划水</cu-step-card>
+      <cu-step-card title="第三步">等死</cu-step-card>
+    </cu-step>
+    <cu-switch v-model="valueswitch"></cu-switch>
+    <cu-radio-group v-model="active2">
+      <cu-radio label="1"> 单选框1 </cu-radio>
+      <cu-radio label="2"> 单选框2</cu-radio>
+      <cu-radio label="3"> 单选框3</cu-radio>
+    </cu-radio-group>
+    <cu-textarea v-model="valuetextarea" placeholder="请输入..."></cu-textarea>
+    <cu-time-picker v-model="valuetime" class="demoinput" placeholder="请选择时间..." clearable></cu-time-picker>
+    <cu-upload v-model:fileList="fileList" http="https://run.mocky.io/v3/0746f758-3692-4ad7-bbb8-baab847d1753">
+      <template #tip>
+        <span style="color: #f56c6c">我是占位提示文本</span>
+      </template>
+      <template #trigger>
+        <cu-link>点我才能选择文件</cu-link>
+      </template>
+      <template #default>
+        <cu-tag type="primary">默认插槽内容</cu-tag>
+      </template>
+    </cu-upload>
+    <cu-table :data="tableData2" height="200px" :options="options9">
+      <template #action>
+        <cu-button size="mini">查看</cu-button>
+      </template>
+    </cu-table>
+    <cu-waterfall :col="4" :gutter="10">
+      <cu-waterfall-item v-for="(h, i) in waterfallArr2" :key="i">
+        <div class="blockbox" :style="'height:' + h">瀑布流，高{{ h }}</div>
+      </cu-waterfall-item>
+    </cu-waterfall>
+    <cu-tabs v-model="activeName">
+      <cu-tab-pane name="1" label="标签页1"></cu-tab-pane>
+      <cu-tab-pane name="2" label="标签页2"></cu-tab-pane>
+      <cu-tab-pane name="3" label="标签页3"></cu-tab-pane>
+    </cu-tabs>
+    <cu-button @click="show3 = !show3">{{ show3 ? '隐藏' : '显示' }}</cu-button>
+    <div class="transitiondemobox2">
+      <cu-transition-collapse>
+        <div v-show="show3">
+          <div class="transitiondemo">transition-collapse</div>
+          <div class="transitiondemo">transition-collapse</div>
+        </div>
+      </cu-transition-collapse>
+    </div>
+    <div class="scrollbar" style="height: 300px">
+      <cu-scrollbar>
+        <ul>
+          <li v-for="el in 20">{{ el }}</li>
+        </ul>
+      </cu-scrollbar>
+    </div>
+    <cu-atlas svg="404"></cu-atlas>
+    <cu-tip rolling type="primary" plain>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores molestias repudiandae harum laborum vel dolor
+      eum ipsum? Ad et inventore, facere optio quos officiis
+    </cu-tip>
+    <cu-dropdown>
+      <cu-button type="primary" size="mini">
+        下拉菜单
+        <i class="cu-icon-down"></i>
+      </cu-button>
+      <template #dropdown>
+        <cu-dropdown-menu>
+          <cu-dropdown-item>菜单项1</cu-dropdown-item>
+          <cu-dropdown-item disabled>菜单项2</cu-dropdown-item>
+          <cu-dropdown-item>菜单项3</cu-dropdown-item>
+          <cu-dropdown-item divider>菜单项4</cu-dropdown-item>
+        </cu-dropdown-menu>
+      </template>
+    </cu-dropdown>
+
+    <div style="text-align: right; padding-right: 200px">
+      <cu-affix position="bottom" :offset="200">
+        <cu-pistol>
+          <template #magazine>
+            <cu-bullet icon="cu-icon-sun" sign="sun"></cu-bullet>
+            <cu-bullet icon="cu-icon-snowflake" sign="snowflake"></cu-bullet>
+            <cu-bullet icon="cu-icon-heavy-rain" sign="rain"></cu-bullet>
+            <cu-bullet icon="cu-icon-wind" sign="wind"></cu-bullet>
+          </template>
+        </cu-pistol>
+      </cu-affix>
+    </div>
+
+    <div class="demo-zone" style="height: 200px">
+      <cu-zone v-model="zonevalue">
+        <template #start> startbox </template>
+        <template #end> endbox </template>
+      </cu-zone>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { ref, getCurrentInstance } from 'vue';
+import { CuMessageBox, preview } from '../es';
+const { proxy }: any = getCurrentInstance();
+const cardlist = [
+  'https://img1.baidu.com/it/u=1173557936,3508278217&fm=253',
+  'https://img1.baidu.com/it/u=4178657956,655270145&fm=253',
+  'https://img1.baidu.com/it/u=4244897139,3864268160&fm=253',
+  'https://img2.baidu.com/it/u=1062929378,2700578315&fm=253',
+  'https://img2.baidu.com/it/u=3265719718,2280453773&fm=253'
+];
+const activeName = ref('1');
+const fileList = ref<UploadFile[]>([]);
+const valuetextarea = ref('');
+const active2 = ref('1');
+const values = ref([]);
+const checkList = ref([]);
+const show = ref(false);
+const activeValue = ref('');
+const actives = ref([]);
+const valuenumber = ref(1);
+const time = ref(Date.now() + 1000 * 60 * 60 * 24 * 1);
+const colors = ref('');
+const show3 = ref(true);
+const zonevalue = ref(0.5);
+function open(center: boolean) {
+  // proxy.$alert({
+  //   title: '提示',
+  //   content: '这是一条弹窗消息消息',
+  //   center
+  // });
+  CuMessageBox.alert({
+    title: '提示',
+    content: '这是一条弹窗消息消息',
+    center
+  });
+}
+
+function previewImg() {
+  // proxy.$preview(cardlist, 3);
+  preview(cardlist, 3);
+}
+const tableData2 = ref<object[]>([]);
+tableData2.value = ['张三', '李四', '王五', '赵六', '其它人'].map((v) => {
+  let obj: object = {
+    name: v,
+    age: '18'
+  };
+  for (let i = 1; i <= 8; i++) {
+    obj['col' + i] = 'col' + i;
+  }
+  return obj;
+});
+const valuetime = ref('');
+const valueswitch = ref(false);
+const value = ref('');
+const valueslider = ref(0);
+const list = ['#e4acc7', '#67c23a', '#e6a23c', '#f56c6c'];
+const form2 = ref({
+  name: '',
+  time: '',
+  sex: 'man'
+});
+const waterfallArr2 = ref(['100px', '70px', '125px', '300px', '92px', '118px', '250px', '100px']);
+function openMessage() {
+  // proxy.$message({
+  //   message: '基础消息提示'
+  // });
+  CuMessageBox.message({
+    message: '基础消息提示',
+    showClose: true,
+    duration: -1
+  });
+}
+function notice() {
+  // proxy.$notice({
+  //   message: '基础消息提示'
+  // });
+  CuMessageBox.notice({
+    title: '54654',
+    content: '基础消息提示',
+    showClose: true,
+    duration: -1
+  });
+}
+
+const options9 = ref({
+  border: true,
+  stripe: true,
+  column: [
+    {
+      label: '姓名',
+      prop: 'name',
+      align: 'center',
+      fixed: 'left',
+      width: 150
+    },
+    {
+      label: '年龄',
+      prop: 'age',
+      fixed: 'left'
+    },
+    {
+      label: 'column1',
+      prop: 'col1',
+      width: 150
+    },
+    {
+      label: 'column2',
+      prop: 'col2',
+      width: 150
+    },
+    {
+      label: 'column3',
+      prop: 'col3',
+      width: 150
+    },
+    {
+      label: 'column4',
+      prop: 'col4',
+      width: 150
+    },
+    {
+      label: 'column5',
+      prop: 'col5',
+      width: 150
+    },
+    {
+      label: 'column6',
+      prop: 'col6'
+    },
+    {
+      label: 'column7',
+      prop: 'col7'
+    },
+    {
+      label: 'column8',
+      prop: 'col8'
+    },
+    {
+      label: '操作',
+      prop: 'action',
+      align: 'center',
+      fixed: 'right',
+      width: 150
+    }
+  ]
+});
+const option = ref([
+  {
+    label: '张三',
+    value: 1
+  },
+  {
+    label: '李四',
+    value: 2
+  },
+  {
+    label: '王五',
+    value: 3
+  },
+  {
+    label: '赵六',
+    value: 4
+  },
+  {
+    label: '其他人',
+    value: 5
+  }
+]);
+const tableData = [
+  {
+    name: '张三',
+    age: '18',
+    sex: '男',
+    address: '安徽省合肥市蜀山区黄山路与石门路交叉口XXX号',
+    avator: 'https://img1.baidu.com/it/u=1173557936,3508278217&fm=253'
+  },
+  {
+    name: '李四',
+    age: '18',
+    sex: '女',
+    address: '安徽省合肥市蜀山区黄山路与石门路交叉口XXX号',
+    avator: 'https://img1.baidu.com/it/u=4178657956,655270145&fm=253'
+  },
+  {
+    name: '王五',
+    age: '18',
+    sex: '男',
+    address: '安徽省合肥市蜀山区黄山路与石门路交叉口XXX号',
+    avator: 'https://img1.baidu.com/it/u=4244897139,3864268160&fm=253'
+  },
+  {
+    name: '赵六',
+    age: '18',
+    sex: '男',
+    address: '安徽省合肥市蜀山区黄山路与石门路交叉口XXX号',
+    avator: 'https://img2.baidu.com/it/u=1062929378,2700578315&fm=253'
+  },
+  {
+    name: '其他人',
+    age: '18',
+    sex: '男',
+    address: '安徽省合肥市蜀山区黄山路与石门路交叉口XXX号',
+    avator: 'https://img2.baidu.com/it/u=3265719718,2280453773&fm=253'
+  }
+];
+const elevatorList = [
+  {
+    label: '厨房用品',
+    color: '#f6f6f6',
+    id: '0'
+  },
+  {
+    label: '碳酸饮料',
+    color: '#e4acc7',
+    id: '1'
+  },
+  {
+    label: '家用日常',
+    color: '#65b93b',
+    id: '2'
+  },
+  {
+    label: '卫生用品',
+    color: '#e6a23c',
+    id: '3'
+  }
+];
+const options = ref([
+  {
+    value: 'zhushi',
+    label: '主食',
+    children: [
+      {
+        value: 'mifan',
+        label: '米饭类',
+        children: [
+          {
+            value: 'dami',
+            label: '大米饭'
+          },
+          {
+            value: 'xiaomi',
+            label: '小米饭'
+          }
+        ]
+      },
+      {
+        value: 'miantiao',
+        label: '面条类',
+        children: [
+          {
+            value: 'dawankuanmian',
+            label: '大碗宽面'
+          },
+          {
+            value: 'longxumian',
+            label: '龙须面'
+          },
+          {
+            value: 'wudong',
+            label: '乌冬面'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    value: 'caipin',
+    label: '菜品',
+    children: [
+      {
+        value: 'chaocai',
+        label: '炒菜',
+        children: [
+          {
+            value: 'suanlatudousi',
+            label: '酸辣土豆丝'
+          },
+          {
+            value: 'suanrongkongxincai',
+            label: '蒜蓉空心菜'
+          },
+          {
+            value: 'ganbiansijidou',
+            label: '干煸四季豆'
+          },
+          {
+            value: 'xiaochaorou',
+            label: '小炒肉'
+          },
+          {
+            value: 'xihongshichaodan',
+            label: '西红柿炒蛋'
+          },
+          {
+            value: 'baochaozhugan',
+            label: '爆炒猪肝'
+          }
+        ]
+      },
+      {
+        value: 'ganguo',
+        label: '干锅',
+        children: [
+          {
+            value: 'ganguotudou',
+            label: '干锅土豆'
+          },
+          {
+            value: 'ganguohuacai',
+            label: '干锅花菜'
+          },
+          {
+            value: 'ganguoqianyedoufu',
+            label: '干锅千叶豆腐'
+          },
+          {
+            value: 'ganguoniuwa',
+            label: '干锅牛蛙'
+          },
+          {
+            value: 'ganguoji',
+            label: '干锅鸡'
+          },
+          {
+            value: 'ganguoniurou',
+            label: '干锅牛肉'
+          },
+          {
+            value: 'ganguoniuwa',
+            label: '干锅牛蛙'
+          },
+          {
+            value: 'ganguoji',
+            label: '干锅鸡'
+          },
+          {
+            value: 'ganguoniurou',
+            label: '干锅牛肉'
+          }
+        ]
+      },
+      {
+        value: 'tang',
+        label: '汤',
+        children: [
+          {
+            value: 'xihongshijidantang',
+            label: '西红柿鸡蛋汤'
+          },
+          {
+            value: 'zicaidanhuatang',
+            label: '紫菜蛋花汤'
+          },
+          {
+            value: 'paiguyumitang',
+            label: '排骨玉米汤'
+          },
+          {
+            value: 'chashugulaoyatang',
+            label: '茶树菇老鸭汤'
+          },
+          {
+            value: 'laomujitang',
+            label: '老母鸡汤'
+          },
+          {
+            value: 'zibuwujitang',
+            label: '滋补乌鸡汤'
+          }
+        ]
+      },
+      {
+        value: 'duncai',
+        label: '炖菜',
+        children: [
+          {
+            value: 'baicaidundoufu',
+            label: '白菜炖豆腐'
+          },
+          {
+            value: 'zhuroudunfentiao',
+            label: '猪肉炖粉条'
+          },
+          {
+            value: 'chaiguroudunsuancai',
+            label: '拆骨肉炖酸菜'
+          },
+          {
+            value: 'xianroubaicaidunfensi',
+            label: '咸肉白菜炖粉丝'
+          },
+          {
+            value: 'zhugudunsuancai',
+            label: '猪骨炖酸菜'
+          }
+        ]
+      },
+      {
+        value: 'zheng',
+        label: '蒸菜',
+        children: [
+          {
+            value: 'zhengdan',
+            label: '蒸蛋'
+          },
+          {
+            value: 'fenzhengrou',
+            label: '粉蒸肉'
+          },
+          {
+            value: 'zhengyu',
+            label: '蒸鱼'
+          },
+          {
+            value: 'fengzhaozhengdoumi',
+            label: '凤爪蒸豆米'
+          },
+          {
+            value: 'zhusunzhengjichi',
+            label: '竹笋蒸鸡翅'
+          }
+        ]
+      },
+      {
+        value: 'nanchi',
+        label: '难吃的菜',
+        children: [
+          {
+            value: 'jizhilayu',
+            label: '鸡汁辣鱼'
+          },
+          {
+            value: 'larou',
+            label: '腊肉'
+          },
+          {
+            value: 'xihucuyu',
+            label: '西湖醋鱼'
+          },
+          {
+            value: 'meicaizhujiao',
+            label: '梅菜猪脚'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    value: 'gaifan',
+    label: '盖饭',
+    children: [
+      {
+        value: 'qingjiaojidangaifan',
+        label: '青椒鸡蛋盖饭'
+      },
+      {
+        value: 'suanlatudousigaifan',
+        label: '酸辣土豆丝盖饭'
+      },
+      {
+        value: 'danchaofan',
+        label: '蛋炒饭'
+      },
+      {
+        value: 'yangzhoucaifan',
+        label: '扬州炒饭'
+      }
+    ]
+  }
+]);
+</script>
+
+<style>
+.content {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.itemdiv {
+  width: 100%;
+  height: 400px;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.blockbox {
+  border: 1px solid var(--border);
+  background-color: var(--primary);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+.cardbox {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.scrollbar ul {
+  list-style: none;
+  padding: 0 8px;
+}
+.scrollbar li {
+  margin-bottom: 8px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  background-color: var(--primary-light2);
+  text-align: center;
+  line-height: 40px;
+  color: var(--primary);
+}
+</style>

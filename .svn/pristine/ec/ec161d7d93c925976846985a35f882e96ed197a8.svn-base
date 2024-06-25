@@ -1,0 +1,32 @@
+import { createTitle } from './src/title';
+
+const useTitle = function (): object {
+  return {
+    mounted(el: any, binding: any) {
+      if (!binding.value) return;
+      el.instance = createTitle(el, binding.value, binding.arg);
+    },
+    updated(el: any, binding: any) {
+      if (!binding.value) return;
+      if (el.instance) {
+        el.instance.vm.exposed.update(binding.value, binding.arg);
+      } else {
+        el.instance = createTitle(el, binding.value, binding.arg);
+      }
+    },
+    unmounted(el: any) {
+      if (el.instance) {
+        el.instance.destroy();
+        el.instance = null;
+      }
+    }
+  };
+};
+
+const vTitle = {
+  install: function (app: any) {
+    app.directive('title', useTitle());
+  }
+};
+
+export { useTitle, vTitle };

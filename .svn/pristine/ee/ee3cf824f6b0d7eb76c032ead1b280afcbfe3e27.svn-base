@@ -1,0 +1,79 @@
+
+declare const _default: import('vue').DefineComponent<{
+    modelValue: {
+        type: (ArrayConstructor | NumberConstructor | DateConstructor | StringConstructor)[];
+    };
+    format: {
+        type: StringConstructor;
+        default: string;
+    };
+    valueFormat: {
+        type: StringConstructor;
+        default: string;
+        validator: (value: string) => boolean;
+    };
+    rangeSeparator: {
+        type: StringConstructor;
+        default: string;
+    };
+    size: StringConstructor;
+    range: BooleanConstructor;
+    icon: {
+        type: StringConstructor;
+        default: string;
+    };
+    shortcuts: ArrayConstructor;
+    width: StringConstructor;
+    disabled: BooleanConstructor;
+    placeholder: StringConstructor;
+    clearable: BooleanConstructor;
+    startPlaceholder: StringConstructor;
+    endPlaceholder: StringConstructor;
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    clear: (...args: any[]) => void;
+    change: (...args: any[]) => void;
+    "update:modelValue": (...args: any[]) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    modelValue: {
+        type: (ArrayConstructor | NumberConstructor | DateConstructor | StringConstructor)[];
+    };
+    format: {
+        type: StringConstructor;
+        default: string;
+    };
+    valueFormat: {
+        type: StringConstructor;
+        default: string;
+        validator: (value: string) => boolean;
+    };
+    rangeSeparator: {
+        type: StringConstructor;
+        default: string;
+    };
+    size: StringConstructor;
+    range: BooleanConstructor;
+    icon: {
+        type: StringConstructor;
+        default: string;
+    };
+    shortcuts: ArrayConstructor;
+    width: StringConstructor;
+    disabled: BooleanConstructor;
+    placeholder: StringConstructor;
+    clearable: BooleanConstructor;
+    startPlaceholder: StringConstructor;
+    endPlaceholder: StringConstructor;
+}>> & {
+    onChange?: (...args: any[]) => any;
+    onClear?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+}, {
+    icon: string;
+    disabled: boolean;
+    clearable: boolean;
+    range: boolean;
+    format: string;
+    rangeSeparator: string;
+    valueFormat: string;
+}, {}>;
+export default _default;

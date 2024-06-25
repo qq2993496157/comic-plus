@@ -1,0 +1,191 @@
+<template>
+  <div class="cu-carousel" :class="[transition, direction]" @mouseenter="mouseenter" @mouseleave="mouseleave">
+    <div class="cu-carousel__container" :style="carouselStyle">
+      <template v-if="type === 'card'">
+        <slot></slot>
+      </template>
+      <template v-else>
+        <transition-group :name="transitionName">
+          <slot></slot>
+        </transition-group>
+      </template>
+    </div>
+    <div class="cu-carousel__tools">
+      <div class="cu-carousel__buttons" :class="arrow" v-if="arrow != 'never'">
+        <i class="cu-icon-left left" v-if="direction === 'horizontal'" @click="changeActive(-1)"></i>
+        <i class="cu-icon-right right" v-if="direction === 'horizontal'" @click="changeActive(1)"></i>
+        <i class="cu-icon-top top" v-if="direction === 'vertical'" @click="changeActive(-1)"></i>
+        <i class="cu-icon-bottom bottom" v-if="direction === 'vertical'" @click="changeActive(1)"></i>
+      </div>
+      <div class="cu-carousel__indicator" :class="arrow" v-if="showIndicator">
+        <span v-for="dot in itemKeyList" :key="dot" @click="dotClick(dot)" :class="{ active: current === dot }"></span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, provide, ref, onMounted, onBeforeUnmount } from 'vue';
+import '../style/css';
+import { isNumber } from '../../utils/tools';
+
+defineOptions({
+  name: 'CuCarousel'
+});
+const props = defineProps({
+  height: {
+    type: String,
+    default: '300px'
+  },
+  transition: {
+    type: String,
+    default: 'transform',
+    validator: function (value) {
+      return ['transform', 'opacity'].includes(value);
+    }
+  },
+  autoPlay: {
+    type: Boolean,
+    default: true
+  },
+  arrow: {
+    type: String,
+    default: 'hover',
+    validator: function (value) {
+      return ['hover', 'never', 'always'].includes(value);
+    }
+  },
+  type: {
+    type: String,
+    default: 'default',
+    validator: function (value) {
+      return ['default', 'card'].includes(value);
+    }
+  },
+  direction: {
+    type: String,
+    default: 'horizontal',
+    validator: function (value) {
+      return ['vertical', 'horizontal'].includes(value);
+    }
+  },
+  showIndicator: {
+    type: Boolean,
+    default: true
+  },
+  defaultIndex: Number,
+  pauseOnHover: {
+    type: Boolean,
+    default: true
+  },
+  delay: {
+    type: Number,
+    default: 3000,
+    validator: function (value) {
+      return value > 0;
+    }
+  }
+});
+
+const emit = defineEmits(['change']);
+
+const active = ref(0);
+const flag = ref(true);
+const interval = ref(0);
+// const timeout = ref(0);
+const itemKeyList = ref([]);
+
+const carouselStyle = computed(() => {
+  return {
+    height: props.height
+  };
+});
+const transitionName = computed(() => {
+  if (props.transition === 'transform') {
+    return 'transform_' + props.direction + '_' + (flag.value ? 'nex' : 'pre');
+  }
+  return props.transition;
+});
+
+const current = computed(() => {
+  return itemKeyList.value[active.value];
+});
+
+function start() {
+  stop();
+  interval.value = setInterval(() => {
+    changeActive(1);
+  }, props.delay);
+}
+function stop() {
+  clearInterval(interval.value);
+  interval.value = 0;
+}
+
+function mouseenter() {
+  if (!props.autoPlay) return false;
+  props.pauseOnHover && stop();
+}
+
+function mouseleave() {
+  if (!props.autoPlay) return false;
+  start();
+}
+
+function changeActive(val: number) {
+  flag.value = val >= 0;
+  active.value += val;
+  active.value =
+    active.value >= itemKeyList.value.length ? 0 : active.value < 0 ? itemKeyList.value.length - 1 : active.value;
+  emit('change', active.value);
+}
+function next(): void {
+  changeActive(1);
+}
+
+function prev(): void {
+  changeActive(-1);
+}
+
+function setActiveIndex(num: number): void {
+  num = num >= itemKeyList.value.length ? itemKeyList.value.length : num < 0 ? 0 : num;
+  if (num == active.value) return;
+  flag.value = num > active.value;
+  active.value = num;
+  emit('change', active.value);
+}
+
+function dotClick(dot: number) {
+  if (props.arrow === 'never') return;
+  let index = itemKeyList.value.findIndex((v) => v === dot);
+  flag.value = index >= active.value;
+  active.value = index;
+  emit('change', active.value);
+}
+
+function setItem(id: number) {
+  if (itemKeyList.value.includes(id)) return;
+  itemKeyList.value.push(id);
+}
+
+provide('carousel:setItem', setItem);
+provide('carousel:current', current);
+provide('carousel:type', props.type);
+
+defineExpose({
+  next,
+  prev,
+  setActiveIndex
+});
+
+onMounted(() => {
+  if (isNumber(props.defaultIndex) && props.defaultIndex >= 0 && props.defaultIndex < itemKeyList.value.length) {
+    active.value = props.defaultIndex;
+    emit('change', active.value);
+  }
+  props.autoPlay && start();
+});
+onBeforeUnmount(() => {
+  stop();
+});
+</script>

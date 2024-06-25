@@ -1,0 +1,6 @@
+import type { Ref } from 'vue'
+
+export interface radioProvide {
+  activeValue: Ref<string>;
+  changeItemCheck: Function;
+}

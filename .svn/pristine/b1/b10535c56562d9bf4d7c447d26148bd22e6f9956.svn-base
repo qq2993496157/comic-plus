@@ -1,0 +1,27 @@
+function hexToRgb(hex: string) {
+  hex = hex.replace(/^#/, '');
+  const bigint = parseInt(hex, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return { r, g, b };
+}
+function rgbToHex(r: number, g: number, b: number) {
+  return `#${(1 << 24 | (r << 16) | (g << 8) | b).toString(16).slice(1)}`;
+}
+
+
+const colorMixin: Function = function (color: string, percentage: number): string {
+  if (!color) return ''
+  percentage = Math.min(100, Math.max(0, percentage));
+  const rgb = hexToRgb(color);
+  const blendedColor = {
+    r: Math.round(rgb.r + (255 - rgb.r) * (percentage / 100)),
+    g: Math.round(rgb.g + (255 - rgb.g) * (percentage / 100)),
+    b: Math.round(rgb.b + (255 - rgb.b) * (percentage / 100))
+  };
+  const resultColor = rgbToHex(blendedColor.r, blendedColor.g, blendedColor.b);
+  return resultColor;
+}
+
+export { colorMixin }

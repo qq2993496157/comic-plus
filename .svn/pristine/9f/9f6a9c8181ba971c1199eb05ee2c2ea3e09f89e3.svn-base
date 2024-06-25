@@ -1,0 +1,38 @@
+.cu-input-number .cu-input-number__inner {
+  flex: 1;
+  text-align: center;
+}
+
+.cu-input-number .cu-input-number__minus {
+  border-right: 1px solid transparent;
+  border-radius: var(--cu-border-radius) 0 0 var(--cu-border-radius);
+}
+.cu-input-number .cu-input-number__plus {
+  border-left: 1px solid transparent;
+  border-radius: 0 var(--cu-border-radius) var(--cu-border-radius) 0;
+}
+.cu-input-number:not(.is-disabled) .cu-input-number__minus:not(.disabled):hover,
+.cu-input-number:not(.is-disabled) .cu-input-number__plus:not(.disabled):hover {
+  color: var(--cu-color-primary);
+}
+.cu-input-number.is-disabled .cu-input-number__minus,
+.cu-input-number.is-disabled .cu-input-number__plus,
+.cu-input-number .cu-input-number__minus.disabled,
+.cu-input-number .cu-input-number__plus.disabled {
+  background-color: var(--cu-disabled-background);
+  color: var(--cu-disabled-font);
+  cursor: no-drop;
+}
+
+.cu-input-number .cu-input-number__minus,
+.cu-input-number .cu-input-number__plus {
+  width: var(--size);
+  border-color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  color: var(--cu-color-text);
+  background-color: var(--cu-background-color);
+  cursor: pointer;
+}

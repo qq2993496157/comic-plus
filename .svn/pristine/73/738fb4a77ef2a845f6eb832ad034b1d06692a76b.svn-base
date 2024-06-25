@@ -1,0 +1,20 @@
+
+interface configColor {
+  primary?: string;
+  success?: string;
+  danger?: string;
+  warning?: string;
+  font?: string;
+}
+
+interface comicConfig {
+  size?: string;
+  zIndex?: number;
+  color?: string | configColor;
+}
+
+export type { comicConfig }
+
+export * from './upload/src/type'
+export * from './table/src/type'
+export * from './loading/src/type'

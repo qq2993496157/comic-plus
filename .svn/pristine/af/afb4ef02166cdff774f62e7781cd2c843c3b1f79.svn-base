@@ -1,0 +1,12 @@
+
+import { ComputedRef } from 'vue';
+import type { SelectProps } from './main.props'
+
+export type ValueType = string | number | string[] | number[]
+
+export interface SelectProvide {
+  optionClick: Function;
+  optionSet: Function;
+  currentSize: ComputedRef<string>;
+  props: SelectProps;
+}

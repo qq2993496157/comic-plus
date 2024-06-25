@@ -1,0 +1,97 @@
+<template>
+  <transition name="cu-fade">
+    <div
+      class="cu-title"
+      :class="{ 'cu-title--bottom': classBottom, 'cu-title--left': classLeft }"
+      v-if="visible"
+      :style="style"
+    >
+      {{ text }}
+    </div>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { ref, watch, reactive, computed } from 'vue';
+defineOptions({
+  name: 'CuTitle'
+});
+
+const props = defineProps({
+  title: String
+});
+
+const visible = ref(false);
+const classBottom = ref(false);
+const classLeft = ref(false);
+const text = ref(props.title);
+
+const style = reactive({
+  left: '0px',
+  top: '0px'
+});
+
+function changeVisible(val) {
+  visible.value = val;
+}
+function updateText(val) {
+  text.value = val;
+}
+
+const windowSize = computed(() => {
+  return {
+    width: window.innerWidth,
+    height: window.innerHeight
+  };
+});
+
+watch(visible, (val) => {
+  if (val) {
+    document.onmousemove = move;
+  } else {
+    document.onmousemove = null;
+  }
+});
+
+function move(e) {
+  style.left = e.clientX + 'px';
+  style.top = e.clientY - 10 + 'px';
+  classBottom.value = e.clientY - 10 < windowSize.value.height / 2;
+  classLeft.value = e.clientX > windowSize.value.width / 2;
+}
+
+defineExpose({ changeVisible, updateText });
+</script>
+
+<style scoped>
+.cu-title {
+  font-size: 12px;
+  position: fixed;
+  background-color: #fff;
+  color: var(--font);
+  padding: 8px;
+  left: 0;
+  top: 0;
+  max-width: 400px;
+  /* width: fit-content; */
+  /* width: 400px; */
+  border-radius: 4px;
+  z-index: 20000;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  transform: translate(0%, -100%);
+  transition: transform 200ms;
+}
+
+.cu-title.cu-title--bottom {
+  transform: translate(0%, 100%);
+}
+
+.cu-title.cu-title--left {
+  transform: translate(-100%, -100%);
+}
+
+.cu-title.cu-title--left.cu-title--bottom {
+  transform: translate(-100%, 100%);
+}
+</style>

@@ -1,0 +1,21 @@
+import type { PropType, ExtractPropTypes } from 'vue';
+import type { ValueType } from './type';
+
+export const dateSelectProps = {
+  value: {
+    type: [Date, String, Number, Array] as PropType<ValueType>,
+    required: true
+  },
+  shortcuts: Array as PropType<object[]>,
+  range: Boolean,
+  time: Boolean
+} as const;
+
+export type DateSelectProps = ExtractPropTypes<typeof dateSelectProps>;
+
+export const dateSelectEmits = {
+  pick: (val: number[] | number) => true,
+  cancel: () => true
+};
+
+export type DateSelectEmits = typeof dateSelectEmits;

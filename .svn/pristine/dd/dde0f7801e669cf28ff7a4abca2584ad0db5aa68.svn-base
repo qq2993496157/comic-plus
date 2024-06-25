@@ -1,0 +1,24 @@
+import type { ExtractPropTypes } from "vue";
+
+export const textareaProps = {
+  modelValue: String,
+  placeholder: String,
+  maxlength: Number,
+  autofocus: {
+    type: Boolean,
+    default: false
+  },
+  disabled: Boolean,
+  autoHeight: Boolean
+} as const
+export type TextareaProps = ExtractPropTypes<typeof textareaProps>
+
+
+export const textareaEmits = {
+  ['update:modelValue']: (val: string) => typeof val === 'string',
+  change: (val: string) => typeof val === 'string',
+  blur: (e: FocusEvent) => true,
+  focus: (e: FocusEvent) => true,
+}
+
+export type TextareaEmits = typeof textareaEmits

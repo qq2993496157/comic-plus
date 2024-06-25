@@ -1,0 +1,4 @@
+const PISTOL_PROVIDE = Symbol("PISTOL_PROVIDE");
+export {
+  PISTOL_PROVIDE
+};

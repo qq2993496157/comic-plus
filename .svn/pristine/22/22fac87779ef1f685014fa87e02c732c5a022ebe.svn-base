@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import ButtonGroup from '../button/src/group'
+
+export const CuButtonGroup = useComponets(ButtonGroup)

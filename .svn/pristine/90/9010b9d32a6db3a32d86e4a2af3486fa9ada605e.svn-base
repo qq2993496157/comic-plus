@@ -1,0 +1,13 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const stepProps: {
+    readonly direction: {
+        readonly type: StringConstructor;
+        readonly default: "horizontal";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly active: NumberConstructor;
+    readonly center: BooleanConstructor;
+    readonly activeColor: StringConstructor;
+};
+export type StepProps = ExtractPropTypes<typeof stepProps>;

@@ -1,0 +1,25 @@
+import type { ExtractPropTypes, PropType } from "vue";
+import type { TreeKeyProps } from './type'
+
+export const treeProps = {
+  data: Array as PropType<any[]>,
+  icon: String,
+  selection: Boolean,
+  lazy: Boolean,
+  load: Function,
+  treeProps: Object as PropType<TreeKeyProps>,
+  accordion: Boolean,
+  defaultExpandKeys: Array as PropType<number[]>,
+  defaultCheckedKeys: Array as PropType<number[]>,
+  distinguishClickAndExpand: Boolean,
+  defaultExpandAll: Boolean,
+} as const
+
+export type TreeProps = ExtractPropTypes<typeof treeProps>
+
+export const treeEmits = {
+  ['node-click']: (node: any, depths: number[]) => true,
+  ['node-expand']: (node: any, expand: boolean, depths: number[]) => true,
+}
+
+export type TreeEmits = ExtractPropTypes<typeof treeEmits>

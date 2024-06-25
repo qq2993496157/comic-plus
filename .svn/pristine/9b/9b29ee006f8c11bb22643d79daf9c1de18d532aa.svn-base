@@ -1,0 +1,16 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const formProps: {
+    readonly model: ObjectConstructor;
+    readonly labelWidth: {
+        readonly type: StringConstructor;
+        readonly default: "80px";
+    };
+    readonly labelPosition: {
+        readonly type: StringConstructor;
+        readonly default: "right";
+    };
+    readonly rules: ObjectConstructor;
+    readonly size: StringConstructor;
+};
+export type FormProps = ExtractPropTypes<typeof formProps>;

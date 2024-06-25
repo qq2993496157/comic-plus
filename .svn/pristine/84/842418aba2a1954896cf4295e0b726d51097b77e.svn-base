@@ -1,0 +1,51 @@
+<template>
+  <div class="cu-collapse-item" :style="style">
+    <div class="cu-collapse-item__head" @click="changeShow">
+      <slot name="head">
+        <span>
+          <slot name="label">{{ label }}</slot>
+        </span>
+        <span class="cu-collapse-item__line"></span>
+        <span class="cu-icon-right" :class="{ active: showItem }"></span>
+      </slot>
+    </div>
+    <transition-collapse>
+      <div v-show="showItem">
+        <div class="cu-collapse-item__content">
+          <slot></slot>
+        </div>
+      </div>
+    </transition-collapse>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, computed } from 'vue';
+import transitionCollapse from '../../transition-collapse/src/main.vue';
+import { collapseItemProps } from './item.props';
+import type { collapseProvide } from './type';
+
+defineOptions({
+  name: 'CuCollapseItem'
+});
+const props = defineProps(collapseItemProps);
+
+const parent = inject<collapseProvide>('collapse:parent');
+
+const showItem = computed(() => {
+  return parent?.props.accordion
+    ? parent?.activeValue.value === props.name
+    : parent?.activeValue.value.includes(props.name) || false;
+});
+
+const style = computed(() => {
+  if (!parent?.props.background) return undefined;
+  return {
+    backgroundColor: props.color || parent?.props.color
+  };
+});
+
+const changeShow = function () {
+  parent && parent.collapseChange(!showItem.value, props.name);
+};
+</script>

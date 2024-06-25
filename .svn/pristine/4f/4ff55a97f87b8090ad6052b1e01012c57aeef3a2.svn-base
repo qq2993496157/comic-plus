@@ -1,0 +1,2 @@
+declare const useNotice: (options: any) => void;
+export { useNotice };

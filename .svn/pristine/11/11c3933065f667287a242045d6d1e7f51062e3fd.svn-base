@@ -1,0 +1,14 @@
+import type { ComputedRef, CSSProperties } from 'vue';
+import type { MenuProps } from './main.props';
+
+export interface MenuProvide {
+  props: MenuProps;
+  style: ComputedRef<CSSProperties>;
+  useItemClick: Function;
+}
+
+export interface SubmenuProvide {
+  closeMenu: Function;
+  setActive: Function;
+  isHorizontal: ComputedRef<boolean>;
+}

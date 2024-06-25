@@ -1,0 +1,79 @@
+<template>
+  <cu-mode
+    :show="showMode"
+    custom-class="cu-mode__flex"
+    @close="destroy()"
+    @open="onAfterEnter"
+    @mode-click="modeHandleClick">
+    <transition name="cu-fade-top" @after-leave="onAfterLeave()">
+      <div class="cu-popup" :class="[type, { center }]" v-if="visible">
+        <div class="cu-popup__head" :style="{ color }">
+          <div class="title">
+            <i v-if="headIcon" :class="headIcon"></i>
+            <span>{{ title }}</span>
+          </div>
+          <i class="cu-icon-shut" @click="close" v-if="showClose"></i>
+        </div>
+        <div class="cu-popup__content">
+          <div v-html="content" v-if="isVNode"></div>
+          <template v-else>
+            {{ content }}
+          </template>
+        </div>
+        <div class="cu-popup__footer" v-if="showButton">
+          <cu-button
+            size="mini"
+            :type="color ? undefined : type === 'error' ? 'danger' : type"
+            :color="color"
+            @click="close">
+            {{ closeButtonText }}
+          </cu-button>
+        </div>
+      </div>
+    </transition>
+  </cu-mode>
+</template>
+
+<script setup lang="ts">
+import { onMounted, computed, onUnmounted } from 'vue';
+import '../../style/message-box.css';
+import { CuMode } from '../../../mode';
+import { usePopup } from '../../../../utils';
+import { CuButton } from '../../../button';
+import { alertProps } from './main.props';
+defineOptions({
+  name: 'CuAlert'
+});
+const typeList = {
+  primary: 'cu-icon-tips',
+  info: 'cu-icon-info',
+  success: 'cu-icon-success',
+  warning: 'cu-icon-warning',
+  error: 'cu-icon-caution-filled'
+};
+
+const props = defineProps(alertProps);
+
+const { visible, showMode, onAfterEnter, modeHandleClick, close, onAfterLeave } = usePopup(props);
+
+const headIcon = computed(() => {
+  if (!props.showIcon) return false;
+  if (props.icon) return props.icon;
+  return props.type ? typeList[props.type] : '';
+});
+
+function escKeydown(e: KeyboardEvent) {
+  if (e.keyCode === 27) {
+    close();
+  }
+}
+onMounted(() => {
+  showMode.value = true;
+  if (props.escClose) {
+    document.addEventListener('keydown', escKeydown);
+  }
+});
+onUnmounted(() => {
+  document.removeEventListener('keydown', escKeydown);
+});
+</script>

@@ -1,0 +1,3 @@
+import CardGroup from '../card/src/group.vue'
+
+export default CardGroup

@@ -1,0 +1,11 @@
+import type { InjectionKey } from 'vue';
+
+export type DropdownProvide = {
+  choose: (sign: string) => void;
+};
+export type DropdownMenuProvide = {
+  itemClick: (sign: string) => void;
+};
+
+export const DROPDOWN_PROVIDE: InjectionKey<DropdownProvide> = Symbol('DROPDOWN_PROVIDE');
+export const DROPDOWNMENU_PROVIDE: InjectionKey<DropdownMenuProvide> = Symbol('DROPDOWNMENU_PROVIDE');

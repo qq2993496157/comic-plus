@@ -1,0 +1,45 @@
+.cu-link {
+  color: var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  --color-disabled: var(--font-light2);
+}
+.cu-link.underline {
+  text-decoration: underline;
+}
+
+.cu-link:not([disabled='true']):hover {
+  text-shadow: 0 0 2px;
+}
+
+.cu-link.cu-link--primary {
+  color: var(--primary);
+  --color-disabled: var(--primary-light);
+}
+
+.cu-link.cu-link--success {
+  color: var(--success);
+  --color-disabled: var(--success-light);
+}
+.cu-link.cu-link--danger {
+  color: var(--danger);
+  --color-disabled: var(--danger-light);
+}
+.cu-link.cu-link--warning {
+  color: var(--warning);
+  --color-disabled: var(--warning-light);
+}
+.cu-link.cu-link--info {
+  color: var(--info);
+  --color-disabled: var(--info-light);
+}
+
+.cu-link + .cu-link {
+  margin-left: 10px;
+}
+
+.cu-link[disabled='true'] {
+  color: var(--color-disabled);
+  cursor: no-drop;
+}

@@ -1,0 +1,20 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const ellipsisProps = {
+  data: [String, Array] as PropType<string | any[]>,
+  openText: {
+    type: String,
+    default: '展开'
+  },
+  closeText: {
+    type: String,
+    default: '收起'
+  },
+  clamp: {
+    type: Number,
+    default: 2
+  }
+} as const
+
+export type EllipsisProps = ExtractPropTypes<typeof ellipsisProps>
+

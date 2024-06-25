@@ -1,0 +1,78 @@
+<template>
+  <transition
+    name="cu-transition-collapse"
+    @before-enter="beforeEnter"
+    @before-leave="beforeLeave"
+    @enter="enter"
+    @leave="leave"
+    @after-enter="afterEnter"
+    @after-leave="afterLeave"
+  >
+    <slot></slot>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { reactive } from 'vue';
+
+defineOptions({
+  name: 'TransitionCollapse'
+});
+
+const oldStyle = reactive({
+  overflow: '',
+  paddingTop: '',
+  paddingBottom: ''
+});
+
+function reast(el) {
+  el.style.overflow = oldStyle.overflow;
+  el.style.maxHeight = '';
+  el.style.paddingTop = oldStyle.paddingTop;
+  el.style.paddingBottom = oldStyle.paddingBottom;
+}
+
+function beforeEnter(el) {
+  oldStyle.overflow = el.style.overflow;
+  oldStyle.paddingTop = el.style.paddingTop;
+  oldStyle.paddingBottom = el.style.paddingBottom;
+
+  el.style.maxHeight = 0;
+  el.style.paddingTop = 0;
+  el.style.paddingBottom = 0;
+}
+function enter(el) {
+  if (el.scrollHeight !== 0) {
+    el.style.maxHeight = `${el.scrollHeight}px`;
+  } else {
+    el.style.maxHeight = 0;
+  }
+  el.style.paddingTop = oldStyle.paddingTop;
+  el.style.paddingBottom = oldStyle.paddingBottom;
+
+  el.style.overflow = 'hidden';
+}
+
+function beforeLeave(el) {
+  oldStyle.overflow = el.style.overflow;
+  oldStyle.paddingTop = el.style.paddingTop;
+  oldStyle.paddingBottom = el.style.paddingBottom;
+
+  el.style.maxHeight = el.scrollHeight + 'px';
+  el.style.overflow = 'hidden';
+}
+function leave(el) {
+  if (el.scrollHeight !== 0) {
+    el.style.maxHeight = 0;
+    el.style.paddingTop = 0;
+    el.style.paddingBottom = 0;
+  }
+}
+
+function afterEnter(el) {
+  reast(el);
+}
+function afterLeave(el) {
+  reast(el);
+}
+</script>

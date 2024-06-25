@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Tag from './src/main.vue'
+
+export const CuTag = useComponets(Tag)

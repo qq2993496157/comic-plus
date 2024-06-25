@@ -1,0 +1,153 @@
+<template>
+  <div class="cu-elevator" :style="{ height }">
+    <div class="cu-elevator__menu" :class="{ 'menu-fixed': fixed }" :style="menuStyle">
+      <slot name="menu">
+        <transition name="cu-zoom-bottom">
+          <ul class="cu-elevator__menu-list" v-show="showMenu">
+            <li
+              v-for="item in itemList"
+              :class="{ 'is-active': currentName === item.name }"
+              @click="menuClick(item.name)"
+            >
+              {{ item.label }}
+            </li>
+          </ul>
+        </transition>
+        <i class="cu-icon-top-s fold" @click="foldClick()" v-if="fold && !fixed"></i>
+      </slot>
+    </div>
+    <div class="cu-elevator__container" ref="container" @scroll="onScroll">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, provide, computed, onMounted, watch } from 'vue';
+import '../style/css';
+import { debounce, isNumber } from '../../utils/tools';
+const MENU_POSITION = {
+  'left-top': {
+    left: '20px',
+    top: '20px'
+  },
+  'left-bottom': {
+    left: '20px',
+    top: '100%',
+    transform: 'translate(0,calc(-100% - 20px))'
+  },
+  'right-top': {
+    left: '100%',
+    top: '20px',
+    transform: 'translate(calc(-100% - 20px),0)'
+  },
+  'right-bottom': {
+    left: '100%',
+    top: '100%',
+    transform: 'translate(calc(-100% - 20px),calc(-100% - 20px))'
+  }
+};
+defineOptions({
+  name: 'CuElevator'
+});
+const props = defineProps({
+  height: {
+    type: String,
+    default: '100%'
+  },
+  offset: {
+    type: Number,
+    default: 0,
+    validator: function (value) {
+      return isNumber(value);
+    }
+  },
+  postion: {
+    type: String,
+    default: 'right-bottom',
+    validator: function (value) {
+      return ['left-top', 'left-bottom', 'right-top', 'right-bottom'].includes(value);
+    }
+  },
+  fixed: Boolean,
+  manual: Boolean,
+  menuSize: {
+    type: String,
+    default: '40px'
+  },
+  fold: {
+    type: Boolean,
+    default: true
+  }
+});
+const emit = defineEmits(['change']);
+
+const itemList = ref([]);
+const container = ref();
+const currentName = ref('');
+const showMenu = ref(true);
+
+const onScroll = debounce(setActive);
+
+watch(currentName, (val, old) => {
+  emit('change', val);
+});
+
+const menuStyle = computed(() => {
+  if (props.fixed) return undefined;
+  return Object.assign({ '--size': props.menuSize }, MENU_POSITION[props.postion]);
+});
+
+function menuClick(name: String) {
+  let item: HTMLElement = Array.from(container.value.children).find((v: HTMLElement) => {
+    let vName = v.getAttribute('elevator-name');
+    return vName === name;
+  });
+  currentName.value = name;
+  if (!props.manual) {
+    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    const Reat = container.value.getBoundingClientRect();
+    let itemTop = item.getBoundingClientRect().top;
+    let scrollTop = container.value.scrollTop + (itemTop - Reat.top);
+    container.value.scrollTo({
+      top: scrollTop,
+      behavior: 'smooth'
+    });
+  }
+}
+
+function setActive() {
+  const Reat = container.value.getBoundingClientRect();
+  let arr = Array.from(container.value.children);
+  for (let i = arr.length - 1; i >= 0; i--) {
+    let item: HTMLElement = arr[i];
+    if (item.getBoundingClientRect().top - Reat.top - props.offset <= 0) {
+      currentName.value = item.getAttribute('elevator-name');
+      break;
+    }
+    //如果循环到第一个元素依然没有break则直接使用第一个元素作为选中项
+    if (i === 0) {
+      currentName.value = item.getAttribute('elevator-name');
+    }
+  }
+}
+
+function foldClick() {
+  showMenu.value = !showMenu.value;
+}
+
+function setElevatorItem(val: object) {
+  let index = itemList.value.findIndex((v) => v.name === val.name);
+  if (index > -1) return;
+  itemList.value.push(val);
+}
+
+provide('elevator:setItem', setElevatorItem);
+
+defineExpose({ changeItemActive: menuClick });
+
+onMounted(() => {
+  setActive();
+});
+</script>

@@ -1,0 +1,170 @@
+[class*='cu-'] input,
+[class^='cu-'] input {
+  border: 0;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  outline: none;
+  padding: 0 8px;
+  color: inherit;
+  line-height: inherit;
+  font-size: inherit;
+}
+
+[class*='cu-'] input::placeholder,
+[class^='cu-'] input::placeholder {
+  color: var(--placeholder);
+}
+
+[class*='cu-'] input::-webkit-outer-spin-button,
+[class*='cu-'] input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+[class*='cu-'] input[type='number'] {
+  -moz-appearance: textfield;
+}
+.cu-input,
+.cu-cascader,
+.cu-select,
+.cu-input-number,
+.cu-time-picker,
+.cu-date-picker,
+.cu-datetime-picker {
+  display: inline-flex;
+  width: 100%;
+  vertical-align: middle;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-color: var(--border);
+  color: var(--font);
+  border-radius: 4px;
+  height: 32px;
+  line-height: 30px;
+  overflow: hidden;
+  font-size: 14px;
+  transition: all 200ms;
+}
+.cu-time-picker,
+.cu-date-picker,
+.cu-datetime-picker {
+  width: auto;
+}
+.cu-time-picker.range input,
+.cu-date-picker.range input,
+.cu-datetime-picker.range input {
+  text-align: center;
+}
+.cu-input.is-disabled,
+.cu-cascader.is-disabled,
+.cu-select.is-disabled,
+.cu-input-number.is-disabled,
+.cu-time-picker.is-disabled,
+.cu-date-picker.is-disabled,
+.cu-datetime-picker.is-disabled,
+.cu-color-picker.is-disabled {
+  cursor: no-drop;
+  color: var(--disabled-font);
+  background-color: var(--disabled-bg);
+  border-color: var(--disabled-border);
+}
+[class*='cu-']:not(.is-disabled) .cu-icon-close-c {
+  cursor: pointer;
+}
+
+[class*='cu-'].is-disabled input,
+[class^='cu-'].is-disabled input {
+  background-color: var(--disabled-bg);
+  cursor: no-drop;
+}
+
+.cu-input:focus-within,
+.cu-input:not(.is-disabled):hover,
+.cu-textarea:focus-within,
+.cu-textarea:not(.is-disabled):hover,
+.cu-input-number:focus-within,
+.cu-input-number:not(.is-disabled):hover,
+.cu-cascader:not(.is-disabled):hover,
+.cu-cascader.checked,
+.cu-select:not(.is-disabled):hover,
+.cu-select.checked,
+.cu-time-picker.checked,
+.cu-time-picker:not(.is-disabled):hover,
+.cu-date-picker.checked,
+.cu-date-picker:not(.is-disabled):hover,
+.cu-datetime-picker.checked,
+.cu-datetime-picker:not(.is-disabled):hover,
+.cu-color-picker.checked,
+.cu-color-picker:not(.is-disabled):hover
+/* .cu-color-picker.checked .color-picker__container,
+.cu-color-picker:not(.is-disabled):hover .color-picker__container */ {
+  border-color: var(--primary);
+}
+
+.cu-cascader,
+.cu-select {
+  flex-direction: column;
+  height: auto;
+  align-items: center;
+  cursor: default;
+}
+
+.cu-input.small,
+.cu-cascader.small,
+.cu-select.small,
+.cu-input-number.small,
+.cu-time-picker.small,
+.cu-date-picker.small,
+.cu-datetime-picker.small {
+  height: 28px;
+  line-height: 26px;
+}
+.cu-input.mini,
+.cu-cascader.mini,
+.cu-select.mini,
+.cu-input-number.mini,
+.cu-time-picker.mini,
+.cu-date-picker.mini,
+.cu-datetime-picker.mini {
+  height: 24px;
+  line-height: 22px;
+  font-size: 12px;
+}
+.cu-cascader.small,
+.cu-select.small {
+  height: auto;
+}
+
+.cu-cascader.mini,
+.cu-select.mini {
+  height: auto;
+}
+
+.cu-input-number {
+  --size: 32px;
+  height: var(--size);
+  cursor: default;
+}
+
+.cu-input-number.small {
+  --size: 28px;
+  line-height: 26px;
+}
+.cu-input-number.mini {
+  --size: 24px;
+  line-height: 22px;
+  font-size: 12px;
+}
+
+.cu-form-item.is-error .cu-input,
+.cu-form-item.is-error .cu-input-number,
+.cu-form-item.is-error .cu-cascader,
+.cu-form-item.is-error .cu-select,
+.cu-form-item.is-error .cu-time-picker,
+.cu-form-item.is-error .cu-textarea,
+.cu-form-item.is-error .cu-date-picker,
+.cu-form-item.is-error .cu-datetime-picker,
+.cu-form-item.is-error .cu-color-picker {
+  border-color: var(--danger);
+}

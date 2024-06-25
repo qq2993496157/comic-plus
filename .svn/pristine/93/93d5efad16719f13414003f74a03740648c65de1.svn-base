@@ -1,0 +1,67 @@
+<template>
+  <div class="cu-waterfall" ref="waterfall" v-resize="debounceResize">
+    <slot></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUpdated } from 'vue';
+import '../style/css';
+import { findIndexOfMinOrMax, debounce } from '../../utils/tools.js';
+import { useResize } from '../../utils/directive.js';
+import { waterfallProps, waterfallEmits } from './main.props';
+defineOptions({
+  name: 'CuWaterfall'
+});
+const props = defineProps(waterfallProps);
+const emit = defineEmits(waterfallEmits);
+
+const waterfall = ref();
+const waterfallStyle = ref<any>({});
+const childrenList = ref<number[]>([]);
+
+const vResize = useResize();
+const debounceResize = debounce(setWaterfallStyle, 500);
+
+function setWaterfallStyle() {
+  if (!waterfall.value) return;
+  waterfallStyle.value = waterfall.value.getBoundingClientRect();
+  childrenList.value = new Array();
+  let colNum: number;
+  if (props.itemWidth) {
+    colNum = Math.floor(waterfallStyle.value.width / props.itemWidth);
+  } else {
+    colNum = props.col;
+  }
+  for (let i = 0; i < colNum; i++) {
+    childrenList.value.push(0);
+  }
+  let gutterSize = props.gutter;
+  if (props.itemWidth) {
+    gutterSize = (waterfallStyle.value.width - colNum * props.itemWidth) / (colNum - 1);
+  }
+  let list = Array.from(waterfall.value.children);
+  for (let i = 0; i < list.length; i++) {
+    let item: any = list[i];
+    let itemRect = item.getBoundingClientRect();
+    let index = findIndexOfMinOrMax(childrenList.value);
+    let w = props.itemWidth
+      ? props.itemWidth
+      : (waterfallStyle.value.width - props.gutter * (props.col - 1)) / props.col;
+    let x = index * w + index * (gutterSize <= 0 ? props.gutter : gutterSize);
+    let y = childrenList.value[index];
+    item.style.setProperty('width', w + 'px');
+    item.style.setProperty('transform', `translate(${x}px,${y}px)`);
+    childrenList.value[index] += itemRect.height + props.gutter;
+  }
+  waterfall.value.style.setProperty('height', Math.max(...childrenList.value) - props.gutter + 'px');
+  emit('update');
+}
+
+onMounted(() => {
+  setWaterfallStyle();
+});
+onUpdated(() => {
+  setWaterfallStyle();
+});
+</script>

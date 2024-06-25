@@ -1,0 +1,10 @@
+import { createApp } from 'vue';
+import App from './App.vue';
+import '../lib/styles/index';
+import ComicPlus from '../lib/index';
+
+const app = createApp(App);
+
+app.use(ComicPlus);
+
+app.mount('#app');

@@ -1,0 +1,13 @@
+import { vTitle, useTitle } from './title/main';
+import { Loading, vLoading, useLoading } from './loading/main';
+import { preview } from './preview-image/index';
+import { default as MessageBox } from './message-box/index';
+import { Plugin } from 'vue';
+
+declare const plugin: Plugin;
+declare const useComicConfig: Function;
+export default plugin;
+export * from './tools/index';
+export * from './export.type';
+export * from './components';
+export { MessageBox as CuMessageBox, preview, Loading as CuLoading, vLoading, useComicConfig, useLoading, useTitle, vTitle };

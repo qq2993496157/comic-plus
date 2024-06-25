@@ -1,0 +1,3 @@
+import Breadcrumb from './src/main'
+
+export default Breadcrumb

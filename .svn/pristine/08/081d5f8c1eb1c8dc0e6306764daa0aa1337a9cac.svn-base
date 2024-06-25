@@ -1,0 +1,5 @@
+import { withInstall } from '../../utils';
+
+import Countdown from './src/main.vue';
+
+export const CuCountdown = withInstall(Countdown);

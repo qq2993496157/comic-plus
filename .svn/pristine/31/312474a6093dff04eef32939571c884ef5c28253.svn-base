@@ -1,0 +1,3 @@
+import CuSlider from './src/main.vue'
+
+export default CuSlider

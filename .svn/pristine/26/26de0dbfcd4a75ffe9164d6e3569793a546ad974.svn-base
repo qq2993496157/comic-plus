@@ -1,0 +1,55 @@
+<template>
+  <div class="cu-tabs" :class="type" :style="{ '--cu-tabs-color': color }">
+    <i class="left cu-icon-left" :style="{ top: hasBar ? '3px' : undefined }" @click="scrollTo(-200)" v-if="hasBar"></i>
+    <i
+      class="right cu-icon-right"
+      :style="{ top: hasBar ? '3px' : undefined }"
+      @click="scrollTo(200)"
+      v-if="hasBar"></i>
+    <cu-scrollbar ref="scrollBarRef" @scroll="onScroll">
+      <div class="cu-tabs__list" :style="{ paddingBottom: hasBar ? '6px' : undefined }">
+        <slot></slot>
+      </div>
+    </cu-scrollbar>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { provide, computed, ref } from 'vue';
+import '../style/tab.css';
+import { CuScrollbar } from '../../scrollbar';
+import { tabProps } from './main.props';
+import { TABS_PROVIDE } from './type';
+defineOptions({
+  name: 'CuTabs'
+});
+const props = defineProps(tabProps);
+
+const scrollBarRef = ref(null);
+const recoreScroll = ref(0);
+
+const hasBar = computed(() => {
+  if (!scrollBarRef.value) return;
+  return scrollBarRef.value.hasThumbx;
+});
+
+const emit = defineEmits(['update:modelValue', 'change']);
+
+function itemClick(name: string | number) {
+  emit('update:modelValue', name);
+  emit('change', name);
+}
+
+function scrollTo(left: number) {
+  scrollBarRef.value.setBarLeft(recoreScroll.value + left);
+}
+
+function onScroll(e) {
+  recoreScroll.value = e.target.scrollLeft;
+}
+
+provide(TABS_PROVIDE, {
+  props,
+  itemClick
+});
+</script>

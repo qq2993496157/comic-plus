@@ -1,0 +1,34 @@
+import type { ObjectDirective, App } from 'vue';
+
+import { createTitle } from './src/title';
+
+const useTitle = function (): ObjectDirective {
+  return {
+    mounted(el, binding) {
+      if (!binding.value) return;
+      el.instance = createTitle(el, binding.value, binding.arg);
+    },
+    updated(el, binding) {
+      if (!binding.value) return;
+      if (el.instance) {
+        el.instance.vm.exposed.update(binding.value, binding.arg);
+      } else {
+        el.instance = createTitle(el, binding.value, binding.arg);
+      }
+    },
+    unmounted(el) {
+      if (el.instance) {
+        el.instance.destroy();
+        el.instance = null;
+      }
+    }
+  };
+};
+
+const vTitle = {
+  install: function (app: App) {
+    app.directive('title', useTitle());
+  }
+};
+
+export { useTitle, vTitle };

@@ -1,0 +1,61 @@
+<template>
+  <teleport to="body">
+    <transition name="cu-fade">
+      <div v-if="show" class="cu-backtop" :style="style" @click="backTop">
+        <slot>
+          <div class="cu-backtop__container">
+            <i class="cu-icon-top-s"></i>
+          </div>
+        </slot>
+      </div>
+    </transition>
+  </teleport>
+</template>
+
+<script setup lang="ts">
+import { computed, ref, onMounted, onUnmounted } from 'vue';
+import '../style/css';
+import { getMaxZIndex } from '../../utils/tools';
+import { backtopProps } from './main.props';
+
+defineOptions({
+  name: 'CuBacktop'
+});
+
+const props = defineProps(backtopProps);
+
+const targetDom = ref<HTMLElement | null>(null);
+const show = ref<boolean>(false);
+
+const style = computed(() => {
+  return {
+    '--size': props.size,
+    zIndex: getMaxZIndex(),
+    right: props.right,
+    bottom: props.bottom
+  };
+});
+
+function backTop() {
+  targetDom?.value?.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function onScroll(e: Event) {
+  show.value = (e.target as HTMLElement).scrollTop >= props.visibleHeight;
+}
+
+onMounted(() => {
+  targetDom.value = document.querySelector(props.target) ?? document.body;
+  if (targetDom.value) {
+    targetDom.value.addEventListener('scroll', onScroll);
+  }
+});
+onUnmounted(() => {
+  if (targetDom.value) {
+    targetDom.value.removeEventListener('scroll', onScroll);
+  }
+});
+</script>

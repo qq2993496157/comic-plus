@@ -1,0 +1,66 @@
+<template>
+  <li class="cu-anchor-link" :class="{ underline }">
+    <a
+      :href="href"
+      :data-href="href"
+      :class="{ active: parent?.currentHref.value === href }"
+      ref="linkRef"
+      @click="linkHandleClick">
+      <slot>{{ title }}</slot>
+    </a>
+    <ul v-if="$slots['sub-link'] && parent && parent.props.direction === 'vertical'" class="cu-anchor-sub-link">
+      <slot name="sub-link"></slot>
+    </ul>
+  </li>
+</template>
+
+<script setup lang="ts">
+import { getCurrentInstance, inject, onUnmounted, ref, watch } from 'vue';
+import '../style/anchor.css';
+import { animateScrollTo } from '../utils/scroll';
+import type { AnchorProvide } from './type';
+import { anchorLinkProps } from './link.props';
+
+defineOptions({
+  name: 'CuAnchorLink'
+});
+
+const props = defineProps(anchorLinkProps);
+const parent = inject<AnchorProvide | null>('anchor:parent', null);
+const linkRef = ref<HTMLElement>();
+
+watch(
+  () => props.href,
+  (val, old) => {
+    parent?.removeLinkItem(old);
+    if (val) {
+      parent?.addLinkItem({
+        href: val,
+        ele: linkRef
+      });
+    }
+  }
+);
+
+const instance = getCurrentInstance()!;
+
+parent?.addLinkItem({
+  href: props.href,
+  ele: linkRef
+});
+
+function linkHandleClick(e) {
+  if (parent) {
+    parent.handleClick(props.href);
+  } else {
+    let el = document.querySelector(props.href);
+    let to = el.getBoundingClientRect().top + window.scrollY - props.offset;
+    animateScrollTo(window, window.scrollY, to, 300);
+  }
+  return false;
+}
+
+onUnmounted(() => {
+  parent?.removeLinkItem(props.href);
+});
+</script>

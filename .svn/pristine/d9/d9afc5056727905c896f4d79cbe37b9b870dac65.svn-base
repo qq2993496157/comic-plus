@@ -1,0 +1,52 @@
+
+/**
+ * @description: 对象深度合并
+ * @param {object} target
+ * @param {object} source
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const deepMerge = (target: object, source: object): object => {
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      if (source[key] instanceof Object) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        deepMerge(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+  return target;
+}
+
+/**
+ * @description: 将数组拆解成指定长度的二维数组
+ * @param {any} value
+ * @param {number} length
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const chunkArray = (value: any[], length: number): any[] => {
+  const result: any[] = [];
+  for (let i = 0; i < value.length; i += length) {
+    const chunk: any[] = value.slice(i, i + length);
+    result.push(chunk);
+  }
+  return result;
+};
+
+
+export {
+  deepMerge,
+  chunkArray
+};
+
+export {
+  debounce,
+  throttle,
+  formatDate,
+  isNumber
+} from '../utils/tools'

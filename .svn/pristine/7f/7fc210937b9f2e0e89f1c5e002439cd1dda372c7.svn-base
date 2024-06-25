@@ -1,0 +1,8 @@
+import type { PropType, ExtractPropTypes } from 'vue';
+
+export const paneProps = {
+  name: [String, Number] as PropType<string | number>,
+  label: String
+} as const;
+
+export type PaneProps = ExtractPropTypes<typeof paneProps>;

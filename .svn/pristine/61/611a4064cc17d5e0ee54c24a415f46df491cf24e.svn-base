@@ -1,0 +1,2 @@
+import '../../../styles/components/form-common.css';
+import '../../../styles/components/color-picker.css'

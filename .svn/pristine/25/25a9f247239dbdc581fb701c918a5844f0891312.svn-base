@@ -1,0 +1,11 @@
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const menuItemProps: {
+    readonly index: {
+        readonly type: PropType<string | number>;
+        readonly required: true;
+    };
+    readonly label: StringConstructor;
+    readonly icon: StringConstructor;
+};
+export type MenuItemProps = ExtractPropTypes<typeof menuItemProps>;

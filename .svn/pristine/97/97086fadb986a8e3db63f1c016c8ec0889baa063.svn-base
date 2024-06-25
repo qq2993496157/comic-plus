@@ -1,0 +1,75 @@
+/**
+ * @description: 校验手机号
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validatePhone: (value: any) => boolean;
+/**
+ * @description: 校验邮箱
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateEmail: (value: any) => boolean;
+/**
+ * @description: 校验中文姓名
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateNameZh: (value: any) => boolean;
+/**
+ * @description: 校验英文姓名
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateNameEn: (value: any) => boolean;
+/**
+ * @description: 校验身份证
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateIdcard: (value: any) => boolean;
+/**
+ * @description: 校验正整数
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateInteger: (value: any) => boolean;
+/**
+ * @description: 校验车牌号
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateLicenseplate: (value: any) => boolean;
+/**
+ * @description: 验证数字是否在指定范围内
+ * @param {number} value
+ * @param {number} max
+ * @param {number} min
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateNumRange: (value: number, max?: number, min?: number) => boolean;
+/**
+ * @description: 判断是否有值
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const validateExists: (value: any) => boolean;
+export { validatePhone, validateEmail, validateNameZh, validateNameEn, validateIdcard, validateInteger, validateLicenseplate, validateNumRange, validateExists };

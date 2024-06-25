@@ -1,0 +1,2 @@
+export declare function useComponets(component: any): any;
+export declare function useDefineComponents(component: any): any;

@@ -1,0 +1,37 @@
+
+declare const _default: import('vue').DefineComponent<{
+    readonly modelValue: StringConstructor;
+    readonly placeholder: StringConstructor;
+    readonly maxlength: NumberConstructor;
+    readonly autofocus: {
+        readonly type: BooleanConstructor;
+        readonly default: false;
+    };
+    readonly disabled: BooleanConstructor;
+    readonly autoHeight: BooleanConstructor;
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    blur: (e: FocusEvent) => void;
+    change: (val: string) => void;
+    focus: (e: FocusEvent) => void;
+    "update:modelValue": (val: string) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly modelValue: StringConstructor;
+    readonly placeholder: StringConstructor;
+    readonly maxlength: NumberConstructor;
+    readonly autofocus: {
+        readonly type: BooleanConstructor;
+        readonly default: false;
+    };
+    readonly disabled: BooleanConstructor;
+    readonly autoHeight: BooleanConstructor;
+}>> & {
+    onFocus?: (e: FocusEvent) => any;
+    onBlur?: (e: FocusEvent) => any;
+    onChange?: (val: string) => any;
+    "onUpdate:modelValue"?: (val: string) => any;
+}, {
+    readonly disabled: boolean;
+    readonly autofocus: boolean;
+    readonly autoHeight: boolean;
+}, {}>;
+export default _default;

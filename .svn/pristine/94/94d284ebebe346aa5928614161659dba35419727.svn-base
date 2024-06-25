@@ -1,0 +1,38 @@
+import { UploadFile } from './type';
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const uploadProps: {
+    readonly fileList: PropType<UploadFile[]>;
+    readonly type: {
+        readonly type: StringConstructor;
+        readonly default: "list";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly http: {
+        readonly type: PropType<string | Function>;
+        readonly required: true;
+    };
+    readonly headers: ObjectConstructor;
+    readonly data: ObjectConstructor;
+    readonly autoUpload: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly multiple: BooleanConstructor;
+    readonly limit: NumberConstructor;
+    readonly disabled: BooleanConstructor;
+    readonly maxFileSize: StringConstructor;
+    readonly withCredentials: BooleanConstructor;
+    readonly accept: StringConstructor;
+    readonly onExceed: FunctionConstructor;
+    readonly onLarge: FunctionConstructor;
+    readonly onSuccess: FunctionConstructor;
+    readonly onError: FunctionConstructor;
+    readonly onChange: FunctionConstructor;
+    readonly beforeUpload: FunctionConstructor;
+};
+export type UploadProps = ExtractPropTypes<typeof uploadProps>;
+export declare const uploadEmits: {
+    "update:fileList": (files: UploadFile[]) => boolean;
+};
+export type UploadEmits = typeof uploadEmits;

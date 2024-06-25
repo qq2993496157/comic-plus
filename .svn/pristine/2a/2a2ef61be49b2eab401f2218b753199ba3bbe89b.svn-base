@@ -1,0 +1,3 @@
+import CarouselItem from '../carousel/src/item.vue'
+
+export default CarouselItem

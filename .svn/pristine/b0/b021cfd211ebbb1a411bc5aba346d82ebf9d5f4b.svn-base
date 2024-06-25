@@ -1,0 +1,24 @@
+import type { ComicConfig } from '../export.type';
+import { computed } from 'vue';
+import type { ComputedRef } from 'vue';
+
+interface UseConfig {
+  SIZE?: ComputedRef<string | undefined>;
+  IS_COMIC?: ComputedRef<boolean>;
+}
+
+export function useConfig(): UseConfig {
+  const COMIC = window['$COMIC'] as ComicConfig;
+
+  const SIZE = computed(() => {
+    return COMIC?.size;
+  });
+  const IS_COMIC = computed(() => {
+    return COMIC?.isComic;
+  });
+
+  return {
+    SIZE,
+    IS_COMIC
+  };
+}

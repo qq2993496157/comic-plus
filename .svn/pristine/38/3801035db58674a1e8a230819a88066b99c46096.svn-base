@@ -1,0 +1,58 @@
+
+declare const _default: __VLS_WithTemplateSlots<import('vue').DefineComponent<{
+    readonly target: {
+        readonly type: StringConstructor;
+        readonly default: "body";
+    };
+    readonly visibleHeight: {
+        readonly type: NumberConstructor;
+        readonly default: 200;
+    };
+    readonly size: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly right: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly bottom: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly target: {
+        readonly type: StringConstructor;
+        readonly default: "body";
+    };
+    readonly visibleHeight: {
+        readonly type: NumberConstructor;
+        readonly default: 200;
+    };
+    readonly size: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly right: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly bottom: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+}>>, {
+    readonly target: string;
+    readonly visibleHeight: number;
+    readonly size: string;
+    readonly right: string;
+    readonly bottom: string;
+}, {}>, {
+    default?(_: {}): any;
+}>;
+export default _default;
+type __VLS_WithTemplateSlots<T, S> = T & {
+    new (): {
+        $slots: S;
+    };
+};

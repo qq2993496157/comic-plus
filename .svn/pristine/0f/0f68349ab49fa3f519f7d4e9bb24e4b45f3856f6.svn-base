@@ -1,0 +1,5 @@
+import { withInstall } from '../../utils';
+
+import Atlas from './src/main.vue';
+
+export const CuAtlas = withInstall(Atlas);

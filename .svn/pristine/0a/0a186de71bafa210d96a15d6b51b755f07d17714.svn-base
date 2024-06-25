@@ -1,0 +1,7 @@
+import { FormProps } from './main.props';
+
+export interface FormProvide {
+    props: FormProps;
+    itemValidatePush: Function;
+    itemValidateDelete: Function;
+}

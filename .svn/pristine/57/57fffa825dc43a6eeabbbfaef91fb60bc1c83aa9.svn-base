@@ -1,0 +1,171 @@
+<template>
+  <div
+    class="cu-datetime-picker"
+    ref="dateTimePicker"
+    :style="{ width }"
+    :class="[{ checked: show }, { 'is-disabled': disabled }, { range }, size]"
+    v-click-outside:dateTimePicker="onClickOutside"
+  >
+    <div
+      class="cu-datetime-picker__inner"
+      :style="{ paddingRight: clearable ? '18px' : false }"
+      @click="handleClick"
+      @mouseover="mouseover"
+      @mouseleave="mouseleave"
+    >
+      <i :class="icon"></i>
+      <input
+        type="text"
+        readonly
+        :value="range ? formatDate(new Date(modelValue[0]), format) : formatDate(new Date(modelValue), format)"
+        :placeholder="range ? startPlaceholder : placeholder"
+        :disabled="disabled"
+      />
+      <span v-if="range">{{ rangeSeparator }}</span>
+      <input
+        v-if="range"
+        type="text"
+        readonly
+        :value="formatDate(new Date(modelValue[1]), format)"
+        :placeholder="endPlaceholder"
+        :disabled="disabled"
+      />
+      <i class="cu-icon-close-c" v-show="showClose" v-if="clearable" @click.stop="clear"></i>
+    </div>
+    <cu-dropdown :show="show" :duration="200" :min-width="320">
+      <div class="cu-datetime-picker__dropdown" :class="{ range }" outside="dateTimePicker">
+        <date-select
+          @pick="updateValue"
+          :shortcuts="shortcuts"
+          :value="modelValue"
+          :value-format="valueFormat"
+          @cancel="show = false"
+          :range="range"
+          time
+        ></date-select>
+      </div>
+    </cu-dropdown>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, provide } from 'vue';
+import '../style/css';
+import { CuDropdown } from '../../dropdown';
+import dateSelect from '../../date-picker/src/date-select.vue';
+import { useClickOutside } from '../../utils/directive.js';
+import { formatDate } from '../../utils/tools.js';
+defineOptions({
+  name: 'CuDatetimePicker'
+});
+const props = defineProps({
+  modelValue: {
+    type: [Date, String, Number, Array]
+  },
+  format: {
+    type: String,
+    default: 'yyyy-MM-dd'
+  },
+  valueFormat: {
+    type: String,
+    default: 'Date',
+    validator: function (value: string) {
+      return ['Date', 'String', 'Number'].includes(value);
+    }
+  },
+  rangeSeparator: {
+    type: String,
+    default: '/'
+  },
+  size: String,
+  range: Boolean,
+  icon: {
+    type: String,
+    default: 'cu-icon-calendar'
+  },
+  shortcuts: Array,
+  width: String,
+  disabled: Boolean,
+  placeholder: String,
+  clearable: Boolean,
+  startPlaceholder: String,
+  endPlaceholder: String
+});
+
+const emit = defineEmits(['update:modelValue', 'change', 'clear']);
+
+const vClickOutside = useClickOutside();
+
+const showClose = ref(false);
+const show = ref(false);
+
+const dateTimePicker = ref();
+
+const isModelValue = computed(() => {
+  if (props.range) {
+    return props.modelValue.length > 0;
+  }
+  return !!props.modelValue;
+});
+
+function clear() {
+  emit('update:modelValue', props.range ? [] : '');
+  emit('clear');
+  showClose.value = false;
+  show.value = false;
+}
+function onClickOutside() {
+  show.value && (show.value = false);
+}
+function handleClick() {
+  if (props.disabled) return;
+  show.value = !show.value;
+}
+function mouseover() {
+  if (props.disabled) return;
+  isModelValue.value && (showClose.value = true);
+}
+
+function mouseleave() {
+  if (props.disabled) return;
+  isModelValue.value && (showClose.value = false);
+}
+
+function updateValue(value: number | number[]) {
+  let val: string | number | Date | string[] | number[] | Date[];
+  if (Array.isArray(value)) {
+    if (value[0] > value[1]) {
+      value.reverse();
+      // console.log('fanz');
+    }
+  }
+  // console.log(value);
+
+  switch (props.valueFormat) {
+    case 'Date':
+      if (props.range) {
+        val = [new Date(value[0]), new Date(value[1])];
+      } else {
+        val = new Date(value);
+      }
+      break;
+    case 'String':
+      if (props.range) {
+        val = [formatDate(value[0], props.format), formatDate(value[1], props.format)];
+      } else {
+        val = formatDate(value, props.format);
+      }
+      break;
+    case 'Number':
+      val = value;
+      break;
+    default:
+      val = value;
+      break;
+  }
+  emit('update:modelValue', val);
+  show.value = false;
+}
+
+provide('parent:dom', dateTimePicker);
+</script>

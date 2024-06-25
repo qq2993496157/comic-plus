@@ -1,0 +1,36 @@
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import viteCompression from 'vite-plugin-compression';
+import dts from 'vite-plugin-dts';
+export default defineConfig({
+  plugins: [
+    vue(),
+    dts(),
+    vueJsx(),
+    viteCompression({
+      verbose: true,
+      disable: false,
+      deleteOriginFile: false,
+      threshold: 10240,
+      algorithm: 'gzip',
+      ext: '.gz'
+    })
+  ],
+  build: {
+    outDir: 'lib',
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    },
+    lib: {
+      entry: './packages/index.ts',
+      name: 'comic-plus',
+      fileName: 'comic-plus'
+    }
+  }
+});

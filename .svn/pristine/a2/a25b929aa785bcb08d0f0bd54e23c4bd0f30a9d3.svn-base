@@ -1,0 +1,12 @@
+{
+  "allowJs": true,
+  "resolveJsonModule": true,
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.d.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
+    "packages/build/css.plugin.js"
+  ],
+  "exclude": ["node_modules"]
+}

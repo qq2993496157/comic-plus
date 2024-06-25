@@ -1,0 +1,33 @@
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { ImageFit } from '../../type';
+export const avatarGroupProps = {
+  urls: Array as PropType<string[]>,
+  fit: {
+    type: String as PropType<ImageFit>,
+    default: 'cover'
+  },
+  size: {
+    type: Number,
+    default: 40
+  },
+  shape: {
+    type: String as PropType<'circle' | 'square'>,
+    default: 'circle'
+  },
+  offset: Number,
+  shadow: Boolean,
+  maxCount: {
+    type: Number,
+    default: 5
+  },
+  clickShowAll: Boolean
+} as const;
+
+export type AvatarGroupProps = ExtractPropTypes<typeof avatarGroupProps>;
+
+export const avatarGroupEmits = {
+  unfold: () => true,
+  tuck: () => true
+};
+
+export type AvatarGroupEmits = typeof avatarGroupEmits;

@@ -1,0 +1,98 @@
+.cu-select__inner {
+  flex: auto;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.cu-select__inner input {
+  cursor: inherit;
+}
+.cu-select__inner .cu-select__multiple {
+  padding: 2px 8px;
+  flex: 1;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+.cu-select__inner .cu-select__multiple em {
+  font-style: normal;
+  background-color: var(--bgcolor);
+  color: var(--font-light);
+  font-size: inherit;
+  margin: 2px;
+  padding: 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+.cu-select__inner .cu-select__multiple em > i {
+  font-size: 12px;
+  cursor: pointer;
+}
+.cu-select__inner .cu-select__multiple em > i:hover {
+  color: var(--primary);
+}
+.cu-select__inner .cu-select__multiple .placeholder {
+  color: var(--placeholder);
+  line-height: 1;
+}
+.cu-select__inner > i {
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: inherit;
+  transition: transform 200ms;
+  color: var(--font-light);
+}
+.cu-select.checked .cu-select__inner .cu-icon-bottom {
+  transform: rotate(-180deg);
+}
+
+.cu-select__dropdown {
+  position: relative;
+  z-index: 1;
+  padding: 4px 0;
+  position: relative;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.cu-option {
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--font);
+}
+.cu-option.disabled {
+  color: var(--disabled-font);
+  cursor: no-drop;
+}
+.cu-option:not(.disabled)::after {
+  position: absolute;
+  display: block;
+  inset: 0;
+  content: '';
+  transition: opacity 200ms;
+  background-color: var(--primary);
+  opacity: 0;
+  z-index: -1;
+}
+
+.cu-option:hover::after {
+  opacity: 0.2;
+}
+.cu-option.active {
+  color: var(--primary);
+}
+
+.cu-option.small {
+  height: 28px;
+  line-height: 26px;
+}
+.cu-option.mini {
+  height: 24px;
+  line-height: 22px;
+  font-size: 12px;
+}

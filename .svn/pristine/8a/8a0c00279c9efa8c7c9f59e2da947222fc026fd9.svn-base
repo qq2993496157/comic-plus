@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Pagination from './src/main.vue'
+
+export const CuPagination = useComponets(Pagination)

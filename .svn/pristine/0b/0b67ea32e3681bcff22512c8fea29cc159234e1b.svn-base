@@ -1,0 +1,19 @@
+<template>
+  <div class="cu-color-picker__preview" :class="{ alpha: props.alpha }">
+    <div class="preview__box" :style="{ background }"></div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+import { COLORPICKER_PROVIDE } from '../type';
+defineOptions({
+  name: 'CuColorPreview'
+});
+
+const { props, color } = inject(COLORPICKER_PROVIDE);
+
+const background = computed(() => {
+  return color.value;
+});
+</script>

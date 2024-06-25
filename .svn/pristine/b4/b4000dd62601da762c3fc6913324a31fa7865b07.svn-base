@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Countdown from './src/main.vue'
+
+export const CuCountdown = useComponets(Countdown)

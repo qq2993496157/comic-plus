@@ -1,0 +1,33 @@
+import type { ExtractPropTypes, PropType } from 'vue';
+
+export const anchorProps = {
+  container: {
+    type: [String, HTMLElement, Window] as PropType<string | HTMLElement | Window>,
+    default: window
+  },
+  direction: {
+    type: String,
+    default: 'vertical',
+    validator: (value: string) => ['horizontal', 'vertical'].includes(value)
+  },
+  lineWeight: Number,
+  showLine: Boolean,
+  offset: {
+    type: Number,
+    default: 0
+  },
+  size: String,
+  color: String,
+  duration: {
+    type: Number,
+    default: 500
+  }
+} as const;
+
+export type AnchorProps = ExtractPropTypes<typeof anchorProps>;
+
+export const anchorEmits = {
+  change: (href: string) => typeof href === 'string'
+};
+
+export type AnchorEmits = typeof anchorEmits;

@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import MenuItem from '../menu/src/item.vue'
+
+export const CuMenuItem = useComponets(MenuItem)

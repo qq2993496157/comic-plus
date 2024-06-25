@@ -1,0 +1,74 @@
+<template>
+  <Teleport to="body">
+    <transition name="cu-fade">
+      <div v-if="show" class="cu-backtop" :style="style" @click="backTop">
+        <slot>
+          <div class="cu-backtop__container">
+            <i class="cu-icon-top-s"></i>
+          </div>
+        </slot>
+      </div>
+    </transition>
+  </Teleport>
+</template>
+
+<script setup lang="ts">
+import { computed, ref, onMounted } from 'vue';
+import '../style/css';
+import { getMaxZIndex } from '../../utils/tools';
+defineOptions({
+  name: 'CuBacktop'
+});
+const props = defineProps({
+  target: {
+    type: String,
+    default: 'body'
+  },
+  visibleHeight: {
+    type: Number,
+    default: 200
+  },
+  size: {
+    type: String,
+    default: '40px'
+  },
+  right: {
+    type: String,
+    default: '40px'
+  },
+  bottom: {
+    type: String,
+    default: '40px'
+  }
+});
+
+const targetDom = ref<HTMLElement | null>(null);
+const show = ref(false);
+
+const style = computed(() => {
+  return {
+    '--size': props.size,
+    zIndex: getMaxZIndex(),
+    right: props.right,
+    bottom: props.bottom
+  };
+});
+
+function backTop() {
+  targetDom.value?.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function onScroll(e: Event) {
+  show.value = e.target?.scrollTop >= props.visibleHeight;
+}
+
+onMounted(() => {
+  targetDom.value = document.querySelector(props.target) ?? document.body;
+  if (targetDom.value) {
+    targetDom.value.addEventListener('scroll', onScroll);
+  }
+});
+</script>

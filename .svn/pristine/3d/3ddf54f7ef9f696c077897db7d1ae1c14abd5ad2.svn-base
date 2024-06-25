@@ -1,0 +1,29 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const colorPickerProps = {
+  modelValue: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  alpha: Boolean,
+  format: {
+    type: String,
+    default: (props) => {
+      return props.alpha ? 'rgb' : 'hex'
+    }
+  },
+  size: String,
+  disabled: Boolean,
+  predefine: Array as PropType<string[]>
+} as const
+
+export type ColorPickerProps = ExtractPropTypes<typeof colorPickerProps>
+
+
+export const colorPickerEmits = {
+  ['update:modelValue']: (val: string) => typeof val === 'string',
+  change: (val: string) => typeof val === 'string',
+}
+
+export type ColorPickerEmits = typeof colorPickerEmits

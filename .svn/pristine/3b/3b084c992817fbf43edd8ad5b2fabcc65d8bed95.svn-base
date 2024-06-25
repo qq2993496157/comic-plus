@@ -1,0 +1,15 @@
+{
+  "name": "comic-theme",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [
+    "comic-theme",
+    "vue3+ts组件库样式表"
+  ],
+  "author": "stop",
+  "license": "MIT",
+  "description": ""
+}

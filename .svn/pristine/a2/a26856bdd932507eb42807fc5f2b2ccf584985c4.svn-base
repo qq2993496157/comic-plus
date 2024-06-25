@@ -1,0 +1,37 @@
+.cu-input-number .cu-input-number__inner {
+  flex: 1;
+  text-align: center;
+}
+
+.cu-input-number .cu-input-number__minus {
+  border-right: 1px solid transparent;
+}
+.cu-input-number .cu-input-number__plus {
+  border-left: 1px solid transparent;
+}
+.cu-input-number:not(.is-disabled) .cu-input-number__minus:not(.disabled):hover,
+.cu-input-number:not(.is-disabled) .cu-input-number__plus:not(.disabled):hover {
+  color: var(--primary);
+}
+.cu-input-number.is-disabled .cu-input-number__minus,
+.cu-input-number.is-disabled .cu-input-number__plus,
+.cu-input-number .cu-input-number__minus.disabled,
+.cu-input-number .cu-input-number__plus.disabled {
+  background-color: var(--disabled-bg);
+  color: var(--disabled-font);
+  cursor: no-drop;
+}
+
+.cu-input-number .cu-input-number__minus,
+.cu-input-number .cu-input-number__plus {
+  width: var(--size);
+  height: var(--size);
+  border-color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  color: var(--font);
+  background-color: var(--bgcolor);
+  cursor: pointer;
+}

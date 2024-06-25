@@ -1,0 +1,22 @@
+import { useAlert } from './alert/main'
+import { useConfirm } from './confirm/main'
+import { useMessage } from './message/main'
+import { useNotice } from './notice/main'
+
+
+interface Message {
+  alert: Function;
+  confirm: Function;
+  message: Function;
+  notice: Function;
+}
+
+const CuMessageBox: Message = {
+  alert: useAlert,
+  confirm: useConfirm,
+  message: useMessage,
+  notice: useNotice,
+}
+
+
+export default CuMessageBox

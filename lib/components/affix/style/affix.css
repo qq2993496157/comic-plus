@@ -1,0 +1,7 @@
+.cu-affix {
+  display: inline-flex;
+}
+
+.cu-affix .cu-affix__container.is-fixed {
+  position: fixed;
+}

@@ -1,0 +1,7 @@
+import type { Ref } from 'vue';
+import type { RadioGroupProps } from './group.props';
+export interface RadioProvide {
+  activeValue: Ref<string>;
+  changeItemCheck: Function;
+  props: RadioGroupProps;
+}

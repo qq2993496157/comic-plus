@@ -1,0 +1,53 @@
+.cu-badge {
+  position: relative;
+  --cu-badge-color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+}
+.cu-badge__inner {
+  border: 1px solid #fff;
+  display: inline-block;
+  padding: 2px 6px;
+  color: #fff;
+  background-color: var(--cu-badge-color);
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 10px;
+  z-index: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+  position: relative;
+}
+.cu-badge__inner.position {
+  position: absolute;
+  right: calc(10px - var(--cu-badge-offsetx, 0px));
+  top: var(--cu-badge-offsety, 0);
+  transform: translate(100%, -50%);
+}
+.cu-badge__inner.position.dot {
+  padding: 0;
+  width: 10px;
+  height: 10px;
+  right: calc(5px - var(--cu-badge-offsetx, 0px));
+}
+.cu-badge.cu-badge--primary {
+  --cu-badge-color: var(--cu-color-primary);
+}
+.cu-badge.cu-badge--success {
+  --cu-badge-color: var(--cu-color-success);
+}
+.cu-badge.cu-badge--warning {
+  --cu-badge-color: var(--cu-color-warning);
+}
+.cu-badge.cu-badge--danger {
+  --cu-badge-color: var(--cu-color-danger);
+}
+.cu-badge.cu-badge--info {
+  --cu-badge-color: var(--cu-color-info);
+}
+
+.comic-plus__is-comic .cu-badge .cu-badge__inner {
+  border-color: var(--cu-comic-border-color);
+}

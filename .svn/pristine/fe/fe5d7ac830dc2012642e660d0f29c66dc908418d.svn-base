@@ -1,0 +1,15 @@
+import { ComputedRef } from 'vue';
+import type { menuProps } from './main.props'
+
+export interface menuProvide {
+  props: menuProps;
+  style: ComputedRef<object>
+  useItemClick: Function
+}
+// setActiveboxTop: Function;
+
+export interface submenuProvide {
+  closeMenu: Function;
+  setActive: Function;
+  isHorizontal: ComputedRef<boolean>;
+}

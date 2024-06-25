@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Upload from './src/main.vue'
+
+export const CuUpload = useComponets(Upload)

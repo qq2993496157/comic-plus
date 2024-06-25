@@ -1,0 +1,80 @@
+
+declare function menuClick(name: string): void;
+declare const _default: __VLS_WithTemplateSlots<import('vue').DefineComponent<{
+    readonly height: {
+        readonly type: StringConstructor;
+        readonly default: "100%";
+    };
+    readonly offset: {
+        readonly type: NumberConstructor;
+        readonly default: 0;
+    };
+    readonly postion: {
+        readonly type: StringConstructor;
+        readonly default: "right-bottom";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly fixed: BooleanConstructor;
+    readonly menual: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly menuSize: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly fold: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+}, {
+    changeItemActive: typeof menuClick;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    change: (val: string) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly height: {
+        readonly type: StringConstructor;
+        readonly default: "100%";
+    };
+    readonly offset: {
+        readonly type: NumberConstructor;
+        readonly default: 0;
+    };
+    readonly postion: {
+        readonly type: StringConstructor;
+        readonly default: "right-bottom";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly fixed: BooleanConstructor;
+    readonly menual: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly menuSize: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly fold: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+}>> & {
+    onChange?: (val: string) => any;
+}, {
+    readonly fixed: boolean;
+    readonly height: string;
+    readonly offset: number;
+    readonly postion: string;
+    readonly menual: boolean;
+    readonly menuSize: string;
+    readonly fold: boolean;
+}, {}>, {
+    menu?(_: {}): any;
+    default?(_: {}): any;
+}>;
+export default _default;
+type __VLS_WithTemplateSlots<T, S> = T & {
+    new (): {
+        $slots: S;
+    };
+};

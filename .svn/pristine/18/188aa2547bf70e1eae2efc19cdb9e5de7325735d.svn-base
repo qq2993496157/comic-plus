@@ -1,0 +1,23 @@
+import type { PropType, ExtractPropTypes } from "vue";
+import type { ComicTableOption } from "./type";
+
+export const tableProps = {
+  height: String,
+  data: {
+    type: Array as PropType<object[]>,
+    required: true
+  },
+  options: {
+    type: Object as PropType<ComicTableOption>,
+    default: {}
+  }
+} as const
+
+export type TableProps = ExtractPropTypes<typeof tableProps>
+
+
+export const tableEmits = {
+  ['select-change']: (val: object) => typeof val === 'object',
+}
+
+export type TableEmits = typeof tableEmits

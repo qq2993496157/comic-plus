@@ -1,0 +1,20 @@
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const imageProps: {
+    readonly src: StringConstructor;
+    readonly alt: StringConstructor;
+    readonly fit: StringConstructor;
+    readonly current: NumberConstructor;
+    readonly loading: {
+        readonly type: StringConstructor;
+        readonly default: "eager";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly previewList: PropType<string[]>;
+};
+export type ImageProps = ExtractPropTypes<typeof imageProps>;
+export declare const imageEmits: {
+    load: () => boolean;
+    error: () => boolean;
+};
+export type ImageEmits = typeof imageEmits;

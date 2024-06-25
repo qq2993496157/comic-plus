@@ -1,0 +1,92 @@
+.cu-tag {
+  padding: 0 12px;
+  border-radius: 4px;
+  color: var(--font);
+  background-color: #fff;
+  height: 32px;
+  line-height: 1em;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--input-border);
+  cursor: default;
+  white-space: nowrap;
+}
+
+.cu-tag .closeicon {
+  margin-left: 4px;
+  border: 1px solid var(--input-border);
+  background-color: #fff;
+  border-radius: 2px;
+  color: var(--font);
+  cursor: pointer;
+  font-size: 12px;
+  width: 15px;
+  height: 15px;
+  line-height: 13px;
+  text-align: center;
+  transition: all 100ms;
+  /* border-radius: 50%; */
+}
+
+.cu-tag.plain {
+  background-color: transparent;
+}
+
+.cu-tag.small {
+  height: 28px;
+}
+
+.cu-tag.mini {
+  padding: 0 8px;
+  height: 20px;
+  font-size: 12px;
+}
+
+.cu-tag.cu-tag--primary:not(.plain) {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.cu-tag.cu-tag--success:not(.plain) {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.cu-tag.cu-tag--warning:not(.plain) {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  color: #fff;
+}
+.cu-tag.cu-tag--danger:not(.plain) {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.cu-tag.cu-tag--primary.plain {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.cu-tag.cu-tag--success.plain {
+  border-color: var(--success);
+  color: var(--success);
+}
+.cu-tag.cu-tag--warning.plain {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+.cu-tag.cu-tag--danger.plain {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.cu-tag.plain .closeicon {
+  border: none;
+  color: inherit;
+  line-height: 15px;
+}
+
+.cu-tag + .cu-tag {
+  margin-left: 10px;
+}

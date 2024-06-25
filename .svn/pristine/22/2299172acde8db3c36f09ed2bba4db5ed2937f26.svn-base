@@ -1,0 +1,11 @@
+.cu-countdown {
+  font-size: inherit;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: top;
+}
+
+/* .cu-countdown_time {
+  vertical-align: top;
+  display: inline-block;
+} */

@@ -1,0 +1,2 @@
+import CuTextarea from './src/main.vue'
+export default CuTextarea

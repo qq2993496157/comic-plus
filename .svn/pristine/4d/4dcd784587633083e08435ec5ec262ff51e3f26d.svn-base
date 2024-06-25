@@ -1,0 +1,64 @@
+<template>
+  <span class="cu-image" :style="{ cursor: previewList ? 'pointer' : 'default' }" @click="handleClick">
+    <img
+      :src="src"
+      :alt="alt"
+      width="100%"
+      height="100%"
+      @load="loaded"
+      @error="error"
+      :loading="loading"
+      :style="imageStyle"
+    />
+    <div v-if="loadType === 'load'" class="cu-image__loading">
+      <slot name="load"><i class="cu-icon-usual"></i>加载中... </slot>
+    </div>
+    <div v-if="loadType === 'error'" class="cu-image__error">
+      <slot name="error"> <i class="cu-icon-unhappy"></i>加载失败 </slot>
+    </div>
+  </span>
+</template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import '../style/css';
+import { preview } from '../../preview-image/index.js';
+defineOptions({
+  name: 'CuImage'
+});
+const props = defineProps({
+  src: String,
+  alt: String,
+  fit: String,
+  current: Number,
+  loading: {
+    type: String,
+    default: 'eager'
+  },
+  previewList: Array
+});
+const emit = defineEmits(['load', 'error']);
+
+const loadType = ref('load');
+
+const imageStyle = computed(() => {
+  return {
+    'object-fit': props.fit
+  };
+});
+
+function loaded() {
+  loadType.value = 'loaded';
+  emit('load');
+}
+
+function error() {
+  loadType.value = 'error';
+  emit('error');
+}
+function handleClick() {
+  if (props.previewList) {
+    preview(props.previewList, props.current);
+  }
+}
+</script>

@@ -1,0 +1,125 @@
+<template>
+  <transition name="cu-fade" @after-enter="onAfterEnter" @after-leave="onModeAfterLeave">
+    <div class="cu-mode cu-mode__flex" v-if="showMode" :style="modeStyle">
+      <transition name="cu-fade-top" @after-leave="onAfterLeave">
+        <div class="cu-preview-image" v-if="showPreview">
+          <div class="cu-preview-image__tools">
+            <i class="cu-icon-close" @click="showPreview = false"></i>
+            <i class="cu-icon-left" @click="minus"></i>
+            <i class="cu-icon-right" @click="plus"></i>
+          </div>
+          <div class="cu-preview-image__imgtools">
+            <i class="cu-icon-magnify" @click="scale += 0.2"></i>
+            <i class="cu-icon-shrink" @click="scale -= 0.2"></i>
+            <i class="cu-icon-refresh" @click="rotate -= 90"></i>
+            <i class="cu-icon-refresh refresh2" @click="rotate += 90"></i>
+          </div>
+          <div class="cu-preview-image__pic">
+            <img :src="list[currentIndex]" :style="imgStyle" @mousedown="mousedown" />
+          </div>
+        </div>
+      </transition>
+    </div>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import '../style/css';
+import { getMaxZIndex } from '../../utils/tools.js';
+defineOptions({
+  name: 'CuPreviewImage'
+});
+const props = defineProps({
+  current: Number,
+  list: Array,
+  close: Function
+});
+
+const showMode = ref(false);
+const showPreview = ref(false);
+const disabledTransition = ref(false);
+const currentIndex = ref(0);
+const scale = ref(1);
+const rotate = ref(0);
+const translateXOld = ref(0);
+const translateYOld = ref(0);
+const translateX = ref(0);
+const translateY = ref(0);
+const x = ref(0);
+const y = ref(0);
+
+const modeStyle = computed(() => {
+  return {
+    zIndex: getMaxZIndex()
+  };
+});
+
+const imgStyle = computed(() => {
+  return {
+    transition: disabledTransition.value ? undefined : 'transform 200ms',
+    transform: `translate(${translateX.value}px,${translateY.value}px) scale(${scale.value}) rotate(${rotate.value}deg)`
+  };
+});
+
+function onAfterEnter() {
+  showPreview.value = true;
+}
+
+function onModeAfterLeave() {
+  props.close && props.close();
+}
+function onAfterLeave() {
+  showMode.value = false;
+}
+
+function mousedown(e: Event) {
+  disabledTransition.value = true;
+  x.value = e.clientX;
+  y.value = e.clientY;
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', up);
+}
+
+function move(e: Event) {
+  translateX.value = translateXOld.value + e.clientX - x.value;
+  translateY.value = translateYOld.value + e.clientY - y.value;
+}
+function up() {
+  disabledTransition.value = false;
+  translateXOld.value = translateX.value;
+  translateYOld.value = translateY.value;
+  document.removeEventListener('mousemove', move);
+  document.removeEventListener('mouseup', up);
+}
+
+function minus() {
+  resatTransform();
+  currentIndex.value--;
+  if (currentIndex.value < 0) {
+    currentIndex.value = props.list.length - 1;
+  }
+}
+
+function plus() {
+  resatTransform();
+  currentIndex.value++;
+  if (currentIndex.value >= props.list.length) {
+    currentIndex.value = 0;
+  }
+}
+
+function resatTransform() {
+  translateXOld.value = 0;
+  translateYOld.value = 0;
+  translateX.value = 0;
+  translateY.value = 0;
+  x.value = 0;
+  y.value = 0;
+}
+
+onMounted(() => {
+  showMode.value = true;
+  currentIndex.value = props.current || 0;
+});
+</script>

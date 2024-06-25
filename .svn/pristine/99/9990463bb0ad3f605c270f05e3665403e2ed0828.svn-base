@@ -1,0 +1,32 @@
+
+import { createApp, h } from "vue"
+import Confirm from './src/main.vue'
+
+import type { confirmProps } from "./src/main.props"
+
+
+/**
+ * @description: useConfirm
+ * @param {Props} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const useConfirm: Function = (options: confirmProps): void => {
+  const confirmElement = document.createElement('div');
+  document.body.appendChild(confirmElement);
+  const app = createApp({
+    render() {
+      return h(Confirm, {
+        ...options,
+        close: () => {
+          app.unmount()
+          document.body.removeChild(confirmElement)
+        }
+      });
+    },
+  });
+  app.mount(confirmElement);
+};
+
+export { useConfirm }

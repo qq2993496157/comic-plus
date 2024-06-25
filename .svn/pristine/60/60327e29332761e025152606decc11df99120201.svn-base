@@ -1,0 +1,54 @@
+<template>
+  <div class="cu-step-card" :class="{ finish: isFinish, active: isCurrent && !error, error }">
+    <div class="cu-step-card__header">
+      <i :class="currentIcon" v-if="currentIcon" class="cu-step-item__icon"></i>
+      <slot name="title">
+        {{ title }}
+      </slot>
+    </div>
+    <i
+      :class="parent?.props.direction === 'vertical' ? 'cu-icon-double-down' : 'cu-icon-double-right'"
+      class="card-bridge"></i>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { getCurrentInstance, computed, inject, onMounted, onBeforeUnmount } from 'vue';
+import { stepItemProps } from './item.props';
+import type { StepProvide } from './type';
+defineOptions({
+  name: 'CuStepCard'
+});
+const props = defineProps(stepItemProps);
+const instance = getCurrentInstance()!;
+const parent = inject<StepProvide>('step:parent');
+
+const isFinish = computed(() => {
+  if (!parent?.props.active) return false;
+  return parent.itemList.value.findIndex((id) => id === instance.uid) < parent.props.active;
+});
+
+const isCurrent = computed(() => {
+  if (parent?.props.active === null || parent?.props.active === undefined) return false;
+  return currentIndex.value === parent.props.active;
+});
+
+const currentIndex = computed(() => {
+  return parent?.itemList.value.findIndex((id: number) => id === instance.uid);
+});
+
+const currentIcon = computed(() => {
+  if (props.icon) return props.icon;
+  if (isCurrent.value) {
+    return props.error ? 'cu-icon-close' : false;
+  }
+  return false;
+});
+
+onMounted(() => {
+  parent && parent.addItem(instance.uid);
+});
+onBeforeUnmount(() => {
+  parent && parent.removeItem(instance.uid);
+});
+</script>

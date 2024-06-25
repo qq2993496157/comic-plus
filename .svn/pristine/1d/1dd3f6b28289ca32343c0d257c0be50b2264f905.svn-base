@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Radio from './src/main.vue'
+
+export const CuRadio = useComponets(Radio)

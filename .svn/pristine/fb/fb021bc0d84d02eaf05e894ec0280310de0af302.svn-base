@@ -1,0 +1,28 @@
+<template>
+  <div class="cu-elevator-item" :elevator-name="name">
+    <slot></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue';
+import type { ElevatorProvide } from './type';
+defineOptions({
+  name: 'CuElevatorItem'
+});
+const props = defineProps({
+  name: String,
+  label: String
+});
+
+const instance = getCurrentInstance()!;
+
+const parent = inject<ElevatorProvide>('elevator:parent');
+
+onMounted(() => {
+  parent && parent.setItem({ name: props.name, label: props.label, uid: instance.uid });
+});
+onBeforeUnmount(() => {
+  parent && parent.removeItem(instance.uid);
+});
+</script>

@@ -1,0 +1,3 @@
+import ScrollBar from './src/main.vue'
+
+export default ScrollBar

@@ -1,0 +1,26 @@
+.cu-space {
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.cu-space.cu-space--horizontal {
+  flex-direction: row;
+}
+
+.cu-space.cu-space--vertical {
+  flex-direction: column;
+}
+
+.cu-space-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cu-space-item > * {
+  flex: 1;
+}
+
+.cu-space-split {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

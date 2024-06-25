@@ -1,0 +1,23 @@
+import type { ExtractPropTypes } from 'vue';
+
+export const tipProps = {
+  type: String,
+  plain: Boolean,
+  size: String,
+  icon: String,
+  rolling: Boolean,
+  color: String,
+  clearable: Boolean,
+  hoverPause: {
+    type: Boolean,
+    default: true
+  }
+} as const;
+
+export type TipProps = ExtractPropTypes<typeof tipProps>;
+
+export const tipEmits = {
+  close: () => true
+};
+
+export type TipEmits = typeof tipEmits;

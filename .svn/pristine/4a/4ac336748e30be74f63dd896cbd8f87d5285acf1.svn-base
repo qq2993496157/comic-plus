@@ -1,0 +1,54 @@
+
+import { createVNode, render } from "vue"
+import MessageConstructor from './src/main.vue'
+import { messageProps } from "./src/main.props";
+import { instancesAppend, instancesRemove, getMessageInstanceId } from './src/instance'
+import type { MessageInstance } from './src/instance'
+
+/**
+ * @description: useMessage
+ * @param {Props} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const createInstane: Function = (options: messageProps): void => {
+  const container = document.createElement('div');
+  const id = getMessageInstanceId()
+  const props = {
+    ...options,
+    id,
+    close: (id: string) => {
+      instancesRemove(id)
+    },
+    destroy: () => {
+      render(null, container)
+    }
+  }
+
+  const vnode = createVNode(
+    MessageConstructor,
+    props
+  )
+  render(vnode, container)
+  const vm = vnode.component!
+
+  const messageInstance = {
+    id,
+    vnode,
+    vm,
+  } as MessageInstance
+
+  instancesAppend(messageInstance)
+
+  document.body.appendChild(container.firstElementChild!)
+};
+
+
+const useMessage = (options: messageProps) => createInstane(options);
+['success', 'warning', 'info', 'error', 'primary'].forEach(type => {
+  useMessage[type] = (message: string) => createInstane({ type, message });
+});
+
+
+export { useMessage }

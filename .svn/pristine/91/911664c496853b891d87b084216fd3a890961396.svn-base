@@ -1,0 +1,323 @@
+
+
+import { Plugin } from 'vue'
+import type { ComponentOptions } from 'vue'
+import type { comicConfig } from './export.type'
+import { formRGBA, colorMixin } from './utils/color-mixin'
+import { deepMerge } from './tools/index'
+
+//components
+//基础组件
+import Button from './button/index'
+import ButtonGroup from './button-group/index'
+import Link from './link/index'
+import { Container, Aside, Header, Main, Footer } from './container/index'
+
+//表单组件
+import Form from './form/index'
+import FormItem from './form-item/index'
+import Checkbox from './checkbox/index'
+import CheckboxGroup from './checkbox-group/index'
+import Radio from './radio/index'
+import RadioGroup from './radio-group/index'
+import Input from './input/index'
+import InputNumber from './input-number/index'
+import Textarea from './textarea/index'
+import Switch from './switch/index'
+import Slider from './slider/index'
+import Select from './select/index'
+import Option from './option/index'
+import Cascader from './cascader/index'
+import TimePicker from './time-picker/index'
+import DatePicker from './date-picker/index'
+import DatetimepPicker from './datetime-picker/index'
+import ColorPicker from './color-picker/index'
+import Upload from './upload/index'
+
+//数据渲染
+import Table from './table/index'
+import Tag from './tag/index'
+import Collapse from './collapse/index'
+import CollapseItem from './collapse-item/index'
+import Waterfall from './waterfall/index'
+import WaterfallItem from './waterfall-item/index'
+import Image from './image/index'
+import Badge from './badge/index'
+import Carousel from './carousel/index'
+import CarouselItem from './carousel-item/index'
+import Progress from './progress/index'
+import Card from './card/index'
+import CardGroup from './card-group/index'
+import Empty from './empty/index'
+import Ellipsis from './ellipsis/index'
+import Countdown from './countdown/index'
+import Pagination from './pagination/index'
+import { Tablev2, Column } from './table-v2/index' //测试组件 勿用
+
+
+//导航菜单
+import Menu from './menu/index'
+import MenuItem from './menu-item/index'
+import SubMenu from './sub-menu/index'
+import Tabs from './tabs/index'
+import TabPane from './tab-pane/index'
+import Elevator from './elevator/index'
+import ElevatorItem from './elevator-item/index'
+import Backtop from './backtop/index'
+import Breadcrumb from './breadcrumb/index'
+import BreadcrumbItem from './breadcrumb-item/index'
+
+
+
+//反馈组件
+import Dialog from './dialog/index'
+import MessageBox from './message-box/index'
+import { preview } from './preview-image/index'
+import { vLoading, Loading, useLoading } from './loading/main'
+import Drawer from './drawer/index'
+import { vTitle, useTitle } from './title/main'
+
+//其它组件
+import TransitionCollapse from './transition-collapse/index'
+import Divider from './divider/index'
+import Step from './step/index'
+import StepItem from './step-item/index'
+import StepCard from './step-card/index'
+import ScrollBar from './scroll-bar/index'
+
+
+const components: object[] = [
+  //基础组件
+  Button,
+  ButtonGroup,
+  Link,
+  Container,
+  Aside,
+  Header,
+  Main,
+  Footer,
+
+  //表单组件
+  Form,
+  FormItem,
+  Checkbox,
+  CheckboxGroup,
+  Radio,
+  RadioGroup,
+  Input,
+  InputNumber,
+  Textarea,
+  Switch,
+  Slider,
+  Select,
+  Option,
+  Cascader,
+  TimePicker,
+  DatePicker,
+  DatetimepPicker,
+  ColorPicker,
+  Upload,
+
+  //数据渲染
+  Table,
+  Tag,
+  Collapse,
+  CollapseItem,
+  Waterfall,
+  WaterfallItem,
+  Image,
+  Badge,
+  Carousel,
+  CarouselItem,
+  Progress,
+  Card,
+  CardGroup,
+  Empty,
+  Ellipsis,
+  Countdown,
+  Pagination,
+  Tablev2,
+  Column,
+
+  //导航菜单
+  Menu,
+  MenuItem,
+  SubMenu,
+  Tabs,
+  TabPane,
+  Elevator,
+  ElevatorItem,
+  Backtop,
+  Breadcrumb,
+  BreadcrumbItem,
+
+  //反馈组件
+  Dialog,
+  Drawer,
+
+  //其它
+  TransitionCollapse,
+  Divider,
+  Step,
+  StepItem,
+  StepCard,
+  ScrollBar
+]
+
+
+const plugin: Plugin = {
+  install(App: any, config: object | null) {
+    components.forEach((item: ComponentOptions) => {
+      App.component(item.name, item);
+    });
+
+    App.config.globalProperties.$alert = MessageBox.alert
+    App.config.globalProperties.$confirm = MessageBox.confirm
+    App.config.globalProperties.$message = MessageBox.message
+    App.config.globalProperties.$notice = MessageBox.notice
+
+    App.config.globalProperties.$preview = preview
+    App.config.globalProperties.$loading = Loading
+
+
+    App.use(vLoading)
+    App.use(vTitle)
+
+    useComicConfig(App, config)
+  },
+}
+
+
+const assignConfig = {
+  color: {
+    primary: '#e4acc7',
+  },
+  size: null,
+  zIndex: 2000,
+}
+
+const useComicConfig: Function = function (App: any, config: comicConfig): void {
+  if (config) {
+    if (config.color) {
+      if (typeof config.color === 'string') {
+        config.color = {
+          primary: config.color
+        }
+        setColor(config.color)
+
+      } else if (typeof config.color === 'object') {
+        setColor(config.color)
+      }
+
+    }
+    App.provide('$COMIC', deepMerge(assignConfig, config))
+    window.$COMIC = deepMerge(assignConfig, config)
+  } else {
+    App.provide('$COMIC', assignConfig)
+    window.$COMIC = assignConfig
+  }
+}
+
+const setColor: Function = function (obj: object) {
+  const colors = ['primary', 'success', 'danger', 'warning', 'font']
+  for (const key in obj) {
+    if (colors.includes(key)) {
+      const c = formRGBA(obj[key]) || []
+      document.body.style.setProperty(`--${key}`, `rgba(${c.join(',')})`)
+      document.body.style.setProperty(`--${key}-light`, colorMixin(c, 70))
+      document.body.style.setProperty(`--${key}-light2`, colorMixin(c, 10))
+    } else {
+      document.body.style.setProperty(`--${key}`, obj[key])
+    }
+  }
+}
+
+
+export default plugin
+
+export * from './tools/index'
+export * from './export.type'
+export {
+  //基础组件
+  Button as CuButton,
+  ButtonGroup as CuButtonGroup,
+  Link as CuLink,
+  Container as CuContainer,
+  Aside as CuAside,
+  Header as CuHeader,
+  Main as CuMain,
+  Footer as CuFooter,
+
+  //表单组件
+  Form as CuForm,
+  FormItem as CuFormItem,
+  Checkbox as CuCheckbox,
+  CheckboxGroup as CuCheckboxGroup,
+  Radio as CuRadio,
+  RadioGroup as CuRadioGroup,
+  Input as CuInput,
+  InputNumber as CuInputNumber,
+  Textarea as CuTextarea,
+  Switch as CuSwitch,
+  Slider as CuSlider,
+  Select as CuSelect,
+  Option as CuOption,
+  Cascader as CuCascader,
+  TimePicker as CuTimePicker,
+  DatePicker as CuDatePicker,
+  DatetimepPicker as CuDatetimepPicker,
+  ColorPicker as CuColorPicker,
+  Upload as CuUpload,
+
+  //数据渲染
+  Table as CuTable,
+  Tag as CuTag,
+  Collapse as CuCollapse,
+  CollapseItem as CuCollapseItem,
+  Waterfall as CuWaterfall,
+  WaterfallItem as CuWaterfallItem,
+  Image as CuImage,
+  Badge as CuBadge,
+  Carousel as CuCarousel,
+  CarouselItem as CuCarouselItem,
+  Progress as CuProgress,
+  Card as CuCard,
+  CardGroup as CuCardGroup,
+  Empty as CuEmpty,
+  Ellipsis as CuEllipsis,
+  Countdown as CuCountdown,
+  Pagination as CuPagination,
+
+  //导航菜单
+  Menu as CuMenu,
+  MenuItem as CuMenuItem,
+  SubMenu as CuSubMenu,
+  Tabs as CuTabs,
+  TabPane as CuTabPane,
+  Elevator as CuElevator,
+  ElevatorItem as CuElevatorItem,
+  Backtop as CuBacktop,
+  Breadcrumb as CuBreadcrumb,
+  BreadcrumbItem as CuBreadcrumbItem,
+
+  //反馈组件
+  Dialog as CuDialog,
+  MessageBox as CuMessageBox,
+  preview,
+  Loading as CuLoading,
+  vLoading,
+  Drawer as CuDrawer,
+
+  //其它
+  TransitionCollapse,
+  Divider as CuDivider,
+  Step as CuStep,
+  StepItem as CuStepItem,
+  StepCard as CuStepCard,
+  ScrollBar as CuScrollBar,
+
+  //Function
+  useComicConfig,
+  useLoading,
+  useTitle,
+}

@@ -1,0 +1,25 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const noticeProps: {
+    readonly position: {
+        readonly type: StringConstructor;
+        readonly default: "rt";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly type: StringConstructor;
+    readonly title: StringConstructor;
+    readonly content: StringConstructor;
+    readonly icon: StringConstructor;
+    readonly color: StringConstructor;
+    readonly showClose: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly duration: {
+        readonly type: NumberConstructor;
+        readonly default: 3000;
+    };
+    readonly isVNode: BooleanConstructor;
+    readonly click: FunctionConstructor;
+};
+export type NoticeOptions = ExtractPropTypes<typeof noticeProps>;

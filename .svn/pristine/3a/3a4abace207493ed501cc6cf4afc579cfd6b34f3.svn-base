@@ -1,0 +1,3 @@
+import StepCard from '../step/src/card.vue'
+
+export default StepCard

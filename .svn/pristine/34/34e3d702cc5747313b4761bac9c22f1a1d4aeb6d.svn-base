@@ -1,0 +1,28 @@
+
+interface configColor {
+  primary?: string;
+  success?: string;
+  danger?: string;
+  warning?: string;
+  info?: string;
+  font?: string;
+}
+
+interface ComicConfig {
+  size?: string;
+  color?: configColor | string;
+  zIndex?: number,
+  isComic?: boolean
+}
+
+export type { ComicConfig }
+
+
+export type { AlertOptions } from './components/message-box/alert/src/main.props'
+export type { ConfirmOptions } from './components/message-box/confirm/src/main.props'
+export type { MessageOptions } from './components/message-box/message/src/main.props'
+export type { NoticeOptions } from './components/message-box/notice/src/main.props'
+
+export * from './components/upload/src/type'
+export * from './components/table/src/type'
+export * from './components/loading/src/type'

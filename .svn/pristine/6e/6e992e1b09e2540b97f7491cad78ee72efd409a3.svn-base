@@ -1,0 +1,38 @@
+<template>
+  <template v-for="(value, key) in notices">
+    <list :list="value" :position="key" @change="listChange"></list>
+  </template>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import '../../style/css';
+import list from './list.vue';
+import { noticeInstances } from './instance';
+defineOptions({
+  name: 'CuNotice'
+});
+
+const props = defineProps({
+  destroy: Function
+});
+
+const notices = computed(() => {
+  return noticeInstances;
+});
+
+const isLengthZero = computed(() => {
+  return (
+    notices.value.lt.length === 0 &&
+    notices.value.lb.length === 0 &&
+    notices.value.rt.length === 0 &&
+    notices.value.rb.length === 0
+  );
+});
+
+function listChange() {
+  if (isLengthZero.value) {
+    props.destroy?.();
+  }
+}
+</script>

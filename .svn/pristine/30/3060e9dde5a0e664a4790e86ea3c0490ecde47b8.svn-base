@@ -1,0 +1,27 @@
+import { h, defineComponent, provide, inject } from "vue";
+import '../style/dropdown.css'
+
+export default defineComponent({
+  name: 'CuDropdownMenu',
+  setup(prop, { slots }) {
+
+    interface DropdownParent {
+      choose: Function
+    }
+
+    const parent = inject<DropdownParent>("dropdown:parent")
+
+
+    function itemClick(sign?: string) {
+      parent?.choose(sign)
+    }
+
+    provide('dowpdown-menu:parent', {
+      itemClick
+    })
+
+    return () => {
+      return h('ul', { class: 'cu-dropdown-menu' }, slots);
+    }
+  },
+})

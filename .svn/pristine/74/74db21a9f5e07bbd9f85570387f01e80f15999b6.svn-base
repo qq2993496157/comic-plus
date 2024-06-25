@@ -1,0 +1,16 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const cardProps: {
+    readonly shadow: {
+        readonly type: StringConstructor;
+        readonly default: "always";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly turnCard: BooleanConstructor;
+    readonly turnType: {
+        readonly type: StringConstructor;
+        readonly default: "hover";
+        readonly validator: (value: string) => boolean;
+    };
+};
+export type CardProps = ExtractPropTypes<typeof cardProps>;

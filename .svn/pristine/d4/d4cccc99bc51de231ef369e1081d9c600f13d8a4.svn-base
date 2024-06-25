@@ -1,0 +1,13 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const dropdownProps: {
+    readonly show: BooleanConstructor;
+    readonly duration: NumberConstructor;
+    readonly toElement: {
+        readonly type: StringConstructor;
+        readonly default: "body";
+    };
+    readonly minWidth: NumberConstructor;
+    readonly disabledTeleport: BooleanConstructor;
+};
+export type DropdownProps = ExtractPropTypes<typeof dropdownProps>;

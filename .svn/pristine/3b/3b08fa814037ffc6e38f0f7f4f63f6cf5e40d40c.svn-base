@@ -1,0 +1,27 @@
+
+import type { ExtractPropTypes } from 'vue'
+
+export const backtopProps = {
+  target: {
+    type: String,
+    default: 'body'
+  },
+  visibleHeight: {
+    type: Number,
+    default: 200
+  },
+  size: {
+    type: String,
+    default: '40px'
+  },
+  right: {
+    type: String,
+    default: '40px'
+  },
+  bottom: {
+    type: String,
+    default: '40px'
+  },
+} as const
+
+export type backtopProps = ExtractPropTypes<typeof backtopProps>

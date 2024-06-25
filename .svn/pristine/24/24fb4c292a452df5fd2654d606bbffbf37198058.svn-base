@@ -1,0 +1,26 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+
+export const switchProps = {
+  modelValue: {
+    type: [Boolean, String, Number] as PropType<boolean | string | number>,
+    required: true
+  },
+  activeText: String,
+  unActiveText: String,
+  activeValue: [String, Number] as PropType<string | number>,
+  unActiveValue: [String, Number] as PropType<string | number>,
+  activeColor: String,
+  unActiveColor: String,
+  disabled: Boolean
+} as const
+
+export type switchProps = ExtractPropTypes<typeof switchProps>
+
+
+export const switchEmits = {
+  ['update:modelValue']: (val: boolean | string | number) => true,
+  change: (val: boolean | string | number) => true
+}
+
+export type switchEmits = typeof switchEmits

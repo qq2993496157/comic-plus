@@ -1,0 +1,21 @@
+import type { ExtractPropTypes } from "vue";
+
+export const radioProps = {
+  modelValue: String,
+  label: {
+    type: String,
+    required: true
+  },
+  disabled: Boolean,
+  activeColor: String
+} as const
+
+export type RadioProps = ExtractPropTypes<typeof radioProps>
+
+
+export const radioEmits = {
+  ['update:modelValue']: (val: string) => typeof val === 'string',
+  change: (val: string) => typeof val === 'string'
+}
+
+export type RadioEmits = typeof radioEmits

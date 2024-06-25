@@ -1,0 +1,48 @@
+
+import { createApp, h } from "vue"
+import Alert from './src/main.vue'
+
+import type { Props } from "./src/main.props"
+
+// interface Props {
+//   title?: string
+//   type?: string
+//   content?: string,
+//   closeButtonText?: string,
+//   icon?: string,
+//   color?: string,
+//   center: boolean,
+//   escClose?: boolean,
+//   modeClose?: boolean,
+//   showButton?: boolean,
+//   showClose?: boolean,
+//   showIcon?: boolean,
+//   callback?: Function
+// }
+
+/**
+ * @description: useAlert
+ * @param {Props} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const useAlert: Function = (options: Props): void => {
+  const alertElement = document.createElement('div');
+  document.body.appendChild(alertElement);
+  const app = createApp({
+    render() {
+      return h(Alert, {
+        ...options,
+        close: () => {
+          app.unmount()
+          document.body.removeChild(alertElement)
+        }
+      });
+    },
+  });
+  app.mount(alertElement);
+
+};
+
+export { useAlert }

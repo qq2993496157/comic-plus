@@ -1,0 +1,47 @@
+.cu-divider {
+  display: inline-flex;
+  font-size: 14px;
+  color: var(--cu-color-text);
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  background-color: var(--cu-border-color);
+}
+
+.cu-divider.cu-divider--horizontal {
+  margin: 12px 0;
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
+.cu-divider.cu-divider--vertical {
+  margin: 0 8px;
+  display: inline-flex;
+  height: 1em;
+  line-height: inherit;
+}
+
+.cu-divider > span {
+  padding: 0 10px;
+  background-color: #fff;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cu-divider.cu-divider--primary {
+  background-color: var(--cu-color-primary);
+}
+.cu-divider.cu-divider--success {
+  background-color: var(--cu-color-success);
+}
+.cu-divider.cu-divider--danger {
+  background-color: var(--cu-color-danger);
+}
+.cu-divider.cu-divider--warning {
+  background-color: var(--cu-color-warning);
+}
+.cu-divider.cu-divider--info {
+  background-color: var(--cu-color-info);
+}

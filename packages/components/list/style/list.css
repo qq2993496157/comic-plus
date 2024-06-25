@@ -1,0 +1,130 @@
+.cu-list {
+  width: 100%;
+  font-size: 14px;
+  color: var(--cu-color-text);
+  border-color: var(--cu-border-color);
+}
+
+.cu-list.is-border {
+  border: 1px solid var(--cu-border-color);
+}
+
+.cu-list__container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  transition: all 200ms;
+  position: relative;
+  border-color: inherit;
+}
+
+.cu-list__head {
+  padding: 8px 10px;
+  border-bottom: 1px solid;
+  border-color: inherit;
+}
+.cu-list__footer {
+  padding: 8px 10px;
+  border-top: 1px solid;
+  border-color: inherit;
+}
+
+.cu-list-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 10px;
+  border-bottom: 1px solid;
+  background-color: #fff;
+  border-color: inherit;
+}
+
+.cu-list-item .cu-list-item__container {
+  flex: 1;
+}
+
+.cu-list .cu-list-item:last-child {
+  border-bottom: 0;
+}
+
+.cu-list-meta {
+  display: flex;
+}
+
+.cu-list-meta__content {
+  margin-left: 8px;
+  flex: 1;
+}
+
+.cu-list-meta__content .title {
+  font-size: 14px;
+}
+
+.cu-list-meta__content .description {
+  font-size: 12px;
+  color: #999;
+}
+
+.cu-list-item .cu-list-meta + .cu-list-item__content {
+  margin-top: 8px;
+}
+
+.cu-list-item .extra {
+  padding-left: 10px;
+}
+
+.cu-list-action {
+  display: flex;
+  align-items: center;
+}
+
+.cu-list-action > span {
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 8px;
+  position: relative;
+  color: var(--cu-color-primary);
+}
+
+.cu-list-action > span::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 2px;
+  bottom: 2px;
+  display: block;
+  width: 1px;
+  background-color: var(--cu-border-color);
+}
+
+.cu-list-action > span:first-child {
+  padding-left: 0;
+}
+.cu-list-action > span:last-child {
+  padding-right: 0;
+}
+
+.cu-list-action > span:last-child:after {
+  display: none;
+}
+
+.cu-list-action > span:hover {
+  color: var(--cu-color-primary-light);
+}
+
+.list-animation-move,
+.list-animation-enter-active,
+.list-animation-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.list-animation-enter-from,
+.list-animation-leave-to {
+  opacity: 0;
+  transform: scaleY(0.01) translate(100%, 0);
+}
+
+.list-animation-leave-active {
+  position: absolute;
+}

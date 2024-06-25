@@ -1,0 +1,15 @@
+import { ExtractDefaultPropTypes } from 'vue';
+
+export declare const titleProps: {
+    readonly title: StringConstructor;
+    readonly position: {
+        readonly type: StringConstructor;
+        readonly default: "top-end";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly parent: {
+        new (): HTMLElement;
+        prototype: HTMLElement;
+    };
+};
+export type TitleProps = ExtractDefaultPropTypes<typeof titleProps>;

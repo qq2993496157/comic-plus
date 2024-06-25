@@ -1,0 +1,64 @@
+<template>
+  <div class="cu-collapse-item" :style="style">
+    <div class="cu-collapse-item__head" @click="changeShow">
+      <slot name="head">
+        <span>
+          <slot name="label">{{ label }}</slot>
+        </span>
+        <span class="cu-collapse-item__line"></span>
+        <span class="cu-icon-right" :class="{ active: showItem }"></span>
+      </slot>
+    </div>
+    <transition-collapse :show="showItem">
+      <div class="cu-collapse-item__content" :style="{ maxHeight: height }">
+        <slot></slot>
+      </div>
+    </transition-collapse>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, computed } from 'vue';
+import '../style/css';
+import transitionCollapse from '../../transition-collapse/src/main.vue';
+
+defineOptions({
+  name: 'CuCollapseItem'
+});
+const props = defineProps<{
+  label?: string;
+  name: string;
+  maxHeight?: number | string;
+  color?: string;
+}>();
+
+const accordion = inject<boolean>('accordion');
+const activeValue = inject<string[] | string>('activeValue');
+const parentColor = inject<string>('parentColor');
+const isBackground = inject<string>('isBackground');
+const useMaxHeight = inject<string | number>('maxHeight');
+const useCollapseChange = inject<Function>('useCollapseChange');
+
+const height = computed(() => {
+  if (!props.maxHeight && !useMaxHeight) {
+    return false;
+  }
+  let mh = props.maxHeight || useMaxHeight || undefined;
+  return typeof mh === 'number' ? mh + 'px' : mh;
+});
+
+const showItem = computed(() => {
+  return accordion ? activeValue.value === props.name : activeValue.value.includes(props.name);
+});
+
+const style = computed(() => {
+  if (!isBackground) return {};
+  return {
+    backgroundColor: props.color || parentColor
+  };
+});
+
+const changeShow = function () {
+  useCollapseChange(!showItem.value, props.name);
+};
+</script>

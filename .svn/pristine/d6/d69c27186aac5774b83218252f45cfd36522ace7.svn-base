@@ -1,0 +1,12 @@
+import { defineComponent, h } from "vue";
+import '../style/button.css';
+
+export default defineComponent({
+  name: 'CuButtonGroup',
+  setup(props, { slots }) {
+    return () => h('span', { class: ['cu-button-group', props.round ? 'round' : undefined] }, slots)
+  },
+  props: {
+    round: Boolean
+  }
+})

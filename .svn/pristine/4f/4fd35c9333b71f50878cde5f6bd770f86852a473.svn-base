@@ -1,0 +1,4 @@
+import Tablev2 from './src/main.vue'
+import Column from './src/column.vue'
+
+export { Tablev2, Column }

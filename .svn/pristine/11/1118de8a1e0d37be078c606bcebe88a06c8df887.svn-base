@@ -1,0 +1,49 @@
+import { createLoading, LoadingService, getDataAttribute } from './src/loading';
+
+const useLoading = function (): any {
+  return {
+    mounted(el: any, binding: any) {
+      if (binding.value) {
+        el.instance = createLoading(
+          {
+            target: el,
+            ...getDataAttribute(el)
+          },
+          binding.value
+        );
+      }
+    },
+    updated(el: any, binding: any) {
+      if (!el.instance && binding.value) {
+        el.instance = createLoading(
+          {
+            target: el,
+            ...getDataAttribute(el)
+          },
+          binding.value
+        );
+      } else {
+        if (!el.instance) return;
+        el.instance.updateVisible(binding.value);
+      }
+    },
+    unmounted(el: any) {
+      if (el.instance) {
+        el.instance.destroy();
+        el.instance = null;
+      }
+    }
+  };
+};
+
+const vLoading = {
+  install: function (app: any) {
+    app.directive('loading', useLoading());
+  }
+};
+
+const CuLoading = {
+  service: LoadingService
+};
+
+export { vLoading, CuLoading, useLoading };

@@ -1,0 +1,38 @@
+<template>
+  <transition name="cu-fade-message" @after-leave="close">
+    <span class="cu-message" :class="type" v-if="show" :style="{ backgroundColor: color }">
+      <i :class="icon" class="prefix-icon"></i>
+      <span>
+        {{ message }}
+      </span>
+      <i class="cu-icon-close-c" v-if="showClose" @click="closeMessage"></i>
+    </span>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import '../../style/css';
+import { messageProps } from './main.props';
+defineOptions({
+  name: 'CuMessage'
+});
+const props = defineProps(messageProps);
+const show = ref(false);
+const timer: any = ref(null);
+
+function closeMessage() {
+  show.value = false;
+  if (timer.value) {
+    clearTimeout(timer.value);
+    timer.value = null;
+  }
+}
+onMounted(() => {
+  show.value = true;
+  if (props.duration === -1) return;
+  timer.value = setTimeout(() => {
+    closeMessage();
+  }, props.duration);
+});
+</script>

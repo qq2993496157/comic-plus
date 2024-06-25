@@ -1,0 +1,28 @@
+import type { ExtractDefaultPropTypes } from "vue";
+
+const positionList = [
+  'top-start',
+  'top-center',
+  'top-end',
+  'bottom-start',
+  'bottom-center',
+  'bottom-end',
+  'left-start',
+  'left-center',
+  'left-end',
+  'right-start',
+  'right-center',
+  'right-end'
+]
+
+export const titleProps = {
+  title: String,
+  position: {
+    type: String,
+    default: 'top-end',
+    validator: (value: string) => positionList.includes(value)
+  },
+  parent: HTMLElement
+} as const
+
+export type TitleProps = ExtractDefaultPropTypes<typeof titleProps>

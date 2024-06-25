@@ -1,0 +1,42 @@
+<template>
+  <span class="cu-badge" :class="type" :style="{ '--color': color }">
+    <span
+      class="cu-badge__inner"
+      v-show="showBadge"
+      :style="badgeStyle"
+      :class="[{ position }, { dot: dot && !corner }]">
+      <slot name="corner">{{ dot ? null : currentValue }}</slot>
+    </span>
+    <slot v-if="position"></slot>
+  </span>
+</template>
+
+<script setup lang="ts">
+import { useSlots, computed } from 'vue';
+import '../style/badge.css';
+import { isNumber } from '../../../utils';
+import { badgeProps } from './main.props';
+
+defineOptions({
+  name: 'CuBadge'
+});
+
+const props = defineProps(badgeProps);
+
+const position = !!useSlots().default;
+const corner = !!useSlots().corner;
+
+const currentValue = computed(() => {
+  return isNumber(props.value) ? (props.value! > props.max ? props.max + '+' : props.value) : props.value;
+});
+
+const showBadge = computed(() => {
+  return isNumber(props.value) ? (props.value! <= 0 ? props.zeroShow : true) : true;
+});
+
+const badgeStyle = computed(() => {
+  return {
+    maxWidth: props.ellipsis ? '100%' : undefined
+  };
+});
+</script>

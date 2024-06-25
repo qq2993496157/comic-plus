@@ -1,0 +1,10 @@
+import { StepProps } from './main.props';
+import { Ref, ComputedRef } from 'vue';
+
+export interface StepProvide {
+    props: StepProps;
+    addItem: Function;
+    removeItem: Function;
+    itemList: Ref<number[]>;
+    maxWidth: ComputedRef<number>;
+}

@@ -1,0 +1,66 @@
+<template>
+  <div
+    class="cu-menu-item"
+    @mouseenter="mouseenter"
+    @click="itemClick"
+    :show-title="showTitle && showEllipsis"
+    v-title="label"
+    :class="{ 'is-active': isActive }"
+    ref="cuMenuItem"
+  >
+    <span v-if="icon" :class="icon" class="icon"></span>
+    <span>
+      <slot>{{ label }}</slot>
+    </span>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, computed, ref, onMounted, onUpdated } from 'vue';
+import '../style/css';
+import { useTitle } from '../../utils/directive.js';
+
+defineOptions({
+  name: 'CuMenuItem'
+});
+const props = defineProps<{
+  label?: string;
+  index: string | number;
+  icon?: string;
+}>();
+
+const vTitle = useTitle();
+const cuMenuItem = ref();
+const showTitle = ref(false);
+
+onMounted(() => {
+  useShowTitle();
+});
+onUpdated(() => {
+  useShowTitle();
+});
+
+const setActiveboxTop = inject<Function>('setActiveboxTop');
+const useItemClick = inject<Function>('useItemClick');
+const activeValue = inject<string | number>('activeValue');
+const showEllipsis = inject<boolean>('showEllipsis');
+
+const isActive = computed(() => {
+  if (activeValue?.value) {
+    return activeValue?.value == props.index;
+  }
+  return false;
+});
+
+function useShowTitle() {
+  if (cuMenuItem.value.clientWidth < cuMenuItem.value.scrollWidth) {
+    showTitle.value = true;
+  }
+}
+function mouseenter(e: object) {
+  setActiveboxTop(e.target.offsetTop);
+}
+function itemClick() {
+  useItemClick(props.index);
+}
+</script>

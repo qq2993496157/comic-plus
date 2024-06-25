@@ -1,0 +1,147 @@
+<template>
+  <li class="cu-sub-menu" @mouseleave="mouseleave" :class="{ 'is-active': isActive }">
+    <div
+      class="cu-sub-menu__head"
+      ref="subMenuHead"
+      v-menu-title:right-center="textLebel"
+      @click="headHandleClick"
+      @mouseenter="mouseenter"
+    >
+      <span v-if="icon" :class="icon" class="icon"></span>
+      <span>
+        <slot name="label">
+          {{ label }}
+        </slot>
+      </span>
+      <span
+        class="suffix-icon"
+        :class="[{ open: isOpen }, parent?.props.mode === 'horizontal' ? 'cu-icon-bottom' : 'cu-icon-right']"
+      ></span>
+    </div>
+    <cu-transition-collapse v-if="parent?.props.mode === 'vertical'">
+      <ul class="cu-sub-menu__content" v-if="isOpen">
+        <slot></slot>
+      </ul>
+    </cu-transition-collapse>
+    <teleport to="body" :disabled="!isToBody" v-if="parent?.props.mode === 'horizontal'">
+      <menu-dropdown :visible="isOpen" :is-fixed="isToBody" @mouse-in="clearTimes" @mouse-out="createTimes">
+        <ul class="cu-sub-menu__content" :style="parent?.style.value">
+          <slot></slot>
+        </ul>
+      </menu-dropdown>
+    </teleport>
+  </li>
+</template>
+
+<script setup lang="ts">
+import { ref, inject, reactive, onMounted, onUpdated, getCurrentInstance, computed, provide } from 'vue';
+import type { ComputedRef } from 'vue';
+import { CuTransitionCollapse } from '../../transition-collapse';
+import menuDropdown from './menu-dropdown.vue';
+import { useTitle } from '../../title/main';
+import { submenuProps } from './submenu.props';
+import type { MenuProvide, SubmenuProvide } from './type';
+defineOptions({
+  name: 'CuSubMenu'
+});
+interface ItemInstance {
+  uid: number;
+  isActive: ComputedRef<boolean>;
+}
+
+const props = defineProps(submenuProps);
+
+const vMenuTitle = useTitle();
+const instance = getCurrentInstance()!;
+
+const subMenuHead = ref();
+const isOpen = ref(false);
+const textLebel = ref<string | undefined>('');
+const activeList = reactive([]) as ItemInstance[];
+var timer;
+
+onMounted(() => {
+  useShowTitle();
+});
+onUpdated(() => {
+  useShowTitle();
+});
+const isToBody = computed(() => {
+  return instance.parent?.type.name === 'CuMenu';
+});
+
+const parent = inject<MenuProvide>('menu:parent');
+
+const submenuParent = inject<SubmenuProvide | null>('submenu:parent', null);
+
+const isActive = computed(() => {
+  return activeList.filter((v) => v.isActive).length > 0;
+});
+
+const isHorizontal = computed(() => {
+  return parent?.props.mode === 'horizontal';
+});
+
+submenuParent?.setActive({
+  uid: instance.uid,
+  isActive
+});
+
+function useShowTitle() {
+  if (subMenuHead.value.clientWidth < subMenuHead.value.scrollWidth && parent?.props.showEllipsis) {
+    textLebel.value = props.label;
+  }
+}
+
+function headHandleClick() {
+  if (isHorizontal.value) return;
+  isOpen.value = !isOpen.value;
+}
+
+function mouseenter() {
+  if (isHorizontal.value) {
+    clearTimes();
+    isOpen.value = true;
+  }
+}
+
+function mouseleave() {
+  if (isHorizontal.value) {
+    createTimes();
+  }
+}
+
+function clearTimes() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
+function createTimes() {
+  if (!timer) {
+    timer = setTimeout(() => {
+      closeMenu();
+    }, 300);
+  }
+}
+
+function closeMenu(deep?: boolean) {
+  isOpen.value = false;
+  clearTimes();
+  if (deep) {
+    submenuParent?.closeMenu(deep);
+  }
+}
+
+function setActive(item: ItemInstance) {
+  if (activeList.findIndex((v) => v.uid === item.uid) === -1) {
+    activeList.push(item);
+  }
+}
+
+provide('submenu:parent', {
+  closeMenu,
+  setActive,
+  isHorizontal
+});
+</script>

@@ -1,0 +1,9 @@
+import type { Ref, InjectionKey } from 'vue';
+import type { ArrayMix } from '../../../utils';
+
+export type CheckboxGroupProvide = {
+  activeValue: Ref<ArrayMix<string | number>>;
+  changeItemCheck: (check: boolean, value: string | number) => void;
+};
+
+export const CHECKBOXGROUP_PROVIDE: InjectionKey<CheckboxGroupProvide> = Symbol('CHECKBOXGROUP_PROVIDE');

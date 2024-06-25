@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import TransitionCollapse from './src/main.vue'
+
+export const CuTransitionCollapse = useComponets(TransitionCollapse)

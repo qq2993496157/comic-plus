@@ -1,0 +1,32 @@
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { ComicType, ComicSize } from '../../type';
+
+export const dropdownProps = {
+  trigger: {
+    type: String as PropType<'hover' | 'click' | 'right-click'>,
+    default: 'hover'
+  },
+  chooseAfterHide: {
+    type: Boolean,
+    default: true
+  },
+  button: Boolean,
+  size: String as PropType<ComicSize>,
+  buttonType: {
+    type: String as PropType<ComicType>,
+    default: 'primary'
+  },
+  buttonIcon: {
+    type: String,
+    default: 'cu-icon-down'
+  }
+} as const;
+
+export type DropdownProps = ExtractPropTypes<typeof dropdownProps>;
+
+export const dropdownEmits = {
+  ['menu-click']: (val?: string) => true,
+  ['button-click']: (evt: MouseEvent) => evt instanceof MouseEvent
+};
+
+export type DropdownEmits = typeof dropdownEmits;

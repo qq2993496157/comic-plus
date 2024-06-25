@@ -1,0 +1,14 @@
+import type { ExtractPropTypes, PropType } from "vue";
+
+export const containerCommonProps = {
+  height: String
+}
+export type containerCommonProps = ExtractPropTypes<typeof containerCommonProps>
+
+
+export const asideProps = {
+  ...containerCommonProps,
+  width: String
+}
+
+export type asideProps = ExtractPropTypes<typeof asideProps>

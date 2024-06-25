@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import ColorPicker from './src/main.vue'
+
+export const CuColorPicker = useComponets(ColorPicker)

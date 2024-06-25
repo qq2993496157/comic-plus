@@ -1,0 +1,41 @@
+import type { PropType, ExtractPropTypes } from 'vue';
+import type { ComicType } from '../../type';
+
+export const STATUS = {
+  success: 'cu-icon-success',
+  warning: 'cu-icon-warning',
+  fail: 'cu-icon-close-one'
+};
+
+export const progressProps = {
+  progress: {
+    type: Number,
+    default: 0
+  },
+  type: {
+    type: String as PropType<ComicType>,
+    default: 'primary'
+  },
+  barType: {
+    type: String as PropType<'line' | 'line-trends' | 'circle' | 'trends'>,
+    default: 'line'
+  },
+  status: {
+    type: String as PropType<'primary' | 'success' | 'fail'>,
+    default: 'primary'
+  },
+  size: {
+    type: [String, Number] as PropType<string | number>,
+    default: '120'
+  },
+  barWidth: Number,
+  colors: [String, Object, Function] as PropType<string | object | Function>,
+  insetFormat: Boolean,
+  format: String,
+  showText: {
+    type: Boolean,
+    default: true
+  }
+} as const;
+
+export type ProgressProps = ExtractPropTypes<typeof progressProps>;

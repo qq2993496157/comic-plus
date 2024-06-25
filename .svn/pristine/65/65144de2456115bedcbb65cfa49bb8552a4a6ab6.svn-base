@@ -1,0 +1,35 @@
+
+import { createVNode, render } from "vue"
+import AlertConstructor from './src/main.vue'
+
+import type { AlertOptions } from "./src/main.props"
+
+/**
+ * @description: useAlert
+ * @param {*} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+function useAlert(options: AlertOptions): Promise<any> {
+  return new Promise<void>((resolve) => {
+    const container = document.createElement('div');
+    const props = {
+      ...options,
+      close: () => {
+        render(null, container)
+        resolve()
+      }
+    }
+
+    const vnode = createVNode(
+      AlertConstructor,
+      props
+    )
+    render(vnode, container)
+
+    document.body.appendChild(container.firstElementChild!)
+  })
+};
+
+export { useAlert }

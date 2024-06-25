@@ -1,0 +1,28 @@
+<template>
+  <li class="cu-dropdown-item" :class="{ divider, disabled }" @click="itemHandleClick">
+    <div>
+      <i class="prefix-icon" :class="icon" v-if="icon"></i>
+      <slot></slot>
+    </div>
+  </li>
+</template>
+
+<script setup lang="ts">
+import { inject } from 'vue';
+import { dropdownItemProps } from './menu-item.props';
+import { DROPDOWNMENU_PROVIDE } from './type';
+defineOptions({
+  name: 'CuDropdownItem'
+});
+
+const props = defineProps(dropdownItemProps);
+
+const { itemClick } = inject(DROPDOWNMENU_PROVIDE);
+
+function itemHandleClick() {
+  if (props.disabled) return;
+  itemClick(props.sign);
+}
+</script>
+
+<style scoped></style>

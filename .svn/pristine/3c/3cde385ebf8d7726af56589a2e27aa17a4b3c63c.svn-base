@@ -1,0 +1,22 @@
+import { useAlert } from './alert/main.js'
+import { useConfirm } from './confirm/main.js'
+import { useMessage } from './message/main.js'
+import { useNotice } from './notice/main.js'
+
+
+interface Message {
+  alert: Function;
+  confirm: Function;
+  message: Function;
+  notice: Function;
+}
+
+const MessageBox: Message = {
+  alert: useAlert,
+  confirm: useConfirm,
+  message: useMessage,
+  notice: useNotice,
+}
+
+
+export default MessageBox

@@ -1,0 +1,37 @@
+<template>
+  <div class="cu-option" @click="handleClick" :class="[{ active: isActive }, { disabled }, size]">
+    <slot>{{ label }}</slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, onMounted, computed } from 'vue';
+import '../style/css';
+import { optionProps } from './option.props';
+defineOptions({
+  name: 'CuOption'
+});
+const props = defineProps(optionProps);
+
+const optionClick = inject<Function | null>('select:optionClick', null);
+const optionSet = inject<Function | null>('select:optionSet', null);
+const currentValue = inject<string | number | string[] | number[]>('select:currentValue');
+const size = inject<string | null>('select:size', null);
+const multiple = inject<boolean>('select:multiple');
+
+const isActive = computed(() => {
+  if (multiple) {
+    return currentValue?.value.includes(props.value);
+  } else {
+    return currentValue?.value === props.value;
+  }
+});
+
+function handleClick() {
+  optionClick && optionClick(props.value);
+}
+
+onMounted(() => {
+  optionSet && optionSet(props);
+});
+</script>

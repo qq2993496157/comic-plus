@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import Textarea from './src/main.vue'
+
+export const CuTextarea = useComponets(Textarea)

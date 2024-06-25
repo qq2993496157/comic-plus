@@ -1,0 +1,3 @@
+import SubMenu from '../menu/src/submenu.vue'
+
+export default SubMenu

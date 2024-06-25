@@ -1,0 +1,16 @@
+
+import type { ExtractPropTypes } from 'vue'
+
+
+export const stepProps = {
+  direction: {
+    type: String,
+    default: 'horizontal',
+    validator: (value: string) => ['vertical', 'horizontal'].includes(value)
+  },
+  active: Number,
+  center: Boolean,
+  activeColor: String,
+}
+
+export type stepProps = ExtractPropTypes<typeof stepProps>

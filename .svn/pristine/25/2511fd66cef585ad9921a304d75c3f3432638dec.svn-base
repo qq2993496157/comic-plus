@@ -1,0 +1,13 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const collapseItemProps = {
+  label: String,
+  name: {
+    type: String,
+    required: true
+  },
+  color: String
+} as const
+
+export type collapseItemProps = ExtractPropTypes<typeof collapseItemProps>
+

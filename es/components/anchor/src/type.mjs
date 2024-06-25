@@ -1,0 +1,4 @@
+const ANCHOR_PROVIDE = Symbol("ANCHOR_PROVIDE");
+export {
+  ANCHOR_PROVIDE
+};

@@ -1,0 +1,28 @@
+<template>
+  <a
+    class="cu-link"
+    :href="disabled || !href ? undefined : href"
+    :target="target"
+    :class="[type ? 'cu-link--' + type : null, { underline }]"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <slot></slot>
+  </a>
+</template>
+
+<script setup lang="ts">
+import '../style/css';
+import { linkProps, linkEmits } from './main.props';
+defineOptions({
+  name: 'CuLink'
+});
+
+const props = defineProps(linkProps);
+const emit = defineEmits(linkEmits);
+
+function handleClick(e: Event) {
+  if (props.disabled) return;
+  emit('click', e);
+}
+</script>

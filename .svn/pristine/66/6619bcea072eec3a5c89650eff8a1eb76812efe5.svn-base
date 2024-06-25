@@ -1,0 +1,43 @@
+const useClickOutside = function (): object {
+  return {
+    mounted(el: HTMLElement, binding: any) {
+      function eventHandler(e: Event) {
+        if (el.contains(<HTMLElement>e.target) || hasParent(e.target, binding.arg)) {
+          return false;
+        }
+        if (binding.value && typeof binding.value === 'function') {
+          binding.value(e);
+        }
+      }
+      el.__click_outside__ = eventHandler;
+      document.addEventListener('click', eventHandler);
+    },
+    beforeUnmount(el: HTMLElement) {
+      document.removeEventListener('click', el.__click_outside__);
+      delete el.__click_outside__;
+    }
+  };
+};
+/**
+ * @description: 是否存在指定父元素
+ * @param {HTMLElement} ele
+ * @param {string} attr
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+const hasParent = function (ele: HTMLElement, attr: string): boolean {
+  if (!attr) return false;
+  let parent: HTMLElement | null = ele;
+  let flag = false;
+  while (parent && !flag) {
+    let attrs = parent.getAttribute('outside');
+    parent = parent.parentElement || null;
+    if (attrs && attrs === attr) {
+      flag = true;
+    }
+  }
+  return flag;
+};
+
+export { useClickOutside };

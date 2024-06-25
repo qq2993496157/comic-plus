@@ -1,0 +1,110 @@
+.cu-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c0c4cc;
+  overflow: hidden;
+  font-size: 14px;
+  color: #fff;
+  vertical-align: middle;
+  cursor: default;
+  transition: all 200ms;
+}
+
+.cu-avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.cu-avatar .avatar-icon {
+  font-size: 1.5em;
+}
+
+.cu-avatar-group {
+  display: inline-flex;
+  vertical-align: middle;
+  transition: all 200ms;
+}
+
+.cu-avatar-group .cu-avatar {
+  border: 1px solid var(--cu-border-color);
+  background-color: #c0c4cc;
+  overflow: hidden;
+}
+
+.cu-avatar-group__container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 200ms;
+}
+
+.cu-avatar-group.mode-tile .cu-avatar-group__container {
+  gap: var(--cu-avatar-gap);
+}
+
+.cu-avatar-group.shadow .cu-avatar-group__surplus,
+.cu-avatar-group.shadow .cu-avatar {
+  box-shadow: 0 0 4px #000;
+}
+
+.cu-avatar-group.mode-stack .cu-avatar-group__surplus,
+.cu-avatar-group.mode-stack .cu-avatar {
+  margin-left: var(--cu-avatar-gap);
+}
+
+.cu-avatar-group.mode-stack .cu-avatar:first-child {
+  margin-left: 0;
+}
+
+.cu-avatar.is-circle,
+.cu-avatar-group.is-circle .cu-avatar-group__surplus,
+.cu-avatar-group.is-circle .cu-avatar {
+  border-radius: 50%;
+}
+.cu-avatar.is-square,
+.cu-avatar-group.is-square .cu-avatar-group__surplus,
+.cu-avatar-group.is-square .cu-avatar {
+  border-radius: var(--cu-border-radius);
+}
+
+.cu-avatar-group .cu-avatar-group__surplus.can-click {
+  cursor: pointer;
+}
+
+.cu-avatar-group .cu-avatar-group__surplus {
+  border: 1px solid var(--cu-border-color);
+  width: var(--cu-avatar-size);
+  height: var(--cu-avatar-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  cursor: default;
+  background-color: var(--cu-color-primary);
+  transition: all 200ms;
+  z-index: 2;
+}
+.cu-avatar-group .cu-avatar-group__surplus.can-click:hover {
+  background-color: var(--cu-color-primary-light);
+  text-shadow: 0 0 2px;
+}
+
+.avatar-move,
+.avatar-enter-active,
+.avatar-leave-active {
+  transition: all 500ms cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.avatar-enter-from,
+.avatar-leave-to {
+  opacity: 0;
+  transform: translate(0, -30px);
+}
+
+.comic-plus__is-comic .cu-avatar,
+.comic-plus__is-comic .cu-avatar-group .cu-avatar-group__item {
+  border-color: var(--cu-comic-border-color);
+  border: 1px solid var(--cu-comic-border-color);
+}

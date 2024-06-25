@@ -1,0 +1,65 @@
+.cu-radio {
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 14px;
+  color: var(--font);
+  border-color: var(--border);
+  cursor: pointer;
+  vertical-align: middle;
+  --color: var(--active-color, var(--primary));
+}
+.cu-radio__inner {
+  margin-right: 4px;
+  display: inline-flex;
+  line-height: 1;
+  width: 16px;
+  height: 16px;
+  border: 1px solid;
+  border-color: inherit;
+  border-radius: 50%;
+  position: relative;
+}
+.cu-radio__inner::after {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: none;
+}
+.cu-radio:not(.is-disabled):hover {
+  color: var(--color);
+  border-color: var(--color);
+}
+
+.cu-radio.is-disabled {
+  opacity: 0.6;
+  cursor: no-drop;
+}
+.cu-radio .cu-radio__label {
+  color: inherit;
+}
+
+.cu-radio input:not(:disabled):active ~ .cu-radio__inner {
+  transform: scale(0.9);
+}
+.cu-radio input:checked ~ .cu-radio__inner {
+  border-color: var(--color);
+}
+
+.cu-radio input:checked ~ .cu-radio__inner::after {
+  background-color: var(--color);
+  display: block;
+}
+.cu-radio input:checked ~ .cu-radio__label {
+  color: var(--color);
+}
+
+.cu-radio-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+}

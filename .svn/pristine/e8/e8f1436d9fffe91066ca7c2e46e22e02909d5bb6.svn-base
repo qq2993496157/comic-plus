@@ -1,0 +1,163 @@
+.cu-button {
+  padding: 0 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, var(--border));
+  color: var(--font);
+  background-color: var(--background-color, #fff);
+  cursor: pointer;
+  height: 34px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+  --border-hover: var(--primary);
+  --background-hover: var(--primary);
+  --color-hover: #fff;
+  /* transition: background-color 200ms, border-color 200ms, color 200ms, box-shadow 200ms; */
+  transition: all 200ms;
+  outline: none;
+}
+
+.cu-button.small {
+  padding: 0 10px;
+  height: 30px;
+}
+.cu-button.mini {
+  padding: 0 8px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.cu-button.round {
+  border-radius: 18px;
+}
+.cu-button.circle {
+  width: 36px;
+  padding: 0;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.cu-button.circle.small {
+  width: 30px;
+}
+.cu-button.circle.mini {
+  width: 24px;
+}
+
+.cu-button.primary {
+  color: #fff;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  --border-hover: var(--primary-light);
+  --background-hover: var(--primary-light);
+}
+
+.cu-button.success {
+  color: #fff;
+  background-color: var(--success);
+  border-color: var(--success);
+  --border-hover: var(--success-light);
+  --background-hover: var(--success-light);
+}
+.cu-button.warning {
+  color: #fff;
+  background-color: var(--warning);
+  border-color: var(--warning);
+  --border-hover: var(--warning-light);
+  --background-hover: var(--warning-light);
+}
+.cu-button.danger {
+  color: #fff;
+  background-color: var(--danger);
+  border-color: var(--danger);
+  --border-hover: var(--danger-light);
+  --background-hover: var(--danger-light);
+}
+
+.cu-button.info {
+  color: #fff;
+  background-color: var(--info);
+  border-color: var(--info);
+  --border-hover: var(--info-light);
+  --background-hover: var(--info-light);
+}
+
+.cu-button.is-plain {
+  color: var(--font);
+  --background-hover: #fff;
+  --color-hover: var(--primary);
+}
+
+.cu-button.primary.is-plain {
+  background-color: #fff;
+  color: var(--primary);
+  --background-hover: var(--primary-light2);
+  --color-hover: var(--primary);
+}
+.cu-button.success.is-plain {
+  background-color: #fff;
+  color: var(--success);
+  --background-hover: var(--success-light2);
+  --color-hover: var(--success);
+}
+.cu-button.warning.is-plain {
+  background-color: #fff;
+  color: var(--warning);
+  --background-hover: var(--warning-light2);
+  --color-hover: var(--warning);
+}
+.cu-button.danger.is-plain {
+  background-color: #fff;
+  color: var(--danger);
+  --background-hover: var(--danger-light2);
+  --color-hover: var(--danger);
+}
+.cu-button.info.is-plain {
+  background-color: #fff;
+  color: var(--info);
+  --background-hover: var(--info-light2);
+  --color-hover: var(--info);
+}
+
+.cu-button[disabled] {
+  opacity: 0.6;
+  cursor: no-drop;
+}
+
+.cu-button:not([disabled]):hover {
+  background-color: var(--background-hover);
+  color: var(--color-hover);
+  border-color: var(--border-hover);
+}
+
+.cu-button:active:not([disabled]) {
+  box-shadow: inset 0 0 0 1px;
+}
+.cu-button-group .cu-button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.cu-button-group .cu-button:last-child {
+  border-radius: 0 4px 4px 0;
+}
+.cu-button-group .cu-button {
+  border-radius: 0;
+}
+
+.cu-button-group .cu-button + .cu-button {
+  border-left-color: var(--border);
+  margin-left: -1px;
+}
+.cu-button-group + .cu-button-group,
+.cu-button-group + .cu-button,
+.cu-button + .cu-button,
+.cu-button + .cu-button-group {
+  margin-left: 10px;
+}
+.cu-button-group {
+  display: inline-block;
+  vertical-align: middle;
+}

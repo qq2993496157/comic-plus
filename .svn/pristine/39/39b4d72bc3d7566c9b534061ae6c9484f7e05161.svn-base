@@ -1,0 +1,1 @@
+export type ValueType = Date | string | number | Date[] | string[] | number[];

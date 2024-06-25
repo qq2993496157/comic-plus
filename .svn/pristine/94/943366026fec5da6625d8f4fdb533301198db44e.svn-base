@@ -1,0 +1,13 @@
+import { InjectionKey } from 'vue';
+import type { SelectProps } from './main.props';
+import type { OptionProps } from './option.props';
+
+export type ValueType = string | number | string[] | number[];
+
+export type SelectProvide = {
+  optionClick: (value: ValueType) => void;
+  optionSet: (prop: OptionProps) => void;
+  props: SelectProps;
+};
+
+export const SELECT_PROVIDE: InjectionKey<SelectProvide> = Symbol('SELECT_PROVIDE');

@@ -1,0 +1,53 @@
+
+import { createApp, h } from "vue"
+import Message from './src/main.vue'
+import { getMaxZIndex } from '../../utils/tools.js';
+import { Props } from "./src/main.props";
+
+// interface Props {
+//   message?: string
+//   type?: string,
+//   icon?: string,
+//   color?: string,
+//   duration?: number,
+//   showClose?: boolean
+// }
+var MessageBox: HTMLElement | any = null
+
+/**
+ * @description: useMessage
+ * @param {Props} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const useMessage: Function = (options: Props): void => {
+  if (!MessageBox) {
+    MessageBox = document.createElement('div');
+    MessageBox.className = 'cu-message--mode'
+    MessageBox.style.setProperty('z-index', getMaxZIndex())
+    document.body.appendChild(MessageBox);
+  }
+
+  const MessageElement = document.createElement('span');
+  MessageBox.appendChild(MessageElement)
+
+  const app = createApp({
+    render() {
+      return h(Message, {
+        ...options,
+        close: () => {
+          app.unmount()
+          MessageBox?.removeChild(MessageElement)
+          if (MessageBox?.childNodes.length <= 0) {
+            document.body.removeChild(MessageBox);
+            MessageBox = null
+          }
+        }
+      });
+    },
+  });
+  app.mount(MessageElement);
+};
+
+export { useMessage }

@@ -1,0 +1,102 @@
+.cu-time-picker__inner {
+  position: relative;
+  flex: auto;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.cu-time-picker__inner input {
+  cursor: inherit;
+}
+.cu-time-picker__inner > i {
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: inherit;
+  transition: transform 200ms;
+  color: var(--font-light);
+}
+.cu-time-picker.checked .cu-time-picker__inner .cu-icon-bottom {
+  transform: rotate(-180deg);
+}
+
+.cu-time-picker__dropdown {
+  font-size: 13px;
+}
+
+.cu-time-picker__dropdown .cu-time-picker__list {
+  padding: calc(32px * 3) 0;
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+}
+.cu-time-picker__listbox {
+  width: 180px;
+  margin: 4px 0;
+  display: flex;
+  height: calc(32px * 7);
+  position: relative;
+}
+.cu-time-picker__dropdown.range > div {
+  display: flex;
+  padding: 10px;
+}
+.cu-time-picker__dropdown.range > div .time-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.cu-time-picker__dropdown.range .cu-time-picker__listbox {
+  border: 1px solid var(--input-border);
+}
+.rangetime-box + .rangetime-box {
+  margin-left: 10px;
+}
+
+.cu-time-picker__footer {
+  border-top: 1px solid var(--input-border);
+  padding: 4px 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cu-time-picker__dropdown .cu-time-picker__list > span {
+  width: 100%;
+  height: 32px;
+  display: inline-block;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cu-time-picker__listbox::before,
+.cu-time-picker__listbox::after {
+  content: '';
+  display: block;
+  height: 1px;
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  opacity: 0.5;
+  background-color: var(--input-border);
+}
+
+.cu-time-picker__listbox::before {
+  transform: translateY(-16px);
+}
+.cu-time-picker__listbox::after {
+  transform: translateY(16px);
+}
+
+.cu-time-picker__listbox .cu-time-picker__list > span.active {
+  color: var(--primary);
+}
+
+.cu-time-picker__inner .cu-icon-close-c {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}

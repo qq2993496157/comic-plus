@@ -1,0 +1,195 @@
+.cu-color-picker {
+  display: inline-block;
+  border: 1px solid var(--border);
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px;
+  transition: all 200ms;
+}
+
+.cu-color-picker__container {
+  position: relative;
+  border: 1px solid var(--border);
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  transition: all 200ms;
+}
+.cu-color-picker.is-disabled i {
+  color: var(--disabled-font);
+}
+
+.cu-color-picker.small {
+  width: 26px;
+  height: 26px;
+}
+
+.cu-color-picker.mini {
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+}
+
+.cu-color-picker__container i {
+  position: relative;
+  z-index: 5;
+}
+
+.cu-color-picker__container .cu-icon-minus {
+  font-size: 12px;
+  color: var(--font-light);
+}
+
+.cu-color-picker__popper {
+  width: 300px;
+  padding: 6px;
+}
+
+.cu-color-picker__buttons {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cu-color-picker__hsl {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: linear-gradient(90deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red);
+}
+.cu-color-picker__alpha::after,
+.cu-color-picker__hsl::after,
+.cu-color-picker__pane::after {
+  display: block;
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+}
+.cu-color-picker__alpha .bar,
+.cu-color-picker__hsl .bar {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  border: 1px solid #f0f0f0;
+  transform: translateX(-50%);
+}
+
+.cu-color-picker__alpha {
+  margin-top: 10px;
+  position: relative;
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+}
+
+.cu-color-picker__alpha,
+.cu-color-picker__container.alpha,
+.cu-color-picker__preview.alpha,
+.cu-color-picker__preset li {
+  background-color: white;
+  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 10px 10px;
+  background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+}
+
+.cu-color-picker__alpha .mixin_black {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-90deg, #000, transparent);
+}
+
+.cu-color-picker__pane {
+  width: 100%;
+  height: 160px;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+}
+.cu-color-picker__pane > div {
+  position: absolute;
+  inset: 0;
+}
+.cu-color-picker__pane .mixin_black {
+  background: linear-gradient(0deg, #000, transparent);
+}
+.cu-color-picker__pane .mixin_white {
+  background: linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
+}
+
+.cu-color-picker__pane .spot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 1px 2px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%);
+}
+
+.cu-color-picker__preview {
+  position: relative;
+  margin-left: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+}
+.cu-color-picker__container .preview__box,
+.cu-color-picker__preview .preview__box {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.cu-color-picker__huering {
+  margin-top: 8px;
+  display: flex;
+}
+.cu-color-picker__huering .flex1 {
+  flex: 1;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cu-color-picker__preset {
+  padding-left: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.cu-color-picker__preset li {
+  margin-top: 8px;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.cu-color-picker__preset li:hover,
+.cu-color-picker__preset li.selected {
+  border: 1px solid #fff;
+  box-shadow: 0 0 4px 2px var(--border);
+}
+
+.cu-color-picker__preset li span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

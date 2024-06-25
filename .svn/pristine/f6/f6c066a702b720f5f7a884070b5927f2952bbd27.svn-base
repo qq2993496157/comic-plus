@@ -1,0 +1,15 @@
+<template>
+  <span class="cu-card-group" ref="group" :class="cardHoverEffect">
+    <slot></slot>
+  </span>
+</template>
+
+<script setup lang="ts">
+import '../style/css';
+import { cardGroupProps } from './group.props';
+defineOptions({
+  name: 'CuCardGroup'
+});
+
+defineProps(cardGroupProps);
+</script>

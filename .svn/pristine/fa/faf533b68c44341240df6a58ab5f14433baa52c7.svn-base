@@ -1,0 +1,18 @@
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { ComicSize } from '../../type';
+export const formProps = {
+  model: Object,
+  labelWidth: {
+    type: String,
+    default: '80px'
+  },
+  labelPosition: {
+    type: String as PropType<'left' | 'right' | 'top'>,
+    default: 'right'
+  },
+  rules: Object,
+  size: String as PropType<ComicSize>,
+  hideRequiredAsterisk: Boolean
+} as const;
+
+export type FormProps = ExtractPropTypes<typeof formProps>;

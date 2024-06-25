@@ -1,0 +1,100 @@
+
+declare const _default: import('vue').DefineComponent<{
+    readonly title: {
+        readonly type: StringConstructor;
+        readonly default: "提示";
+    };
+    readonly type: StringConstructor;
+    readonly content: StringConstructor;
+    readonly center: BooleanConstructor;
+    readonly cancelButtonText: {
+        readonly type: StringConstructor;
+        readonly default: "取消";
+    };
+    readonly confirmButtonText: {
+        readonly type: StringConstructor;
+        readonly default: "确认";
+    };
+    readonly icon: StringConstructor;
+    readonly color: StringConstructor;
+    readonly modeClose: BooleanConstructor;
+    readonly escClose: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly distinguishCloseAndCancel: BooleanConstructor;
+    readonly showConfirmButton: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly showCancelButton: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly showClose: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly showIcon: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly close: FunctionConstructor;
+    readonly isVNode: BooleanConstructor;
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly title: {
+        readonly type: StringConstructor;
+        readonly default: "提示";
+    };
+    readonly type: StringConstructor;
+    readonly content: StringConstructor;
+    readonly center: BooleanConstructor;
+    readonly cancelButtonText: {
+        readonly type: StringConstructor;
+        readonly default: "取消";
+    };
+    readonly confirmButtonText: {
+        readonly type: StringConstructor;
+        readonly default: "确认";
+    };
+    readonly icon: StringConstructor;
+    readonly color: StringConstructor;
+    readonly modeClose: BooleanConstructor;
+    readonly escClose: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly distinguishCloseAndCancel: BooleanConstructor;
+    readonly showConfirmButton: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly showCancelButton: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly showClose: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly showIcon: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly close: FunctionConstructor;
+    readonly isVNode: BooleanConstructor;
+}>>, {
+    readonly title: string;
+    readonly center: boolean;
+    readonly showClose: boolean;
+    readonly isVNode: boolean;
+    readonly modeClose: boolean;
+    readonly escClose: boolean;
+    readonly showIcon: boolean;
+    readonly cancelButtonText: string;
+    readonly confirmButtonText: string;
+    readonly distinguishCloseAndCancel: boolean;
+    readonly showConfirmButton: boolean;
+    readonly showCancelButton: boolean;
+}, {}>;
+export default _default;

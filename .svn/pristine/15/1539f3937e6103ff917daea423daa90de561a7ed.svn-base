@@ -1,0 +1,54 @@
+<template>
+  <label
+    class="cu-checkbox"
+    :style="activeColor ? '--active-color:' + activeColor : undefined"
+    :class="{ 'is-disabled': disabled }"
+  >
+    <input type="checkbox" :checked="isCheck" :disabled="disabled" @change="changeValue" v-show="false" />
+    <span class="cu-checkbox__inner" :class="{ ispart }">
+      <i v-if="part" :class="modelValue ? 'cu-icon-success ' : ispart ? 'cu-icon-minus' : ''"></i>
+      <i v-else class="cu-icon-success" v-show="isCheck"></i>
+    </span>
+    <span class="cu-checkbox__label">
+      <slot>{{ label }}</slot>
+    </span>
+  </label>
+</template>
+
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+import '../style/css';
+import useItemValidate from '../../utils/mixin/validate.js';
+import { checkboxProps, checkboxEmits } from './main.props';
+import type { CheckboxProvide } from './type';
+defineOptions({
+  name: 'CuCheckbox'
+});
+const props = defineProps(checkboxProps);
+const emit = defineEmits(checkboxEmits);
+
+const part = computed(() => {
+  return typeof props.ispart === 'boolean';
+});
+
+const parent = inject<CheckboxProvide | null>('checkbox:parent', null);
+
+const { itemValidate } = useItemValidate();
+
+const isCheck = computed(() => {
+  return parent ? parent?.activeValue.value.includes(props.label) : props.modelValue;
+});
+
+function changeValue(e: Event) {
+  const eTarget = e.target as HTMLInputElement;
+  if (parent?.changeItemCheck) {
+    parent.changeItemCheck(eTarget.checked, props.label);
+    return;
+  }
+  if (typeof props.modelValue === 'boolean') {
+    emit('update:modelValue', eTarget.checked);
+    emit('change', eTarget.checked);
+    itemValidate('change');
+  }
+}
+</script>

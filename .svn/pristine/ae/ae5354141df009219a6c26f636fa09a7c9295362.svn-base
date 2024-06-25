@@ -1,0 +1,86 @@
+<template>
+  <div
+    class="cu-step-item"
+    :style="style"
+    :class="{ finish: isFinish, active: isCurrent && !error, error, 'is-center': parent?.props.center }">
+    <div class="cu-step-item__header">
+      <span :class="currentIcon" class="cu-step-item__text">{{ currentIcon ? undefined : currentIndex! + 1 }}</span>
+      <span class="cu-step-item__line"></span>
+    </div>
+    <div class="cu-step-item__main">
+      <div class="cu-step-item__title">
+        <slot name="title">
+          {{ title }}
+        </slot>
+      </div>
+      <div class="cu-step-item__content">
+        <slot>
+          {{ content }}
+        </slot>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { getCurrentInstance, computed, inject, onMounted, onBeforeUnmount } from 'vue';
+import { stepItemProps } from './item.props';
+import type { StepProvide } from './type';
+defineOptions({
+  name: 'CuStepItem'
+});
+const props = defineProps(stepItemProps);
+const instance = getCurrentInstance()!;
+const parent = inject<StepProvide>('step:parent');
+
+const isFinish = computed(() => {
+  if (!parent?.props.active) return false;
+  return parent.itemList.value.findIndex((id) => id === instance.uid) < parent.props.active;
+});
+
+const isCurrent = computed(() => {
+  if (parent?.props.active === null || parent?.props.active === undefined) return false;
+  return currentIndex.value === parent.props.active;
+});
+
+const currentIndex = computed(() => {
+  return parent?.itemList.value.findIndex((id: number) => id === instance.uid);
+});
+
+const currentIcon = computed(() => {
+  if (props.icon) return props.icon;
+  if (isCurrent.value) {
+    return props.error ? 'cu-icon-close' : false;
+  }
+  if (isFinish.value) return 'cu-icon-check';
+  return false;
+});
+
+const style = computed(() => {
+  if (parent?.props.direction === 'vertical') {
+    if (instance.uid === parent?.itemList.value[parent.itemList.value.length - 1]) return undefined;
+    return {
+      flexBasis: 100 / (parent?.itemList.value.length - 1) + '%'
+    };
+  } else if (parent?.props.center) {
+    return {
+      flexBasis: 100 / parent?.itemList.value.length + '%'
+    };
+  } else if (instance.uid === parent?.itemList.value[parent.itemList.value.length - 1]) {
+    return {
+      maxWidth: parent?.maxWidth.value + '%'
+    };
+  } else {
+    return {
+      flexBasis: 100 / (parent?.itemList.value.length! - 1) + '%'
+    };
+  }
+});
+
+onMounted(() => {
+  parent && parent.addItem(instance.uid);
+});
+onBeforeUnmount(() => {
+  parent && parent.removeItem(instance.uid);
+});
+</script>

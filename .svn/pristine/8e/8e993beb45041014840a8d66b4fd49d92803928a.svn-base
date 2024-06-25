@@ -1,0 +1,39 @@
+import { ExtractPropTypes, PropType } from 'vue';
+
+export declare const paginationProps: {
+    readonly total: {
+        readonly type: NumberConstructor;
+        readonly default: 0;
+    };
+    readonly pageSize: {
+        readonly type: NumberConstructor;
+        readonly default: 10;
+    };
+    readonly currentPage: {
+        readonly type: NumberConstructor;
+        readonly default: 1;
+    };
+    readonly pageSizes: {
+        readonly type: PropType<number[]>;
+        readonly default: readonly [];
+    };
+    readonly pagerCount: {
+        readonly type: NumberConstructor;
+        readonly validator: (value: number) => boolean;
+        readonly default: 7;
+    };
+    readonly layout: {
+        readonly type: PropType<string[]>;
+        readonly default: readonly ["pages"];
+    };
+    readonly size: StringConstructor;
+    readonly background: BooleanConstructor;
+};
+export type PaginationProps = ExtractPropTypes<typeof paginationProps>;
+export declare const paginationEmits: {
+    "update:currentPage": (val: number) => boolean;
+    "update:pageSize": (val: number) => boolean;
+    "current-change": (val: number) => boolean;
+    "size-change": (val: number) => boolean;
+};
+export type PaginationEmits = typeof paginationEmits;

@@ -1,0 +1,11 @@
+import { ConfirmOptions } from './src/main.props';
+
+/**
+ * @description: useConfirm
+ * @param {*} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function useConfirm(options: ConfirmOptions): Promise<any>;
+export { useConfirm };

@@ -1,0 +1,87 @@
+import { reactive } from 'vue'
+import type { Plugin, Component, App } from 'vue'
+import type { ComicConfig } from './export.type'
+import { formRGBA, colorMixin } from './utils/color-mixin'
+import { deepMerge } from './tools/index'
+
+import components from './components'
+
+import CuMessageBox from './components/message-box/index'
+import { preview } from './components/preview-image/index'
+import { CuLoading, vLoading, useLoading } from './components/loading/main'
+import { vTitle, useTitle } from './components/title/main'
+
+const plugin = {
+  install(app: App, config: object | null) {
+    components.forEach((item: Component) => {
+      app.use(item as unknown as { install: () => any });
+    });
+
+    app.config.globalProperties.$alert = CuMessageBox.alert
+    app.config.globalProperties.$confirm = CuMessageBox.confirm
+    app.config.globalProperties.$message = CuMessageBox.message
+    app.config.globalProperties.$notice = CuMessageBox.notice
+
+    app.config.globalProperties.$preview = preview
+    app.config.globalProperties.$loading = CuLoading
+
+    app.use(vLoading)
+    app.use(vTitle)
+
+    useComicConfig(config)
+  }
+} as Plugin
+
+var assignConfig = reactive({
+  color: {
+    primary: '#e4acc7',
+  },
+}) as ComicConfig
+
+const useComicConfig: Function = function (config: ComicConfig): void {
+  if (config?.color) {
+    if (typeof config.color === 'string') {
+      config.color = {
+        primary: config.color
+      }
+      setColor(config.color)
+
+    } else if (typeof config.color === 'object') {
+      setColor(config.color)
+    }
+  }
+  assignConfig = reactive(deepMerge(assignConfig, config))
+  window.$COMIC = assignConfig
+}
+
+
+const setColor: Function = function (obj: object) {
+  const colors = ['primary', 'success', 'danger', 'warning', 'font']
+  for (const key in obj) {
+    if (colors.includes(key)) {
+      const c = formRGBA(obj[key]) || []
+      document.body.style.setProperty(`--${key}`, `rgba(${c.join(',')})`)
+      document.body.style.setProperty(`--${key}-light`, colorMixin(c, 70))
+      document.body.style.setProperty(`--${key}-light2`, colorMixin(c, 10))
+    } else {
+      document.body.style.setProperty(`--${key}`, obj[key])
+    }
+  }
+}
+
+export default plugin
+
+export * from './tools/index'
+export * from './export.type'
+export * from './components'
+
+export {
+  CuMessageBox,
+  preview,
+  CuLoading,
+  vLoading,
+  useComicConfig,
+  useLoading,
+  useTitle,
+  vTitle
+}

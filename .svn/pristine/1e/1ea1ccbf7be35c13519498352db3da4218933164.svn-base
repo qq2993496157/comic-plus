@@ -1,0 +1,12 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const menuItemProps = {
+  index: {
+    type: [String, Number] as PropType<string | number>,
+    required: true
+  },
+  label: String,
+  icon: String,
+} as const
+
+export type MenuItemProps = ExtractPropTypes<typeof menuItemProps>

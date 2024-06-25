@@ -1,0 +1,49 @@
+{
+  "name": "comic-plus",
+  "version": "1.4.1",
+  "license": "MIT",
+  "private": false,
+  "main": "lib/packages/index.js",
+  "module": "es/packages/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "theme",
+    "package.json",
+    "tsconfig.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "comic-plus",
+    "vue3+ts组件库"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build:comp": "pnpm run -C packages build",
+    "build:css": "pnpm run -C styles build",
+    "build:all": "pnpm run -C packages build & pnpm run -C styles build",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "@vue/shared": "^3.4.21",
+    "async-validator": "^4.2.5",
+    "axios": "^1.6.8",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vue/shared": "^3.4.21",
+    "async-validator": "^4.2.5",
+    "axios": "^1.6.8",
+    "vite-plugin-css": "^1.0.4",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.3",
+    "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.8.1"
+  }
+}

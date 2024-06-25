@@ -1,0 +1,57 @@
+<template>
+  <button
+    class="cu-button"
+    :class="[type, currentSize, { 'is-plain': plain }, { circle, round }]"
+    :disabled="disabled"
+    @click="$emit('click', $event)"
+    :style="buttonStyle"
+  >
+    <span v-if="icon" :class="icon" :style="{ marginRight: $slots.default ? '4px' : '0' }"></span>
+    <span><slot></slot></span>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { inject, computed } from 'vue';
+import type { ComputedRef } from 'vue';
+import '../style/button.css';
+import { buttonProps, buttonEmits } from './main.props';
+import { useConfig, formRGBA, colorMixin } from '../../../utils';
+
+defineOptions({
+  name: 'CuButton'
+});
+
+const props = defineProps(buttonProps);
+const emit = defineEmits(buttonEmits);
+
+const { SIZE } = useConfig();
+const formSize = inject<ComputedRef<string> | null>('form:size', null);
+
+const currentSize = computed(() => {
+  return props.size ?? formSize?.value ?? SIZE;
+});
+
+const buttonStyle = computed(() => {
+  if (props.color) {
+    if (props.plain) {
+      return {
+        '--background-color': '#fff',
+        '--border-hover': props.color,
+        '--border-color': props.color,
+        '--background-hover': colorMixin(formRGBA(props.color), 20),
+        color: props.color
+      };
+    } else {
+      return {
+        '--background-color': props.color,
+        '--border-hover': colorMixin(formRGBA(props.color), 80),
+        '--border-color': props.color,
+        '--background-hover': colorMixin(formRGBA(props.color), 80),
+        color: '#fff'
+      };
+    }
+  }
+  return undefined;
+});
+</script>

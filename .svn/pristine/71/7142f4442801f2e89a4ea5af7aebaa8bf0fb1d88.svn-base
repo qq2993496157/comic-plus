@@ -1,0 +1,10 @@
+import type { ExtractPropTypes } from "vue";
+
+export const transitionCollapseProps = {
+  show: {
+    type: Boolean,
+    required: true
+  },
+  duration: Number
+} as const
+export type transitionCollapseProps = ExtractPropTypes<typeof transitionCollapseProps>

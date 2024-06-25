@@ -1,0 +1,33 @@
+import {
+  debounce,
+  throttle
+} from '../utils/tools'
+
+/**
+ * @description: 对象深度合并
+ * @param {object} target
+ * @param {object} source
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const deepMerge = (target: object, source: object): object => {
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      if (source[key] instanceof Object) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        deepMerge(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+  return target;
+}
+
+
+export {
+  debounce,
+  throttle,
+  deepMerge
+};

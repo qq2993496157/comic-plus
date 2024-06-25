@@ -1,0 +1,29 @@
+
+import type { ExtractPropTypes, PropType } from "vue";
+
+export const checkboxProps = {
+  modelValue: {
+    type: [Boolean, String] as PropType<boolean | string>,
+    default: false
+  },
+  activeValue: String,
+  unActiveValue: String,
+  label: String,
+  ispart: {
+    type: Boolean,
+    default: () => {
+      return null;
+    }
+  },
+  disabled: Boolean,
+  activeColor: String
+} as const
+
+export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>
+
+export const checkboxEmits = {
+  ['update:modelValue']: (evt: boolean | string) => typeof evt === 'boolean' || typeof evt === 'string',
+  change: (evt: boolean | string) => typeof evt === 'boolean' || typeof evt === 'string',
+}
+
+export type CheckboxEmits = typeof checkboxEmits

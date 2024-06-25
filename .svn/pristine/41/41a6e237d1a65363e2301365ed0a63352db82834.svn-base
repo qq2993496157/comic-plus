@@ -1,0 +1,49 @@
+<template>
+  <div class="cu-tablev2">
+    <div>
+      <ul v-for="row in data">
+        <li v-for="col in columns">
+          <span v-if="col.slots" :class="'uid' + col.uid" uid="85"></span>
+          <span v-else>{{ row[col.props.prop] }}</span>
+        </li>
+      </ul>
+    </div>
+    <div data-table></div>
+    <span v-show="false">
+      <slot></slot>
+    </span>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, provide, getCurrentInstance, nextTick } from 'vue';
+import '../style/css';
+import { tableProps } from './main.props';
+defineOptions({
+  name: 'CuTablev2'
+});
+
+const props = defineProps(tableProps);
+const columns = ref([]);
+const instance = getCurrentInstance()!;
+
+function setColumns(column) {
+  console.log(column);
+  columns.value.push(column);
+  if (column.slots) {
+    nextTick(() => {
+      let htmlList = document.querySelectorAll('.uid' + column.uid);
+      htmlList.forEach((item) => {
+        // const el = column.columnRef.value.cloneNode(true);
+        // item.appendChild(el);
+      });
+    });
+  }
+}
+
+provide('table:parent', {
+  setColumns
+});
+</script>
+
+<style scoped></style>

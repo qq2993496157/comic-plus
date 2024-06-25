@@ -1,0 +1,44 @@
+
+declare const _default: __VLS_WithTemplateSlots<import('vue').DefineComponent<{
+    readonly modelValue: {
+        readonly type: BooleanConstructor;
+        readonly default: false;
+    };
+    readonly label: StringConstructor;
+    readonly ispart: {
+        readonly type: BooleanConstructor;
+        readonly default: () => any;
+    };
+    readonly disabled: BooleanConstructor;
+    readonly activeColor: StringConstructor;
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    change: (evt: boolean) => void;
+    "update:modelValue": (evt: boolean) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly modelValue: {
+        readonly type: BooleanConstructor;
+        readonly default: false;
+    };
+    readonly label: StringConstructor;
+    readonly ispart: {
+        readonly type: BooleanConstructor;
+        readonly default: () => any;
+    };
+    readonly disabled: BooleanConstructor;
+    readonly activeColor: StringConstructor;
+}>> & {
+    onChange?: (evt: boolean) => any;
+    "onUpdate:modelValue"?: (evt: boolean) => any;
+}, {
+    readonly disabled: boolean;
+    readonly modelValue: boolean;
+    readonly ispart: boolean;
+}, {}>, {
+    default?(_: {}): any;
+}>;
+export default _default;
+type __VLS_WithTemplateSlots<T, S> = T & {
+    new (): {
+        $slots: S;
+    };
+};

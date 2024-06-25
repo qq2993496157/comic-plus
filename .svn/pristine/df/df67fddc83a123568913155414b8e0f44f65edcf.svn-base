@@ -1,0 +1,29 @@
+import type { ExtractPropTypes } from "vue";
+
+export const scrollBarProps = {
+  width: String,
+  height: String,
+  display: {
+    type: String,
+    validator: (value: string) => ['none', 'always', 'hover'].includes(value),
+    default: 'hover'
+  },
+  maxHeight: String,
+  disabledX: {
+    type: Boolean,
+    default: false
+  },
+  disabledY: {
+    type: Boolean,
+    default: false
+  }
+} as const
+
+export type scrollBarProps = ExtractPropTypes<typeof scrollBarProps>
+
+
+export const scrollBarEmits = {
+  scroll: (e: Event) => true
+}
+
+export type scrollBarEmits = typeof scrollBarEmits

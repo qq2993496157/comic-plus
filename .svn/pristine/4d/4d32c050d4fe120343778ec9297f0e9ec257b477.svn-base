@@ -1,0 +1,25 @@
+import type { PropType, ExtractPropTypes } from "vue";
+import type { ValueType } from './type'
+
+export const selectProps = {
+  modelValue: {
+    type: [String, Number, Array] as PropType<ValueType>,
+    required: true,
+  },
+  multiple: Boolean,
+  size: String,
+  disabled: Boolean,
+  width: String,
+  clearable: Boolean,
+  placeholder: String
+} as const
+
+export type SelectProps = ExtractPropTypes<typeof selectProps>
+
+
+export const selectEmits = {
+  ['update:modelValue']: (val: ValueType) => true,
+  change: (val: ValueType) => true,
+  clear: () => true
+}
+export type SelectEmits = typeof selectEmits

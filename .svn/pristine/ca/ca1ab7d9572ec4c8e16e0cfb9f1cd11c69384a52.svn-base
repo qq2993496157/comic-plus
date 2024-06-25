@@ -1,0 +1,117 @@
+<template>
+  <div class="cu-elevator" :style="{ height }">
+    <div class="cu-elevator__menu" v-if="menual" :class="{ 'menu-fixed': fixed }" :style="menuStyle">
+      <slot name="menu">
+        <transition name="cu-zoom-bottom">
+          <ul class="cu-elevator__menu-list" v-show="showMenu">
+            <li
+              v-for="item in itemList"
+              :class="{ 'is-active': currentName === item.name }"
+              @click="menuClick(item.name)"
+            >
+              {{ item.label }}
+            </li>
+          </ul>
+        </transition>
+        <i class="cu-icon-top-s fold" @click="foldClick()" v-if="fold && !fixed"></i>
+      </slot>
+    </div>
+    <ScrollBar @scroll="onScroll" ref="scrollBarRef">
+      <div class="cu-elevator__container" ref="container">
+        <slot></slot>
+      </div>
+    </ScrollBar>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, provide, computed, onMounted, watch, getCurrentInstance } from 'vue';
+import '../style/css';
+import ScrollBar from '../../scroll-bar';
+import { debounce } from '../../utils/tools';
+import { elevatorProps, elevatorEmits, MENU_POSITION } from './main.props';
+
+defineOptions({
+  name: 'CuElevator'
+});
+const props = defineProps(elevatorProps);
+const emit = defineEmits(elevatorEmits);
+
+interface itemObj {
+  name: string;
+  label: string;
+  uid: number;
+}
+
+const itemList = ref<itemObj[]>([]);
+const container = ref();
+const scrollBarRef = ref();
+const instance = getCurrentInstance()!;
+const currentName = ref<string | null>('');
+const showMenu = ref(true);
+
+const onScroll = debounce(setActive);
+
+watch(currentName, (val, old) => {
+  emit('change', val);
+});
+
+const menuStyle = computed(() => {
+  if (props.fixed) return undefined;
+  return Object.assign({ '--size': props.menuSize }, MENU_POSITION[props.postion]);
+});
+
+function menuClick(name: string) {
+  let item: HTMLElement = Array.from(container.value.children).find((v: HTMLElement) => {
+    let vName = v.getAttribute('elevator-name');
+    return vName === name;
+  });
+  currentName.value = name;
+  const Reat = container.value.getBoundingClientRect();
+  let itemTop = item.getBoundingClientRect().top;
+  scrollBarRef.value.setBarTop(itemTop - Reat.top);
+}
+
+function setActive() {
+  const ele = instance.vnode.el;
+  const Reat = ele?.getBoundingClientRect();
+  let arr: HTMLElement[] = Array.from(container.value.children);
+  for (let i = arr.length - 1; i >= 0; i--) {
+    let item: HTMLElement = arr[i];
+    if (item.getBoundingClientRect().top - Reat.top - props.offset <= 0) {
+      currentName.value = item.getAttribute('elevator-name');
+      break;
+    }
+    //如果循环到第一个元素依然没有break则直接使用第一个元素作为选中项
+    if (i === 0) {
+      currentName.value = item.getAttribute('elevator-name');
+    }
+  }
+}
+
+function foldClick() {
+  showMenu.value = !showMenu.value;
+}
+
+function setItem(val: itemObj) {
+  itemList.value.push(val);
+}
+
+function removeItem(uid: number) {
+  itemList.value.splice(
+    itemList.value.findIndex((v: itemObj) => v.uid === uid),
+    1
+  );
+}
+
+provide('elevator:parent', {
+  setItem,
+  removeItem
+});
+
+defineExpose({ changeItemActive: menuClick });
+
+onMounted(() => {
+  setActive();
+});
+</script>

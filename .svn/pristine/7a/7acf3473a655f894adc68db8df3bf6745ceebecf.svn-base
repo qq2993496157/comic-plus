@@ -1,0 +1,77 @@
+
+declare const _default: import('vue').DefineComponent<{
+    readonly total: {
+        readonly type: NumberConstructor;
+        readonly default: 0;
+    };
+    readonly pageSize: {
+        readonly type: NumberConstructor;
+        readonly default: 10;
+    };
+    readonly currentPage: {
+        readonly type: NumberConstructor;
+        readonly default: 1;
+    };
+    readonly pageSizes: {
+        readonly type: import("vue").PropType<number[]>;
+        readonly default: readonly [];
+    };
+    readonly pagerCount: {
+        readonly type: NumberConstructor;
+        readonly validator: (value: number) => boolean;
+        readonly default: 7;
+    };
+    readonly layout: {
+        readonly type: import("vue").PropType<string[]>;
+        readonly default: readonly ["pages"];
+    };
+    readonly size: StringConstructor;
+    readonly background: BooleanConstructor;
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    "update:currentPage": (val: number) => void;
+    "update:pageSize": (val: number) => void;
+    "current-change": (val: number) => void;
+    "size-change": (val: number) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly total: {
+        readonly type: NumberConstructor;
+        readonly default: 0;
+    };
+    readonly pageSize: {
+        readonly type: NumberConstructor;
+        readonly default: 10;
+    };
+    readonly currentPage: {
+        readonly type: NumberConstructor;
+        readonly default: 1;
+    };
+    readonly pageSizes: {
+        readonly type: import("vue").PropType<number[]>;
+        readonly default: readonly [];
+    };
+    readonly pagerCount: {
+        readonly type: NumberConstructor;
+        readonly validator: (value: number) => boolean;
+        readonly default: 7;
+    };
+    readonly layout: {
+        readonly type: import("vue").PropType<string[]>;
+        readonly default: readonly ["pages"];
+    };
+    readonly size: StringConstructor;
+    readonly background: BooleanConstructor;
+}>> & {
+    "onUpdate:currentPage"?: (val: number) => any;
+    "onUpdate:pageSize"?: (val: number) => any;
+    "onCurrent-change"?: (val: number) => any;
+    "onSize-change"?: (val: number) => any;
+}, {
+    readonly background: boolean;
+    readonly total: number;
+    readonly pageSize: number;
+    readonly currentPage: number;
+    readonly pageSizes: number[];
+    readonly pagerCount: number;
+    readonly layout: string[];
+}, {}>;
+export default _default;

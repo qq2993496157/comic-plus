@@ -1,0 +1,23 @@
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const colorPickerProps: {
+    readonly modelValue: {
+        readonly type: StringConstructor;
+        readonly required: true;
+        readonly default: "";
+    };
+    readonly alpha: BooleanConstructor;
+    readonly format: {
+        readonly type: StringConstructor;
+        readonly default: (props: any) => "rgb" | "hex";
+    };
+    readonly size: StringConstructor;
+    readonly disabled: BooleanConstructor;
+    readonly predefine: PropType<string[]>;
+};
+export type ColorPickerProps = ExtractPropTypes<typeof colorPickerProps>;
+export declare const colorPickerEmits: {
+    "update:modelValue": (val: string) => boolean;
+    change: (val: string) => boolean;
+};
+export type ColorPickerEmits = typeof colorPickerEmits;

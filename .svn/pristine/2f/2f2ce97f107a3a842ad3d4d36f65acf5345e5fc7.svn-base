@@ -1,0 +1,8 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const breadcrumbItemProps = {
+  to: [String, Object] as PropType<string | object>,
+  active: Boolean
+} as const
+
+export type BreadcrumbItemProps = ExtractPropTypes<typeof breadcrumbItemProps>

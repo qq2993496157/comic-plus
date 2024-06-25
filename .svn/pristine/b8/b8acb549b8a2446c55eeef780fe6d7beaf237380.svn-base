@@ -1,0 +1,8 @@
+declare interface Window {
+  $COMIC: object
+}
+
+declare interface HTMLElement {
+  __click_outside__: any,
+  __resizeObserver__: any
+}

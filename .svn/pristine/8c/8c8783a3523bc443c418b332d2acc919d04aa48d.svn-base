@@ -1,0 +1,50 @@
+
+import { createApp, h } from "vue"
+import Notice from './src/main.vue'
+
+interface Props {
+  message?: string
+  type?: string,
+  icon?: string,
+  color?: string,
+  duration?: number,
+  showClose?: boolean
+}
+var NoticeBox: HTMLElement | any = null
+
+/**
+ * @description: useMessage
+ * @param {Props} options
+ * @return {*}
+ * @author: 陈龙
+ * @logic: 
+ */
+const useNotice: Function = (options: Props): void => {
+  if (!NoticeBox) {
+    NoticeBox = document.createElement('div');
+    NoticeBox.className = 'cu-notice--mode'
+    document.body.appendChild(NoticeBox);
+  }
+
+  const NoticeElement = document.createElement('span');
+  NoticeBox.appendChild(NoticeElement)
+
+  const app = createApp({
+    render() {
+      return h(Notice, {
+        ...options,
+        close: () => {
+          app.unmount()
+          NoticeBox?.removeChild(NoticeElement)
+          if (NoticeBox?.childNodes.length <= 0) {
+            document.body.removeChild(NoticeBox);
+            NoticeBox = null
+          }
+        }
+      });
+    },
+  });
+  app.mount(NoticeElement);
+};
+
+export { useNotice }

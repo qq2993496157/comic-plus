@@ -1,0 +1,40 @@
+import type { PropType, ExtractPropTypes } from 'vue';
+import type { UploadFile, UploadInstance } from './type';
+
+export const uploadProps = {
+  fileList: Array as PropType<UploadFile[]>,
+  type: {
+    type: String as PropType<'list' | 'picture'>,
+    default: 'list'
+  },
+  http: {
+    type: [String, Function] as PropType<string | ((instance: UploadInstance) => void)>,
+    required: true
+  },
+  headers: Object,
+  data: Object,
+  autoUpload: {
+    type: Boolean,
+    default: true
+  },
+  multiple: Boolean,
+  limit: Number,
+  disabled: Boolean,
+  maxFileSize: String,
+  withCredentials: Boolean,
+  accept: String,
+  onExceed: Function,
+  onLarge: Function,
+  onSuccess: Function,
+  onError: Function,
+  onChange: Function,
+  beforeUpload: Function
+} as const;
+
+export type UploadProps = ExtractPropTypes<typeof uploadProps>;
+
+export const uploadEmits = {
+  ['update:fileList']: (files: UploadFile[]) => Array.isArray(files)
+};
+
+export type UploadEmits = typeof uploadEmits;

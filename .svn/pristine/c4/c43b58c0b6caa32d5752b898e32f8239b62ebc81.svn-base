@@ -1,0 +1,4 @@
+import { MessageOptions } from './src/main.props';
+
+declare const useMessage: (options: MessageOptions) => void;
+export { useMessage };

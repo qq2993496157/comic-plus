@@ -1,0 +1,7 @@
+import type { ExtractPropTypes, PropType } from "vue"
+
+export const tableProps = {
+  data: Array as PropType<object[]>
+}
+
+export type tableProps = ExtractPropTypes<typeof tableProps>

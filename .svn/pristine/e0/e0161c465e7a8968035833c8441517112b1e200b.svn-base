@@ -1,0 +1,25 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const backtopProps: {
+    readonly target: {
+        readonly type: StringConstructor;
+        readonly default: "body";
+    };
+    readonly visibleHeight: {
+        readonly type: NumberConstructor;
+        readonly default: 200;
+    };
+    readonly size: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly right: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly bottom: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+};
+export type BacktopProps = ExtractPropTypes<typeof backtopProps>;

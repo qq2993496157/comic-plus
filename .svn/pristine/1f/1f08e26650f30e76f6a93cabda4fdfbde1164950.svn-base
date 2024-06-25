@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import { Menu } from './src/main'
+
+export const CuMenu = useComponets(Menu)

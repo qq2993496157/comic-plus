@@ -1,0 +1,109 @@
+<template>
+  <teleport to="body">
+    <transition name="cu-fade">
+      <div
+        class="cu-title"
+        :class="classList"
+        :style="style"
+        v-if="show"
+        @mouseenter="isEnter = true"
+        @mouseleave="leave">
+        {{ text }}
+      </div>
+    </transition>
+  </teleport>
+</template>
+
+<script setup lang="ts">
+import { ref, watch, reactive, onMounted, computed } from 'vue';
+import '../style/title.css';
+import { getMaxZIndex, useScrollSever } from '../../../utils';
+import { titleProps } from './main.props';
+defineOptions({
+  name: 'CuTitle'
+});
+
+const props = defineProps(titleProps);
+const isEnter = ref(false);
+const visible = ref(false);
+const classList = ref<string[]>(props.position.split('-'));
+const style = reactive({
+  left: '0px',
+  top: '0px',
+  zIndex: 2000
+});
+const text = ref(props.title);
+
+function changeVisible(val: boolean) {
+  visible.value = val;
+}
+
+const show = computed(() => {
+  return visible.value || isEnter.value;
+});
+
+function changeEnter(val) {
+  isEnter.value = val;
+}
+function update(title: string, position?: string) {
+  text.value = title;
+  if (position) {
+    classList.value = position.split('-');
+  }
+}
+
+function getPosition() {
+  const { left, top, height, width }: any = props.parent?.getBoundingClientRect();
+
+  let offsety = 0,
+    offsetx = 0;
+
+  if (classList.value.includes('left') || classList.value.includes('right')) {
+    offsetx = classList.value.includes('right') ? width : 0;
+
+    if (classList.value.includes('center')) {
+      offsety = height / 2;
+    } else if (classList.value.includes('end')) {
+      offsety = height;
+    }
+  } else if (classList.value.includes('top') || classList.value.includes('bottom')) {
+    offsety = classList.value.includes('bottom') ? height : 0;
+
+    if (classList.value.includes('center')) {
+      offsetx = width / 2;
+    } else if (classList.value.includes('end')) {
+      offsetx = width;
+    }
+  }
+
+  style.left = left + offsetx + 'px';
+  style.top = top + offsety + 'px';
+}
+
+watch(
+  () => visible.value,
+  (val) => {
+    if (val) {
+      getPosition();
+      style.zIndex = getMaxZIndex();
+    }
+  }
+);
+
+function leave() {
+  let timer: any = setTimeout(() => {
+    clearTimeout(timer);
+    timer = null;
+    isEnter.value = false;
+  }, 300);
+}
+
+onMounted(() => {
+  if (props.parent) {
+    useScrollSever(props.parent, () => {
+      getPosition();
+    });
+  }
+});
+defineExpose({ changeVisible, changeEnter, update, isEnter });
+</script>

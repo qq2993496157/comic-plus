@@ -1,0 +1,21 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const textareaProps: {
+    readonly modelValue: StringConstructor;
+    readonly placeholder: StringConstructor;
+    readonly maxlength: NumberConstructor;
+    readonly autofocus: {
+        readonly type: BooleanConstructor;
+        readonly default: false;
+    };
+    readonly disabled: BooleanConstructor;
+    readonly autoHeight: BooleanConstructor;
+};
+export type TextareaProps = ExtractPropTypes<typeof textareaProps>;
+export declare const textareaEmits: {
+    "update:modelValue": (val: string) => boolean;
+    change: (val: string) => boolean;
+    blur: (e: FocusEvent) => boolean;
+    focus: (e: FocusEvent) => boolean;
+};
+export type TextareaEmits = typeof textareaEmits;

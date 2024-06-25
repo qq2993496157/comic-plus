@@ -1,0 +1,48 @@
+<template>
+  <div class="cu-ellipsis" ref="ellipsis">
+    <template v-if="arrayData">
+      <template v-for="(item, index) in data">
+        <div v-if="clamp >= 0 && (showMore || index < clamp)">
+          <slot :row="item"></slot>
+        </div>
+      </template>
+      <div @click="showMore = !showMore" v-if="data.length > clamp" class="cu-ellipsis__button">
+        {{ showMore ? closeText : openText }}<i :class="`cu-icon-double-${showMore ? 'up' : 'down'}`"></i>
+      </div>
+    </template>
+    <template v-else>
+      <div class="cu-ellipsis__text" ref="ellipsisText" :style="{ '--clamp': showMore ? undefined : clamp }">
+        <slot>{{ data }}</slot>
+      </div>
+      <div @click="showMore = !showMore" class="cu-ellipsis__button" v-if="showButton">
+        {{ showMore ? closeText : openText }}<i :class="`cu-icon-double-${showMore ? 'up' : 'down'}`"></i>
+      </div>
+    </template>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import '../style/ellipsis.css';
+import { ellipsisProps } from './main.props';
+defineOptions({
+  name: 'CuEllipsis'
+});
+const props = defineProps(ellipsisProps);
+
+const showMore = ref(false);
+const ellipsisText = ref();
+
+const arrayData = computed(() => {
+  return Array.isArray(props.data);
+});
+
+const showButton = computed(() => {
+  if (!ellipsisText.value) return true;
+  if (props.clamp >= 0) {
+    return ellipsisText.value.scrollHeight > ellipsisText.value.offsetHeight;
+  } else {
+    return false;
+  }
+});
+</script>

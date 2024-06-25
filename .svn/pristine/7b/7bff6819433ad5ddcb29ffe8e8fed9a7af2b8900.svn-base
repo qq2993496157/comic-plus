@@ -1,0 +1,56 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const MENU_POSITION: {
+    'left-top': {
+        left: string;
+        top: string;
+    };
+    'left-bottom': {
+        left: string;
+        top: string;
+        transform: string;
+    };
+    'right-top': {
+        left: string;
+        top: string;
+        transform: string;
+    };
+    'right-bottom': {
+        left: string;
+        top: string;
+        transform: string;
+    };
+};
+export declare const elevatorProps: {
+    readonly height: {
+        readonly type: StringConstructor;
+        readonly default: "100%";
+    };
+    readonly offset: {
+        readonly type: NumberConstructor;
+        readonly default: 0;
+    };
+    readonly postion: {
+        readonly type: StringConstructor;
+        readonly default: "right-bottom";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly fixed: BooleanConstructor;
+    readonly menual: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly menuSize: {
+        readonly type: StringConstructor;
+        readonly default: "40px";
+    };
+    readonly fold: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+};
+export type ElevatorProps = ExtractPropTypes<typeof elevatorProps>;
+export declare const elevatorEmits: {
+    change: (val: string | null) => boolean;
+};
+export type ElevatorEmits = typeof elevatorEmits;

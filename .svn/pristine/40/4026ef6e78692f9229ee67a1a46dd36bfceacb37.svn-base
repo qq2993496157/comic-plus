@@ -1,0 +1,44 @@
+<template>
+  <label
+    class="cu-radio"
+    :style="activeColor ? '--active-color:' + activeColor : undefined"
+    :class="{ 'is-disabled': disabled }"
+  >
+    <input type="radio" v-show="false" :disabled="disabled" :checked="isCheck" :value="label" @change="changeValue" />
+    <span class="cu-radio__inner"> </span>
+    <span class="cu-radio__label">
+      <slot>{{ label }}</slot>
+    </span>
+  </label>
+</template>
+
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+import '../style/radio.css';
+import { useItemValidate } from '../../../utils';
+import { radioProps, radioEmits } from './main.props';
+import type { RadioProvide } from './type';
+defineOptions({
+  name: 'CuRadio'
+});
+const props = defineProps(radioProps);
+const emit = defineEmits(radioEmits);
+
+const { itemValidate } = useItemValidate();
+
+const parent = inject<RadioProvide | null>('radio:parent', null);
+
+const isCheck = computed(() => {
+  return parent ? parent.activeValue?.value === props.label : props.modelValue === props.label;
+});
+
+function changeValue() {
+  if (parent) {
+    parent.changeItemCheck(props.label);
+    return;
+  }
+  emit('update:modelValue', props.label);
+  emit('change', props.label);
+  itemValidate('change');
+}
+</script>

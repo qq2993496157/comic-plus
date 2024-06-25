@@ -1,0 +1,94 @@
+/**
+ * @description: 对象深度合并
+ * @param {object} target
+ * @param {object} source
+ * @return {*}
+ */
+const deepMerge = (target: object, source: object): object => {
+  for (let key in source) {
+    if (source.hasOwnProperty(key)) {
+      if (source[key] instanceof Object) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        deepMerge(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+  return target;
+};
+
+/**
+ * @description: 将数组拆解成指定长度的二维数组
+ * @param {any} value
+ * @param {number} length
+ * @return {*}
+ */
+const chunkArray = (value: any[], length: number): any[] => {
+  const result: any[] = [];
+  for (let i = 0; i < value.length; i += length) {
+    const chunk: any[] = value.slice(i, i + length);
+    result.push(chunk);
+  }
+  return result;
+};
+
+/**
+ * @description: 复制文本内容到粘贴板
+ * @param {string} text
+ * @return {*}
+ */
+const copyToClipboard = (text: string): Promise<unknown> => {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  } else {
+    let textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'absolute';
+    textArea.style.opacity = '0';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    // textArea.focus();
+    textArea.select();
+    return new Promise<void>((res, rej) => {
+      document.execCommand('copy') ? res() : rej();
+      textArea.remove();
+    });
+  }
+};
+/**
+ * @description: 生成随机颜色
+ * @param {*}
+ * @return {*}
+ */
+const randomColor = (): string => {
+  return (
+    '#' +
+    Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padEnd(6, '0')
+  );
+};
+
+/**
+ * @description: 生成随机uid
+ * @param {*}
+ * @return {*}
+ */
+const randomUid = (): string => {
+  return Math.random().toString(36).slice(2) + Date.now();
+};
+
+/**
+ * @description: 判断奇偶
+ * @param {number} num
+ * @return {boolean} true 奇数 false 偶数
+ */
+function parity(num: number): boolean {
+  return num % 2 !== 0;
+}
+
+export { deepMerge, chunkArray, copyToClipboard, randomColor, randomUid, parity };
+
+export { debounce, throttle, formatDate, isNumber } from '../utils/tools';

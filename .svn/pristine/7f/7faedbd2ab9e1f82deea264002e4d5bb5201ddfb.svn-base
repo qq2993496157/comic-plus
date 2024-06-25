@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'comic-font';
+  font-weight: 400;
+  src: url('./SourceHanSansCN-Regular.ttf');
+  font-display: swap;
+}
+[class^='cu-'],
+[class*='cu-'] {
+  font-family: 'comic-font', '微软雅黑', Arial, 'STXihei';
+  box-sizing: border-box;
+}
+[class*=' cu-icon-'],
+[class^='cu-icon-'] {
+  font-style: normal;
+  font-family: 'iconfont' !important;
+}
+@keyframes rotateInfinite {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.is-loading,
+.cu-icon-loading,
+.cu-icon-loading-one {
+  display: inline-block;
+  animation: rotateInfinite 2s infinite linear;
+}

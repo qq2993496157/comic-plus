@@ -1,0 +1,45 @@
+.cu-divider {
+  display: inline-flex;
+  font-size: 14px;
+  color: var(--font);
+  align-items: center;
+  justify-content: center;
+}
+
+.cu-divider.horizontal {
+  margin: 12px 0;
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
+.cu-divider.vertical {
+  margin: 0 8px;
+  display: inline-flex;
+  height: 1em;
+  line-height: inherit;
+}
+
+.cu-divider > span {
+  padding: 0 10px;
+  background-color: #fff;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cu-divider.primary {
+  background-color: var(--primary);
+}
+.cu-divider.success {
+  background-color: var(--success);
+}
+.cu-divider.error {
+  background-color: var(--danger);
+}
+.cu-divider.warning {
+  background-color: var(--warning);
+}
+.cu-divider.info {
+  background-color: var(--border);
+}

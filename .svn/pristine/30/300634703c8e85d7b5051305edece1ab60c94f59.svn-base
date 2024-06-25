@@ -1,0 +1,18 @@
+import { ValueType } from './type';
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const dateSelectProps: {
+    readonly value: {
+        readonly type: PropType<ValueType>;
+        readonly required: true;
+    };
+    readonly shortcuts: PropType<object[]>;
+    readonly range: BooleanConstructor;
+    readonly time: BooleanConstructor;
+};
+export type DateSelectProps = ExtractPropTypes<typeof dateSelectProps>;
+export declare const dateSelectEmits: {
+    pick: (val: number[] | number) => boolean;
+    cancel: () => boolean;
+};
+export type DateSelectEmits = typeof dateSelectEmits;

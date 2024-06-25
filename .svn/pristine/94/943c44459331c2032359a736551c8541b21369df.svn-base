@@ -1,0 +1,12 @@
+import type { ComicConfig } from "./export.type"
+
+declare module 'comic-plus';
+
+declare interface Window {
+  $COMIC: ComicConfig
+}
+
+declare interface HTMLElement {
+  __click_outside__: any,
+  __resizeObserver__: any
+}

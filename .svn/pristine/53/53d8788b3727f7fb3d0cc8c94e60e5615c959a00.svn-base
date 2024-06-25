@@ -1,0 +1,50 @@
+.cu-scroll {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.cu-scroll__body {
+  height: 100%;
+  max-height: inherit;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  overflow-x: hidden;
+  position: relative;
+}
+.cu-scroll__body > div {
+  width: 100%;
+}
+.cu-scroll__body.auto > div {
+  width: var(--w);
+}
+
+.cu-scroll__body.none::-webkit-scrollbar,
+.cu-scroll__body:not(.haveScroll)::-webkit-scrollbar {
+  display: none;
+}
+.cu-scroll__body.auto::-webkit-scrollbar {
+  width: 0;
+}
+.cu-scroll:hover .cu-scroll__body.haveScroll.auto::-webkit-scrollbar {
+  width: 10px;
+}
+
+.cu-scroll__body.horizontal {
+  width: var(--h);
+  height: var(--w);
+  transform-origin: 0 0;
+  transform: translateY(var(--h)) rotate(-90deg);
+  direction: rtl;
+}
+.cu-scroll__body.horizontal > div {
+  display: flex;
+  position: absolute;
+  left: 100%;
+  height: var(--h);
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+  direction: ltr;
+}
+.cu-scroll__body.horizontal:not(.auto, .none).haveScroll > div {
+  height: calc(var(--h) - 10px);
+}

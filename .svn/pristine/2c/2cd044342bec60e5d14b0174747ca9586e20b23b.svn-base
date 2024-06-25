@@ -1,0 +1,46 @@
+import type { PropType, ExtractPropTypes } from 'vue';
+import type { ValueType } from './type';
+
+export const datePickerProps = {
+  modelValue: {
+    type: [Date, String, Number, Array] as PropType<ValueType>,
+    required: true
+  },
+  format: {
+    type: String,
+    default: 'yyyy-MM-dd'
+  },
+  valueFormat: {
+    type: String,
+    default: 'date',
+    validator: function (value: string) {
+      return ['date', 'string', 'number'].includes(value);
+    }
+  },
+  rangeSeparator: {
+    type: String,
+    default: '/'
+  },
+  size: String,
+  range: Boolean,
+  icon: {
+    type: String,
+    default: 'cu-icon-calendar'
+  },
+  shortcuts: Array as PropType<object[]>,
+  disabled: Boolean,
+  placeholder: String,
+  clearable: Boolean,
+  startPlaceholder: String,
+  endPlaceholder: String
+} as const;
+
+export type DatePickerProps = ExtractPropTypes<typeof datePickerProps>;
+
+export const datePickerEmits = {
+  ['update:modelValue']: (val: ValueType) => true,
+  change: (val: ValueType) => true,
+  clear: () => true
+};
+
+export type DatePickerEmits = typeof datePickerEmits;

@@ -1,0 +1,22 @@
+import { ValueType } from './type';
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const selectProps: {
+    readonly modelValue: {
+        readonly type: PropType<ValueType>;
+        readonly required: true;
+    };
+    readonly multiple: BooleanConstructor;
+    readonly size: StringConstructor;
+    readonly disabled: BooleanConstructor;
+    readonly width: StringConstructor;
+    readonly clearable: BooleanConstructor;
+    readonly placeholder: StringConstructor;
+};
+export type SelectProps = ExtractPropTypes<typeof selectProps>;
+export declare const selectEmits: {
+    "update:modelValue": (val: ValueType) => boolean;
+    change: (val: ValueType) => boolean;
+    clear: () => boolean;
+};
+export type SelectEmits = typeof selectEmits;

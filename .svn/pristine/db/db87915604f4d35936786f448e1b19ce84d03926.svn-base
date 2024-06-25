@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import StepItem from '../step/src/item.vue'
+
+export const CuStepItem = useComponets(StepItem)

@@ -1,0 +1,15 @@
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const checkboxGroupProps: {
+    readonly modelValue: {
+        readonly type: PropType<string[]>;
+        readonly required: true;
+        readonly default: readonly [];
+    };
+};
+export type CheckboxGroupProps = ExtractPropTypes<typeof checkboxGroupProps>;
+export declare const checkboxGroupEmits: {
+    "update:modelValue": (val: string[]) => boolean;
+    change: (val: string[]) => boolean;
+};
+export type CheckboxGroupEmits = typeof checkboxGroupEmits;

@@ -1,0 +1,7 @@
+import type { menuProps } from './main.props'
+
+export interface menuProvide {
+  props: menuProps;
+  setActiveboxTop: Function;
+  useItemClick: Function
+}

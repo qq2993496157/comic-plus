@@ -1,0 +1,102 @@
+<template>
+  <component
+    :is="button ? CuButton : 'div'"
+    :size="size"
+    :type="buttonType"
+    class="cu-dropdown-content"
+    v-click-outside:dropdownPopper="hidePopper"
+    @click="handleClick"
+    @mouseenter="enter"
+    @mouseleave="leave"
+    @contextmenu="contextmenu"
+  >
+    <div class="cu-dropdown__trigger">
+      <template v-if="button">
+        <i :class="buttonIcon"></i>
+      </template>
+      <slot v-else></slot>
+    </div>
+    <cu-popper :show="showPopper">
+      <div
+        class="cu-dropdown__popper"
+        outside="dropdownPopper"
+        @mouseenter="enter"
+        @mouseleave="leave"
+        @click="chooseAfterHideClick"
+      >
+        <slot name="dropdown"></slot>
+      </div>
+    </cu-popper>
+  </component>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import '../style/dropdown.css';
+import { CuPopper } from '../../popper';
+import { CuButton } from '../../button';
+import { useClickOutside } from '../../../utils';
+import { dropdownProps } from './main.props';
+
+defineOptions({
+  name: 'CuDropdownContent'
+});
+
+const props = defineProps(dropdownProps);
+var timer: any;
+
+const vClickOutside = useClickOutside();
+
+const showPopper = ref(false);
+
+function handleClick() {
+  if (props.trigger !== 'click') return;
+  trigger();
+}
+
+function contextmenu(e) {
+  if (props.trigger !== 'right-click') return;
+  e.preventDefault();
+  trigger();
+}
+
+function leave() {
+  if (props.trigger !== 'hover') return;
+  startTime();
+}
+
+function enter() {
+  if (props.trigger !== 'hover') return;
+  trigger();
+  turnTime();
+}
+
+function startTime() {
+  timer = setTimeout(() => {
+    hidePopper();
+  }, 300);
+}
+
+function turnTime() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
+
+function trigger() {
+  showPopper.value = true;
+}
+
+function hidePopper() {
+  showPopper.value && (showPopper.value = false);
+}
+
+function chooseAfterHideClick() {
+  if (props.chooseAfterHide) {
+    hidePopper();
+  }
+}
+</script>
+
+<style scoped></style>

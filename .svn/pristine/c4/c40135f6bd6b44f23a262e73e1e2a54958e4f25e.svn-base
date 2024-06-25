@@ -1,0 +1,20 @@
+import type { ComicConfig } from '../export.type'
+
+interface UseConfig {
+  SIZE?: string,
+  THEME?: string | any
+}
+
+export function useConfig(): UseConfig {
+  const COMIC = window.$COMIC as ComicConfig
+  if (!COMIC) {
+    return {
+      THEME: '#e4acc7',
+    }
+  } else {
+    return {
+      SIZE: COMIC.size,
+      THEME: COMIC.color?.primary
+    }
+  }
+}

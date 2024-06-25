@@ -1,0 +1,35 @@
+import type { PropType } from 'vue';
+import type { ComicType2 } from '../../../../utils';
+
+const messageOptions = {
+  type: String as PropType<ComicType2>,
+  message: String,
+  icon: String,
+  color: String,
+  showClose: Boolean,
+  duration: {
+    type: Number,
+    default: 3000
+  },
+  showIcon: {
+    type: Boolean,
+    default: true
+  }
+} as const;
+
+export const messageProps = {
+  ...messageOptions,
+  id: String,
+  close: Function,
+  destroy: Function
+};
+
+export type MessageOptions = {
+  readonly type?: 'primary' | 'success' | 'warning' | 'info' | 'error';
+  readonly message?: string;
+  readonly icon?: string;
+  readonly color?: string;
+  readonly showClose?: boolean;
+  readonly duration?: number;
+  readonly showIcon?: boolean;
+};

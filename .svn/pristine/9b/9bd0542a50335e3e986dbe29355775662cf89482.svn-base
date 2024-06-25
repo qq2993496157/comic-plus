@@ -1,0 +1,3 @@
+import WaterfallItem from '../waterfall/src/item.vue'
+
+export default WaterfallItem

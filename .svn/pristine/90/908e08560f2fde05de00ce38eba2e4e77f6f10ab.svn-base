@@ -1,0 +1,33 @@
+import type { PropType, ExtractPropTypes } from 'vue';
+import type { ComicSize } from '../../type';
+
+export const timePickerProps = {
+  modelValue: {
+    type: [String, Array] as PropType<string | string[]>,
+    required: true
+  },
+  rangeSeparator: {
+    type: String,
+    default: '/'
+  },
+  icon: {
+    type: String,
+    default: 'cu-icon-time'
+  },
+  size: String as PropType<ComicSize>,
+  range: Boolean,
+  placeholder: String,
+  startPlaceholder: String,
+  endPlaceholder: String,
+  disabled: Boolean,
+  clearable: Boolean
+} as const;
+export type TimePickerProps = ExtractPropTypes<typeof timePickerProps>;
+
+export const timePickerEmits = {
+  ['update:modelValue']: (val: string | string[]) => true,
+  change: (val: string | string[]) => true,
+  clear: () => true
+};
+
+export type TimePickerEmits = typeof timePickerEmits;

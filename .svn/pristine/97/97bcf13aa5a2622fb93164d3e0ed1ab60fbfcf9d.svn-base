@@ -1,0 +1,41 @@
+import { computed, inject } from 'vue';
+import { useItemValidate } from '../../../utils';
+import type { RadioProps, RadioEmits } from './main.props';
+import type { SetupContext } from 'vue';
+import { FORM_PROVIDE } from '../../form/src/type';
+import { RADIOGROUP_PROVIDE } from './type';
+
+export const useRadio = (props: RadioProps, emit: SetupContext<RadioEmits>['emit']) => {
+  const { itemValidate } = useItemValidate();
+
+  const radioGroup = inject(RADIOGROUP_PROVIDE, undefined);
+  const form = inject(FORM_PROVIDE, undefined);
+
+  const currentValue = computed(() => {
+    return props.value ?? props.label;
+  });
+
+  const isCheck = computed(() => {
+    return radioGroup ? radioGroup.activeValue?.value === currentValue.value : props.modelValue === currentValue.value;
+  });
+
+  function changeValue() {
+    if (radioGroup) {
+      radioGroup.changeItemCheck(currentValue.value);
+      return;
+    }
+    emit('update:modelValue', currentValue.value);
+    emit('change', isCheck.value);
+    itemValidate('change');
+  }
+
+  return {
+    props,
+    emit,
+    isCheck,
+    currentValue,
+    changeValue,
+    form,
+    radioGroup
+  };
+};

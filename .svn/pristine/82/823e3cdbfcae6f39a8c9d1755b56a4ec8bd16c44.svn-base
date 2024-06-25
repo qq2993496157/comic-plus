@@ -1,0 +1,32 @@
+import type { ExtractPropTypes } from "vue";
+
+export const POSITION_ENUM = {
+  'center': 'center',
+  'left': 'flex-start',
+  'right': 'flex-end'
+}
+
+export const dividerProps = {
+  direction: {
+    type: String,
+    default: 'horizontal',
+    validator: (value: string) => ['vertical', 'horizontal'].includes(value)
+  },
+  type: {
+    type: String,
+    default: 'info',
+    validator: (value: string) => ['primary', 'success', 'error', 'warning', 'info'].includes(value)
+  },
+  color: String,
+  thickness: {
+    type: Number,
+    default: 1
+  },
+  contentPosition: {
+    type: String,
+    default: 'center',
+    validator: (value: string) => ['left', 'center', 'right'].includes(value)
+  }
+}
+
+export type dividerProps = ExtractPropTypes<typeof dividerProps>

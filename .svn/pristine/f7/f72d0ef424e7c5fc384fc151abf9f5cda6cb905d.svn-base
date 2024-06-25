@@ -1,0 +1,17 @@
+import type { VNode } from 'vue';
+
+export interface LoadingInstance {
+  vnode: VNode;
+  updateVisible: Function;
+  destroy: Function;
+  close?: Function;
+}
+
+export interface LoadingOptions {
+  icon?: string;
+  text?: string;
+  blur?: boolean;
+  background?: string;
+  color?: string;
+  target?: HTMLElement;
+}

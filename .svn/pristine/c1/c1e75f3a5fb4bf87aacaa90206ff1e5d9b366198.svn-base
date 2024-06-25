@@ -1,0 +1,9 @@
+import { Ref } from 'vue';
+import type { stepProps } from './main.props'
+
+export interface stepProvide {
+  props: stepProps;
+  addItem: Function;
+  removeItem: Function;
+  itemList: Ref<number[]>;
+}

@@ -1,0 +1,64 @@
+import type { ExtractPropTypes } from "vue";
+
+export const MENU_POSITION = {
+  'left-top': {
+    left: '20px',
+    top: '20px'
+  },
+  'left-bottom': {
+    left: '20px',
+    top: '100%',
+    transform: 'translate(0,calc(-100% - 20px))'
+  },
+  'right-top': {
+    left: '100%',
+    top: '20px',
+    transform: 'translate(calc(-100% - 20px),0)'
+  },
+  'right-bottom': {
+    left: '100%',
+    top: '100%',
+    transform: 'translate(calc(-100% - 20px),calc(-100% - 20px))'
+  }
+};
+
+export const elevatorProps = {
+  height: {
+    type: String,
+    default: '100%'
+  },
+  offset: {
+    type: Number,
+    default: 0,
+  },
+  postion: {
+    type: String,
+    default: 'right-bottom',
+    validator: function (value: string) {
+      return ['left-top', 'left-bottom', 'right-top', 'right-bottom'].includes(value);
+    }
+  },
+  fixed: Boolean,
+  menual: {
+    type: Boolean,
+    default: true
+  },
+  menuSize: {
+    type: String,
+    default: '40px'
+  },
+  fold: {
+    type: Boolean,
+    default: true
+  },
+
+} as const
+
+export type ElevatorProps = ExtractPropTypes<typeof elevatorProps>
+
+
+export const elevatorEmits = {
+  change: (val: string | null) => true,
+}
+
+export type ElevatorEmits = typeof elevatorEmits

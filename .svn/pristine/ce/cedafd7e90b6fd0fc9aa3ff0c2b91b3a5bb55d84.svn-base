@@ -1,0 +1,23 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const loadingProps: {
+    readonly icon: {
+        readonly tyoe: StringConstructor;
+        readonly default: "cu-icon-loading";
+    };
+    readonly visible: {
+        readonly type: BooleanConstructor;
+        readonly default: true;
+    };
+    readonly text: StringConstructor;
+    readonly blur: BooleanConstructor;
+    readonly background: StringConstructor;
+    readonly color: StringConstructor;
+    readonly target: {
+        new (): HTMLElement;
+        prototype: HTMLElement;
+    };
+    readonly close: FunctionConstructor;
+    readonly glabal: BooleanConstructor;
+};
+export type LoadingProps = ExtractPropTypes<typeof loadingProps>;

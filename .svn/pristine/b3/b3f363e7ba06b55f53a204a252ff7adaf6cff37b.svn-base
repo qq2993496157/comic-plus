@@ -1,0 +1,28 @@
+<template>
+  <div class="cu-breadcrumb" :class="{ background, closeboth }" :style="{ '--color': color || undefined }">
+    <slot></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, provide } from 'vue';
+import '../style/css';
+defineOptions({
+  name: 'CuBreadcrumb'
+});
+
+const props = defineProps({
+  separator: {
+    type: String,
+    default: '/'
+  },
+  separatorIcon: String,
+  color: String,
+  background: Boolean,
+  closeboth: Boolean
+});
+
+provide('breadcrumb:separator', props.separator);
+provide('breadcrumb:separatorIcon', props.separatorIcon);
+provide('breadcrumb:background', props.background);
+</script>

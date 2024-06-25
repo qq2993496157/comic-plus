@@ -1,0 +1,37 @@
+
+export declare const Menu: import('vue').DefineComponent<{
+    readonly modelValue: {
+        readonly type: import("vue").PropType<string | number>;
+        readonly required: true;
+    };
+    readonly mode: {
+        readonly type: StringConstructor;
+        readonly default: "vertical";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly showEllipsis: BooleanConstructor;
+    readonly backgroundColor: StringConstructor;
+    readonly activeTextColor: StringConstructor;
+    readonly activeBackgroundColor: StringConstructor;
+    readonly textColor: StringConstructor;
+}, () => import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+    [key: string]: any;
+}>, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly modelValue: {
+        readonly type: import("vue").PropType<string | number>;
+        readonly required: true;
+    };
+    readonly mode: {
+        readonly type: StringConstructor;
+        readonly default: "vertical";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly showEllipsis: BooleanConstructor;
+    readonly backgroundColor: StringConstructor;
+    readonly activeTextColor: StringConstructor;
+    readonly activeBackgroundColor: StringConstructor;
+    readonly textColor: StringConstructor;
+}>>, {
+    readonly mode: string;
+    readonly showEllipsis: boolean;
+}, {}>;

@@ -1,0 +1,24 @@
+<template>
+  <div class="cu-empty">
+    <div class="cu-empty__image" :style="{ '--size': imageSize ? imageSize + 'px' : undefined }">
+      <img :src="image" v-if="image" />
+      <default-svg v-else></default-svg>
+    </div>
+    <div class="cu-empty__description">
+      {{ description }}
+    </div>
+    <div class="cu-empty__tools">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import '../style/css';
+import defaultSvg from './default.vue';
+import { emptyProps } from './main.props';
+defineOptions({
+  name: 'CuEmpty'
+});
+defineProps(emptyProps);
+</script>

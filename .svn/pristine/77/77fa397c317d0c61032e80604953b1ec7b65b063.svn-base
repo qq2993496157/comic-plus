@@ -1,0 +1,16 @@
+
+declare function init(): void;
+declare const _default: import('vue').DefineComponent<{
+    readonly value: NumberConstructor;
+    readonly flagTime: NumberConstructor;
+}, {
+    init: typeof init;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    change: (val: number) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly value: NumberConstructor;
+    readonly flagTime: NumberConstructor;
+}>> & {
+    onChange?: (val: number) => any;
+}, {}, {}>;
+export default _default;

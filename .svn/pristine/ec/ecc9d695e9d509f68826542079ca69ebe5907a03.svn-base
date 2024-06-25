@@ -1,0 +1,21 @@
+import type { ExtractPropTypes } from "vue";
+
+export const loadingProps = {
+  icon: {
+    tyoe: String,
+    default: 'cu-icon-loading'
+  },
+  visible: {
+    type: Boolean,
+    default: true
+  },
+  text: String,
+  blur: Boolean,
+  background: String,
+  color: String,
+  target: HTMLElement,
+  close: Function,
+  glabal: Boolean
+} as const
+
+export type LoadingProps = ExtractPropTypes<typeof loadingProps>

@@ -1,0 +1,40 @@
+<template>
+  <ul class="cu-color-picker__preset">
+    <li v-for="(item, index) in rgbaColors" @click="selectColor(index)">
+      <span :style="{ background: item.value }"></span>
+    </li>
+  </ul>
+</template>
+
+<script setup lang="ts">
+import { PropType, inject, ref } from 'vue';
+import type { ColorProvide } from '../type';
+import Color from '../../utils/color';
+defineOptions({
+  name: 'CuColorPreset'
+});
+const props = defineProps({
+  predefine: {
+    type: Array as PropType<string[]>,
+    required: true
+  }
+});
+
+const parent = inject<ColorProvide>('color:parent');
+
+const rgbaColors = ref<Color[]>(parseColors(props?.predefine));
+
+function parseColors(colors: string[]) {
+  return colors.map((value) => {
+    const c = new Color();
+    c.enableAlpha = true;
+    c.format = parent?.props.format || 'rgba';
+    c.fromString(value);
+    return c;
+  });
+}
+
+function selectColor(index: number) {
+  parent?.color.fromString(props?.predefine[index]);
+}
+</script>

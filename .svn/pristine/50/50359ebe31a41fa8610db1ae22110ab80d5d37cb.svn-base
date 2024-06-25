@@ -1,0 +1,17 @@
+import type { InjectionKey, ComputedRef } from 'vue';
+import type { FormProps } from './main.props';
+
+export type FormProvide = {
+  props: FormProps;
+  itemValidatePush: Function;
+  itemValidateDelete: Function;
+};
+
+export const FORM_PROVIDE: InjectionKey<FormProvide> = Symbol('FORM_PROVIDE');
+
+export type FormItemProvide = {
+  trigger: string | string[];
+  fn: () => true | Promise<any>;
+};
+
+export const FORMITEM_PROVIDE: InjectionKey<FormItemProvide> = Symbol('FORMITEM_PROVIDE');

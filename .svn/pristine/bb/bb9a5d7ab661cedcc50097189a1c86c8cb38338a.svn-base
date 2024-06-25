@@ -1,0 +1,25 @@
+
+import { inject } from 'vue';
+interface comic {
+  size?: string,
+  zIndex?: number,
+  color?: object
+}
+export function useConfig() {
+
+  const $COMIC = inject<comic>('$COMIC');
+  if (!$COMIC) {
+    return {
+      SIZE: null,
+      Z_INDEX: 2000,
+      THEME: '#e4acc7'
+    }
+  }
+
+  return {
+    SIZE: $COMIC.size,
+    Z_INDEX: $COMIC.zIndex,
+    THEME: $COMIC.color?.primary
+  }
+
+}

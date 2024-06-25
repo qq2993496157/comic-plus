@@ -1,0 +1,86 @@
+.cu-dialog {
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: var(--cu-border-radius);
+  color: var(--cu-color-text);
+  border: 1px solid transparent;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.cu-dialog .cu-dialog__header {
+  padding: 8px 10px;
+  font-size: 18px;
+  display: flex;
+  min-height: 42px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--cu-border-color);
+  position: relative;
+}
+.cu-dialog .cu-dialog__header > div {
+  flex: 1;
+}
+.cu-dialog .cu-dialog__header .close {
+  cursor: pointer;
+}
+.cu-dialog .cu-dialog__header .close:hover {
+  text-shadow: 0 0 2px;
+}
+.cu-dialog__content {
+  padding: 10px;
+}
+.cu-dialog .cu-dialog__footer {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cross-scale-enter-active {
+  animation: crossScale 500ms;
+}
+
+.cross-scale-leave-active {
+  animation: crossScale 500ms reverse;
+}
+
+@keyframes crossScale {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(0.01, 0.01);
+  }
+  50% {
+    transform: scale(1, 0.01);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.comic-plus__is-comic .cu-dialog,
+.comic-plus__is-comic .cu-dialog .cu-dialog__header {
+  border-color: var(--cu-comic-border-color);
+}
+.comic-plus__is-comic .cu-dialog::before,
+.comic-plus__is-comic .cu-dialog::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 58px;
+  height: 1px;
+  background: var(--cu-comic-fill-background);
+
+  transition: all 200ms;
+  box-sizing: border-box;
+}
+.comic-plus__is-comic .cu-dialog::before {
+  top: -1px;
+  left: 20px;
+}
+
+.comic-plus__is-comic .cu-dialog::after {
+  right: 20px;
+  bottom: -1px;
+}

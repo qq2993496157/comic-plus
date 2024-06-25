@@ -1,0 +1,28 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const menuProps = {
+  modelValue: {
+    type: [String, Number] as PropType<string | number>,
+    required: true
+  },
+  mode: {
+    type: String,
+    default: 'vertical',
+    validator: (value: string) => ['horizontal', 'vertical'].includes(value)
+  },
+  showEllipsis: Boolean,
+  backgroundColor: String,
+  activeTextColor: String,
+  activeBackgroundColor: String,
+  textColor: String,
+} as const
+
+export type MenuProps = ExtractPropTypes<typeof menuProps>
+
+
+export const menuEmits = {
+  ['update:modelValue']: (val: string | number) => typeof val === 'string' || typeof val === 'number',
+  ['menu-click']: (val: string | number) => typeof val === 'string' || typeof val === 'number',
+}
+
+export type MenuEmits = typeof menuEmits

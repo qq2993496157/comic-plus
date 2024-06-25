@@ -1,0 +1,14 @@
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const previewImageProps: {
+    readonly current: NumberConstructor;
+    readonly list: {
+        readonly type: PropType<string[]>;
+        readonly required: true;
+    };
+    readonly close: {
+        readonly type: FunctionConstructor;
+        readonly required: true;
+    };
+};
+export type PreviewImageProps = ExtractPropTypes<typeof previewImageProps>;

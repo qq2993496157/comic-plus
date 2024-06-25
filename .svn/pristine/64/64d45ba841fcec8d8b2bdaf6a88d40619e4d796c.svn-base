@@ -1,0 +1,128 @@
+.cu-table {
+  position: relative;
+  width: 100%;
+  color: var(--font);
+  border-bottom: 1px solid var(--border);
+  /* overflow: auto; */
+  overflow: hidden;
+}
+.cu-table table {
+  min-width: 100%;
+  font-size: 14px;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.cu-table table th,
+.cu-table table td {
+  text-align: left;
+  padding: 2px 8px;
+  background-color: inherit;
+}
+.cu-table.border {
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.cu-table table tbody .cu-table__row {
+  background-color: #fff;
+}
+
+.cu-table table thead .cu-table__row {
+  background-color: var(--bgcolor);
+}
+
+.cu-table__head {
+  /* display: flex; */
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+.cu-table__body {
+  /* overflow-y: auto;
+  overflow-x: hidden; */
+}
+.cu-table .cu-table__row .scroll-gap {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cu-table__row th,
+.cu-table__row td {
+  position: relative;
+  height: 36px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* .cu-table__row th > span,
+.cu-table__row td > span {
+  display: block;
+  position: absolute;
+  inset: 0;
+  padding: 2px 8px;
+  text-align: inherit;
+} */
+
+.cu-table__row:last-child td {
+  border-bottom: 0;
+}
+
+.cu-table.border .cu-table__td,
+.cu-table.border .cu-table__th {
+  border-right: 1px solid var(--border);
+}
+.cu-table:not(.scrollbody) .cu-table__td:last-child,
+.cu-table:not(.scrollbody) .cu-table__th:last-child {
+  border-right: 0;
+}
+
+.cu-table .checkbox {
+  text-align: center;
+}
+
+.cu-table__empty {
+  line-height: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--font-light);
+}
+
+.cu-table .fixed-left {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.cu-table .fixed-left.fixed-shadow-left:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+}
+
+.cu-table.show-left-shadow .fixed-left.fixed-shadow-left:after {
+  box-shadow: inset 10px 0 10px -10px rgba(0, 0, 0, 0.25);
+}
+
+.cu-table .fixed-right {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+}
+
+.cu-table .cu-table__row .fixed-right.fixed-shadow-right::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -10px;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+}
+.cu-table.show-right-shadow .cu-table__row .fixed-right.fixed-shadow-right::before {
+  box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.25);
+}

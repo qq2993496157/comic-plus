@@ -1,0 +1,6 @@
+import type { Ref } from 'vue'
+
+export interface checkboxProvide {
+  activeValue: Ref<string[] | number[]>;
+  changeItemCheck: Function;
+}

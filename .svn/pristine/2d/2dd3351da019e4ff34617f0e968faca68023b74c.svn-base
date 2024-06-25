@@ -1,0 +1,122 @@
+<template>
+  <div class="cu-slider" :class="{ 'is-disabled': disabled }">
+    <div
+      class="cu-slider__inner"
+      :class="{ range }"
+      :style="{
+        '--innerWidth': innerWidth.s + '%',
+        '--innerWidth2': innerWidth.l ? innerWidth.l + '%' : undefined,
+        '--color': inputColor
+      }">
+      <div class="cu-slider__breaks" v-if="inputStep > 0 && showStep">
+        <span v-for="b in inputMax / inputStep - 1" :key="b"></span>
+      </div>
+      <input
+        :disabled="disabled"
+        :step="inputStep"
+        :max="inputMax"
+        :min="min"
+        type="range"
+        :value="inputValue[0]"
+        @change="handleChange(0, $event)"
+        @input="handleInput(0, $event)" />
+      <input
+        :disabled="disabled"
+        v-if="range"
+        :step="inputStep"
+        :max="inputMax"
+        :min="min"
+        type="range"
+        :value="inputValue[1]"
+        @change="handleChange(1, $event)"
+        @input="handleInput(1, $event)" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import '../style/slider.css';
+import '../../form-common.css';
+import { useItemValidate } from '../../../utils';
+import { sliderProps, sliderEmits } from './main.props';
+defineOptions({
+  name: 'CuSlider'
+});
+const props = defineProps(sliderProps);
+const emit = defineEmits(sliderEmits);
+
+const { itemValidate } = useItemValidate();
+
+const inputColor = computed(() => {
+  if (props.color) return props.color;
+  return `var(--cu-color-${props.type})`;
+});
+const inputMax = computed(() => {
+  return props.max === 1 ? 100 : props.max;
+});
+const inputStep = computed(() => {
+  return props.max === 1 ? props.step * 100 : props.step;
+});
+const inputValue = computed(() => {
+  let val = props.modelValue;
+  if (Array.isArray(val)) {
+    !val[0] && (val[0] = 0);
+    !val[1] && (val[1] = 0);
+  }
+  let value = [].concat(val);
+  if (value[1] !== undefined) {
+    return [props.max === 1 ? value[0] * 100 : value[0], props.max === 1 ? value[1] * 100 : value[1]];
+  }
+  return [props.max === 1 ? value[0] * 100 : value[0]];
+});
+
+const innerWidth = computed(() => {
+  let s = (inputValue.value[0] - props.min) / (props.max - props.min);
+  s = props.max === 1 ? s : s * 100;
+  let l;
+  if (inputValue.value[1] !== undefined) {
+    l = (inputValue.value[1] - props.min) / (props.max - props.min);
+    l = props.max === 1 ? l : l * 100;
+  }
+  if (s > l) {
+    return {
+      s: l,
+      l: s
+    };
+  }
+  return {
+    s,
+    l
+  };
+});
+
+function handleInput(index: number, e: Event) {
+  const val = (<HTMLInputElement>e.target).value;
+  const computedVal = Number(props.max === 1 ? Number(val) / 100 : val);
+  if (props.range) {
+    let arr = inputValue.value;
+    arr[index] = computedVal;
+    emit('update:modelValue', arr);
+    return;
+  }
+  emit('update:modelValue', computedVal);
+}
+
+function handleChange(index: number, e: Event) {
+  const val = (<HTMLInputElement>e.target).value;
+  const computedVal = Number(props.max === 1 ? Number(val) / 100 : val);
+  if (props.range) {
+    let arr = inputValue.value;
+    arr[index] = computedVal;
+    emit('change', arr);
+    if (arr[0] > arr[1]) {
+      arr.reverse();
+      emit('update:modelValue', arr);
+    }
+    return;
+  }
+  emit('change', computedVal);
+  itemValidate('change');
+}
+</script>

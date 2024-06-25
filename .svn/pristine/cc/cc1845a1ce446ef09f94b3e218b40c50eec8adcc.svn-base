@@ -1,0 +1,15 @@
+/**
+ * @description: clickOutside指令
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const useClickOutside: () => object;
+/**
+ * @description: resize指令
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare const useResize: () => object;
+export { useClickOutside, useResize };

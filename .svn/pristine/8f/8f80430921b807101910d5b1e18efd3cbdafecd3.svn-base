@@ -1,0 +1,15 @@
+import type { Ref } from 'vue';
+import type { AnchorProps } from './main.props';
+
+export interface AnchorProvide {
+  props: AnchorProps;
+  currentHref: Ref<string>;
+  handleClick: Function;
+  addLinkItem: Function;
+  removeLinkItem: Function;
+}
+
+export interface AnchorLinkInstance {
+  href: string;
+  ele: Ref<HTMLElement>;
+}

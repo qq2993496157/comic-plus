@@ -1,0 +1,21 @@
+import { provide, defineComponent, h } from 'vue';
+import { breadcrumbProps } from './main.props';
+import '../style/breadcrumb.css';
+
+export default defineComponent({
+  name: 'CuBreadcrumb',
+  setup(props, { slots }) {
+    provide('breadcrumb:parent', { props });
+    return () => {
+      return h(
+        'div',
+        {
+          class: ['cu-breadcrumb', { background: props.background, closeboth: props.closeboth }],
+          style: { '--color': props.color || undefined }
+        },
+        slots
+      );
+    };
+  },
+  props: breadcrumbProps
+});

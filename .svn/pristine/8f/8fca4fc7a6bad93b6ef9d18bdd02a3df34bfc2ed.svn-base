@@ -1,0 +1,27 @@
+import type { ExtractPropTypes } from "vue";
+
+export const noticeProps = {
+  position: {
+    type: String,
+    default: 'rt',
+    validator: (value: string) => ['lt', 'lb', 'rt', 'rb'].includes(value)
+  },
+  type: String,
+  title: String,
+  content: String,
+  icon: String,
+  color: String,
+  showClose: {
+    type: Boolean,
+    default: true
+  },
+  duration: {
+    type: Number,
+    default: 3000
+  },
+  isVNode: Boolean,
+  click: Function
+} as const
+
+export type noticeProps = ExtractPropTypes<typeof noticeProps>
+

@@ -1,0 +1,61 @@
+<template>
+  <div class="cu-sub-menu">
+    <div
+      class="cu-sub-menu__head"
+      @mouseenter="mouseenter"
+      ref="subMenuHead"
+      :show-title="showTitle && showEllipsis"
+      v-title="label"
+      @click="showItem = !showItem"
+    >
+      <span v-if="icon" :class="icon" class="icon"></span>
+      <span>
+        <slot name="label">
+          {{ label }}
+        </slot>
+      </span>
+      <span class="cu-icon-right" :class="{ active: showItem }"></span>
+    </div>
+    <transition-collapse :show="showItem">
+      <div class="cu-sub-menu__content">
+        <slot></slot>
+      </div>
+    </transition-collapse>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, inject, onMounted, onUpdated } from 'vue';
+import '../style/css';
+import transitionCollapse from '../../transition-collapse/src/main.vue';
+import { useTitle } from '../../utils/directive.js';
+import { submenuProps } from './submenu.props';
+defineOptions({
+  name: 'CuSubMenu'
+});
+defineProps(submenuProps);
+
+const vTitle = useTitle();
+const subMenuHead = ref();
+const showTitle = ref(false);
+const showItem = ref(false);
+
+onMounted(() => {
+  useShowTitle();
+});
+onUpdated(() => {
+  useShowTitle();
+});
+
+const setActiveboxTop = inject<Function>('setActiveboxTop');
+const showEllipsis = inject<boolean>('showEllipsis');
+
+function useShowTitle() {
+  if (subMenuHead.value.clientWidth < subMenuHead.value.scrollWidth) {
+    showTitle.value = true;
+  }
+}
+function mouseenter(e: Event) {
+  setActiveboxTop && setActiveboxTop((e.target as HTMLElement).offsetTop);
+}
+</script>

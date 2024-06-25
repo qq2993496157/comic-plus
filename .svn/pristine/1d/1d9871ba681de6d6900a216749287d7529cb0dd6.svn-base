@@ -1,0 +1,25 @@
+
+export const messageProps = {
+  type: String,
+  message: String,
+  icon: String,
+  color: String,
+  showClose: Boolean,
+  duration: {
+    type: Number,
+    default: 3000
+  },
+  id: String,
+  close: Function,
+  destroy: Function
+} as const
+
+export type MessageOptions = {
+  type?: string;
+  message?: string;
+  icon?: string;
+  color?: string;
+  showClose?: boolean;
+  duration?: number
+}
+

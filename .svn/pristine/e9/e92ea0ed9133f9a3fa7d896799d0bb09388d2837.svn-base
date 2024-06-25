@@ -1,0 +1,28 @@
+import { ref, onBeforeUnmount } from 'vue';
+
+export function useScrollSever(ele: HTMLElement, callback: Function) {
+  const scrollList = ref<HTMLElement[]>([]);
+  let parent: any = ele;
+  while (parent != null) {
+    if (parent.scrollHeight > parent.clientHeight || parent.scrollWidth > parent.clientWidth) {
+      scrollList.value.push(parent);
+    }
+    parent = parent.parentNode;
+  }
+  scrollList.value.forEach((el: HTMLElement) => {
+    el.addEventListener('scroll', updated);
+  });
+  window.addEventListener('scroll', updated);
+
+  function updated() {
+    callback();
+  }
+
+  onBeforeUnmount(() => {
+    scrollList.value.forEach((el: HTMLElement) => {
+      el.removeEventListener('scroll', updated);
+    });
+    scrollList.value = [];
+    window.removeEventListener('scroll', updated);
+  });
+}

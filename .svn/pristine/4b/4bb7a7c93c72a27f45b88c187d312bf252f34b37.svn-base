@@ -1,0 +1,41 @@
+<template>
+  <div class="transition-collapse" :style="{ height: height, '--duration': duration ? duration + 'ms' : undefined }">
+    <div class="transition-collapse-content" ref="cuTransitionCollapse">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+const cuTransitionCollapse = ref();
+const flagHeight = ref('0px');
+defineOptions({
+  name: 'TransitionCollapse'
+});
+onMounted(() => {
+  flagHeight.value = cuTransitionCollapse?.value?.offsetHeight + 'px';
+});
+const props = defineProps<{
+  show: boolean;
+  duration?: number;
+}>();
+const height = computed(() => {
+  if (!props.show) {
+    return '0px';
+  } else {
+    flagHeight.value = cuTransitionCollapse?.value?.offsetHeight + 'px';
+    return flagHeight.value;
+  }
+});
+</script>
+
+<style scoped>
+.transition-collapse {
+  overflow: hidden;
+  transition: height var(--duration, 400ms);
+}
+.transition-collapse-content {
+  padding: 1px;
+}
+</style>

@@ -1,0 +1,71 @@
+/**
+ * @description: 防抖
+ * @param {Function} func
+ * @param {number} delay
+ * @return {Function}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function debounce(func: Function, delay?: number): Function;
+/**
+ * @description: 节流
+ * @param {Function} func
+ * @param {number} delay
+ * @param {boolean} immediate
+ * @return {Function}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function throttle(func: Function, delay?: number, immediate?: boolean): Function;
+/**
+ * @description: 判断是否是数字
+ * @param {any} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function isNumber(value: any): boolean;
+/**
+ * @description: 设置zIndex
+ * @param {Document} dom
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function getMaxZIndex(dom?: HTMLElement | Document): number;
+/**
+ * @description: 根据下标删除指定数组内容返回新数组
+ * @param {unknown[]} arr 数组
+ * @param {number} index 要删除的位置下标
+ * @return {unknown[]}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function deleteAfterIndex(arr: unknown[], index: number): unknown[];
+/**
+ * @description: 补0操作
+ * @param {number | string} value
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function repairZero(value: number | string): string;
+/**
+ * @description: 日期格式化
+ * @param {any} timestamp
+ * @param {string} fmt
+ * @return {string}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function formatDate(timestamp: any, fmt: string): string;
+/**
+ * @description: 找出数组最大值或最小值下标位置
+ * @param {number[]} arr 数组
+ * @param {boolean} flag  true为最大值 false为最小值  默认false
+ * @return {number}
+ * @author: 陈龙
+ * @logic:
+ */
+declare function findIndexOfMinOrMax(arr: number[], flag?: boolean): number;
+export { debounce, throttle, isNumber, getMaxZIndex, deleteAfterIndex, repairZero, formatDate, findIndexOfMinOrMax };

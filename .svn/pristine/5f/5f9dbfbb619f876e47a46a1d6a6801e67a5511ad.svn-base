@@ -1,0 +1,9 @@
+
+import type { colorPickerProps } from "./main.props";
+import type Color from '../utils/color'
+
+
+export interface colorProvide {
+  props: colorPickerProps;
+  color: Color;
+}

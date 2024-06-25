@@ -1,0 +1,4 @@
+const DROPDOWN_PROVIDE = Symbol("DROPDOWN_PROVIDE");
+export {
+  DROPDOWN_PROVIDE
+};

@@ -1,0 +1,49 @@
+:root {
+  /* 主题色 */
+  /* --primary: #e4acc7;
+  --primary-light: #ecc5d8;
+  --primary-light2: #fcf7f9; */
+
+  --cu-color-primary: #2f51ff;
+  --cu-color-primary-light: #6d85ff;
+  --cu-color-primary-light2: #eaeeff;
+
+  --cu-color-success: #67c23a;
+  --cu-color-success-light: #95d475;
+  --cu-color-success-light2: #f0f9eb;
+
+  --cu-color-danger: #f56c6c;
+  --cu-color-danger-light: #f89898;
+  --cu-color-danger-light2: #fef0f0;
+
+  --cu-color-warning: #e6a23c;
+  --cu-color-warning-light: #eebe77;
+  --cu-color-warning-light2: #fdf9f1;
+
+  --cu-color-info: #909399;
+  --cu-color-info-light: #b1b3b8;
+  --cu-color-info-light2: #f4f4f5;
+
+  --cu-text-color: #333333;
+  --cu-text-color-light: #707070;
+  --cu-text-color-light2: #d6d6d6;
+
+  --cu-placeholder-color: #bbbdbf;
+  --cu-border-color: #d4d6d9;
+  --cu-background-color: #f5f6f7;
+
+  /* 其它颜色 */
+  --cu-disabled-background: #e6e8eb;
+  --cu-disabled-font: #bbbdbf;
+  --cu-disabled-border: #d4d6d9;
+
+  /* 其它内容 */
+  --cu-border-radius: 3px;
+  --cu-size-default: 32px;
+  --cu-size-small: 28px;
+  --cu-size-mini: 24px;
+
+  --cu-comic-border-color: #181818;
+  --cu-comic-fill-background: linear-gradient(90deg, #ffffff 40%, transparent 40%, transparent 80%, #ffffff 80%);
+  --cu-comic-fill-background-color: #fff;
+}

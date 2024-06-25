@@ -1,0 +1,55 @@
+import { ExtractPropTypes } from "vue";
+
+export const carouselProps = {
+  height: {
+    type: String,
+    default: '300px'
+  },
+  transition: {
+    type: String,
+    default: 'transform',
+    validator: (value: string) => ['transform', 'opacity'].includes(value)
+  },
+  autoPlay: {
+    type: Boolean,
+    default: true
+  },
+  arrow: {
+    type: String,
+    default: 'hover',
+    validator: (value: string) => ['hover', 'never', 'always'].includes(value)
+  },
+  // type: {
+  //   type: String,
+  //   default: 'default',
+  //   validator: (value: string) => ['default', 'card'].includes(value)
+  // },
+  direction: {
+    type: String,
+    default: 'horizontal',
+    validator: (value: string) => ['vertical', 'horizontal'].includes(value)
+  },
+  showIndicator: {
+    type: Boolean,
+    default: true
+  },
+  defaultIndex: Number,
+  pauseOnHover: {
+    type: Boolean,
+    default: true
+  },
+  delay: {
+    type: Number,
+    default: 3000,
+    validator: (value: number) => value > 0
+  }
+} as const
+
+export type CarouselProps = ExtractPropTypes<typeof carouselProps>
+
+
+export const carouselEmits = {
+  change: (val: number) => typeof val === 'number'
+}
+
+export type CarouselEmits = typeof carouselEmits

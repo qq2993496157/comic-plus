@@ -1,0 +1,183 @@
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="99.6923599243164"
+    height="86.480224609375"
+    viewBox="0 0 99.6923599243164 86.480224609375"
+    fill="none"
+  >
+    <g opacity="1" transform="translate(0 0)">
+      <path
+        id="路径 8"
+        fill-rule="evenodd"
+        fill="url(#linear_0)"
+        opacity="1"
+        d="M50 76.3969L2.08327 67.3819L18.1731 54.1833L50 76.3969Z"
+      ></path>
+      <path
+        id="路径 9"
+        fill-rule="evenodd"
+        fill="url(#linear_1)"
+        opacity="1"
+        d="M49.9111 0L6.16112 12.5625L6.16112 61.7969L49.9111 47.2187L49.9111 0Z"
+      ></path>
+      <path
+        id="路径 10"
+        fill-rule="evenodd"
+        fill="url(#linear_2)"
+        opacity="1"
+        d="M6.16112 12.5469L49.9111 24.9688L49.9111 76.2969L6.16112 61.8594L6.16112 12.5469Z"
+      ></path>
+      <path
+        id="路径 11"
+        fill-rule="evenodd"
+        fill="url(#linear_3)"
+        opacity="1"
+        d="M6.16112 12.5938L49.9111 25.0313L45.6923 47.1251L6.16112 33.1876L6.16112 12.5938Z"
+      ></path>
+      <path
+        id="路径 12"
+        fill-rule="evenodd"
+        fill="url(#linear_4)"
+        opacity="1"
+        d="M6.16114 12.5938L49.9111 25.0313L43.3017 39.9844L0.114273 26.2969L6.16114 12.5938Z"
+      ></path>
+      <path
+        id="路径 13"
+        fill-rule="evenodd"
+        fill="url(#linear_5)"
+        opacity="1"
+        d="M49.9111 0L93.6612 12.5625L93.6612 61.7188L49.9111 47.2188L49.9111 0Z"
+      ></path>
+      <path
+        id="路径 14"
+        fill-rule="evenodd"
+        fill="url(#linear_6)"
+        opacity="1"
+        d="M93.6612 12.5469L49.9111 24.9688L49.9111 76.2969L93.6612 61.8594L93.6612 12.5469Z"
+      ></path>
+      <path
+        id="路径 15"
+        fill-rule="evenodd"
+        fill="url(#linear_7)"
+        opacity="1"
+        d="M93.6612 12.5938L49.9111 25.0313L56.083 45.1251L93.6612 32.2501L93.6612 12.5938Z"
+      ></path>
+      <path
+        id="路径 16"
+        fill-rule="evenodd"
+        fill="url(#linear_8)"
+        opacity="1"
+        d="M93.6611 12.5938L49.9111 25.0313L56.5049 39.9844L99.6924 26.2969L93.6611 12.5938Z"
+      ></path>
+    </g>
+    <defs>
+      <linearGradient
+        id="linear_0"
+        x1="46.14649193874142"
+        y1="63.558256771269455"
+        x2="2.6562563523001588"
+        y2="73.64199870391936"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0" stop-color="#BCC0CC" stop-opacity="1" />
+        <stop offset="0.2941" stop-color="#BFC3CE" stop-opacity="0.7" />
+        <stop offset="0.5142" stop-color="#C9CCD6" stop-opacity="0.48" />
+        <stop offset="0.7103" stop-color="#D9DBE2" stop-opacity="0.28" />
+        <stop offset="0.8912" stop-color="#EFF0F3" stop-opacity="0.1" />
+        <stop offset="0.9894" stop-color="#FFFFFF" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="linear_1"
+        x1="-0.0008113346228145826%"
+        y1="50.0104708488069%"
+        x2="99.99216630576154%"
+        y2="50.0104708488069%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#DCE0E6" stop-opacity="1" />
+        <stop offset="1" stop-color="#DFE3EB" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_2"
+        x1="99.99216630576154%"
+        y1="49.9955867393344%"
+        x2="-0.0008113346228145826%"
+        y2="49.9955867393344%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#B3BDC9" stop-opacity="1" />
+        <stop offset="1" stop-color="#D7DAE0" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_3"
+        x1="30.585302834343487%"
+        y1="82.02923353100256%"
+        x2="63.668343232752036%"
+        y2="9.430002761771771%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#C1C8D1" stop-opacity="0" />
+        <stop offset="1" stop-color="#8F99AB" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_4"
+        x1="99.99312556096311%"
+        y1="50.01352316230212%"
+        x2="0.015154255778031044%"
+        y2="50.01352316230212%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#C1C8D1" stop-opacity="1" />
+        <stop offset="1" stop-color="#DFE3ED" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_5"
+        x1="99.98522896977168%"
+        y1="50.00086384988134%"
+        x2="-0.007684492682843369%"
+        y2="50.00086384988134%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#CCD3DB" stop-opacity="1" />
+        <stop offset="1" stop-color="#D6DAE3" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_6"
+        x1="-0.007684492682843369%"
+        y1="49.9955867393344%"
+        x2="99.98522896977168%"
+        y2="49.9955867393344%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#DCE0E6" stop-opacity="1" />
+        <stop offset="1" stop-color="#D3D8E3" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_7"
+        x1="-551.4777591846688%"
+        y1="82.82099236480096%"
+        x2="-583.6252683454023%"
+        y2="7.937418877769274%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#C1C8D1" stop-opacity="0" />
+        <stop offset="1" stop-color="#C7CBD1" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient
+        id="linear_8"
+        x1="-545.9705381909765%"
+        y1="50.01352316230212%"
+        x2="-445.9613457947619%"
+        y2="50.01352316230212%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#E1E9F2" stop-opacity="1" />
+        <stop offset="1" stop-color="#DFE3ED" stop-opacity="1" />
+      </linearGradient>
+    </defs>
+  </svg>
+</template>
+
+<script setup lang="ts"></script>

@@ -1,0 +1,96 @@
+<template>
+  <teleport to="body">
+    <transition name="cu-fade" @after-enter="onAfterEnter">
+      <div class="cu-mode" v-if="showMode" @click.self="modeHandleClick" :style="modeStyle">
+        <transition :name="transitionMode" @after-leave="onAfterLeave">
+          <div class="cu-dialog" v-if="showDialog" :style="dialogStyle">
+            <div class="cu-dialog__header">
+              <div>
+                <slot name="header"> {{ header }} </slot>
+              </div>
+              <i class="cu-icon-close close" @click="close" v-if="showClose"></i>
+            </div>
+            <div class="cu-dialog__content">
+              <slot></slot>
+            </div>
+            <div class="cu-dialog__footer" v-if="$slots.footer">
+              <slot name="footer"> </slot>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </transition>
+  </teleport>
+</template>
+
+<script setup lang="ts">
+import { ref, watch, computed } from 'vue';
+import '../style/dialog.css';
+import { getMaxZIndex, useLookScroll } from '../../../utils';
+import { dialogProps, dialogEmits } from './main.props';
+
+defineOptions({
+  name: 'CuDialog'
+});
+const props = defineProps(dialogProps);
+const emit = defineEmits(dialogEmits);
+
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (val) {
+      showMode.value = true;
+    } else {
+      showDialog.value = false;
+    }
+  }
+);
+
+const showDialog = ref(false);
+const showMode = ref(false);
+
+if (props.lockScroll) {
+  useLookScroll(showMode);
+}
+
+const dialogStyle = computed(() => {
+  return {
+    width: props.width,
+    marginTop: props.top,
+    backgroundColor: props.color
+  };
+});
+
+const modeStyle = computed(() => {
+  return {
+    zIndex: getMaxZIndex()
+  };
+});
+
+function onAfterEnter() {
+  showDialog.value = true;
+  emit('open');
+}
+
+function onAfterLeave() {
+  showMode.value = false;
+  emit('update:modelValue', false);
+  emit('close');
+}
+
+function modeHandleClick() {
+  if (!props.modeClose) return;
+  close();
+}
+
+function close() {
+  if (typeof props.beforeClose === 'function') {
+    props.beforeClose(done);
+  } else {
+    done();
+  }
+}
+function done() {
+  showDialog.value = false;
+}
+</script>

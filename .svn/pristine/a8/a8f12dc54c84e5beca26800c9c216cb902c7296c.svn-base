@@ -1,0 +1,39 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+interface column {
+  label: string;
+  prop: string;
+  width?: number;
+  align?: string
+}
+
+interface option {
+  column?: column[];
+  border?: boolean;
+  selection?: boolean;
+  headStyle?: object;
+  bodyStyle?: object;
+  stripe?: boolean;
+  stripeColors?: string[];
+  empty?: string
+}
+
+export const tableProps = {
+  data: {
+    type: Array as PropType<object[]>,
+    required: true
+  },
+  options: {
+    type: Object as PropType<option>,
+    default: {}
+  }
+} as const
+
+export type tableProps = ExtractPropTypes<typeof tableProps>
+
+
+export const tableEmits = {
+  ['select-change']: (val: object) => typeof val === 'object',
+}
+
+export type tableEmits = typeof tableEmits

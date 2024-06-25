@@ -1,0 +1,59 @@
+import { createVNode, render, watch } from 'vue';
+import type { ComponentInternalInstance } from 'vue';
+import { useMouseInElement } from '@vueuse/core';
+import TitleConstructor from './main.vue';
+
+function mouseenter(vm: ComponentInternalInstance) {
+  vm.exposed?.changeVisible(true);
+}
+
+function leave(vm?: ComponentInternalInstance) {
+  let timer: any = setTimeout(() => {
+    clearTimeout(timer);
+    timer = null;
+    vm?.exposed?.changeVisible(false);
+  }, 300);
+}
+
+/**
+ * @description: useTitle
+ * @param {Props} text
+ * @return {*}
+ * @author: 陈龙
+ * @logic:
+ */
+function createTitle(el: HTMLElement, text: string, position: string): object | undefined {
+  if (!text) return;
+  let container = document.createElement('span');
+
+  const props = {
+    title: text,
+    position,
+    parent: el
+  };
+  const destroy = function () {
+    render(null, container);
+  };
+
+  const vnode = createVNode(TitleConstructor, props);
+  render(vnode, container);
+
+  const vm = vnode.component!;
+
+  const { isOutside } = useMouseInElement(el);
+
+  watch(isOutside, (val) => {
+    if (val) {
+      leave(vm);
+    } else {
+      mouseenter(vm);
+    }
+  });
+
+  return {
+    vm,
+    destroy
+  };
+}
+
+export { createTitle };

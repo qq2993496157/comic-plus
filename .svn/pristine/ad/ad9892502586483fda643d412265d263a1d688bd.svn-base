@@ -1,0 +1,23 @@
+import type { StyleValue } from 'vue'
+
+export interface ComicTableColumn {
+  label: string;
+  prop: string;
+  width?: number;
+  align?: string;
+  fixed?: string;
+  className?: string | Function;
+}
+
+export interface ComicTableOption {
+  column?: ComicTableColumn[];
+  border?: boolean;
+  selection?: boolean;
+  headStyle?: StyleValue;
+  bodyStyle?: StyleValue;
+  stripe?: boolean;
+  stripeColors?: string[];
+  empty?: string,
+}
+
+

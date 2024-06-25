@@ -1,0 +1,19 @@
+<template>
+  <div class="cu-color-picker__preview" :class="{ alpha: parent?.props.alpha }">
+    <div class="preview__box" :style="{ background }"></div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+import type { colorProvide } from '../type';
+defineOptions({
+  name: 'CuColorPreview'
+});
+
+const parent = inject<colorProvide>('color:parent');
+
+const background = computed(() => {
+  return parent?.color.value;
+});
+</script>

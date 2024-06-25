@@ -1,0 +1,45 @@
+<template>
+  <label
+    class="cu-radio"
+    :style="activeColor ? '--active-color:' + activeColor : undefined"
+    :class="{ 'is-disabled': disabled }"
+  >
+    <input type="radio" v-show="false" :disabled="disabled" :checked="isCheck" :value="label" @change="changeValue" />
+    <span class="cu-radio__inner"> </span>
+    <span class="cu-radio__label">
+      <slot>{{ label }}</slot>
+    </span>
+  </label>
+</template>
+
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+import '../style/css';
+import useItemValidate from '../../utils/mixin/validate.js';
+import { radioProps, radioEmits } from './main.props';
+defineOptions({
+  name: 'CuRadio'
+});
+const props = defineProps(radioProps);
+const emit = defineEmits(radioEmits);
+
+const { itemValidate } = useItemValidate();
+
+const isGroup = inject<boolean>('group:isGroup', false);
+const activeValue = inject<string>('group:activeValue', '');
+const changeItemCheck = inject<Function | null>('group:changeItemCheck', null);
+
+const isCheck = computed(() => {
+  return isGroup ? activeValue?.value === props.label : props.modelValue === props.label;
+});
+
+function changeValue() {
+  if (isGroup) {
+    changeItemCheck && changeItemCheck(props.label);
+    return;
+  }
+  emit('update:modelValue', props.label);
+  emit('change', props.label);
+  itemValidate('change');
+}
+</script>

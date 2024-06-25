@@ -1,0 +1,42 @@
+
+import { createLoading, LoadingClass, getDataAttribute, updateLoading } from "./src/loading";
+
+const vLoading = {
+  install: function (app) {
+    app.directive('loading', {
+      mounted(el: any, binding: any) {
+        if (binding.value) {
+          el.instance = createLoading({
+            target: el,
+            ...getDataAttribute(el)
+          });
+        }
+      },
+      updated(el, binding) {
+        if (el.instance && !binding.value) {
+          el.removeChild(el.instance)
+          delete el.instance
+        } else if (!el.instance && binding.value) {
+          el.instance = createLoading({
+            target: el,
+            ...getDataAttribute(el)
+          });
+        } else {
+          if (!el.instance) return
+          updateLoading(el.instance, getDataAttribute(el))
+        }
+      },
+      unmounted(el) {
+        if (el.instance) {
+          el.removeChild(el.instance)
+          delete el.instance
+        }
+      }
+    });
+  }
+};
+
+
+const Loading = new LoadingClass()
+
+export { vLoading, Loading };

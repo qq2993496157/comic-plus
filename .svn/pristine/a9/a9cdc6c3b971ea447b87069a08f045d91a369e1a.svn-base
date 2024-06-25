@@ -1,0 +1,54 @@
+<template>
+  <cu-scroll-bar @scroll="onScroll" ref="scrollBarRef">
+    <div class="cu-time-picker__list" ref="list">
+      <span v-for="item in num" :class="{ active: active === (item - 1).toString() }" @click="itemHandClick">{{
+        repairZero(item - 1)
+      }}</span>
+    </div>
+  </cu-scroll-bar>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue';
+import { CuScrollBar } from '../../scroll-bar';
+import { repairZero, debounce } from '../../../utils';
+import { listProps, listEmits } from './list.props';
+
+const props = defineProps(listProps);
+const emit = defineEmits(listEmits);
+
+const list = ref();
+const scrollBarRef = ref();
+const stopScrollTop = ref(0);
+const scrollTop = ref(0);
+
+const active = computed(() => {
+  return repairZero(Math.floor(stopScrollTop.value / 30));
+});
+
+const onScroll = (e: Event) => {
+  setScroll(e);
+  scrollTop.value = (<HTMLElement>e.target).scrollTop;
+};
+
+const setScroll = debounce((e: Event) => {
+  let top = (<HTMLElement>e.target).scrollTop;
+  stopScrollTop.value = top;
+  if (scrollTop.value === stopScrollTop.value) {
+    let scrollTop = Math.floor(top / 30) * 30;
+    scrollBarRef.value.setBarTop(scrollTop);
+    emit('change', active.value);
+  }
+}, 20);
+
+function itemHandClick(e: MouseEvent) {
+  (<HTMLElement>e.target).scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    let idx = Number(props.time);
+    list.value.children[idx].scrollIntoView({ block: 'center' });
+  }, 50);
+});
+</script>

@@ -1,0 +1,32 @@
+<template>
+  <div class="cu-table-column" :class="'cu-table-column__' + instance.uid">
+    <slot></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, getCurrentInstance, inject, onMounted } from 'vue';
+defineOptions({
+  name: 'CuTableColumn'
+});
+
+const props = defineProps({
+  prop: String
+});
+const instance = getCurrentInstance()!;
+const parent = inject('table:parent');
+// console.log(instance);
+// console.log(parent);
+
+const columnInstance = {
+  uid: instance.uid,
+  props,
+  ele: instance.vnode.el,
+  slots: instance.slots.default
+};
+onMounted(() => {
+  parent && parent.setColumns(columnInstance);
+});
+</script>
+
+<style scoped></style>

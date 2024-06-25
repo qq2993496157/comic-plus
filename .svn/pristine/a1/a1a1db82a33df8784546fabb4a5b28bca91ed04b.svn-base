@@ -1,0 +1,70 @@
+<template>
+  <div
+    class="cu-avatar-group"
+    :class="[shape ? 'is-' + shape : undefined, { shadow, 'is-surplus': surplus > 0 && clickShowAll }]"
+    :style="style">
+    <transition-group name="avatar-list">
+      <span
+        v-for="(src, index) in showUrls"
+        :key="src"
+        class="cu-avatar-group__item"
+        :style="{ 'object-fit': fit }"
+        @click="tuck">
+        <img :src="src" />
+        <span
+          class="cu-avatar-group__surplus"
+          v-show="!isShowAll"
+          v-if="surplus && index === showUrls.length - 1"
+          @click.stop="unfold">
+          {{ '+' + surplus }}
+        </span>
+      </span>
+    </transition-group>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import '../style/avatar.css';
+import { avatarGroupProps, avatarGroupEmits } from './group.props';
+
+defineOptions({
+  name: 'CuAvatarGroup'
+});
+
+const props = defineProps(avatarGroupProps);
+const emit = defineEmits(avatarGroupEmits);
+
+const isShowAll = ref<boolean>(false);
+
+const style = computed(() => {
+  return {
+    '--cu-avatar-size': props.size + 'px',
+    '--cu-avatar-left': 0 - (props.size / 2 + (props.offset ?? 0)) + 'px'
+  };
+});
+
+const showUrls = computed(() => {
+  if (isShowAll.value) {
+    return props.urls;
+  }
+  return props.urls?.toSpliced(props.maxCount, props.urls.length - props.maxCount);
+});
+
+const surplus = computed(() => {
+  return Math.max((props.urls?.length ?? 0) - props.maxCount, 0);
+});
+
+function unfold() {
+  if (!props.clickShowAll) return;
+  isShowAll.value = true;
+  emit('unfold');
+}
+
+function tuck() {
+  if (isShowAll.value) {
+    isShowAll.value = false;
+    emit('tuck');
+  }
+}
+</script>

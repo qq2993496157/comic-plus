@@ -1,0 +1,190 @@
+[class*='cu-'] input,
+[class^='cu-'] input {
+  border: 0;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  outline: none;
+  padding: 0 8px;
+  color: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  background-color: transparent;
+}
+
+[class*='cu-'] input::placeholder,
+[class^='cu-'] input::placeholder {
+  color: var(--cu-placeholder-color);
+}
+
+[class*='cu-'] input::-webkit-outer-spin-button,
+[class*='cu-'] input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+[class*='cu-'] input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.cu-input,
+.cu-cascader,
+.cu-select,
+.cu-input-number,
+.cu-time-picker,
+.cu-date-picker,
+.cu-datetime-picker {
+  display: inline-flex;
+  width: 100%;
+  vertical-align: middle;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-color: var(--cu-border-color);
+  color: var(--cu-text-color);
+  border-radius: var(--cu-border-radius);
+  min-height: var(--cu-size-default);
+  font-size: 14px;
+  line-height: 30px;
+  transition: all 200ms;
+}
+
+.comic-plus__is-comic .cu-input,
+.comic-plus__is-comic .cu-cascader,
+.comic-plus__is-comic .cu-select,
+.comic-plus__is-comic .cu-input-number,
+.comic-plus__is-comic .cu-time-picker,
+.comic-plus__is-comic .cu-date-picker,
+.comic-plus__is-comic .cu-datetime-picker {
+  border-color: var(--cu-comic-border-color);
+}
+.comic-plus__is-comic .cu-input::before,
+.comic-plus__is-comic .cu-cascader::before,
+.comic-plus__is-comic .cu-select::before,
+.comic-plus__is-comic .cu-input-number::before,
+.comic-plus__is-comic .cu-time-picker::before,
+.comic-plus__is-comic .cu-date-picker::before,
+.comic-plus__is-comic .cu-datetime-picker::before {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--cu-comic-fill-background);
+  top: -1px;
+  left: 10px;
+  transition: all 200ms;
+  box-sizing: border-box;
+}
+
+.cu-time-picker,
+.cu-date-picker,
+.cu-datetime-picker {
+  width: auto;
+}
+.cu-time-picker.range input,
+.cu-date-picker.range input,
+.cu-datetime-picker.range input {
+  text-align: center;
+}
+.cu-input.is-disabled,
+.cu-cascader.is-disabled,
+.cu-select.is-disabled,
+.cu-input-number.is-disabled,
+.cu-time-picker.is-disabled,
+.cu-date-picker.is-disabled,
+.cu-datetime-picker.is-disabled,
+.cu-color-picker.is-disabled {
+  cursor: no-drop;
+  color: var(--cu-disabled-font);
+  background-color: var(--cu-disabled-background);
+  border-color: var(--cu-disabled-border);
+}
+
+[class*='cu-'].is-disabled input,
+[class^='cu-'].is-disabled input {
+  background-color: var(--cu-disabled-background);
+  cursor: no-drop;
+}
+
+.cu-input:focus-within,
+.cu-input:not(.is-disabled):hover,
+.cu-textarea:focus-within,
+.cu-textarea:not(.is-disabled):hover,
+.cu-input-number:focus-within,
+.cu-input-number:not(.is-disabled):hover,
+.cu-cascader:not(.is-disabled):hover,
+.cu-cascader.checked,
+.cu-select:not(.is-disabled):hover,
+.cu-select.checked,
+.cu-time-picker.checked,
+.cu-time-picker:not(.is-disabled):hover,
+.cu-date-picker.checked,
+.cu-date-picker:not(.is-disabled):hover,
+.cu-datetime-picker.checked,
+.cu-datetime-picker:not(.is-disabled):hover,
+.cu-color-picker.checked,
+.cu-color-picker:not(.is-disabled):hover {
+  border-color: var(--cu-color-primary);
+}
+
+.cu-cascader,
+.cu-select {
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+
+.cu-input.small,
+.cu-cascader.small,
+.cu-select.small,
+.cu-input-number.small,
+.cu-time-picker.small,
+.cu-date-picker.small,
+.cu-datetime-picker.small {
+  min-height: var(--cu-size-small);
+  line-height: calc(var(--cu-size-small) - 2px);
+}
+.cu-input.mini,
+.cu-cascader.mini,
+.cu-select.mini,
+.cu-input-number.mini,
+.cu-time-picker.mini,
+.cu-date-picker.mini,
+.cu-datetime-picker.mini {
+  min-height: var(--cu-size-mini);
+  line-height: calc(var(--cu-size-mini) - 2px);
+  font-size: 12px;
+}
+
+.cu-input-number {
+  --size: var(--cu-size-default);
+}
+
+.cu-input-number.small {
+  --size: var(--cu-size-small);
+}
+.cu-input-number.mini {
+  --size: var(--cu-size-mini);
+}
+
+.comic-plus__is-comic .cu-input-number::before {
+  left: calc(10px + var(--cu-size-default));
+}
+.comic-plus__is-comic .cu-input-number.small::before {
+  left: calc(10px + var(--cu-size-small));
+}
+.comic-plus__is-comic .cu-input-number.mini::before {
+  left: calc(10px + var(--cu-size-mini));
+}
+
+.cu-form-item.is-error .cu-input,
+.cu-form-item.is-error .cu-input-number,
+.cu-form-item.is-error .cu-cascader,
+.cu-form-item.is-error .cu-select,
+.cu-form-item.is-error .cu-time-picker,
+.cu-form-item.is-error .cu-textarea,
+.cu-form-item.is-error .cu-date-picker,
+.cu-form-item.is-error .cu-datetime-picker,
+.cu-form-item.is-error .cu-color-picker {
+  border-color: var(--cu-color-danger);
+}

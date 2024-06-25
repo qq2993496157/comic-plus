@@ -1,0 +1,81 @@
+
+declare const _default: import('vue').DefineComponent<{
+    readonly modelValue: {
+        readonly type: import("vue").PropType<import("./type").ValueType>;
+        readonly required: true;
+    };
+    readonly format: {
+        readonly type: StringConstructor;
+        readonly default: "yyyy-MM-dd";
+    };
+    readonly valueFormat: {
+        readonly type: StringConstructor;
+        readonly default: "date";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly rangeSeparator: {
+        readonly type: StringConstructor;
+        readonly default: "/";
+    };
+    readonly size: StringConstructor;
+    readonly range: BooleanConstructor;
+    readonly icon: {
+        readonly type: StringConstructor;
+        readonly default: "cu-icon-calendar";
+    };
+    readonly shortcuts: import("vue").PropType<object[]>;
+    readonly width: StringConstructor;
+    readonly disabled: BooleanConstructor;
+    readonly placeholder: StringConstructor;
+    readonly clearable: BooleanConstructor;
+    readonly startPlaceholder: StringConstructor;
+    readonly endPlaceholder: StringConstructor;
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    clear: () => void;
+    change: (val: import("./type").ValueType) => void;
+    "update:modelValue": (val: import("./type").ValueType) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly modelValue: {
+        readonly type: import("vue").PropType<import("./type").ValueType>;
+        readonly required: true;
+    };
+    readonly format: {
+        readonly type: StringConstructor;
+        readonly default: "yyyy-MM-dd";
+    };
+    readonly valueFormat: {
+        readonly type: StringConstructor;
+        readonly default: "date";
+        readonly validator: (value: string) => boolean;
+    };
+    readonly rangeSeparator: {
+        readonly type: StringConstructor;
+        readonly default: "/";
+    };
+    readonly size: StringConstructor;
+    readonly range: BooleanConstructor;
+    readonly icon: {
+        readonly type: StringConstructor;
+        readonly default: "cu-icon-calendar";
+    };
+    readonly shortcuts: import("vue").PropType<object[]>;
+    readonly width: StringConstructor;
+    readonly disabled: BooleanConstructor;
+    readonly placeholder: StringConstructor;
+    readonly clearable: BooleanConstructor;
+    readonly startPlaceholder: StringConstructor;
+    readonly endPlaceholder: StringConstructor;
+}>> & {
+    onChange?: (val: import("./type").ValueType) => any;
+    onClear?: () => any;
+    "onUpdate:modelValue"?: (val: import("./type").ValueType) => any;
+}, {
+    readonly icon: string;
+    readonly disabled: boolean;
+    readonly clearable: boolean;
+    readonly range: boolean;
+    readonly format: string;
+    readonly rangeSeparator: string;
+    readonly valueFormat: string;
+}, {}>;
+export default _default;

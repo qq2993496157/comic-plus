@@ -1,0 +1,75 @@
+<template>
+  <div class="cu-color-picker__alpha" @mousedown="mousedown">
+    <div class="mixin_black"></div>
+    <div class="bar" :style="barStyle"></div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, inject, watch, getCurrentInstance, onMounted } from 'vue';
+import type { ColorProvide } from '../type';
+defineOptions({
+  name: 'CuAlphaSlider'
+});
+
+const parent = inject<ColorProvide>('color:parent');
+const instance = getCurrentInstance();
+
+const x = ref(0);
+
+const barStyle = computed(() => {
+  return {
+    left: x.value + 'px'
+  };
+});
+
+watch(
+  () => parent?.color.get('alpha'),
+  (val) => {
+    update(val);
+  }
+);
+onMounted(() => {
+  update(parent?.color.get('alpha'));
+});
+
+function update(c: any) {
+  var { clientWidth }: any = instance?.vnode.el;
+  clientWidth = Math.max(clientWidth, 250);
+
+  x.value = (clientWidth * c) / 100;
+}
+
+function mousedown(e: MouseEvent) {
+  const ele = instance?.vnode.el;
+  let left = e.offsetX;
+  left = Math.max(0, left);
+  left = Math.min(left, ele?.clientWidth);
+  x.value = left;
+  updateColor();
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', up);
+}
+
+function move(e: MouseEvent) {
+  const ele = instance?.vnode.el;
+  let left = e.offsetX;
+  left = Math.max(0, left);
+  left = Math.min(left, ele?.clientWidth);
+  x.value = left;
+  updateColor();
+}
+
+function up() {
+  document.removeEventListener('mousemove', move);
+  document.removeEventListener('mouseup', up);
+}
+
+function updateColor() {
+  if (parent) {
+    const ele = instance?.vnode.el;
+    let val = (x.value / ele?.clientWidth) * 100;
+    parent.color.set('alpha', val);
+  }
+}
+</script>

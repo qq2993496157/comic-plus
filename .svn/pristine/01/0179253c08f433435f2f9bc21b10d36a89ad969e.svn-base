@@ -1,0 +1,11 @@
+import { ExtractPropTypes } from 'vue';
+
+export declare const collapseItemProps: {
+    readonly label: StringConstructor;
+    readonly name: {
+        readonly type: StringConstructor;
+        readonly required: true;
+    };
+    readonly color: StringConstructor;
+};
+export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>;

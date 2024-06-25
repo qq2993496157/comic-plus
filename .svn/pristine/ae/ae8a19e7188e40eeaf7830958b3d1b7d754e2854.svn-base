@@ -1,0 +1,44 @@
+import type { PropType, ExtractPropTypes } from "vue";
+
+export const STATUS = {
+  success: 'cu-icon-success',
+  warning: 'cu-icon-warning',
+  fail: 'cu-icon-close-one'
+};
+
+export const progressProps = {
+  progress: {
+    type: Number,
+    default: 0
+  },
+  type: {
+    type: String,
+    default: 'primary'
+  },
+  barType: {
+    type: String,
+    default: 'line',
+    validator: function (value) {
+      return ['line', 'line-trends', 'circle', 'trends'].includes(value);
+    }
+  },
+  status: {
+    type: String,
+    default: 'primary'
+  },
+  size: {
+    type: [String, Number] as PropType<string | number>,
+    default: '120'
+  },
+  barWidth: Number,
+  colors: [String, Object, Function] as PropType<string | object | Function>,
+  insetFormat: Boolean,
+  format: String,
+  showText: {
+    type: Boolean,
+    default: true
+  }
+} as const
+
+export type ProgressProps = ExtractPropTypes<typeof progressProps>
+

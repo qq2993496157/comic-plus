@@ -1,0 +1,147 @@
+<template>
+  <div
+    class="cu-select"
+    :class="[{ checked: show }, { 'is-disabled': disabled }, currentSize]"
+    :style="{ width }"
+    v-click-outside:selectPopper="onClickOutside"
+  >
+    <div class="cu-select__inner" @click="handleClick" @mouseover="mouseover" @mouseleave="mouseleave">
+      <span v-if="multiple" class="cu-select__multiple">
+        <i v-if="inputValue.length === 0" class="placeholder">{{ placeholder }}</i>
+        <em v-for="op in inputValue" :key="op">
+          {{ options[op] }}
+          <i class="cu-icon-close-c" @click.stop="deleteOpItem(op)"></i>
+        </em>
+      </span>
+      <input type="text" readonly :value="inputValue" :placeholder="placeholder" :disabled="disabled" v-else />
+      <i class="cu-icon-bottom" v-show="!showClose || !clearable"></i>
+      <i class="cu-icon-close-c" v-show="showClose" v-if="clearable" @click.stop="clear"></i>
+    </div>
+
+    <cu-popper :show="show">
+      <div class="cu-select__popper" :style="{ minWidth: popperMinWidth }" outside="selectPopper">
+        <cu-scroll-bar>
+          <slot></slot>
+        </cu-scroll-bar>
+      </div>
+    </cu-popper>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, provide, reactive, computed, inject, watch, getCurrentInstance } from 'vue';
+import type { ComputedRef } from 'vue';
+import '../style/select.css';
+import '../../form-common.css';
+import { CuPopper } from '../../popper';
+import { CuScrollBar } from '../../scroll-bar';
+import { useConfig, useItemValidate, useClickOutside } from '../../../utils';
+import { selectProps, selectEmits } from './main.props';
+import type { ValueType } from './type';
+import type { OptionProps } from './option.props';
+defineOptions({
+  name: 'CuSelect'
+});
+const props = defineProps(selectProps);
+const emit = defineEmits(selectEmits);
+
+const { itemValidate } = useItemValidate();
+const { SIZE } = useConfig();
+const formSize = inject<ComputedRef<string> | null>('form:size', null);
+
+const currentSize = computed(() => {
+  return props.size ?? formSize?.value ?? SIZE;
+});
+
+const instance = getCurrentInstance()!;
+const show = ref(false);
+const showClose = ref(false);
+const options = reactive({});
+
+const vClickOutside = useClickOutside();
+
+const inputValue = computed(() => {
+  if (props.multiple) {
+    return props.modelValue;
+  } else {
+    return options[props.modelValue];
+  }
+});
+
+const popperMinWidth = ref('none');
+
+watch(show, (val) => {
+  if (val) {
+    popperMinWidth.value = instance.vnode.el?.getBoundingClientRect().width + 'px';
+  }
+});
+
+function onClickOutside() {
+  show.value && (show.value = false);
+}
+
+function optionSet(item: OptionProps) {
+  if (options.hasOwnProperty(item.value)) return;
+  options[item.value] = item.label;
+}
+
+function optionClick(value: ValueType) {
+  let val;
+  if (props.multiple) {
+    let arr = [...props.modelValue];
+    let index = arr.findIndex((v) => v === value);
+    index >= 0 ? arr.splice(index, 1) : arr.push(value);
+    val = arr;
+  } else {
+    val = value;
+    show.value = false;
+  }
+  emit('update:modelValue', val);
+  change(val);
+}
+
+function mouseover() {
+  if (props.disabled) return;
+  props.modelValue && (showClose.value = true);
+}
+
+function mouseleave() {
+  if (props.disabled) return;
+  props.modelValue && (showClose.value = false);
+}
+
+function clear() {
+  showClose.value && (showClose.value = false);
+  show.value && (show.value = false);
+  emit('update:modelValue', props.multiple ? [] : '');
+  change(props.multiple ? [] : '');
+  emit('clear');
+}
+
+function deleteOpItem(op: string | number) {
+  let arr = [...props.modelValue];
+  arr.splice(
+    arr.findIndex((v) => v === op),
+    1
+  );
+  emit('update:modelValue', arr);
+  change(arr);
+}
+
+function handleClick() {
+  if (props.disabled) return;
+  show.value = !show.value;
+}
+
+function change(val: ValueType) {
+  emit('change', val);
+  itemValidate('change');
+}
+
+provide('select:parent', {
+  optionClick,
+  optionSet,
+  currentSize,
+  props
+});
+</script>

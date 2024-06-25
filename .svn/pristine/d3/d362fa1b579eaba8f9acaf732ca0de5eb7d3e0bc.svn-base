@@ -1,0 +1,55 @@
+<template>
+  <div class="cu-collapse" :class="{ background }">
+    <slot></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, provide, computed } from 'vue';
+import '../style/css';
+import { collapseProps, collapseEmits } from './main.props';
+
+defineOptions({
+  name: 'CuCollapse'
+});
+
+const props = defineProps(collapseProps);
+const emit = defineEmits(collapseEmits);
+
+const activeValue = ref(props.modelValue);
+
+const collapseChange = function (val: boolean, name: string) {
+  if (props.accordion) {
+    activeValue.value = val ? name : '';
+    updateValue();
+    return;
+  }
+  let flag = activeValue.value.includes(name);
+  if (val) {
+    !flag && activeValue.value.push(name);
+  } else {
+    flag &&
+      activeValue.value.splice(
+        activeValue.value.findIndex((v: string) => v === name),
+        1
+      );
+  }
+  updateValue();
+};
+function updateValue() {
+  emit('update:modelValue', activeValue.value);
+  emit('change', activeValue.value);
+}
+
+const provideAccordion = computed(() => props.accordion);
+const provideColor = computed(() => props.color);
+const provideBackground = computed(() => props.background);
+const providemaxHeight = computed(() => props.maxHeight);
+
+provide('collapse:activeValue', activeValue);
+provide('collapse:accordion', provideAccordion);
+provide('collapse:color', provideColor);
+provide('collapse:background', provideBackground);
+provide('collapse:maxHeight', providemaxHeight);
+provide('collapse:collapseChange', collapseChange);
+</script>

@@ -1,0 +1,33 @@
+import type { ExtractPropTypes } from "vue";
+
+export const dialogProps = {
+  modelValue: {
+    type: Boolean,
+    default: false
+  },
+  showClose: {
+    type: Boolean,
+    default: true
+  },
+  modeClose: {
+    type: Boolean,
+    default: true
+  },
+  disabledTransition: Boolean,
+  header: String,
+  width: String,
+  top: String,
+  color: String,
+  beforeClose: Function
+} as const
+
+export type DialogProps = ExtractPropTypes<typeof dialogProps>
+
+
+export const dialogEmits = {
+  ['update:modelValue']: (val: boolean) => typeof val === 'boolean',
+  close: () => true,
+  open: () => true
+}
+
+export type DialogEmits = typeof dialogEmits

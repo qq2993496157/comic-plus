@@ -1,0 +1,100 @@
+<template>
+  <transition name="cu-menu-popper">
+    <div
+      class="cu-menu-popper"
+      :class="isFixed ? className : undefined"
+      v-show="visible"
+      :style="computedStyle"
+      @mouseenter="mouseEnter"
+      @mouseleave="mouseLeave"
+    >
+      <slot></slot>
+    </div>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { ref, getCurrentInstance, onMounted, reactive, watch, nextTick } from 'vue';
+import type { CSSProperties } from 'vue';
+import { getMaxZIndex, useScrollSever } from '../../../utils';
+defineOptions({
+  name: 'CuMenuPopper'
+});
+
+interface ComputedStyle {
+  left: string | number;
+  top?: string | number;
+  zIndex?: number;
+}
+
+const props = defineProps({
+  isFixed: Boolean,
+  visible: Boolean
+});
+
+const className = ref('top');
+
+const emit = defineEmits(['mouse-in', 'mouse-out']);
+
+watch(
+  () => props.visible,
+  (val) => {
+    if (val) {
+      nextTick(() => {
+        getStyle();
+      });
+    }
+  }
+);
+
+const instance = getCurrentInstance()!;
+const OFFSET = 10;
+
+const computedStyle = reactive({
+  left: 0
+}) as CSSProperties;
+
+const parent = ref<any>(null);
+
+function getStyle() {
+  var rect = parent.value?.getBoundingClientRect();
+  const selfRect = instance.vnode.el;
+  if (props.isFixed) {
+    computedStyle.left = rect.left + 'px';
+    let t = rect.top + rect.height + OFFSET;
+    if (selfRect?.offsetHeight + t > window.innerHeight) {
+      computedStyle.top = rect.top - selfRect?.offsetHeight - OFFSET + 'px';
+      className.value = 'bottom';
+    } else {
+      computedStyle.top = t + 'px';
+      className.value = 'top';
+    }
+    computedStyle.zIndex = getMaxZIndex();
+  } else {
+    let l = rect.left + rect.width + OFFSET;
+    if (selfRect?.offsetWidth + l > window.innerWidth) {
+      computedStyle.left = 0 - selfRect?.offsetWidth - OFFSET + 'px';
+    } else {
+      computedStyle.left = rect.width + OFFSET + 'px';
+    }
+  }
+}
+
+function mouseEnter() {
+  emit('mouse-in');
+}
+
+function mouseLeave() {
+  emit('mouse-out');
+}
+
+onMounted(() => {
+  parent.value = instance.parent?.vnode.el;
+  getStyle();
+  if (parent.value && props.isFixed) {
+    useScrollSever(parent.value, () => {
+      getStyle();
+    });
+  }
+});
+</script>

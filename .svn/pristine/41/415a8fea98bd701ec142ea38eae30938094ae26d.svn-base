@@ -1,0 +1,37 @@
+<template>
+  <button
+    class="cu-button"
+    :class="[type, size ?? formSize ?? SIZE, { 'is-plain': plain }, { circle, round }]"
+    :disabled="disabled"
+    @click="$emit('click')"
+    :style="customStyle"
+  >
+    <span v-if="icon" :class="icon" :style="{ marginRight: $slots.default ? '4px' : '0' }"></span>
+    <span><slot></slot></span>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { inject } from 'vue';
+import '../style/css';
+import { useConfig } from '../../utils/config.js';
+
+defineOptions({
+  name: 'CuButton'
+});
+const emit = defineEmits(['click']);
+
+const { SIZE } = useConfig();
+const formSize = inject<string | null>('form:size', null);
+
+defineProps({
+  type: String,
+  size: String,
+  disabled: Boolean,
+  plain: Boolean,
+  icon: String,
+  round: Boolean,
+  circle: Boolean,
+  customStyle: Object
+});
+</script>

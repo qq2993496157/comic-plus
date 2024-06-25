@@ -1,0 +1,5 @@
+declare const useTitle: () => object;
+declare const vTitle: {
+    install: (app: any) => void;
+};
+export { useTitle, vTitle };

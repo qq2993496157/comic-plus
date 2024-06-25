@@ -1,0 +1,71 @@
+<template>
+  <div class="cu-notice-popup" :class="'cu-notice-popup--' + position" :style="style">
+    <transition-group :name="'cu-notice-' + position" @after-leave="afterLeave">
+      <div
+        class="cu-notice"
+        :style="{ '--hover-color': item.props.color }"
+        :class="[item.props.type, { 'is-click': item.props.click }]"
+        v-for="item in list"
+        :key="item.id"
+        @click="handleClick(item)"
+      >
+        <div class="cu-notice__header" :style="{ color: item.props.color }">
+          <span class="title">
+            <i
+              v-if="item.props.icon || typeList[item.props.type!]"
+              :class="item.props.icon ?? typeList[item.props.type!]"
+            ></i>
+            {{ item.props.title }}
+          </span>
+          <i class="cu-icon-close" v-if="item.props.showClose" @click.stop="item.close(item)"></i>
+        </div>
+        <div class="cu-notice__main">
+          <div v-if="item.props.isVNode" v-html="item.props.content"></div>
+          <template v-else>
+            {{ item.props.content }}
+          </template>
+        </div>
+      </div>
+    </transition-group>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import type { PropType } from 'vue';
+import type { NoticeInstance } from './instance';
+import { getMaxZIndex } from '../../../../utils';
+defineOptions({
+  name: 'CuNoticeList'
+});
+const typeList = {
+  primary: 'cu-icon-tips',
+  info: 'cu-icon-info',
+  success: 'cu-icon-success-c',
+  warning: 'cu-icon-warning',
+  error: 'cu-icon-close-s'
+};
+
+const props = defineProps({
+  position: String,
+  list: Array as PropType<NoticeInstance[]>
+});
+
+const emit = defineEmits(['empty']);
+
+const style = computed(() => {
+  return {
+    'z-index': getMaxZIndex()
+  };
+});
+
+function handleClick(item: NoticeInstance) {
+  item.props.click?.(item.close);
+}
+
+function afterLeave() {
+  if (props.list?.length === 0) {
+    emit('empty');
+  }
+}
+</script>

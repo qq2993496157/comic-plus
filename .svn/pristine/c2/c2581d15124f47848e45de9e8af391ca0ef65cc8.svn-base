@@ -1,0 +1,102 @@
+<template>
+  <transition name="cu-fade" @after-enter="onAfterEnter" @after-leave="onModeAfterLeave">
+    <div class="cu-mode cu-mode__flex" v-show="showMode" @click.self="handleModeClose" :style="modeStyle">
+      <transition name="cu-fade-top" @after-leave="onAfterLeave">
+        <div class="cu-popup" :class="[type, { center }]" v-if="showAlert">
+          <div class="cu-popup__head" :style="{ color }">
+            <div class="title">
+              <i v-if="headIcon" :class="headIcon"></i>
+              <span>{{ title }}</span>
+            </div>
+            <i class="cu-icon-shut" @click="closeAlert" v-if="showClose"></i>
+          </div>
+          <div class="cu-popup__content">
+            <div v-html="content" v-if="isVNode"></div>
+            <template v-else>
+              {{ content }}
+            </template>
+          </div>
+          <div class="cu-popup__footer" v-if="showButton">
+            <cu-button
+              size="mini"
+              :type="color ? undefined : type === 'error' ? 'danger' : type"
+              :color="color"
+              @click="closeAlert"
+            >
+              {{ closeButtonText }}
+            </cu-button>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, computed, onUnmounted } from 'vue';
+import '../../../mode.css';
+import '../../style/message-box.css';
+import { CuButton } from '../../../button';
+import { getMaxZIndex } from '../../../../utils';
+import { alertProps } from './main.props';
+defineOptions({
+  name: 'CuAlert'
+});
+const typeList = {
+  primary: 'cu-icon-tips',
+  info: 'cu-icon-info',
+  success: 'cu-icon-success-c',
+  warning: 'cu-icon-warning',
+  error: 'cu-icon-warning-s'
+};
+
+const props = defineProps(alertProps);
+
+const showMode = ref(false);
+const showAlert = ref(false);
+
+const headIcon = computed(() => {
+  if (!props.showIcon) return false;
+  if (props.icon) return props.icon;
+  return props.type ? typeList[props.type] : '';
+});
+
+const modeStyle = computed(() => {
+  return {
+    zIndex: getMaxZIndex()
+  };
+});
+
+function onAfterEnter() {
+  showAlert.value = true;
+}
+function handleModeClose() {
+  if (!props.modeClose) return;
+  closeAlert();
+}
+function closeAlert() {
+  showAlert.value = false;
+}
+function onAfterLeave() {
+  showMode.value = false;
+}
+
+function onModeAfterLeave() {
+  props.close?.();
+  // props.callback && props.callback();
+}
+function escKeydown(e: KeyboardEvent) {
+  if (e.keyCode === 27) {
+    closeAlert();
+  }
+}
+onMounted(() => {
+  showMode.value = true;
+  if (props.escClose) {
+    document.addEventListener('keydown', escKeydown);
+  }
+});
+onUnmounted(() => {
+  document.removeEventListener('keydown', escKeydown);
+});
+</script>

@@ -1,0 +1,10 @@
+interface comicHttp {
+    create: Function;
+    get: Function;
+    post: Function;
+    put: Function;
+    delete: Function;
+}
+declare const http: comicHttp;
+export { http };
+export type { comicHttp };

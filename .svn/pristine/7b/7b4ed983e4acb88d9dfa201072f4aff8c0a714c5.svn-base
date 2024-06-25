@@ -1,0 +1,21 @@
+import { PropType, ExtractPropTypes } from 'vue';
+
+export declare const switchProps: {
+    readonly modelValue: {
+        readonly type: PropType<string | number | boolean>;
+        readonly required: true;
+    };
+    readonly activeText: StringConstructor;
+    readonly unActiveText: StringConstructor;
+    readonly activeValue: PropType<string | number>;
+    readonly unActiveValue: PropType<string | number>;
+    readonly activeColor: StringConstructor;
+    readonly unActiveColor: StringConstructor;
+    readonly disabled: BooleanConstructor;
+};
+export type SwitchProps = ExtractPropTypes<typeof switchProps>;
+export declare const switchEmits: {
+    "update:modelValue": (val: boolean | string | number) => boolean;
+    change: (val: boolean | string | number) => boolean;
+};
+export type SwitchEmits = typeof switchEmits;

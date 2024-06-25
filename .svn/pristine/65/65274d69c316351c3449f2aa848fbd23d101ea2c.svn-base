@@ -1,0 +1,92 @@
+.cu-pagination {
+  display: block;
+  font-size: 14px;
+  color: var(--font);
+  user-select: none;
+  white-space: nowrap;
+}
+.cu-pagination__container {
+  display: flex;
+  align-items: center;
+}
+.cu-pagination__container > div {
+  padding: 0 4px;
+}
+
+.cu-pagination__pages {
+  display: flex;
+  align-items: center;
+}
+
+.cu-pagination__pages span {
+  min-width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 200ms;
+}
+
+.cu-pagination.background .cu-pagination__pages span {
+  margin: 0 4px;
+  padding: 2px;
+}
+
+.cu-pagination__pages span.button {
+  font-size: 18px;
+}
+
+.cu-pagination__pages span:hover,
+.cu-pagination__pages span.current {
+  color: var(--primary);
+}
+
+.cu-pagination__pages .more i:first-child {
+  display: block;
+}
+.cu-pagination__pages .more i:last-child {
+  display: none;
+}
+
+.cu-pagination__pages .more:hover i:first-child {
+  display: none;
+}
+.cu-pagination__pages .more:hover i:last-child {
+  display: block;
+}
+
+.cu-pagination__pages span.disabled {
+  color: var(--disabled-font);
+  cursor: no-drop;
+}
+.cu-pagination__jumper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cu-pagination__jumper input {
+  text-align: center;
+}
+
+.cu-pagination.small .cu-pagination__pages span {
+  min-width: 26px;
+  height: 26px;
+}
+
+.cu-pagination.mini .cu-pagination__pages span {
+  font-size: 12px;
+  min-width: 22px;
+  height: 22px;
+}
+
+.cu-pagination.mini .cu-pagination__pages span.button {
+  font-size: 14px;
+}
+.cu-pagination.background .cu-pagination__pages span {
+  background-color: #f4f4f5;
+}

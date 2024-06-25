@@ -1,0 +1,23 @@
+import { Fileoption, UploadError } from '../src/type';
+
+export declare function getUid(): number;
+export declare function parseFileSize(fileSizeStr?: string): number;
+export default class UploadInstance {
+    private _headers;
+    private _http;
+    private _data;
+    private _withCredentials;
+    private _success;
+    private _fail;
+    name: any;
+    url: any;
+    uid: number;
+    _file: any;
+    _progress: number;
+    _status: string;
+    constructor(options: Fileoption);
+    onProgress(e: number): void;
+    onSuccess(results: any): void;
+    onError(err: UploadError): void;
+    upload(): void;
+}

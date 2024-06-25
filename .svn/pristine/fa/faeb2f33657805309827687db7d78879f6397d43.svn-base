@@ -1,0 +1,53 @@
+<template>
+  <div class="cu-menu" :style="style" @mouseleave="showActiveBox = false">
+    <slot></slot>
+    <Transition name="cu-fade">
+      <span class="cu-menu-activebox" v-show="showActiveBox" :style="{ transform: `translateY(${top}px)` }"></span>
+    </Transition>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, provide, ref } from 'vue';
+import '../style/css';
+
+defineOptions({
+  name: 'CuMenu'
+});
+const props = defineProps<{
+  modelValue: string;
+  width?: string;
+  height?: string;
+  showEllipsis?: boolean;
+}>();
+const emit = defineEmits(['update:modelValue', 'menu-click']);
+
+const top = ref(0);
+const showActiveBox = ref(false);
+
+const activeValue = computed(() => {
+  return props.modelValue;
+});
+const style = computed(() => {
+  return {
+    width: props.width,
+    height: props.height
+  };
+});
+
+provide('setActiveboxTop', setActiveboxTop);
+provide('useItemClick', useItemClick);
+provide('showEllipsis', props.showEllipsis);
+provide('activeValue', activeValue);
+
+function setActiveboxTop(t: number) {
+  top.value = t;
+  if (!showActiveBox.value) {
+    showActiveBox.value = true;
+  }
+}
+function useItemClick(name: string | number) {
+  emit('menu-click', name);
+  emit('update:modelValue', name);
+}
+</script>

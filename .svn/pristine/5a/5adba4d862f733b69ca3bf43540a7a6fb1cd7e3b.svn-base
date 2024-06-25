@@ -1,0 +1,3 @@
+import CollapseItem from '../collapse/src/item.vue'
+
+export default CollapseItem

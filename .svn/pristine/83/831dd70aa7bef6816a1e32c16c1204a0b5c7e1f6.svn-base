@@ -1,0 +1,83 @@
+<template>
+  <span class="cu-input-number" :class="[{ 'is-disabled': disabled }, currentSize]">
+    <span class="cu-input-number__minus" :class="{ disabled: useValue <= min }" @click="valueMinus">
+      <i class="cu-icon-minus"></i>
+    </span>
+    <input
+      type="number"
+      class="cu-input-number__inner"
+      :min="min"
+      :max="max"
+      :disabled="disabled"
+      :value="modelValue"
+      @change="change"
+      @focus="emit('focus', $event)"
+      @blur="blur" />
+    <span class="cu-input-number__plus" :class="{ disabled: useValue >= max }" @click="valuePlus">
+      <i class="cu-icon-plus"></i>
+    </span>
+  </span>
+</template>
+
+<script setup lang="ts">
+import { ref, inject, computed } from 'vue';
+import '../style/input-number.css';
+import '../../form-common.css';
+import { FORM_PROVIDE } from '../../form/src/type';
+import { useConfig, useItemValidate, isNumber } from '../../../utils';
+import { inputNumberProps, inputNumberEmits } from './main.props';
+defineOptions({
+  name: 'CuInputNumber'
+});
+const props = defineProps(inputNumberProps);
+const emit = defineEmits(inputNumberEmits);
+
+const { itemValidate } = useItemValidate();
+const { SIZE } = useConfig();
+const form = inject(FORM_PROVIDE, undefined);
+
+const currentSize = computed(() => {
+  return props.size ?? form?.props.size ?? SIZE?.value;
+});
+
+const useValue = ref(props.modelValue);
+
+function change(e: Event) {
+  useValue.value = Number((<HTMLInputElement>e.target).value);
+  validateValue();
+  emit('update:modelValue', useValue.value);
+  emit('change', useValue.value);
+  itemValidate('change');
+}
+function validateValue() {
+  if (isNumber(props.min) && useValue.value < props.min) {
+    useValue.value = props.min;
+  }
+  if (isNumber(props.max) && useValue.value > props.max) {
+    useValue.value = props.max;
+  }
+}
+function valuePlus() {
+  if (props.disabled) return;
+  if (isNumber(props.max) && useValue.value > props.max) return;
+  useValue.value += props.step;
+  validateValue();
+  emit('update:modelValue', useValue.value);
+  emit('change', useValue.value);
+  itemValidate('change');
+}
+function valueMinus() {
+  if (props.disabled) return;
+  if (isNumber(props.min) && useValue.value < props.min) return;
+  useValue.value -= props.step;
+  validateValue();
+  emit('update:modelValue', useValue.value);
+  emit('change', useValue.value);
+  itemValidate('change');
+}
+
+function blur(e: FocusEvent) {
+  emit('blur', e);
+  itemValidate('blur');
+}
+</script>

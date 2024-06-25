@@ -1,0 +1,5 @@
+import { useComponets } from '../utils/use'
+
+import RadioGroup from '../radio/src/group.vue'
+
+export const CuRadioGroup = useComponets(RadioGroup)

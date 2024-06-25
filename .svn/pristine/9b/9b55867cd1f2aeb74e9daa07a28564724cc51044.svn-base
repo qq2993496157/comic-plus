@@ -1,0 +1,88 @@
+<template>
+  <div class="cu-date-table__box">
+    <div class="shortcuts" v-if="shortcuts">
+      <span v-for="el in shortcuts" @click="pickShortcut(el.value)">{{ el.label }}</span>
+    </div>
+    <div>
+      <div v-if="time" class="time-select">
+        <span>选择时间</span>
+        <cu-time-picker v-model="times" icon="none" size="small" width="130px"></cu-time-picker>
+      </div>
+      <cu-date-table
+        :value="range ? timeValue[0] : timeValue"
+        :flag-time="range ? timeValue[1] : undefined"
+        @change="changeTime($event, 0)"
+        ref="tableref"
+      ></cu-date-table>
+    </div>
+    <div v-if="range">
+      <div v-if="time" class="time-select">
+        <cu-time-picker v-model="times"></cu-time-picker>
+      </div>
+      <cu-date-table :value="timeValue[1]" :flag-time="timeValue[0]" @change="changeTime($event, 1)"></cu-date-table>
+    </div>
+  </div>
+  <div class="cu-date-picker__footer">
+    <cu-button plain size="mini" @click="emit('cancel')">取消</cu-button>
+    <cu-button size="mini" type="primary" @click="confirm">确认</cu-button>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, onBeforeMount } from 'vue';
+import CuDateTable from './date-table.vue';
+import { CuTimePicker } from '../../time-picker';
+import { CuButton } from '../../button';
+import { dateSelectProps, dateSelectEmits } from './select.props';
+defineOptions({
+  name: 'CuDateSelect'
+});
+
+const props = defineProps(dateSelectProps);
+const emit = defineEmits(dateSelectEmits);
+
+const timeValue = props.range ? ref([0, 0]) : ref(0);
+const times = ref('');
+
+function confirm() {
+  if (props.range) {
+    timeValue.value[0] ||= new Date().getTime();
+    timeValue.value[1] ||= new Date().getTime();
+    timeValue.value[1] = new Date(timeValue.value[1]).getTime() + (24 * 60 * 60 * 1000 - 1);
+  } else {
+    timeValue.value ||= new Date().getTime();
+  }
+  emit('pick', timeValue.value);
+}
+function changeTime(val: number, flag: number) {
+  if (props.range) {
+    timeValue.value[flag] = val;
+  } else {
+    timeValue.value = val;
+  }
+}
+function pickShortcut(val: any) {
+  if (typeof val === 'function') {
+    val = val();
+  }
+  if (props.range) {
+    timeValue.value = [
+      val[0] ? new Date(val[0]).getTime() : new Date().getTime(),
+      val[1] ? new Date(val[1]).getTime() : new Date().getTime()
+    ];
+  } else {
+    timeValue.value = new Date(val).getTime();
+  }
+  this.confirm();
+}
+onBeforeMount(() => {
+  if (props.range) {
+    timeValue.value = [
+      props.value[0] ? new Date(props.value[0]).getTime() : new Date().getTime(),
+      props.value[1] ? new Date(props.value[1]).getTime() : new Date().getTime()
+    ];
+  } else {
+    timeValue.value = props.value ? new Date(props.value).getTime() : new Date().getTime();
+  }
+});
+</script>

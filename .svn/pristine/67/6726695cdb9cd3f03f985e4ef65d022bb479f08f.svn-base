@@ -1,0 +1,49 @@
+<template>
+  <label
+    class="cu-radio-button"
+    :style="activeColor ? '--active-color:' + activeColor : undefined"
+    :class="[{ 'is-disabled': disabled, 'is-checked': isCheck }, currentSize]">
+    <input type="radio" v-show="false" :disabled="disabled" :checked="isCheck" :value="label" @change="changeValue" />
+    <span class="cu-radio__label">
+      <slot>{{ label }}</slot>
+    </span>
+  </label>
+</template>
+
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+import '../style/radio.css';
+import { FORM_PROVIDE } from '../../form/src/type';
+import { useConfig, useItemValidate } from '../../../utils';
+import { radioProps, radioEmits } from './main.props';
+import { RADIOGROUP_PROVIDE } from './type';
+defineOptions({
+  name: 'CuRadioButton'
+});
+const props = defineProps(radioProps);
+const emit = defineEmits(radioEmits);
+
+const { itemValidate } = useItemValidate();
+const { SIZE } = useConfig();
+
+const radioGroup = inject(RADIOGROUP_PROVIDE, undefined);
+const form = inject(FORM_PROVIDE, undefined);
+
+const isCheck = computed(() => {
+  return radioGroup ? radioGroup.activeValue.value === props.label : props.modelValue === props.label;
+});
+
+const currentSize = computed(() => {
+  return props.size ?? radioGroup?.props.size ?? form?.props.size ?? SIZE?.value;
+});
+
+function changeValue() {
+  if (radioGroup) {
+    radioGroup.changeItemCheck(props.label);
+    return;
+  }
+  emit('update:modelValue', props.label);
+  emit('change', props.label);
+  itemValidate('change');
+}
+</script>

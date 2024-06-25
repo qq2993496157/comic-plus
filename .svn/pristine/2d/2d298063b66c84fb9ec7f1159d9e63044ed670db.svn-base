@@ -1,0 +1,18 @@
+import type { ExtractPropTypes } from "vue";
+
+export const tagProps = {
+  type: String,
+  plain: Boolean,
+  size: String,
+  closable: Boolean,
+  transition: Boolean,
+  customStyle: Object
+} as const
+export type tagProps = ExtractPropTypes<typeof tagProps>
+
+
+export const tagEmits = {
+  close: () => true
+}
+
+export type tagEmits = typeof tagEmits

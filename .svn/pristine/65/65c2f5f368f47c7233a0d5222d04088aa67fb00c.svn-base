@@ -1,0 +1,32 @@
+import type { ExtractPropTypes } from "vue";
+
+export const inputNumberProps = {
+  modelValue: {
+    type: Number,
+    required: true
+  },
+  width: {
+    type: String,
+    default: '180px'
+  },
+  size: String,
+  min: Number,
+  max: Number,
+  step: {
+    type: Number,
+    default: 1
+  },
+  disabled: Boolean
+} as const
+
+export type inputNumberProps = ExtractPropTypes<typeof inputNumberProps>
+
+
+export const inputNumberEmits = {
+  ['update:modelValue']: (val: number) => true,
+  change: (val: number) => true,
+  blur: (e: FocusEvent) => e instanceof FocusEvent,
+  focus: (e: FocusEvent) => e instanceof FocusEvent,
+}
+
+export type inputNumberEmits = typeof inputNumberEmits

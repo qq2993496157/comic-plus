@@ -1,0 +1,49 @@
+<template>
+  <span
+    v-if="!transition"
+    class="cu-tag"
+    :class="[type ? 'cu-tag--' + type : '', mode, { border }]"
+    :style="[{ paddingRight: closable ? '8px' : '' }, { height: size + 'px' }, customStyle]"
+  >
+    <slot></slot>
+    <span class="closeicon" v-if="closable" @click="$emit('close')" :color="'#' + props.mode"></span>
+  </span>
+  <transition v-else name="cu-zoom-x" appear>
+    <span
+      class="cu-tag"
+      :class="[type ? 'cu-tag--' + type : '', mode, { border }]"
+      :style="[{ paddingRight: closable ? '8px' : '' }, { height: size + 'px' }, customStyle]"
+    >
+      <slot></slot>
+      <span class="closeicon" v-if="closable" @click="handleClose" :color="'#' + props.mode"></span>
+    </span>
+  </transition>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import '../style/tag.css';
+import { colorMixin, formRGBA } from '../../../utils';
+import { tagProps, tagEmits } from './main.props';
+defineOptions({
+  name: 'CuTag'
+});
+
+const props = defineProps(tagProps);
+const emit = defineEmits(tagEmits);
+
+function handleClose() {
+  emit('close');
+}
+
+const customStyle = computed(() => {
+  if (!props.color) return undefined;
+  return {
+    borderColor: props.color,
+    backgroundColor:
+      props.mode === 'light' ? colorMixin(formRGBA(props.color), 20) : props.mode === 'plain' ? '#fff' : props.color,
+    color: props.mode ? props.color : '#fff',
+    '--icon-bg': props.mode ? props.color : undefined
+  };
+});
+</script>

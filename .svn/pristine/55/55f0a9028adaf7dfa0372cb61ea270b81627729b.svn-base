@@ -1,0 +1,28 @@
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { ComicSize } from '../../type';
+
+export const inputNumberProps = {
+  modelValue: {
+    type: Number,
+    required: true
+  },
+  size: String as PropType<ComicSize>,
+  min: Number,
+  max: Number,
+  step: {
+    type: Number,
+    default: 1
+  },
+  disabled: Boolean
+} as const;
+
+export type InputNumberProps = ExtractPropTypes<typeof inputNumberProps>;
+
+export const inputNumberEmits = {
+  ['update:modelValue']: (val: number) => true,
+  change: (val: number) => true,
+  blur: (e: FocusEvent) => e instanceof FocusEvent,
+  focus: (e: FocusEvent) => e instanceof FocusEvent
+};
+
+export type InputNumberEmits = typeof inputNumberEmits;

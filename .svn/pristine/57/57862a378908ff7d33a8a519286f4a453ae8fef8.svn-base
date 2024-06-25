@@ -1,0 +1,10 @@
+import type { defaultConfig } from "./export.type"
+
+declare interface Window {
+  $COMIC: defaultConfig
+}
+
+declare interface HTMLElement {
+  __click_outside__: any,
+  __resizeObserver__: any
+}

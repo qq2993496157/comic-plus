@@ -1,0 +1,34 @@
+<template>
+  <div class="cu-breadcrumb-item">
+    <span class="cu-breadcrumb__text" :class="[{ link: to }, { active }]" @click="itemHandleClick()">
+      <slot></slot>
+    </span>
+    <span class="cu-breadcrumb__separator" v-if="!background">
+      <i :class="separatorIcon">{{ separatorIcon ? undefined : separator }}</i>
+    </span>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import '../style/css';
+defineOptions({
+  name: 'CuBreadcrumbItem'
+});
+
+const props = defineProps({
+  to: [String, Object],
+  active: Boolean
+});
+
+const separator = inject('breadcrumb:separator');
+const separatorIcon = inject('breadcrumb:separatorIcon');
+const background = inject('breadcrumb:background');
+const router = useRouter();
+
+function itemHandleClick() {
+  if (!props.to) return;
+  router.push(props.to);
+}
+</script>

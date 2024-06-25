@@ -1,0 +1,11 @@
+import { ExtractPropTypes } from "vue";
+
+export const cardGroupProps = {
+  cardHoverEffect: {
+    type: String,
+    default: 'filter',
+    validator: (value: string) => ['none', 'filter', 'stack'].includes(value)
+  }
+} as const
+
+export type CardGroupProps = ExtractPropTypes<typeof cardGroupProps>

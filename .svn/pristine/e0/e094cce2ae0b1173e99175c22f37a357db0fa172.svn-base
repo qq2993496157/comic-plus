@@ -1,0 +1,9 @@
+const COMIC_TYPE = {
+  'primary': '#e4acc7',
+  'success': '#67c23a',
+  'danger': '#f56c6c',
+  'error': '#f56c6c',
+  'warning': '#e6a23c'
+}
+
+export { COMIC_TYPE }
