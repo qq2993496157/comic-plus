@@ -1,6 +1,0 @@
-import { LoadingInstance, LoadingOptions } from './type';
-
-declare function createLoading(option: LoadingOptions, visible?: boolean): any;
-declare function getDataAttribute(el: HTMLElement): object;
-declare function LoadingService(option?: LoadingOptions): LoadingInstance | null;
-export { createLoading, getDataAttribute, LoadingService };

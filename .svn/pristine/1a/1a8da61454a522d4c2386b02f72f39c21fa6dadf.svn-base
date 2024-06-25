@@ -1,9 +1,0 @@
-import type { Ref } from 'vue';
-import type { ColorPickerProps } from './main.props';
-import type Color from '../utils/color';
-
-export interface ColorProvide {
-  props: ColorPickerProps;
-  show: Ref<boolean>;
-  color: Color;
-}

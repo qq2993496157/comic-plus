@@ -1,7 +1,0 @@
-{
-  "allowJs": true,
-  "resolveJsonModule": true,
-  "include": ["packages/**/*.ts", "packages/**/*.d.ts", "packages/**/*.tsx", "packages/**/*.vue"],
-  // 指定不需要被编译的目录
-  "exclude": ["node_modules"]
-}

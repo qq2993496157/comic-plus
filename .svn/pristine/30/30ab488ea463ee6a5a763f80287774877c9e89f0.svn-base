@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Empty from './src/main.vue'
-
-export const CuEmpty = useComponets(Empty)

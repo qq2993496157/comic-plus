@@ -1,8 +1,0 @@
-import { CollapseProps } from './main.props';
-import { Ref } from 'vue';
-
-export interface CollapseProvide {
-    props: CollapseProps;
-    activeValue: Ref<string[] | string>;
-    collapseChange: Function;
-}

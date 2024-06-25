@@ -1,3 +1,0 @@
-import Collapse from './src/main.vue'
-
-export default Collapse

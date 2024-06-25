@@ -1,9 +1,0 @@
-import { InjectionKey } from 'vue';
-import type { TabProps } from './main.props';
-
-export type TabsProvide = {
-  props: TabProps;
-  itemClick: (name: string | number) => void;
-};
-
-export const TABS_PROVIDE: InjectionKey<TabsProvide> = Symbol('TABS_PROVIDE');

@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import CheckboxGroup from '../checkbox/src/group.vue'
-
-export const CuCheckboxGroup = useComponets(CheckboxGroup)

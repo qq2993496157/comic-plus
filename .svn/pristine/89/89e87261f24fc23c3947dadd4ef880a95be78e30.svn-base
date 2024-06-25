@@ -1,3 +1,0 @@
-import CuCascader from './src/main.vue'
-
-export default CuCascader

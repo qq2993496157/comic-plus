@@ -1,9 +1,0 @@
-/**
- * @description: useTitle
- * @param {Props} text
- * @return {*}
- * @author: 陈龙
- * @logic:
- */
-declare function createTitle(el: HTMLElement, text: string, position: string): object | undefined;
-export { createTitle };

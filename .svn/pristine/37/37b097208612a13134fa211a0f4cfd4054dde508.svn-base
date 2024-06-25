@@ -1,3 +1,0 @@
-export default function useItemValidate(): {
-    itemValidate: (trigger?: string) => void;
-};

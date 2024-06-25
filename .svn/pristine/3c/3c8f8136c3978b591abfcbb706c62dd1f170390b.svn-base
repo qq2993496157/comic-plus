@@ -1,3 +1,0 @@
-import CardGroup from '../card/src/group'
-
-export default CardGroup

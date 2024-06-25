@@ -1,7 +1,0 @@
-
-import { messageProps } from "./main.props";
-
-export interface messageInstance {
-  prop: messageProps,
-  key: number | string
-}

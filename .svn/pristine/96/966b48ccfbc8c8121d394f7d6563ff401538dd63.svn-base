@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Dialog from './src/main.vue'
-
-export const CuDialog = useComponets(Dialog)

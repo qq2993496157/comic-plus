@@ -1,3 +1,0 @@
-import DatetimepPicker from './src/main.vue'
-
-export default DatetimepPicker

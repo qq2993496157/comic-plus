@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import WaterfallItem from '../waterfall/src/item'
-
-export const CuWaterfallItem = useComponets(WaterfallItem)

@@ -1,3 +1,0 @@
-import WaterfallItem from '../waterfall/src/item'
-
-export default WaterfallItem

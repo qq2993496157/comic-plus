@@ -1,5 +1,0 @@
-import { withInstall } from '../../utils';
-
-import Collapse from './src/main.vue';
-
-export const CuCollapse = withInstall(Collapse);

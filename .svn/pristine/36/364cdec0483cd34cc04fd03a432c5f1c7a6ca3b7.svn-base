@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Link from './src/main.vue'
-
-export const CuLink = useComponets(Link)

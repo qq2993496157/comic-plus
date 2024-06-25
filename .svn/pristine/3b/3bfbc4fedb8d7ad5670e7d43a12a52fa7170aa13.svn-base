@@ -1,3 +1,0 @@
-import ElevatorItem from '../elevator/src/item.vue'
-
-export default ElevatorItem

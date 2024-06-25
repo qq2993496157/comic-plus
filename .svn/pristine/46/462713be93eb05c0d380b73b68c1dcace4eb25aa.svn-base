@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import ElevatorItem from '../elevator/src/item.vue'
-
-export const CuElevatorItem = useComponets(ElevatorItem)

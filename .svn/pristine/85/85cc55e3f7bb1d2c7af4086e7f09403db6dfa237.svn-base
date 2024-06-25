@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Button from './src/main.vue'
-
-export const CuButton = useComponets(Button)

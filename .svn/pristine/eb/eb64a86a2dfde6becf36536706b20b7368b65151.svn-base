@@ -1,3 +1,0 @@
-import StepItem from '../step/src/item.vue'
-
-export default StepItem

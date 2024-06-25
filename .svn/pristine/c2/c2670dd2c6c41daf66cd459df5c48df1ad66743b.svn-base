@@ -1,3 +1,0 @@
-import ButtonGroup from '../button/src/group'
-
-export default ButtonGroup

@@ -1,5 +1,0 @@
-export declare function useConfig(): {
-    SIZE: string;
-    Z_INDEX: number;
-    THEME: any;
-};

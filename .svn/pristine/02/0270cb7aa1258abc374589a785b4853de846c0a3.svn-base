@@ -1,7 +1,0 @@
-import { ComputedRef } from "vue";
-
-export interface CarouselProvide {
-  addItem: Function;
-  removeItem: Function;
-  current: ComputedRef<number>;
-}

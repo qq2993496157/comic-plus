@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Form from './src/main.vue'
-
-export const CuForm = useComponets(Form)

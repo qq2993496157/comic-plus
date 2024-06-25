@@ -1,3 +1,0 @@
-import Dropdown from './src/main.vue'
-
-export default Dropdown

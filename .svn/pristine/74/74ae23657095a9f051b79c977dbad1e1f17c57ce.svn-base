@@ -1,5 +1,0 @@
-import { withInstall } from '../../utils';
-
-import Waterfall from './src/main.vue';
-
-export const CuWaterfall = withInstall(Waterfall);

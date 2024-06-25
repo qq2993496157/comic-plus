@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Select from './src/main.vue'
-
-export const CuSelect = useComponets(Select)

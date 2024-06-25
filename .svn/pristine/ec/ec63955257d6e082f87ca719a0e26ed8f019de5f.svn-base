@@ -1,5 +1,0 @@
-import { withInstall } from '../../utils';
-
-import CheckboxGroup from '../checkbox/src/group.vue';
-
-export const CuCheckboxGroup = withInstall(CheckboxGroup);

@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import FormItem from '../form/src/item.vue'
-
-export const CuFormItem = useComponets(FormItem)

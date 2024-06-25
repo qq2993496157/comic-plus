@@ -1,5 +1,0 @@
-import { withInstall } from '../../utils'
-
-import Divider from './src/main.vue'
-
-export const CuDivider = withInstall(Divider)

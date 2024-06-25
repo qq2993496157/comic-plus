@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import StepCard from '../step/src/card.vue'
-
-export const CuStepCard = useComponets(StepCard)

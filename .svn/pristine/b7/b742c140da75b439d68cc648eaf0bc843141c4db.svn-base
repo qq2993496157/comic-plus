@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Card from './src/main.vue'
-
-export const CuCard = useComponets(Card)

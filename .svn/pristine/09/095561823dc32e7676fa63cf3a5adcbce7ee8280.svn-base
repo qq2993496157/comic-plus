@@ -1,5 +1,0 @@
-import type { breadcrumbProps } from './main.props'
-
-export interface breadcrumbProvide {
-  props: breadcrumbProps
-}

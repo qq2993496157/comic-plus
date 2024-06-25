@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import BreadcrumbItem from '../breadcrumb/src/item.vue'
-
-export const CuBreadcrumbItem = useComponets(BreadcrumbItem)

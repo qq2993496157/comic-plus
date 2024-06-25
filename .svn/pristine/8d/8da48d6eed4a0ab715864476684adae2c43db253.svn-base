@@ -1,6 +1,0 @@
-import type { tabProps } from './main.props'
-
-export interface tabsProvide {
-  props: tabProps;
-  itemClick: Function
-}

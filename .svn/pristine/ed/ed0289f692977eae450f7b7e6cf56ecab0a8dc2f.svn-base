@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import ScrollBar from './src/main.vue'
-
-export const CuScrollBar = useComponets(ScrollBar)

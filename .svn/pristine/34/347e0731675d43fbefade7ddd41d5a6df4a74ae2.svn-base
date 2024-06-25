@@ -1,3 +1,0 @@
-import CuInputNumber from './src/main.vue'
-
-export default CuInputNumber

@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import SubMenu from '../menu/src/submenu.vue'
-
-export const CuSubMenu = useComponets(SubMenu)

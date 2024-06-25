@@ -1,8 +1,0 @@
-interface Message {
-    alert: Function;
-    confirm: Function;
-    message: Function;
-    notice: Function;
-}
-declare const MessageBox: Message;
-export default MessageBox;

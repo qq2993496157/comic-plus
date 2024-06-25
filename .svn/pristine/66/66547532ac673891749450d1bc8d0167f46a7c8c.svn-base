@@ -1,3 +1,0 @@
-import Countdown from './src/main.vue'
-
-export default Countdown

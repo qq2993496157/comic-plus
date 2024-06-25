@@ -1,6 +1,0 @@
-export type ImageFit = 'fill' | 'cover' | 'contain' | 'none' | 'scale-down';
-export type ComicType = 'primary' | 'success' | 'warning' | 'danger' | 'info';
-export type ComicType2 = 'primary' | 'success' | 'warning' | 'error' | 'info';
-export type ComicSize = 'default' | 'small' | 'mini';
-export type ComicDisplay = 'always' | 'hover' | 'never';
-export type ComicDir = 'vertical' | 'horizontal';

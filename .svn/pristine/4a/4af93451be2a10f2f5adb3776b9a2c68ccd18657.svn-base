@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Image from './src/main.vue'
-
-export const CuImage = useComponets(Image)

@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Collapse from './src/main.vue'
-
-export const CuCollapse = useComponets(Collapse)

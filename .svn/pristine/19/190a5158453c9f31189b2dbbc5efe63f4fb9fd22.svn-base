@@ -1,3 +1,0 @@
-import CuOption from '../select/src/option.vue'
-
-export default CuOption

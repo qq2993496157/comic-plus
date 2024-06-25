@@ -1,3 +1,0 @@
-import CuSelect from './src/main.vue'
-
-export default CuSelect

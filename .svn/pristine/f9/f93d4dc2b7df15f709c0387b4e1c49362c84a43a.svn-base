@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Switch from './src/main.vue'
-
-export const CuSwitch = useComponets(Switch)

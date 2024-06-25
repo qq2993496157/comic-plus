@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import DatetimepPicker from './src/main.vue'
-
-export const CuDatetimepPicker = useComponets(DatetimepPicker)

@@ -1,9 +1,0 @@
-import { defineComponent, h } from "vue";
-import '../style/button.css';
-
-export default defineComponent({
-  name: 'CuButtonGroup',
-  setup(props, { slots }) {
-    return () => h('span', { class: 'cu-button-group' }, slots)
-  }
-})

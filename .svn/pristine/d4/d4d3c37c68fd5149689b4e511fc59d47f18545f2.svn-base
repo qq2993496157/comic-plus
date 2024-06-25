@@ -1,3 +1,0 @@
-import Backtop from './src/main.vue'
-
-export default Backtop

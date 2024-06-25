@@ -1,3 +1,0 @@
-declare function formRGBA(color: any): number[];
-declare function colorMixin(rgba: any | any[], ratio: number, flag?: boolean): string;
-export { formRGBA, colorMixin };

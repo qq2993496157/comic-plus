@@ -1,7 +1,0 @@
-import { ExtractPropTypes } from 'vue';
-
-export declare const submenuProps: {
-    readonly label: StringConstructor;
-    readonly icon: StringConstructor;
-};
-export type SubmenuProps = ExtractPropTypes<typeof submenuProps>;

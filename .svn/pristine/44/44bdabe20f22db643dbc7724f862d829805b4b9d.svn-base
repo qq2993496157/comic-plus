@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import TabPane from '../tabs/src/pane.vue'
-
-export const CuTabPane = useComponets(TabPane)

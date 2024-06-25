@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import Breadcrumb from './src/main'
-
-export const CuBreadcrumb = useComponets(Breadcrumb)

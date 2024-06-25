@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import CarouselItem from '../carousel/src/item.vue'
-
-export const CuCarouselItem = useComponets(CarouselItem)

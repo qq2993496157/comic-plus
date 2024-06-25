@@ -1,3 +1,0 @@
-import Step from './src/main.vue'
-
-export default Step

@@ -1,7 +1,0 @@
-import { PropType, ExtractPropTypes } from 'vue';
-
-export declare const paneProps: {
-    readonly name: PropType<string | number>;
-    readonly label: StringConstructor;
-};
-export type PaneProps = ExtractPropTypes<typeof paneProps>;

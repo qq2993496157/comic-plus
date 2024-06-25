@@ -1,6 +1,0 @@
-
-
-export interface elevatorProvide {
-  setItem: Function;
-  removeItem: Function;
-}

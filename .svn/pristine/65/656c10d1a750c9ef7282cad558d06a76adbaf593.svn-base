@@ -1,6 +1,0 @@
-export type ValueType = Date | string | number | Date[] | string[] | number[];
-
-export type Shortcut = {
-  label: string;
-  value: ValueType | (() => ValueType);
-};

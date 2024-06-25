@@ -1,3 +1,0 @@
-import TransitionCollapse from './src/main.vue'
-
-export default TransitionCollapse

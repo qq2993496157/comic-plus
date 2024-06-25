@@ -1,5 +1,0 @@
-import { withInstall } from '../../utils';
-
-import TabPane from '../tabs/src/pane.vue';
-
-export const CuTabPane = withInstall(TabPane);

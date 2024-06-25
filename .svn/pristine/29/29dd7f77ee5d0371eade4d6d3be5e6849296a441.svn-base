@@ -1,8 +1,0 @@
-import type { Ref, InjectionKey } from 'vue';
-
-export type CheckboxGroupProvide = {
-  activeValue: Ref<string[] | number[]>;
-  changeItemCheck: (check: boolean, label: string) => void;
-};
-
-export const CHECKBOXGROUP_PROVIDE: InjectionKey<CheckboxGroupProvide> = Symbol('CHECKBOXGROUP_PROVIDE');

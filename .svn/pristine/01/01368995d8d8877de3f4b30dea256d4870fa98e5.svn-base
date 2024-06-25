@@ -1,5 +1,0 @@
-import { useComponets } from '../utils/use'
-
-import CardGroup from '../card/src/group'
-
-export const CuCardGroup = useComponets(CardGroup)
