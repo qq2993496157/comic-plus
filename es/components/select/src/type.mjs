@@ -1,4 +1,0 @@
-const SELECT_PROVIDE = Symbol("SELECT_PROVIDE");
-export {
-  SELECT_PROVIDE
-};

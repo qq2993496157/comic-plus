@@ -1,4 +1,0 @@
-const CAROUSEL_PROVIDE = Symbol("CAROUSEL_PROVIDE");
-export {
-  CAROUSEL_PROVIDE
-};
