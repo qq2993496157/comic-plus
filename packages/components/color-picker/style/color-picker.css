@@ -22,8 +22,15 @@
   color: #fff;
   transition: all 200ms;
 }
+
+.cu-color-picker.is-disabled,
+.cu-color-picker.is-disabled .cu-color-picker__container {
+  border-color: var(--cu-disabled-border);
+  background-color: var(--cu-disabled-background);
+}
+
 .cu-color-picker.is-disabled i {
-  color: var(--cu-disabled-font);
+  color: var(--cu-disabled-border);
 }
 
 .cu-color-picker.large {

@@ -29,7 +29,11 @@ export const pistolProps = {
     default: 'top'
   },
   icon: String,
-  chooseAfterHide: Boolean
+  chooseAfterHide: {
+    type: Boolean,
+    default: true
+  },
+  disabled: Boolean
 } as const;
 
 export type PistolProps = ExtractPropTypes<typeof pistolProps>;

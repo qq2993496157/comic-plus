@@ -24,6 +24,8 @@
 }
 .cu-textarea.is-disabled {
   cursor: no-drop;
+  border-color: var(--cu-disabled-border);
+  background-color: var(--cu-disabled-background);
 }
 .cu-textarea.is-disabled textarea {
   resize: none;

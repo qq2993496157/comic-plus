@@ -3,6 +3,7 @@
  * @param {object} target
  * @param {object} source
  * @return {*}
+ * @see http://comicui.cn/api?name=deepMerge
  */
 const deepMerge = (target: object, source: object): object => {
   for (let key in source) {
@@ -23,6 +24,7 @@ const deepMerge = (target: object, source: object): object => {
  * @param {any} value
  * @param {number} length
  * @return {*}
+ * @see http://comicui.cn/api?name=chunkArray
  */
 const chunkArray = (value: any[], length: number): any[] => {
   const result: any[] = [];
@@ -37,6 +39,7 @@ const chunkArray = (value: any[], length: number): any[] => {
  * @description: 复制文本内容到粘贴板
  * @param {string} text
  * @return {*}
+ * @see http://comicui.cn/api?name=copyToClipboard
  */
 const copyToClipboard = (text: string): Promise<unknown> => {
   if (navigator.clipboard && window.isSecureContext) {
@@ -59,8 +62,7 @@ const copyToClipboard = (text: string): Promise<unknown> => {
 };
 /**
  * @description: 生成随机颜色
- * @param {*}
- * @return {*}
+ * @see http://comicui.cn/api?name=randomColor
  */
 const randomColor = (): string => {
   return (
@@ -73,8 +75,7 @@ const randomColor = (): string => {
 
 /**
  * @description: 生成随机uid
- * @param {*}
- * @return {*}
+ * @see http://comicui.cn/api?name=randomUid
  */
 const randomUid = (): string => {
   return Math.random().toString(36).slice(2) + Date.now();
@@ -84,6 +85,7 @@ const randomUid = (): string => {
  * @description: 判断奇偶
  * @param {number} num
  * @return {boolean} true 奇数 false 偶数
+ * @see http://comicui.cn/api?name=parity
  */
 function parity(num: number): boolean {
   return num % 2 !== 0;

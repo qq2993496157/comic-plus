@@ -3,7 +3,9 @@
     :is="button ? CuButton : 'div'"
     :size="size"
     :type="buttonType"
+    :disabled="disabled"
     class="cu-dropdown-content"
+    :class="{ 'is-disabled': disabled }"
     v-click-outside:[popperRef]="hidePopper"
     ref="dropdownTriggerRef">
     <div class="cu-dropdown__trigger">
@@ -34,7 +36,11 @@ defineOptions({
 });
 
 const props = defineProps(dropdownProps);
-var timer: any, clearTriggerEvent, clearTriggerLeave, clearPopperEvent, clearPopperLeave;
+var timer: number | null,
+  clearTriggerEvent: (() => void) | null,
+  clearTriggerLeave: (() => void) | null,
+  clearPopperEvent: (() => void) | null,
+  clearPopperLeave: (() => void) | null;
 
 const vClickOutside = useClickOutside();
 
@@ -56,7 +62,6 @@ const EVENT_TYPE = {
     clearPopperLeave = useEventListener(popperRef, 'mouseleave', startTime);
   }
 };
-EVENT_TYPE[props.trigger]?.();
 
 function enter(e: Event) {
   trigger(e);
@@ -99,10 +104,12 @@ function clearEvent() {
 }
 
 watch(
-  () => props.trigger,
+  [() => props.trigger, () => props.disabled],
   (val) => {
     clearEvent();
-    EVENT_TYPE[val]?.();
-  }
+    if (val[1]) return;
+    EVENT_TYPE[val[0]]?.();
+  },
+  { immediate: true }
 );
 </script>

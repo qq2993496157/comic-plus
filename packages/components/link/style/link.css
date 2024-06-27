@@ -39,10 +39,6 @@
   --cu-link-disabled-color: var(--cu-color-info-light2);
 }
 
-.cu-link + .cu-link {
-  margin-left: 10px;
-}
-
 .cu-link.is-disabled {
   color: var(--cu-link-disabled-color);
   cursor: no-drop;

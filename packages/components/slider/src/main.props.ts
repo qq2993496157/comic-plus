@@ -1,36 +1,37 @@
 import type { PropType, ExtractPropTypes } from 'vue';
-import { type ComicType, type Arrayable, isArray, isNumber } from '../../../utils';
+import { ComicType, Arrayable, ComicSize, isArray, isNumber } from '../../../utils';
+import type { Marks } from './type';
 
 export const sliderProps = {
-  modelValue: {
-    type: [Number, Array] as PropType<number | number[]>,
-    required: true
+  modelValue: [Number, Array] as PropType<number | number[]>,
+  type: {
+    type: String as PropType<ComicType>,
+    default: 'primary'
   },
-  type: String as PropType<ComicType>,
+  size: String as PropType<ComicSize>,
   color: String,
   range: Boolean,
   max: {
     type: Number,
-    default: 100,
-    validator(value: number) {
-      return value >= 1;
-    }
+    default: 100
   },
   min: {
     type: Number,
-    default: 0,
-    validator(value: number) {
-      return value >= 0;
-    }
+    default: 0
   },
   step: {
     type: Number,
-    default: () => {
-      return 0;
-    }
+    default: 1
   },
+  showInput: Boolean,
   showStep: Boolean,
-  disabled: Boolean
+  disabled: Boolean,
+  marks: Object as PropType<Marks>,
+  showTooltip: {
+    type: Boolean,
+    default: true
+  },
+  formatTooltip: Function as PropType<(value: number) => string>
 } as const;
 
 export type SliderProps = ExtractPropTypes<typeof sliderProps>;
@@ -39,8 +40,7 @@ const isValidValue = (value: Arrayable<number>) => isNumber(value) || (isArray(v
 
 export const sliderEmits = {
   ['update:modelValue']: isValidValue,
-  change: isValidValue,
-  input: isValidValue
+  change: isValidValue
 };
 
 export type SliderEmits = typeof sliderEmits;

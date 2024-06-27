@@ -2,7 +2,7 @@
   <div
     class="cu-zone"
     ref="zoneRef"
-    :class="mode ? 'is-' + mode : undefined"
+    :class="[mode ? 'is-' + mode : undefined, { 'is-disabled': disabled }]"
     :style="{ '--cu-zone-line-weight': lineWeight + 'px' }">
     <div class="cu-zone__container cu-zone--start" :style="{ [end]: right }">
       <slot name="start"></slot>
@@ -43,14 +43,8 @@ const splitValue = ref(props.modelValue);
 
 let clearMove: (() => void) | null = null,
   clearUp: (() => void) | null = null,
-  clearSelect: (() => void) | null = null;
-
-watch(
-  () => props.modelValue,
-  (val) => {
-    splitValue.value = val;
-  }
-);
+  clearSelect: (() => void) | null = null,
+  clearDown: (() => void) | null = null;
 
 const left = computed(() => {
   return isNumber(splitValue.value) ? splitValue.value * 100 + '%' : splitValue.value;
@@ -83,8 +77,6 @@ const getMin = computed<number>(() => {
     return isNumber(props.min) ? percentToPx(props.min) : Number(props.min.replace('px', ''));
   }
 });
-
-useEventListener(lineRef, 'mousedown', onmousedown);
 
 function onmousedown() {
   emit('drag-start');
@@ -135,4 +127,23 @@ function onmousemove(e: MouseEvent) {
   emit('update:modelValue', val);
   emit('drag', e);
 }
+
+watch(
+  () => props.modelValue,
+  (val) => {
+    splitValue.value = val;
+  }
+);
+
+watch(
+  () => props.disabled,
+  (val) => {
+    if (val) {
+      clearDown?.();
+    } else {
+      clearDown = useEventListener(lineRef, 'mousedown', onmousedown);
+    }
+  },
+  { immediate: true }
+);
 </script>

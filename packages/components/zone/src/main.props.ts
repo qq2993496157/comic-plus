@@ -21,7 +21,8 @@ export const zoneProps = {
   max: {
     type: [String, Number] as PropType<string | number>,
     default: '40px'
-  }
+  },
+  disabled: Boolean
 } as const;
 
 export type ZoneProps = ExtractPropTypes<typeof zoneProps>;

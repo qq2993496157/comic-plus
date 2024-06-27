@@ -24,24 +24,24 @@
   font-size: calc(var(--cu-pistol-size) / 2);
 }
 
-.cu-pistol__container:hover {
+.cu-pistol .cu-pistol__container:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-primary));
   color: #fff;
 }
 
-.cu-pistol.cu-pistol--primary .cu-pistol__container:hover {
+.cu-pistol--primary .cu-pistol__container:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-primary));
 }
-.cu-pistol.cu-pistol--success .cu-pistol__container:hover {
+.cu-pistol--success .cu-pistol__container:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-success));
 }
-.cu-pistol.cu-pistol--danger .cu-pistol__container:hover {
+.cu-pistol--danger .cu-pistol__container:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-danger));
 }
-.cu-pistol.cu-pistol--warning .cu-pistol__container:hover {
+.cu-pistol--warning .cu-pistol__container:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-warning));
 }
-.cu-pistol.cu-pistol--info .cu-pistol__container:hover {
+.cu-pistol--info .cu-pistol__container:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-info));
 }
 
@@ -69,7 +69,7 @@
   cursor: pointer;
   overflow: hidden;
 }
-.cu-bullet .cu-bullet-content {
+.cu-bullet-content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,48 +80,48 @@
   background-color: #fff;
 }
 
-.cu-pistol.mode-wheel .cu-bullet .cu-bullet-content {
+.cu-pistol.mode-wheel .cu-bullet-content {
   border-radius: inherit;
 }
 
-.cu-bullet .cu-bullet-content:hover {
+.cu-bullet-content:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-primary));
   color: #fff;
 }
 
-.cu-pistol.cu-pistol--primary .cu-bullet .cu-bullet-content {
+.cu-pistol--primary .cu-bullet-content {
   color: var(--pistol-custom-color, var(--cu-color-primary));
 }
-.cu-pistol.cu-pistol--success .cu-bullet .cu-bullet-content {
+.cu-pistol--success .cu-bullet-content {
   color: var(--pistol-custom-color, var(--cu-color-success));
 }
-.cu-pistol.cu-pistol--danger .cu-bullet .cu-bullet-content {
+.cu-pistol--danger .cu-bullet-content {
   color: var(--pistol-custom-color, var(--cu-color-danger));
 }
-.cu-pistol.cu-pistol--warning .cu-bullet .cu-bullet-content {
+.cu-pistol--warning .cu-bullet-content {
   color: var(--pistol-custom-color, var(--cu-color-warning));
 }
-.cu-pistol.cu-pistol--info .cu-bullet .cu-bullet-content {
+.cu-pistol--info .cu-bullet-content {
   color: var(--pistol-custom-color, var(--cu-color-info));
 }
 
-.cu-pistol.cu-pistol--primary .cu-bullet .cu-bullet-content:hover {
+.cu-pistol--primary .cu-bullet-content:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-primary));
   color: #fff;
 }
-.cu-pistol.cu-pistol--success .cu-bullet .cu-bullet-content:hover {
+.cu-pistol--success .cu-bullet-content:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-success));
   color: #fff;
 }
-.cu-pistol.cu-pistol--danger .cu-bullet .cu-bullet-content:hover {
+.cu-pistol--danger .cu-bullet-content:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-danger));
   color: #fff;
 }
-.cu-pistol.cu-pistol--warning .cu-bullet .cu-bullet-content:hover {
+.cu-pistol--warning .cu-bullet-content:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-warning));
   color: #fff;
 }
-.cu-pistol.cu-pistol--info .cu-bullet .cu-bullet-content:hover {
+.cu-pistol--info .cu-bullet-content:hover {
   background-color: var(--pistol-custom-color, var(--cu-color-info));
   color: #fff;
 }
@@ -141,7 +141,15 @@
   border-radius: var(--cu-border-radius);
 }
 
-.cu-pistol .cu-pistol__container:active,
-.cu-bullet:active .cu-bullet-content {
+.cu-bullet.is-disabled .cu-bullet-content,
+.cu-pistol.is-disabled .cu-pistol__container {
+  background-color: var(--cu-disabled-background);
+  border-color: var(--cu-disabled-border);
+  color: var(--cu-disabled-font);
+  cursor: no-drop;
+}
+
+.cu-pistol:not(.is-disabled) .cu-pistol__container:active,
+.cu-bullet:not(.is-disabled):active .cu-bullet-content {
   box-shadow: var(--cu-boxshadow-base), inset 0 0 0 1px;
 }

@@ -11,6 +11,9 @@
 .cu-input .suffix-icon {
   min-width: 22px;
   height: 100%;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   box-sizing: border-box;
   color: var(--cu-color-text-light);
 }

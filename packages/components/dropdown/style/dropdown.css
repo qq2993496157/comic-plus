@@ -4,10 +4,18 @@
   vertical-align: middle;
 }
 
-.cu-dropdown .cu-dropdown__trigger {
+.cu-dropdown__trigger {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+}
+
+.cu-dropdown-content.is-disabled {
+  color: var(--cu-disabled-font);
+}
+
+.cu-dropdown-content.is-disabled .cu-dropdown__trigger {
+  cursor: no-drop;
 }
 
 .cu-dropdown-menu {

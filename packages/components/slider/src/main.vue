@@ -1,122 +1,167 @@
 <template>
-  <div class="cu-slider" :class="[{ 'is-disabled': disabled }, type ? 'cu-slider--' + type : undefined]">
-    <div class="cu-slider__inner" :class="{ range }" :style="sliderStyle">
-      <div class="cu-slider__breaks" v-if="inputStep > 0 && showStep">
-        <span v-for="b in inputMax / inputStep - 1" :key="b"></span>
-      </div>
-      <input
-        :disabled="disabled"
-        :step="inputStep"
-        :max="inputMax"
-        :min="min"
-        type="range"
-        :value="inputValue[0]"
-        @change="handleChange(0, $event)"
-        @input="handleInput(0, $event)" />
-      <input
-        :disabled="disabled"
+  <div
+    class="cu-slider"
+    :class="[type ? 'cu-slider--' + type : undefined, { 'is-disabled': disabled }, currentSize]"
+    :style="{ '--cu-slider-color': props.color }">
+    <div class="cu-slider__container" ref="containerRef" @mousedown="containerMouseDown">
+      <slider-steps :steps="steps" v-if="steps > 0 && props.showStep"></slider-steps>
+      <slider-bar></slider-bar>
+      <slider-marks :marks="marks" v-if="marks"></slider-marks>
+      <slider-button
+        ref="sliderMinButtonRef"
+        :tooltip-value="range ? props.modelValue[0] : props.modelValue"
+        :model-value="sliderValue"
+        @update:model-value="recordValue = $event"></slider-button>
+      <slider-button
         v-if="range"
-        :step="inputStep"
-        :max="inputMax"
-        :min="min"
-        type="range"
-        :value="inputValue[1]"
-        @change="handleChange(1, $event)"
-        @input="handleInput(1, $event)" />
+        :tooltip-value="props.modelValue[1]"
+        ref="sliderMaxButtonRef"
+        :model-value="sliderValue2"
+        @update:model-value="recordValue2 = $event"></slider-button>
+    </div>
+    <div class="cu-slider__input" v-if="showInput && !props.range">
+      <cu-input-number
+        :model-value="props.modelValue"
+        @update:model-value="_emit($event)"
+        :max="props.max"
+        :min="props.min"
+        :step="step"
+        :size="currentSize"></cu-input-number>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed, watch, provide, inject, onMounted, onUpdated } from 'vue';
 import '../style/slider.css';
-import '../../form-common.css';
-import { useItemValidate } from '../../../utils';
-import { sliderProps, sliderEmits } from './main.props';
+import sliderButton from './components/slider-button.vue';
+import sliderBar from './components/slider-bar';
+import sliderSteps from './components/slider-steps';
+import sliderMarks from './components/slider-marks';
+import { CuInputNumber } from '../../input-number';
+import { sliderEmits, sliderProps } from './main.props';
+import { SLIDER_PROVIDE } from './type';
+import { FORM_PROVIDE } from '../../form/src/type';
+import { isArray, useConfig } from '../../../utils';
+
 defineOptions({
   name: 'CuSlider'
 });
+
 const props = defineProps(sliderProps);
 const emit = defineEmits(sliderEmits);
 
-const { itemValidate } = useItemValidate();
+const form = inject(FORM_PROVIDE, undefined);
+const { SIZE } = useConfig();
 
-const inputMax = computed(() => {
-  return props.max === 1 ? 100 : props.max;
+const sliderMinButtonRef = ref();
+const sliderMaxButtonRef = ref();
+const containerRef = ref();
+const recordValue = ref(0);
+const recordValue2 = ref(0);
+
+const currentSize = computed(() => {
+  return props.size ?? form?.props.size ?? SIZE?.value;
 });
 
-const inputStep = computed(() => {
-  return props.max === 1 ? props.step * 100 : props.step;
+const sliderValue = computed(() => {
+  let val = isArray(props.modelValue) ? props.modelValue[0] : props.modelValue;
+  return ((val - props.min) / offset.value) * 100;
 });
 
-const sliderStyle = computed(() => {
-  return {
-    '--cu-slider-width': innerWidth.value.s + '%',
-    '--cu-slider-width2': innerWidth.value.l ? innerWidth.value.l + '%' : undefined,
-    '--cu-slider-color': props.color
-  };
+const sliderValue2 = computed(() => {
+  let val = isArray(props.modelValue) ? props.modelValue[1] : props.modelValue;
+  return ((val - props.min) / offset.value) * 100;
 });
-const inputValue = computed(() => {
-  let val = props.modelValue;
-  if (Array.isArray(val)) {
-    !val[0] && (val[0] = 0);
-    !val[1] && (val[1] = 0);
+
+const offset = computed(() => {
+  return props.max - props.min;
+});
+
+const steps = computed(() => {
+  if (props.step) {
+    let val = (offset.value ?? 100) / props.step - 1;
+    return Math.max(0, val);
   }
-  let value: number[] = [].concat(val);
-  if (value[1] !== undefined) {
-    return [props.max === 1 ? value[0] * 100 : value[0], props.max === 1 ? value[1] * 100 : value[1]];
-  }
-  return [props.max === 1 ? value[0] * 100 : value[0]];
+  return 0;
 });
 
-const innerWidth = computed(() => {
-  let s = (inputValue.value[0] - props.min) / (props.max - props.min);
-  s = props.max === 1 ? s : s * 100;
-  let l;
-  if (inputValue.value[1] !== undefined) {
-    l = (inputValue.value[1] - props.min) / (props.max - props.min);
-    l = props.max === 1 ? l : l * 100;
+function getSliderValue(sort?: boolean) {
+  let value = (recordValue.value / containerRef.value.getBoundingClientRect().width) * offset.value;
+  if (props.step) {
+    value = Math.round(value / props.step) * props.step;
   }
-  if (s > l) {
-    return {
-      s: l,
-      l: s
-    };
-  }
-  return {
-    s,
-    l
-  };
-});
+  value += props.min;
+  value = Math.max(props.min, value);
 
-function handleInput(index: number, e: Event) {
-  const val = (<HTMLInputElement>e.target).value;
-  const computedVal = Number(props.max === 1 ? Number(val) / 100 : val);
   if (props.range) {
-    let arr = inputValue.value;
-    arr[index] = computedVal;
-    emit('update:modelValue', arr);
-    emit('input', arr);
-    return;
-  }
-  emit('update:modelValue', computedVal);
-  emit('input', computedVal);
-}
-
-function handleChange(index: number, e: Event) {
-  const val = (<HTMLInputElement>e.target).value;
-  const computedVal = Number(props.max === 1 ? Number(val) / 100 : val);
-  if (props.range) {
-    let arr = inputValue.value;
-    arr[index] = computedVal;
-    emit('change', arr);
-    if (arr[0] > arr[1]) {
-      arr.reverse();
-      emit('update:modelValue', arr);
+    let value2 = (recordValue2.value / containerRef.value.getBoundingClientRect().width) * offset.value;
+    if (props.step) {
+      value2 = Math.round(value2 / props.step) * props.step;
     }
-    return;
+    value2 += props.min;
+    value2 = Math.max(props.min, value2);
+    let rangeValue = [value, value2];
+    sort && rangeValue.sort((a, b) => a - b);
+    return rangeValue;
+  } else {
+    return value;
   }
-  emit('change', computedVal);
-  itemValidate('change');
 }
+
+function updateValue() {
+  const value = getSliderValue(true);
+  _emit(value);
+}
+
+function containerMouseDown(e: MouseEvent) {
+  if (props.disabled) return;
+  if (props.range) {
+    let currentValue = e.clientX - containerRef.value.getBoundingClientRect().left;
+    let val = Math.abs(recordValue.value - currentValue);
+    let val2 = Math.abs(recordValue2.value - currentValue);
+    if (val2 < val) {
+      sliderMaxButtonRef.value.onmousedown(e);
+    } else {
+      sliderMinButtonRef.value.onmousedown(e);
+    }
+  } else {
+    sliderMinButtonRef.value.onmousedown(e);
+  }
+}
+
+function init() {
+  let w = containerRef.value.getBoundingClientRect().width;
+  if (props.range) {
+    recordValue.value = ((props.modelValue[0] - props.min) / offset.value) * w;
+    recordValue2.value = ((props.modelValue[1] - props.min) / offset.value) * w;
+  } else {
+    recordValue.value = (((props.modelValue as number) - props.min) / offset.value) * w;
+  }
+}
+
+function _emit(value: number | number[]) {
+  emit('update:modelValue', value);
+  emit('change', value);
+}
+
+watch([recordValue, recordValue2], (val) => {
+  const value = getSliderValue();
+  _emit(value);
+});
+
+provide(SLIDER_PROVIDE, {
+  props,
+  containerRef,
+  sliderValue,
+  sliderValue2,
+  updateValue
+});
+
+onMounted(() => {
+  init();
+});
+onUpdated(() => {
+  init();
+});
 </script>

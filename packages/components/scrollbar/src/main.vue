@@ -42,8 +42,8 @@ watch(
     computedShowThumb();
   }
 );
-const { width: cWidth, height: cHeight } = useElementSize(barContainerRef.value);
-const { width: dWidth, height: dHeight } = useElementSize(containerDivRef.value);
+const { width: cWidth, height: cHeight } = useElementSize(barContainerRef);
+const { width: dWidth, height: dHeight } = useElementSize(containerDivRef);
 
 watch([cWidth, cHeight, dWidth, dHeight], () => {
   resateScrollBar();

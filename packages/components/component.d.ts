@@ -88,6 +88,8 @@ declare module 'vue' {
     CuSkeletonItem: (typeof CuCom)['CuSkeletonItem'];
     CuRate: (typeof CuCom)['CuRate'];
     CuSpace: (typeof CuCom)['CuSpace'];
+    CuClock: (typeof CuCom)['CuClock'];
+    CuWebFooter: (typeof CuCom)['CuWebFooter'];
   }
 }
 export {};

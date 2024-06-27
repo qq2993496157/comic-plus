@@ -2,6 +2,7 @@
  * @description: 防抖
  * @param {Function} func
  * @param {number} interval
+ * @see http://comicui.cn/api?name=throttle
  */
 function debounce(func: (...args: any) => void, interval: number = 200): (...args: any) => void {
   if (typeof func !== 'function') {
@@ -20,6 +21,7 @@ function debounce(func: (...args: any) => void, interval: number = 200): (...arg
  * @description: 节流
  * @param {Function} func
  * @param {number} interval
+ * @see http://comicui.cn/api?name=throttle
  */
 function throttle(func: (...args: any) => void, interval: number = 500): (...args: any) => void {
   if (typeof func !== 'function') {
@@ -66,7 +68,7 @@ const repairZero = (value: number | string): string => {
  * @param {any} timestamp
  * @param {string} fmt
  */
-const formatDate = (timestamp: any, fmt: string): string => {
+const formatDate = (timestamp: any, fmt?: string): string => {
   if (!timestamp || isNaN(new Date(timestamp).getTime())) {
     return '';
   }

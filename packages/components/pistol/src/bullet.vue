@@ -7,7 +7,8 @@
       { '--cu-pistol-delay': (injectProps.iteration ? getInstanceIdx * 100 : 0) + 'ms' },
       { '--pistol-custom-color': color ?? injectProps.color }
     ]"
-    @click="itemHandleClick(sign)">
+    :class="{ 'is-disabled': disabled }"
+    @click="bulletClick">
     <div class="cu-bullet-content">
       <slot>
         <i :class="icon" class="icon" v-if="icon"></i>
@@ -42,6 +43,11 @@ const bulletInstance = reactive({
 });
 
 addBullet(bulletInstance);
+
+function bulletClick() {
+  if (props.disabled) return;
+  itemHandleClick(props.sign);
+}
 
 onUnmounted(() => {
   removeBullet(instance.uid);

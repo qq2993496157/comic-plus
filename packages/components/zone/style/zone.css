@@ -66,6 +66,11 @@
   transform: translateY(-50%);
 }
 
+.cu-zone.is-disabled > .cu-zone__line {
+  opacity: 0.7;
+  cursor: no-drop;
+}
+
 .cu-zone.is-horizontal > .cu-zone__line .cu-zone__defaultline {
   border-top: 0;
   border-bottom: 0;

@@ -1,0 +1,29 @@
+.cu-web-footer {
+  display: block;
+  box-sizing: border-box;
+}
+
+.cu-web-footer__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+.cu-web-footer__link {
+  color: var(--cu-color-text-light);
+  text-decoration: none;
+}
+
+.cu-web-footer__link:hover {
+  color: var(--cu-color-text);
+}
+
+.cu-web-footer__copyright {
+  text-align: center;
+}
+
+.cu-web-footer__links ~ .cu-web-footer__copyright {
+  margin-top: 8px;
+}

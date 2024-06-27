@@ -1,0 +1,304 @@
+.cu-clock {
+  --cu-clock-size: 200px;
+  --cu-clock-number-size: 80px;
+  --cu-clock-block-height: 13px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.cu-clock.small {
+  --cu-clock-size: 150px;
+  --cu-clock-block-height: 8px;
+  --cu-clock-number-size: 40px;
+  font-size: 12px;
+}
+.cu-clock.large {
+  --cu-clock-size: 240px;
+  --cu-clock-block-height: 15px;
+  --cu-clock-number-size: 120px;
+  font-size: 16px;
+}
+
+.cu-clock--circle.small {
+  padding: 4px;
+}
+
+.cu-clock--circle {
+  padding: 8px;
+  width: var(--cu-clock-size);
+  height: var(--cu-clock-size);
+  box-sizing: content-box;
+  border-radius: 50%;
+  transition: all 200ms;
+}
+
+.cu-clock__container {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: var(--cu-color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cu-clock-date {
+  padding: 4px;
+  background-color: var(--cu-clock-color, #f0f0f0);
+  color: var(--cu-color-text);
+  line-height: 1;
+  border-radius: var(--cu-border-radius);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.cu-clock--circle .cu-clock-date {
+  position: absolute;
+  left: 50%;
+  bottom: 24%;
+  transform: translateX(-50%);
+}
+
+.cu-clock--circle .cu-clock__container::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--cu-clock-color, var(--cu-color-text));
+  background-color: #fff;
+  z-index: 1;
+}
+
+.cu-clock__pointer {
+  padding-top: 18%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 3px;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%) rotate(var(--cu-clock-time-rotate));
+}
+
+.cu-clock__pointer::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 50%;
+  background-color: var(--cu-color-text);
+  border-radius: 3px;
+  width: 2px;
+}
+
+.cu-clock__pointer.hour {
+  padding-top: 21%;
+}
+
+.cu-clock__pointer.hour::after {
+  width: 3px;
+}
+
+.cu-clock__pointer.second {
+  padding-top: 15%;
+}
+.cu-clock__pointer.second::after {
+  width: 1px;
+  background-color: #f00;
+}
+
+.cu-clock__times {
+  position: absolute;
+  inset: 0;
+}
+
+.cu-clock__times-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(var(--cu-clock-time-rotate));
+}
+
+.cu-clock__times-item div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.cu-clock__times-item div:last-child {
+  flex-direction: column-reverse;
+}
+
+.cu-clock__times-item .block {
+  width: 1px;
+  height: calc(var(--cu-clock-block-height) - 4px);
+  background-color: var(--cu-color-text-light2);
+}
+
+.cu-clock__times .block.is-time {
+  width: 2px;
+  height: var(--cu-clock-block-height);
+  background-color: var(--cu-clock-color, var(--cu-color-text));
+}
+
+.cu-clock__times .cu-clock__text {
+  transform: rotate(calc(0deg - var(--cu-clock-time-rotate)));
+}
+.cu-clock__times-item.roman-text > div:first-child .cu-clock__text {
+  transform: rotate(0deg);
+}
+.cu-clock__times-item.roman-text > div:last-child .cu-clock__text {
+  transform: rotate(180deg);
+}
+
+.cu-clock--number {
+  display: inline-flex;
+  padding: 8px;
+  border-radius: var(--cu-border-radius);
+  transition: all 200ms;
+}
+
+.cu-clock--number .cu-clock__container {
+  display: block;
+}
+
+.cu-clock--number .cu-clock-date {
+  margin-top: calc(var(--cu-clock-number-size) / 10);
+}
+
+.cu-clock-group {
+  position: relative;
+  width: calc(var(--cu-clock-number-size) / 2);
+  height: var(--cu-clock-number-size);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: all 200ms;
+}
+
+.cu-clock__dot {
+  height: var(--cu-clock-number-size);
+  width: calc(var(--cu-clock-number-size) / 10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: width 200ms, height 200ms;
+}
+.cu-clock__dot::before,
+.cu-clock__dot::after {
+  margin: 4px 0;
+  content: '';
+  display: block;
+  width: calc(var(--cu-clock-number-size) / 10);
+  height: calc(var(--cu-clock-number-size) / 10);
+  background-color: var(--cu-clock-color, var(--cu-color-text));
+  transition: width 200ms, height 200ms;
+}
+
+.cu-clock-group + .cu-clock-group {
+  margin-left: calc(var(--cu-clock-number-size) / 10);
+}
+
+.cu-clock-lamp {
+  padding: 0 2px;
+  position: absolute;
+  display: flex;
+  opacity: 0.07;
+  transition: all 200ms, opacity 0ms;
+}
+
+.cu-clock-lamp.show {
+  opacity: 1;
+}
+
+.cu-clock__line {
+  flex: 1;
+  background-color: var(--cu-clock-color, var(--cu-color-text));
+}
+
+.cu-clock__horn {
+  display: block;
+  width: 0;
+  height: 0;
+  border: calc(var(--cu-clock-number-size) / 10 / 2) solid transparent;
+}
+.cu-clock-group .cu-clock__horn.first {
+  border-right-color: var(--cu-clock-color, var(--cu-color-text));
+}
+.cu-clock-group .cu-clock__horn.last {
+  border-left-color: var(--cu-clock-color, var(--cu-color-text));
+}
+
+.cu-clock-group .cu-clock-lamp:nth-child(1) {
+  left: 0;
+  top: calc(var(--cu-clock-number-size) / 10 / 2);
+  width: 100%;
+  height: calc(var(--cu-clock-number-size) / 10);
+}
+.cu-clock-group .cu-clock-lamp:nth-child(2) {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: calc(var(--cu-clock-number-size) / 10);
+}
+.cu-clock-group .cu-clock-lamp:nth-child(3) {
+  left: 0;
+  bottom: calc(var(--cu-clock-number-size) / 10 / 2);
+  width: 100%;
+  height: calc(var(--cu-clock-number-size) / 10);
+}
+.cu-clock-group .cu-clock-lamp:nth-child(4) {
+  left: 0;
+  top: calc(var(--cu-clock-number-size) / 10 / 2);
+}
+
+.cu-clock-group .cu-clock-lamp:nth-child(5) {
+  right: 0;
+  top: calc(var(--cu-clock-number-size) / 10 / 2);
+}
+.cu-clock-group .cu-clock-lamp:nth-child(6) {
+  left: 0;
+  bottom: calc(var(--cu-clock-number-size) / 10 / 2);
+}
+.cu-clock-group .cu-clock-lamp:nth-child(7) {
+  right: 0;
+  bottom: calc(var(--cu-clock-number-size) / 10 / 2);
+}
+
+.cu-clock .cu-clock-group .cu-clock-lamp:nth-child(n + 4) {
+  flex-direction: column;
+  width: calc(var(--cu-clock-number-size) / 10);
+  height: calc(var(--cu-clock-number-size) / 2);
+  padding: 2px 0;
+}
+
+.cu-clock.small .cu-clock-lamp {
+  padding: 0 1px;
+}
+
+.cu-clock-group .cu-clock-lamp:nth-child(n + 4) .cu-clock__horn.first {
+  border-right-color: transparent;
+  border-bottom-color: var(--cu-clock-color, var(--cu-color-text));
+}
+
+.cu-clock-group .cu-clock-lamp:nth-child(n + 4) .cu-clock__horn.last {
+  border-left-color: transparent;
+  border-top-color: var(--cu-clock-color, var(--cu-color-text));
+}
+
+.cu-clock--circle.always,
+.cu-clock--number.always {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+}
+.cu-clock--circle.hover:hover,
+.cu-clock--number.hover:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+}

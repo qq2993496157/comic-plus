@@ -33,6 +33,7 @@
 .cu-input-number .cu-input-number__minus,
 .cu-input-number .cu-input-number__plus {
   width: var(--cu-inputnumber-buttonsize);
+  min-width: var(--cu-inputnumber-buttonsize);
   border-color: inherit;
   display: inline-flex;
   align-items: center;

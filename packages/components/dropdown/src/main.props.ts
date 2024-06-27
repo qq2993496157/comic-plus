@@ -16,7 +16,8 @@ export const dropdownProps = {
   buttonIcon: {
     type: String,
     default: 'cu-icon-down'
-  }
+  },
+  disabled: Boolean
 } as const;
 
 export type DropdownProps = ExtractPropTypes<typeof dropdownProps>;

@@ -6,10 +6,7 @@ export const linkProps = {
   type: String as PropType<ComicType>,
   disabled: Boolean,
   underline: Boolean,
-  target: {
-    type: String as PropType<'_blank' | '_parent' | '_self' | '_top' | 'framename'>,
-    default: '_blank'
-  }
+  target: String as PropType<'_blank' | '_parent' | '_self' | '_top'>
 } as const;
 
 export type LinkProps = ExtractPropTypes<typeof linkProps>;

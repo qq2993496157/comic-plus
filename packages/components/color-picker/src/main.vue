@@ -5,7 +5,7 @@
     v-click-outside:[popperRef]="onClickOutside"
     @click="handleClick">
     <div class="cu-color-picker__container" :class="{ alpha }">
-      <div class="preview__box" :style="{ background: modelValue }"></div>
+      <div class="preview__box" :style="{ background: disabled ? undefined : modelValue }"></div>
       <i class="cu-icon-minus" v-if="!modelValue"></i>
       <i class="cu-icon-down-filled" v-else></i>
     </div>

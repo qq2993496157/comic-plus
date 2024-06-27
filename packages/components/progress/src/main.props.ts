@@ -7,7 +7,7 @@ export const STATUS = {
   fail: 'cu-icon-close-one'
 };
 
-type Colos = string | Record<string, string> | ((value: number) => string);
+type Colors = string | Record<string, string> | ((value: number) => string);
 
 export const progressProps = {
   progress: {
@@ -28,7 +28,7 @@ export const progressProps = {
     default: '120'
   },
   barWidth: Number,
-  colors: [String, Object, Function] as PropType<Colos>,
+  colors: [String, Object, Function] as PropType<Colors>,
   insetFormat: Boolean,
   format: String,
   showText: {

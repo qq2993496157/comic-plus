@@ -1,7 +1,7 @@
 <template>
   <template v-if="button">
     <cu-button-group>
-      <cu-button :size="size" :type="buttonType" @click="emit('button-click', $event)">
+      <cu-button :size="size" :type="buttonType" @click="emit('button-click', $event)" :disabled="disabled">
         <slot></slot>
       </cu-button>
       <dropdown-content v-bind="props">

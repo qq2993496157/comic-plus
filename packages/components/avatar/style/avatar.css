@@ -100,7 +100,7 @@
 .avatar-enter-from,
 .avatar-leave-to {
   opacity: 0;
-  transform: translate(0, -30px);
+  transform: translate(-30px, 0);
 }
 
 .comic-plus__is-comic .cu-avatar,

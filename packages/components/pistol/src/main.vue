@@ -2,9 +2,14 @@
   <div
     class="cu-pistol"
     ref="pistolRef"
-    :class="[{ expand: show }, type ? 'cu-pistol--' + type : undefined, mode ? 'mode-' + mode : undefined]"
+    :class="[
+      { expand: show },
+      type ? 'cu-pistol--' + type : undefined,
+      mode ? 'mode-' + mode : undefined,
+      { 'is-disabled': disabled }
+    ]"
     :style="{ '--cu-pistol-size': props.size + 'px' }">
-    <div class="cu-pistol__container" :style="pistolStyle" @click="containerHandleClick">
+    <div class="cu-pistol__container" ref="pistolContainerRef" :style="pistolStyle">
       <slot>
         <i class="default-icon" :class="icon ?? 'cu-icon-hamburger-button'"></i>
       </slot>
@@ -31,8 +36,12 @@ const emit = defineEmits(pistolEmits);
 
 const bullets = reactive({}) as Bullets;
 const pistolRef = ref(null);
+const pistolContainerRef = ref(null);
 const show = ref(false);
-let timer: number | null;
+let timer: number | null,
+  clearTriggerEvent: (() => void) | null,
+  clearTriggerLeave: (() => void) | null,
+  clearOutside: (() => void) | null;
 
 const bulletsLength = computed(() => {
   return Object.keys(bullets).length;
@@ -52,7 +61,6 @@ const pistolStyle = computed(() => {
 
 function containerHandleClick(e: MouseEvent) {
   emit('trigger-click', e);
-  if (props.trigger !== 'click') return;
   show.value = !show.value;
 }
 
@@ -124,15 +132,6 @@ function getAngle(i: number, len: number) {
   }[props.direction ?? 'top'];
 }
 
-if (props.trigger === 'hover') {
-  useEventListener(pistolRef, 'mouseenter', handleMouseEnter);
-  useEventListener(pistolRef, 'mouseleave', handleMouseLeave);
-}
-
-if (props.trigger === 'click') {
-  onClickOutside(pistolRef, () => (show.value = false));
-}
-
 function handleMouseEnter() {
   show.value = true;
   if (timer) {
@@ -146,18 +145,6 @@ function handleMouseLeave() {
     show.value = false;
   }, 300);
 }
-
-watch(show, (val) => {
-  if (val) {
-    emit('open');
-  } else {
-    emit('close');
-  }
-});
-
-watch([bulletsLength, () => props.size, () => props.direction, () => props.equal], () => {
-  setItemStyle();
-});
 
 function addBullet(item: BulletInstance) {
   bullets[item.uid] = item;
@@ -211,6 +198,54 @@ provide(PISTOL_PROVIDE, {
 defineExpose({
   open,
   close
+});
+
+const EVENT_TYPE = {
+  click: () => {
+    clearTriggerEvent = useEventListener(pistolContainerRef, 'click', containerHandleClick);
+    clearOutside = onClickOutside(pistolRef, () => (show.value = false));
+  },
+  hover: () => {
+    clearTriggerEvent = useEventListener(pistolRef, 'mouseenter', handleMouseEnter);
+    clearTriggerLeave = useEventListener(pistolRef, 'mouseleave', handleMouseLeave);
+  }
+};
+
+function clearEvent() {
+  clearTriggerEvent?.();
+  clearTriggerLeave?.();
+  clearOutside?.();
+}
+
+// if (props.trigger === 'hover') {
+//   useEventListener(pistolRef, 'mouseenter', handleMouseEnter);
+//   useEventListener(pistolRef, 'mouseleave', handleMouseLeave);
+// }
+
+// if (props.trigger === 'click') {
+//   onClickOutside(pistolRef, () => (show.value = false));
+// }
+
+watch(
+  [() => props.trigger, () => props.disabled],
+  (val) => {
+    clearEvent();
+    if (val[1]) return;
+    EVENT_TYPE[val[0]]?.();
+  },
+  { immediate: true }
+);
+
+watch(show, (val) => {
+  if (val) {
+    emit('open');
+  } else {
+    emit('close');
+  }
+});
+
+watch([bulletsLength, () => props.size, () => props.direction, () => props.equal], () => {
+  setItemStyle();
 });
 
 onMounted(() => {

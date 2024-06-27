@@ -20,42 +20,49 @@ const LICENSE_PLATE =
  * @description: 校验手机号
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validatePhone = (value: any): boolean => PHONE.test(value);
 /**
  * @description: 校验邮箱
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validateEmail = (value: any): boolean => EMAIL.test(value);
 /**
  * @description: 校验中文姓名
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validateNameZh = (value: any): boolean => NAME_ZH.test(value);
 /**
  * @description: 校验英文姓名
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validateNameEn = (value: any): boolean => NAME_EN.test(value);
 /**
  * @description: 校验身份证
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validateIdcard = (value: any): boolean => IDCARD.test(value);
 /**
  * @description: 校验正整数
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validateInteger = (value: any): boolean => INTEGER.test(value);
 /**
  * @description: 校验车牌号
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=regular
  */
 const validateLicenseplate = (value: any): boolean => LICENSE_PLATE.test(value);
 /**
@@ -64,6 +71,7 @@ const validateLicenseplate = (value: any): boolean => LICENSE_PLATE.test(value);
  * @param {number} max
  * @param {number} min
  * @return {*}
+ * @see http://comicui.cn/api?name=otherRegular
  */
 const validateNumRange = (value: number, max: number = Number.MAX_VALUE, min: number = 0): boolean => {
   value = Number(value);
@@ -74,11 +82,11 @@ const validateNumRange = (value: number, max: number = Number.MAX_VALUE, min: nu
   }
   return value < max && value > min;
 };
-
 /**
  * @description: 判断是否有值
  * @param {any} value
  * @return {*}
+ * @see http://comicui.cn/api?name=otherRegular
  */
 const validateExists = (value: any): boolean => typeof value !== 'undefined' && value !== null;
 

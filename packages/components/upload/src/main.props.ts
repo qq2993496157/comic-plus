@@ -7,10 +7,7 @@ export const uploadProps = {
     type: String as PropType<'list' | 'picture'>,
     default: 'list'
   },
-  http: {
-    type: [String, Function] as PropType<string | ((instance: UploadInstance) => void)>,
-    required: true
-  },
+  http: [String, Function] as PropType<string | ((instance: UploadInstance) => void)>,
   headers: Object,
   data: Object,
   autoUpload: {

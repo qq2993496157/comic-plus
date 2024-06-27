@@ -78,6 +78,8 @@ import { CuSkeleton } from './skeleton/index';
 import { CuSkeletonItem } from './skeleton-item/index';
 import { CuRate } from './rate/index';
 import { CuSpace } from './space/index';
+import { CuClock } from './clock/index';
+import { CuWebFooter } from './web-footer/index';
 
 import type { Plugin } from 'vue';
 
@@ -167,7 +169,9 @@ export default [
   CuSkeleton,
   CuSkeletonItem,
   CuRate,
-  CuSpace
+  CuSpace,
+  CuClock,
+  CuWebFooter
 ] as Plugin[];
 
 export {
@@ -256,5 +260,7 @@ export {
   CuSkeleton,
   CuSkeletonItem,
   CuRate,
-  CuSpace
+  CuSpace,
+  CuClock,
+  CuWebFooter
 };

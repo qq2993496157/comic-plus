@@ -80,8 +80,8 @@ function clearTime() {
   timer = null;
 }
 
-useEventListener(tooltipRef.value, 'mouseenter', onmouseenter);
-useEventListener(tooltipRef.value, 'mouseleave', onmouseleave);
+useEventListener(tooltipRef, 'mouseenter', onmouseenter);
+useEventListener(tooltipRef, 'mouseleave', onmouseleave);
 useEventListener(props.triggerRef, 'mouseenter', onmouseenter);
 useEventListener(props.triggerRef, 'mouseleave', onmouseleave);
 
