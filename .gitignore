@@ -26,3 +26,7 @@ dist-ssr
 /lib
 /theme
 /.svn
+/.vscode
+/src
+/index.html
+/vite.config.js
