@@ -1,6 +1,6 @@
 {
   "name": "comic-plus",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "license": "MIT",
   "private": false,
   "main": "lib/index.js",
@@ -21,8 +21,8 @@
   "scripts": {
     "dev": "vite",
     "build:comp": "pnpm run -C packages build",
-    "build:css": "pnpm run -C styles build",
-    "build:style": "esno build/buildCss",
+    "build:style": "pnpm run -C styles build",
+    "build:css": "esno build/buildCss",
     "build:all": "pnpm run -C packages build & esno build/buildCss & pnpm run -C styles build",
     "preview": "vite preview"
   },
@@ -42,7 +42,7 @@
     "pnpm": "^8.15.6",
     "vite": "latest",
     "vite-plugin-css": "latest",
-    "vue": "^3.4.29",
+    "vue": "^3.4.31",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
