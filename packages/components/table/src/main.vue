@@ -114,7 +114,7 @@ import CuTableRow from './components/table-row.vue';
 import { CuCheckbox } from '../../checkbox';
 import { CuEmpty } from '../../empty';
 import { tableProps, tableEmits } from './main.props';
-import { Tableresize, TableColumn, TreeProps, TableData, TABLE_PROVIDE } from './type';
+import { Tableresize, TableColumn, TreeProps, TableData, TABLE_PROVIDE, RowOptions } from './type';
 
 defineOptions({
   name: 'CuTable'
@@ -131,13 +131,6 @@ const tableBodyRef = ref(null);
 
 const { width: tWidth, height: tHeight } = useElementSize(tableRef);
 
-watch([tWidth, tHeight], (val) => {
-  getResize({
-    width: val[0],
-    height: val[1]
-  });
-});
-
 const MIN_SIZE = 120;
 
 const tableResize = reactive({
@@ -149,25 +142,10 @@ const tableResize = reactive({
   scrollWidth: 0
 }) as Tableresize;
 
-const checkList = ref<TableData[]>([]);
-
-watch(
-  () => props.data,
-  () => {
-    checkList.value.splice(0);
-  }
-);
-watch(checkList.value, (val) => {
-  emit('select-change', val);
-});
+const checkList = ref<any[]>([]);
 
 const provideTreeProps = reactive(Object.assign({ children: 'children' }, props.treeProps)) as TreeProps;
-
-const canSelectionDatas = ref<any[]>(flattenArray(props.data, provideTreeProps.children));
-
-function addOption(arr: TableData[]) {
-  canSelectionDatas.value.push(...arr);
-}
+const rows = ref<any[]>([]);
 
 const isTableTree = computed(() => {
   return (
@@ -206,12 +184,12 @@ const columns = computed(() => {
 
 const indeterminate = computed(() => {
   if (!props.options?.selection) return false;
-  return checkList.value.length > 0 && checkList.value.length < canSelectionDatas.value.length;
+  return checkList.value.length > 0 && checkList.value.length < rows.value.length;
 });
 
 const isCheckAll = computed(() => {
   if (!props.options?.selection) return false;
-  return checkList.value.length === canSelectionDatas.value.length;
+  return checkList.value.length > 0 && checkList.value.length === rows.value.length;
 });
 
 const getStickyIndex = computed(() => {
@@ -289,48 +267,69 @@ function getResize(rect) {
   tableResize.flexWidth = w <= MIN_SIZE ? MIN_SIZE : w;
 }
 
-function changeSelection(check: boolean, item: TableData) {
-  if (check) {
-    selectRow(item);
-  } else {
-    let idx = checkList.value.findIndex((v) => deepEqual(v, item));
-    if (idx >= 0) {
-      checkList.value.splice(idx, 1);
-    }
-  }
+function changeSelection() {
+  checkList.value = rows.value.filter((v) => v.isCheck);
 }
 function _changeCheckAll(check: boolean) {
-  clearSelection();
-  if (check) {
-    deepSelection(canSelectionDatas.value);
-  }
-}
-
-function deepSelection(arr: TableData[]) {
-  arr.forEach((row) => {
-    if (row[provideTreeProps.children] && Array.isArray(row[provideTreeProps.children])) {
-      deepSelection(row[provideTreeProps.children]);
-    }
-    checkList.value.push(row);
+  rows.value.forEach((item) => {
+    item.updateCheck(check);
   });
+  checkList.value = check ? rows.value : [];
 }
 
 function selectRow(row: TableData | TableData[]) {
-  if (checkList.value.find((v) => v === row)) return;
   row = [].concat(row);
-  checkList.value.push(...(row as TableData[]));
+  for (const key in row) {
+    let item = row[key];
+    if (checkList.value.find((v) => deepEqual(v.row, item))) continue;
+    let idx = rows.value.findIndex((v) => deepEqual(v.row, item));
+    if (idx >= 0) {
+      rows.value[idx].updateCheck(true);
+    }
+    checkList.value.push(item);
+  }
 }
-function clearSelection() {
-  checkList.value.splice(0);
+
+function addOption(row: RowOptions) {
+  rows.value.push(row);
 }
+function removeOption(uid: number) {
+  let idx = rows.value.findIndex((v) => v.uid === uid);
+  if (idx >= 0) {
+    rows.value.splice(idx, 1);
+  }
+}
+
+watch([tWidth, tHeight], (val) => {
+  getResize({
+    width: val[0],
+    height: val[1]
+  });
+});
+watch(
+  () => props.data,
+  () => {
+    checkList.value.splice(0);
+  }
+);
+watch(
+  () => checkList.value.length,
+  () => {
+    emit('select-change', checkList.value);
+  }
+);
 
 provide(TABLE_PROVIDE, {
   props,
   checkList,
   treeProps: provideTreeProps,
   changeSelection,
-  addOption
+  addOption,
+  removeOption
 });
 
-defineExpose({ selectRow, clearSelection });
+defineExpose({
+  selectRow,
+  clearSelection: () => _changeCheckAll(false)
+});
 </script>

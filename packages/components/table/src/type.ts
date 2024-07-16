@@ -1,4 +1,4 @@
-import type { CSSProperties, InjectionKey, Ref } from 'vue';
+import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue';
 import type { TableProps } from './main.props';
 
 export type TableColumn = {
@@ -40,14 +40,22 @@ export type TableData = {
   [key: string]: any;
 };
 
+export type RowOptions = {
+  uid: number;
+  isCheck: Ref<boolean>;
+  row: TableData;
+  updateCheck: (ckeck: boolean) => void;
+};
+
 export type Load = (data: TableData, _then: (arr: TableData[]) => void) => void;
 
 export type TableProvide = {
   props: TableProps;
   checkList: Ref<TableData[]>;
   treeProps: TreeProps;
-  changeSelection: (val: boolean, item: TableData) => void;
-  addOption: (datas: TableData[]) => void;
+  changeSelection: () => void;
+  addOption: (row: RowOptions) => void;
+  removeOption: (uid: number) => void;
 };
 
 export const TABLE_PROVIDE: InjectionKey<TableProvide> = Symbol('TABLE_PROVIDE');

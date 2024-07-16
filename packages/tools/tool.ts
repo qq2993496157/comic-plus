@@ -1,3 +1,4 @@
+import { isBoolean, isFunction } from '../utils';
 /**
  * @description: 对象深度合并
  * @param {object} target
@@ -91,7 +92,35 @@ function parity(num: number): boolean {
   return num % 2 !== 0;
 }
 
-export { deepMerge, chunkArray, copyToClipboard, randomColor, randomUid, parity };
+/**
+ * @description: 判断指定参数是否包含在条件数组内，即：权限查询
+ * @param {number | string} c
+ * @param {(string | number)[]} j
+ * @param {object} o
+ * @return {boolean} 权限结果：boolean
+ * @see http://comicui.cn/api?name=hasJurisdiction
+ */
+function hasJurisdiction(
+  c: string | number,
+  j: (string | number)[],
+  o?: {
+    logic?: boolean;
+    also?: boolean;
+    extra?: () => boolean;
+  }
+): boolean {
+  let also = isBoolean(o?.also) ? o?.also : false;
+  let logic = isBoolean(o?.logic) ? o.logic : true;
+  let result = logic ? j.includes(c) : !j.includes(c);
+
+  if (isFunction(o?.extra)) {
+    return also ? result && o.extra() : result || o.extra();
+  } else {
+    return result;
+  }
+}
+
+export { deepMerge, chunkArray, copyToClipboard, randomColor, randomUid, parity, hasJurisdiction };
 
 export {
   debounce,

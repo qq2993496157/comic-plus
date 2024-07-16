@@ -140,8 +140,8 @@ watch(
 );
 
 function changeSelect() {
-  emit('size-change', currentPageSize.value);
   emit('update:pageSize', currentPageSize.value);
+  emit('size-change', currentPageSize.value);
 }
 
 function pagesHandleClick(num: number) {

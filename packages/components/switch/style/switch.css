@@ -42,7 +42,9 @@
   vertical-align: middle;
   color: inherit;
   font-size: inherit;
+  white-space: nowrap;
 }
+
 .cu-switch__inner {
   display: flex;
   width: 100%;

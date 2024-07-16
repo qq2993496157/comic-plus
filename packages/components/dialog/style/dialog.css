@@ -9,7 +9,7 @@
 }
 
 .cu-dialog .cu-dialog__header {
-  padding: 8px 10px;
+  padding: 12px 20px;
   font-size: 18px;
   display: flex;
   min-height: 42px;
@@ -28,10 +28,10 @@
   text-shadow: 0 0 2px;
 }
 .cu-dialog__content {
-  padding: 10px;
+  padding: 20px;
 }
 .cu-dialog .cu-dialog__footer {
-  padding: 8px 10px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: flex-end;

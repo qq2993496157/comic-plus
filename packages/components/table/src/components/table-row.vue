@@ -5,7 +5,7 @@
       :class="{ 'fixed-shadow-left': getStickyIndex.left == -1 }"
       width="40"
       v-if="injectProps.options.selection">
-      <cu-checkbox :model-value="isCheck" @change="changeSelection($event, row)"></cu-checkbox>
+      <cu-checkbox v-model="isCheck" @change="changeSelection"></cu-checkbox>
     </td>
     <td
       colspan="1"
@@ -58,9 +58,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref, watch, CSSProperties } from 'vue';
+import { computed, inject, ref, watch, CSSProperties, onMounted, getCurrentInstance, onBeforeUnmount } from 'vue';
 import { CuCheckbox } from '../../../checkbox';
-import { deepEqual, isFunction } from '../../../../utils';
+import { isFunction } from '../../../../utils';
 import { tableRowProps } from './row.props';
 import { TABLE_PROVIDE, TableData } from '../type';
 
@@ -70,26 +70,15 @@ defineOptions({
 
 const props = defineProps(tableRowProps);
 
-const { props: injectProps, checkList, treeProps, changeSelection, addOption } = inject(TABLE_PROVIDE);
+const { props: injectProps, treeProps, changeSelection, addOption, removeOption } = inject(TABLE_PROVIDE);
 
+const instance = getCurrentInstance()!;
 const showmore = ref(false);
 const moreList = ref<TableData[]>([]);
 const loadLoading = ref(false);
 const isLazy = ref(false);
+const isCheck = ref(false);
 const MIN_SIZE = 120;
-
-watch(
-  () => props.show,
-  (val) => {
-    if (!val) {
-      showmore.value = false;
-    }
-  }
-);
-
-const isCheck = computed(() => {
-  return checkList.value.findIndex((v) => deepEqual(v, props.row)) >= 0;
-});
 
 const rowChildList = computed(() => {
   return [...(props.row?.[treeProps.children] ?? []), ...moreList.value];
@@ -183,10 +172,39 @@ function loadMore() {
   }
 
   function _then(arr: TableData[]) {
-    addOption(arr);
     moreList.value = [...moreList.value, ...arr];
     showmore.value = true;
     loadLoading.value = false;
   }
 }
+
+onMounted(() => {
+  addOption({
+    uid: instance.uid,
+    isCheck,
+    row: props.row,
+    updateCheck: (check: boolean) => (isCheck.value = check)
+  });
+});
+
+onBeforeUnmount(() => {
+  removeOption(instance.uid);
+});
+
+watch(
+  () => props.show,
+  (val) => {
+    if (!val) {
+      showmore.value = false;
+    }
+  }
+);
+
+watch(
+  () => props.row,
+  () => {
+    isCheck.value = false;
+    changeSelection();
+  }
+);
 </script>

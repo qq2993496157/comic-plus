@@ -30,6 +30,7 @@
   cursor: pointer;
 }
 .cu-dropdown-item > div {
+  width: 100%;
   display: inline-flex;
   align-items: center;
   padding: 4px 14px;

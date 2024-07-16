@@ -4,12 +4,12 @@ import MessageBox from '../components/message-box';
 
 const Message: any = MessageBox.message;
 
-var instance: AxiosInstance;
+var instance: AxiosInstance | null;
 
 interface createAxiosInstanceOption {
   baseURL?: string;
   timeout?: number;
-  getToken?: Function;
+  getToken?: () => any;
   dataType?: string;
   tokenKey?: string;
   headers?: Headers;
@@ -34,9 +34,10 @@ const ERROR = {
   504: '网络超时',
   505: 'http版本不支持该请求'
 };
+type ErrorCode = keyof typeof ERROR;
 
 function getError(code: number) {
-  return ERROR[code] || 'Error';
+  return ERROR[code as ErrorCode] || 'Error';
 }
 
 function createAxiosInstance(option: createAxiosInstanceOption) {
@@ -53,7 +54,7 @@ function createAxiosInstance(option: createAxiosInstanceOption) {
       config.data = JSON.stringify(config.data);
       config.headers['Content-Type'] =
         dataType === 'formData' ? 'application/x-www-form-urlencoded' : 'application/json';
-      config.headers[tokenKey] = getToken && getToken()!;
+      config.headers[tokenKey!] = getToken && getToken()!;
       if (headers) {
         for (const key in headers) {
           config.headers[key] = headers[key];
@@ -74,7 +75,7 @@ function createAxiosInstance(option: createAxiosInstanceOption) {
         if (resData.code === 200 || resData.status == 200) {
           return Promise.resolve(resData);
         } else {
-          if (ERROR[resData.code]) {
+          if (ERROR[resData.code as ErrorCode]) {
             const message = getError(resData.code);
             Message.error(message);
             return Promise.reject(new Error(message));
@@ -100,15 +101,25 @@ function createAxiosInstance(option: createAxiosInstanceOption) {
   return axiosInstance;
 }
 
+function hasInstance() {
+  if (!instance) {
+    throw `HTTP is not initialized. Please call the create method of HTTP to initialize the axios instance first`;
+  }
+  return true;
+}
+
 const http = {
   create: (option: createAxiosInstanceOption) => {
     instance = createAxiosInstance(option);
   },
-  get: (url: string, config: AxiosRequestConfig) => instance(Object.assign({}, { url }, config, { method: 'GET' })),
-  post: (url: string, config: AxiosRequestConfig) => instance(Object.assign({}, { url }, config, { method: 'POST' })),
-  put: (url: string, config: AxiosRequestConfig) => instance(Object.assign({}, { url }, config, { method: 'PUT' })),
+  get: (url: string, config: AxiosRequestConfig) =>
+    hasInstance() && instance?.(Object.assign({}, { url }, config, { method: 'GET' })),
+  post: (url: string, config: AxiosRequestConfig) =>
+    hasInstance() && instance?.(Object.assign({}, { url }, config, { method: 'POST' })),
+  put: (url: string, config: AxiosRequestConfig) =>
+    hasInstance() && instance?.(Object.assign({}, { url }, config, { method: 'PUT' })),
   delete: (url: string, config: AxiosRequestConfig) =>
-    instance(Object.assign({}, { url }, config, { method: 'DELETE' }))
+    hasInstance() && instance?.(Object.assign({}, { url }, config, { method: 'DELETE' }))
 };
 
 export { http };

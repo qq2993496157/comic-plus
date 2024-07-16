@@ -40,7 +40,7 @@
   min-height: 42px;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 10px;
+  padding: 12px 20px;
   border-bottom: 1px solid var(--cu-border-color);
 }
 
@@ -53,12 +53,12 @@
 
 .cu-drawer__content {
   flex: 1;
-  padding: 10px;
+  padding: 20px;
   overflow: auto;
 }
 
 .cu-drawer__footer {
-  padding: 8px 10px;
+  padding: 12px 20px;
   display: flex;
   justify-content: flex-end;
 }

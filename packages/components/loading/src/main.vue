@@ -35,8 +35,6 @@ const style = computed(() => {
 });
 
 function updateVisible(val: boolean) {
-  console.log('updateVisible');
-
   visible.value = val;
 }
 

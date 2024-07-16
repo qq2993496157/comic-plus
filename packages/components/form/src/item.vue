@@ -2,7 +2,7 @@
   <div
     class="cu-form-item"
     :class="{ required: isRequired && !injectProps.hideRequiredAsterisk, 'is-error': errorMsg }">
-    <span class="label" :style="labelStyle">
+    <span class="label" :style="labelStyle" v-if="label || $slots['label']">
       <i class="asterisk"></i>
       <slot name="label">{{ label }}</slot>
     </span>

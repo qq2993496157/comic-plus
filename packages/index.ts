@@ -51,10 +51,12 @@ const setColor = (value?: Config['color']): void => {
   for (const key in obj) {
     if (colors.includes(key)) {
       const c = colorToRgba(obj[key]) || [];
-      document.documentElement.style.setProperty(`--cu-color-${key}`, `rgba(${c.join(',')})`);
-      document.documentElement.style.setProperty(`--cu-color-${key}-light`, colorBlend(c, 70));
-      document.documentElement.style.setProperty(`--cu-color-${key}-light2`, colorBlend(c, 50));
-      document.documentElement.style.setProperty(`--cu-color-${key}-light3`, colorBlend(c, 10));
+      if (c.length > 0) {
+        document.documentElement.style.setProperty(`--cu-color-${key}`, `rgba(${c.join(',')})`);
+        document.documentElement.style.setProperty(`--cu-color-${key}-light`, colorBlend(c, 70));
+        document.documentElement.style.setProperty(`--cu-color-${key}-light2`, colorBlend(c, 50));
+        document.documentElement.style.setProperty(`--cu-color-${key}-light3`, colorBlend(c, 10));
+      }
     }
   }
 };

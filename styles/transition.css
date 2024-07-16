@@ -14,11 +14,6 @@
   opacity: 0;
 }
 
-.cu-fade-enter-from,
-.cu-fade-leave-to {
-  opacity: 0;
-}
-
 .cu-zoom-x-enter-active,
 .cu-zoom-x-leave-active {
   transition: transform 200ms ease !important;

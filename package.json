@@ -1,6 +1,6 @@
 {
   "name": "comic-plus",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "license": "MIT",
   "private": false,
   "main": "lib/index.js",
@@ -16,7 +16,10 @@
   ],
   "keywords": [
     "comic-plus",
-    "vue3+ts组件库"
+    "vue",
+    "vue组件库",
+    "typescript",
+    "ts"
   ],
   "scripts": {
     "dev": "vite",
