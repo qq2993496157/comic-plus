@@ -24,7 +24,12 @@
         class="cu-table__td-placeholder"
         :class="{ unfold: showmore }"
         :style="{ left: calcPaddingLeft - 16 + 'px' }"
-        v-if="(row[treeProps.children] || row[treeProps.hasChildren] || injectProps.expand) && i === 0"
+        v-if="
+          ((isArray(row[treeProps.children]) && row[treeProps.children].length > 0) ||
+            row[treeProps.hasChildren] ||
+            injectProps.expand) &&
+          i === 0
+        "
         @click="loadMore">
         <i :class="loadLoading ? 'cu-icon-loading' : 'cu-icon-right'"></i>
       </span>
@@ -43,10 +48,11 @@
       </td>
     </div>
   </template>
-  <template v-if="row[treeProps.children] || row[treeProps.hasChildren]">
+  <template
+    v-if="(isArray(row[treeProps.children]) && row[treeProps.children].length > 0) || row[treeProps.hasChildren]">
     <template v-for="(item, idx) in rowChildList" :key="idx">
       <cu-table-row :row="item" :calcPaddingLeft="calcPaddingLeft + 10" :show="showmore">
-        <template v-for="td in columns" #[td.prop]="{ row }">
+        <template v-for="td in columns" #[td.prop]="{ row }" :key="td.prop">
           <slot :name="td.prop" :row="row"> </slot>
         </template>
         <template #expand="{ row }" v-if="injectProps.expand && $slots.expand">
@@ -60,7 +66,7 @@
 <script setup lang="ts">
 import { computed, inject, ref, watch, CSSProperties, onMounted, getCurrentInstance, onBeforeUnmount } from 'vue';
 import { CuCheckbox } from '../../../checkbox';
-import { isFunction } from '../../../../utils';
+import { isFunction, isArray } from '../../../../utils';
 import { tableRowProps } from './row.props';
 import { TABLE_PROVIDE, TableData } from '../type';
 

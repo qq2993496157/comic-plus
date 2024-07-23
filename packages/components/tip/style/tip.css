@@ -8,6 +8,7 @@
   transition: all 200ms;
   flex-wrap: nowrap;
   align-items: center;
+  line-height: initial;
 }
 
 .cu-tip.cu-tip--primary {

@@ -18,7 +18,10 @@
         @change="change((<HTMLInputElement>$event.target).value)"
         :placeholder="placeholder"
         :type="type"
-        :disabled="disabled" />
+        :disabled="disabled"
+        autocomplete="off"
+        :maxlength="maxlength"
+        :minlength="minlength" />
       <span class="clearable" v-if="clearable">
         <i class="cu-icon-close-one" v-show="modelValue" @click="clear"></i>
       </span>

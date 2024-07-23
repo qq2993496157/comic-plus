@@ -98,9 +98,9 @@ function parity(num: number): boolean {
  * @param {(string | number)[]} j
  * @param {object} o
  * @return {boolean} 权限结果：boolean
- * @see http://comicui.cn/api?name=hasJurisdiction
+ * @see http://comicui.cn/api?name=permission
  */
-function hasJurisdiction(
+function hasPermission(
   c: string | number,
   j: (string | number)[],
   o?: {
@@ -120,7 +120,7 @@ function hasJurisdiction(
   }
 }
 
-export { deepMerge, chunkArray, copyToClipboard, randomColor, randomUid, parity, hasJurisdiction };
+export { deepMerge, chunkArray, copyToClipboard, randomColor, randomUid, parity, hasPermission };
 
 export {
   debounce,

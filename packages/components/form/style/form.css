@@ -8,7 +8,7 @@
 
 .cu-form-item {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   margin-bottom: 22px;
 }
 .cu-form.small .cu-form-item {
@@ -19,7 +19,18 @@
   display: inline-flex;
   padding-right: 8px;
   height: 100%;
+  line-height: var(--cu-size-default);
   /* transition: all 200ms; */
+}
+
+.cu-form.small .cu-form-item .label,
+.cu-form.small .cu-form-item__content {
+  line-height: var(--cu-size-small);
+}
+
+.cu-form.large .cu-form-item .label,
+.cu-form.large .cu-form-item__content {
+  line-height: var(--cu-size-large);
 }
 
 .cu-form.label-left .cu-form-item .label {
@@ -38,6 +49,7 @@
 .cu-form-item__content {
   flex: 1;
   position: relative;
+  line-height: var(--cu-size-default);
 }
 
 .cu-form-item__content .cu-form__error {
@@ -70,4 +82,5 @@
   padding-right: 0;
   margin-bottom: 8px;
   justify-content: flex-start;
+  line-height: initial;
 }

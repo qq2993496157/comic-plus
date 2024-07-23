@@ -185,7 +185,7 @@
 }
 
 .list-leave-active {
-  position: absolute !important;
+  /* position: absolute !important; */
 }
 
 .comic-plus__is-comic .cu-upload__trigger {

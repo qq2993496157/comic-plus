@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4530402 */
-  src: url('iconfont.woff2?t=1719977146279') format('woff2'),
-       url('iconfont.woff?t=1719977146279') format('woff'),
-       url('iconfont.ttf?t=1719977146279') format('truetype');
+  src: url('iconfont.woff2?t=1721705525621') format('woff2'),
+       url('iconfont.woff?t=1721705525621') format('woff'),
+       url('iconfont.ttf?t=1721705525621') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.cu-icon-editor:before {
+  content: "\ea41";
+}
+
+.cu-icon-clear:before {
+  content: "\ea52";
+}
+
+.cu-icon-link-right:before {
+  content: "\ea54";
+}
+
+.cu-icon-detail:before {
+  content: "\ea55";
+}
+
+.cu-icon-export:before {
+  content: "\ea5a";
+}
+
+.cu-icon-platte:before {
+  content: "\eb6a";
 }
 
 .cu-icon-api:before {

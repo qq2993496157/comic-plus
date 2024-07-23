@@ -9,7 +9,9 @@ export const inputProps = {
   clearable: Boolean,
   placeholder: String,
   type: String,
-  disabled: Boolean
+  disabled: Boolean,
+  maxlength: [String, Number] as PropType<string | number>,
+  minlength: [String, Number] as PropType<string | number>
 } as const;
 
 export type InputProps = ExtractPropTypes<typeof inputProps>;

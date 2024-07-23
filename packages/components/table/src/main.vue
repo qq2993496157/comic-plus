@@ -91,7 +91,7 @@
         <tbody>
           <template v-for="(item, index) in data" :key="index">
             <cu-table-row :row="item" :index="index">
-              <template v-for="td in columns" #[td.prop]="{ row }">
+              <template v-for="td in columns" #[td.prop]="{ row }" :key="td.prop">
                 <slot :name="td.prop" :row="row" :index="index"> </slot>
               </template>
               <template #expand="{ row }" v-if="expand && $slots.expand">
