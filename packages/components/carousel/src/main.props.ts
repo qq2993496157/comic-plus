@@ -7,7 +7,7 @@ export const carouselProps = {
     default: '300px'
   },
   mode: {
-    type: String as PropType<'transform' | 'opacity'>,
+    type: String as PropType<'transform' | 'opacity' | 'oblique'>,
     default: 'transform'
   },
   autoPlay: {

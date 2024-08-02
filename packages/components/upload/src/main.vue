@@ -1,5 +1,8 @@
 <template>
-  <div class="cu-upload" :class="{ 'is-disabled': disabled }">
+  <div
+    class="cu-upload"
+    :class="{ 'is-disabled': disabled }"
+    :style="{ '--cu-upload-size': size ? size + 'px' : undefined }">
     <template v-if="type === 'picture'">
       <upload-list
         :disabled="disabled"
@@ -8,7 +11,7 @@
         :uploadFileEnum="uploadFileEnum"
         @remove="removeFile">
         <upload-choose :disabled="disabled" :type="type" @choose="uploadHandleClick">
-          <slot v-if="$slots.default"></slot>
+          <slot v-if="$slots['default']"></slot>
           <template #trigger v-if="$slots['trigger']">
             <slot name="trigger"></slot>
           </template>
@@ -21,7 +24,7 @@
 
     <template v-if="type === 'list'">
       <upload-choose :disabled="disabled" :type="type" @choose="uploadHandleClick">
-        <slot v-if="$slots.default"></slot>
+        <slot v-if="$slots['default']"></slot>
         <template #trigger v-if="$slots['trigger']">
           <slot name="trigger"></slot>
         </template>
@@ -68,19 +71,6 @@ const emit = defineEmits(uploadEmits);
 
 const inputRef = ref();
 const uploadFileEnum = reactive({}) as FileEnum;
-
-watch(
-  () => props.fileList,
-  () => {
-    props.fileList?.forEach((_, index) => {
-      props.fileList[index].uid ||= getUid();
-    });
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-);
 
 const previewList = computed(() => {
   return props.fileList ?? [];
@@ -228,6 +218,19 @@ async function submit() {
     });
   }
 }
+
+watch(
+  () => props.fileList,
+  () => {
+    props.fileList?.forEach((_, index) => {
+      props.fileList[index].uid ||= getUid();
+    });
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+);
 
 defineExpose({ submit });
 </script>

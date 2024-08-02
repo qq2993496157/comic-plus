@@ -2,8 +2,8 @@ import { ref, watch } from 'vue';
 import { isFunction } from '../typescript';
 
 export function usePopup(props: any, emit?: any) {
-  const visible = ref(false);
-  const showMode = ref(false);
+  const visible = ref(props.modelValue);
+  const showMode = ref(props.modelValue);
 
   const onAfterEnter = () => {
     visible.value = true;
@@ -11,7 +11,9 @@ export function usePopup(props: any, emit?: any) {
 
   const modeHandleClick = () => {
     if (!props.modeClose) return;
-    close();
+    if (visible.value) {
+      close();
+    }
   };
 
   const close = () => {

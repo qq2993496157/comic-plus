@@ -51,15 +51,6 @@ const surplus = computed(() => {
   return avatars.value.length - props.count ?? avatars.value.length;
 });
 
-watch(
-  () => props.clickShowAll,
-  (val) => {
-    if (!val) {
-      showAll.value = false;
-    }
-  }
-);
-
 function changeShowAll() {
   if (!props.clickShowAll) return;
   showAll.value = !showAll.value;
@@ -77,6 +68,15 @@ function removeAvatar(uid: number) {
     avatars.value.splice(idx, 1);
   }
 }
+
+watch(
+  () => props.clickShowAll,
+  (val) => {
+    if (!val) {
+      showAll.value = false;
+    }
+  }
+);
 
 provide(AVATARGROUP_PROVIDE, {
   props,

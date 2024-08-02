@@ -82,6 +82,7 @@ const headIcon = computed(() => {
 });
 
 function handleModeClose() {
+  if (!props.modeClose) return;
   cancel('cancel');
 }
 function cancel(val: string) {

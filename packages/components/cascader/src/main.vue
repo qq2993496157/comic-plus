@@ -17,7 +17,7 @@
       </span>
     </div>
 
-    <cu-popper :show="show" :center="false">
+    <cu-popper :show="show" arrow-left placement="bottom-start">
       <div class="cu-cascader__popper" :class="currentSize" ref="popperRef">
         <div class="cu-cascader-pane">
           <cu-scrollbar>

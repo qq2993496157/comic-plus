@@ -25,10 +25,12 @@ const props = defineProps(menuItemProps);
 
 const vMenuTooltip = useTooltip();
 const instance = getCurrentInstance()!;
-const { parentMenu } = useMenu(instance);
 
 const { props: injectProps, menuClick } = inject(MENU_PROVIDE);
-const submenu = inject<SubmenuProvide>('submenu:provide' + parentMenu.value!.uid, undefined);
+
+const { parentMenu } = useMenu(instance);
+const parentProvideKey = 'submenu:provide' + parentMenu.value?.exposed?.submenuKey;
+const submenu = inject<SubmenuProvide>(parentProvideKey, undefined);
 
 const tooltipDisabled = computed(() => {
   return !((injectProps.collapse && !submenu) || props.showEllipsis);
@@ -40,7 +42,8 @@ const active = computed(() => {
   }
   return false;
 });
-const idx = props.index ?? instance.uid.toString();
+
+const menuItemKey = props.index ?? instance.uid.toString();
 
 function itemClick() {
   menuClick(props.index);
@@ -51,12 +54,12 @@ function itemClick() {
 }
 onMounted(() => {
   submenu?.setMenu({
-    idx,
+    idx: menuItemKey,
     active
   });
 });
 
 onBeforeUnmount(() => {
-  submenu?.removeMenu(idx);
+  submenu?.removeMenu(menuItemKey);
 });
 </script>

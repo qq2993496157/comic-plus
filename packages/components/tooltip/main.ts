@@ -9,7 +9,7 @@ const useTooltip = function (): ObjectDirective {
       el[SCOPE] = createTooltip(el, binding.value, binding.arg);
     },
     updated(el, binding) {
-      el[SCOPE].update(binding.value, binding.arg);
+      el[SCOPE]?.update?.(binding.value);
     },
     unmounted(el) {
       if (el[SCOPE]) {

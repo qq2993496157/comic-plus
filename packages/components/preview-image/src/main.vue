@@ -20,7 +20,7 @@
         </div>
         <div class="cu-preview-image__pic">
           <div ref="imageBoxRef" :style="customStyle">
-            <img :src="list[currentIndex]" :style="imgStyle" />
+            <img :src="list[currentIndex]" :style="imgStyle" :key="list[currentIndex]" />
           </div>
         </div>
       </div>

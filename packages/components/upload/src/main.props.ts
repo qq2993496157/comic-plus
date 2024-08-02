@@ -14,6 +14,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
+  size: Number,
   multiple: Boolean,
   limit: Number,
   disabled: Boolean,

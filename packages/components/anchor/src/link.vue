@@ -30,18 +30,6 @@ const anchor = inject(ANCHOR_PROVIDE, undefined);
 
 const linkRef = ref(null);
 
-watch(
-  () => props.href,
-  (val, old) => {
-    anchor?.removeLinkItem(old);
-    if (val) {
-      anchor?.addLinkItem({
-        href: val,
-        ele: linkRef
-      });
-    }
-  }
-);
 
 anchor?.addLinkItem({
   href: props.href,
@@ -58,6 +46,20 @@ function linkHandleClick() {
   }
   return false;
 }
+
+
+watch(
+  () => props.href,
+  (val, old) => {
+    anchor?.removeLinkItem(old);
+    if (val) {
+      anchor?.addLinkItem({
+        href: val,
+        ele: linkRef
+      });
+    }
+  }
+);
 
 onUnmounted(() => {
   anchor?.removeLinkItem(props.href);

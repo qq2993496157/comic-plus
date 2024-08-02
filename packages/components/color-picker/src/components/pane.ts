@@ -19,17 +19,6 @@ export default defineComponent({
       return color.get('value');
     });
 
-    watch(
-      () => colorValue.value,
-      (val) => {
-        update(val);
-      }
-    );
-
-    onMounted(() => {
-      update(colorValue.value);
-    });
-
     function update(value: any) {
       const saturation = color.get('saturation');
       const ele = instance?.vnode.el;
@@ -89,6 +78,17 @@ export default defineComponent({
         });
       }
     }
+
+    watch(
+      () => colorValue.value,
+      (val) => {
+        update(val);
+      }
+    );
+
+    onMounted(() => {
+      update(colorValue.value);
+    });
 
     return () => {
       return h(

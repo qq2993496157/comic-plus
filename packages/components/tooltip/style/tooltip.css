@@ -1,11 +1,8 @@
 .cu-tooltip {
   font-size: 12px;
-  position: fixed;
   background: #303133;
   color: #fff;
   padding: 8px;
-  left: 0;
-  top: 0;
   max-width: 400px;
   border-radius: var(--cu-border-radius);
   filter: drop-shadow(0 0px 4px rgba(0, 0, 0, 0.12));
@@ -17,9 +14,29 @@
   width: 8px;
   height: 8px;
   background: inherit;
+  translate: 0 -50%;
   rotate: 45deg;
   border-left-color: transparent !important;
   border-top-color: transparent !important;
+}
+
+.cu-tooltip[data-placement^='bottom'] > .cu-tooltip__arrow {
+  top: 0;
+  rotate: 225deg;
+}
+.cu-tooltip[data-placement^='top'] > .cu-tooltip__arrow {
+  bottom: 0;
+  translate: 0 50%;
+}
+.cu-tooltip[data-placement^='left'] > .cu-tooltip__arrow {
+  right: 0;
+  translate: 50% 0;
+  rotate: -45deg;
+}
+.cu-tooltip[data-placement^='right'] > .cu-tooltip__arrow {
+  left: 0;
+  translate: -50% 0;
+  rotate: 135deg;
 }
 
 .cu-tooltip.light {
@@ -29,95 +46,6 @@
 }
 .cu-tooltip.light .cu-tooltip__arrow {
   border: 1px solid var(--cu-border-color);
-}
-
-.comic-plus__is-comic .cu-tooltip.bottom-start::after {
-  left: initial;
-  right: 4px;
-}
-
-.cu-tooltip.top-start .cu-tooltip__arrow {
-  left: 8px;
-  bottom: 0;
-  translate: 0 50%;
-  rotate: 45deg;
-}
-
-.cu-tooltip.top-center .cu-tooltip__arrow {
-  left: 50%;
-  bottom: 0;
-  translate: -50% 50%;
-  rotate: 45deg;
-}
-
-.cu-tooltip.top-end .cu-tooltip__arrow {
-  right: 8px;
-  bottom: 0;
-  translate: 0 50%;
-  rotate: 45deg;
-}
-
-.cu-tooltip.right-start .cu-tooltip__arrow {
-  top: 8px;
-  left: 0;
-  translate: -50% 0;
-  rotate: 135deg;
-}
-
-.cu-tooltip.right-center .cu-tooltip__arrow {
-  left: 0;
-  top: 50%;
-  translate: -50% -50%;
-  rotate: 135deg;
-}
-
-.cu-tooltip.right-end .cu-tooltip__arrow {
-  left: 0;
-  bottom: 8px;
-  translate: -50% 0;
-  rotate: 135deg;
-}
-
-.cu-tooltip.bottom-start .cu-tooltip__arrow {
-  top: 0;
-  left: 8px;
-  translate: 0 -50%;
-  rotate: 225deg;
-}
-
-.cu-tooltip.bottom-center .cu-tooltip__arrow {
-  top: 0;
-  left: 50%;
-  translate: -50% -50%;
-  rotate: 225deg;
-}
-
-.cu-tooltip.bottom-end .cu-tooltip__arrow {
-  top: 0;
-  right: 8px;
-  translate: 0 -50%;
-  rotate: 225deg;
-}
-
-.cu-tooltip.left-start .cu-tooltip__arrow {
-  top: 8px;
-  right: 0;
-  translate: 50% 0;
-  rotate: 315deg;
-}
-
-.cu-tooltip.left-center .cu-tooltip__arrow {
-  top: 50%;
-  right: 0;
-  translate: 50% -50%;
-  rotate: 315deg;
-}
-
-.cu-tooltip.left-end .cu-tooltip__arrow {
-  bottom: 8px;
-  right: 0;
-  translate: 50% 0;
-  rotate: 315deg;
 }
 
 .cu-tooltip.primary {

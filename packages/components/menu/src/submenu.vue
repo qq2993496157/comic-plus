@@ -14,24 +14,42 @@
         class="suffix-icon"
         :class="[{ unfold }, injectProps.mode === 'horizontal' ? 'cu-icon-down' : 'cu-icon-right']"></span>
     </div>
-    <component
-      :is="float ? CuMenuPopper : CuTransitionCollapse"
-      :show="unfold"
-      :fixed="!teleportDisabled"
-      @mouse-in="clearTimes"
-      @mouse-out="createTimes">
-      <ul
-        class="cu-sub-menu__content"
-        v-show="float ? true : unfold"
-        :style="float ? style : { '--cu-menu-padding': deptOffset * 20 + 'px' }">
-        <slot></slot>
-      </ul>
-    </component>
+    <template v-if="float">
+      <cu-menu-popper
+        v-if="isMount"
+        :trigger="submenuRef"
+        :show="unfold"
+        :fixed="!teleportDisabled"
+        @mouse-in="clearTimes"
+        @mouse-out="createTimes">
+        <ul class="cu-sub-menu__content" :style="style">
+          <slot></slot>
+        </ul>
+      </cu-menu-popper>
+    </template>
+    <template v-else>
+      <cu-transition-collapse>
+        <ul class="cu-sub-menu__content" v-show="unfold" :style="{ '--cu-menu-padding': deptOffset * 20 + 'px' }">
+          <slot></slot>
+        </ul>
+      </cu-transition-collapse>
+    </template>
   </li>
 </template>
 
 <script setup lang="ts">
-import { ref, inject, reactive, computed, provide, onBeforeUnmount, getCurrentInstance, onMounted, watch } from 'vue';
+import {
+  ref,
+  inject,
+  reactive,
+  computed,
+  provide,
+  onBeforeUnmount,
+  getCurrentInstance,
+  onMounted,
+  watch,
+  Ref
+} from 'vue';
 import { useTooltip } from '../../tooltip/main';
 import { useMenu } from '../utils/menu';
 import { useEventListener } from '@vueuse/core';
@@ -48,20 +66,29 @@ const vMenuTooltip = useTooltip();
 
 const props = defineProps(submenuProps);
 const instance = getCurrentInstance()!;
-const idx = props.index ?? instance.uid.toString();
+// 为了实现popper组件和submenu组件的解耦
+// 这里只能在mounted之后再渲染popper并将submenuRef这个dom触发器传递给popper
+// 也不知道为什么只能这样，如果直接传递，popper的useFloating函数会找不到锚定的位置
+// 等我弄明白floating-ui库的实现方式再尝试该这里
+const isMount = ref(false);
+
+const submenuKey = props.index ?? instance.uid.toString();
+
 const submenuRef = ref(null);
 var timer: number | null = null,
   clearEnter: (() => void) | null = null,
   clearLeave: (() => void) | null = null,
   clearClick: (() => void) | null = null;
 
-const { parentMenu } = useMenu(instance);
-
 const unfold = ref(false);
 const menus = reactive({}) as { [key: string]: MenuItem };
 
 const { props: injectProps, style } = inject(MENU_PROVIDE);
-const submenu = inject<SubmenuProvide>('submenu:provide' + parentMenu.value!.uid, undefined);
+
+const { parentMenu } = useMenu(instance);
+
+const parentProvideKey = 'submenu:provide' + parentMenu.value?.exposed?.submenuKey;
+const submenu = inject<SubmenuProvide>(parentProvideKey, undefined);
 
 const deptOffset = computed(() => {
   return submenu ? submenu.offset : 2;
@@ -92,14 +119,6 @@ function initListener() {
   }
 }
 initListener();
-
-watch(float, () => {
-  clearEnter?.();
-  clearLeave?.();
-  clearClick?.();
-  unfold.value = false;
-  initListener();
-});
 
 function headHandleClick() {
   unfold.value = !unfold.value;
@@ -140,21 +159,32 @@ function removeMenu(idx: string) {
   delete menus[idx];
 }
 
-provide('submenu:provide' + idx, {
+watch(float, () => {
+  clearEnter?.();
+  clearLeave?.();
+  clearClick?.();
+  unfold.value = false;
+  initListener();
+});
+
+provide('submenu:provide' + submenuKey, {
   closeMenu,
   setMenu,
   removeMenu,
   offset: deptOffset.value + 1
 });
 
+defineExpose({ submenuKey });
+
 onMounted(() => {
   submenu?.setMenu({
-    idx,
+    idx: submenuKey,
     active
   });
+  isMount.value = true;
 });
 
 onBeforeUnmount(() => {
-  submenu?.removeMenu(idx);
+  submenu?.removeMenu(submenuKey);
 });
 </script>

@@ -1,8 +1,9 @@
-import { ref, onMounted, onUpdated, watch, defineComponent, h } from 'vue';
+import { ref, onMounted, onUpdated, watch, defineComponent, h, provide } from 'vue';
 import { useElementSize } from '@vueuse/core';
 import '../style/waterfall.css';
 import { findIndexOfMinOrMax, debounce } from '../../../utils';
 import { waterfallProps, waterfallEmits } from './main.props';
+import { WATERFALL_PROVIDE } from './type';
 
 export default defineComponent({
   name: 'CuWaterfall',
@@ -60,6 +61,10 @@ export default defineComponent({
     });
     onUpdated(() => {
       setWaterfallStyle();
+    });
+
+    provide(WATERFALL_PROVIDE, {
+      updateStyle: debounceSetStyle
     });
 
     return () => {

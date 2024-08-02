@@ -90,6 +90,8 @@ declare module 'vue' {
     CuSpace: (typeof CuCom)['CuSpace'];
     CuClock: (typeof CuCom)['CuClock'];
     CuWebFooter: (typeof CuCom)['CuWebFooter'];
+    CuTimeline: (typeof CuCom)['CuTimeline'];
+    CuTimelineItem: (typeof CuCom)['CuTimelineItem'];
   }
 }
 export {};

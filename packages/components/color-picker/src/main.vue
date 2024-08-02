@@ -9,7 +9,7 @@
       <i class="cu-icon-minus" v-if="!modelValue"></i>
       <i class="cu-icon-down-filled" v-else></i>
     </div>
-    <cu-popper :show="show" hide-arrow>
+    <cu-popper :show="show" hide-arrow :offset="0" placement="bottom">
       <div class="cu-color-picker__popper" ref="popperRef">
         <pane></pane>
         <div class="cu-color-picker__huering">
@@ -83,13 +83,6 @@ const color = reactive(
 
 const colorValue = ref(color.value);
 
-watch(
-  () => color.value,
-  (val) => {
-    colorValue.value = val;
-  }
-);
-
 const vClickOutside = useClickOutside();
 
 function onClickOutside() {
@@ -127,6 +120,13 @@ function change(val: string) {
   emit('change', val);
   itemValidate('change');
 }
+
+watch(
+  () => color.value,
+  (val) => {
+    colorValue.value = val;
+  }
+);
 
 provide(COLORPICKER_PROVIDE, {
   props,

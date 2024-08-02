@@ -1,6 +1,7 @@
 .cu-upload {
   font-size: 14px;
   color: var(--cu-color-text);
+  --cu-upload-size: var(--cu-upload-size, 120px);
 }
 .cu-upload.picture {
   display: flex;
@@ -14,7 +15,6 @@
 .cu-upload .cu-upload__chooseItem {
   vertical-align: middle;
   display: inline-flex;
-  margin: 0 8px 8px 0;
 }
 .cu-upload .cu-upload__tips {
   font-size: 12px;
@@ -80,8 +80,8 @@
 }
 
 .cu-upload__trigger {
-  width: 120px;
-  height: 120px;
+  width: var(--cu-upload-size, 120px);
+  height: var(--cu-upload-size, 120px);
   border-radius: var(--cu-border-radius);
   border: 1px dashed var(--cu-border-color);
   display: flex;
@@ -104,6 +104,7 @@
 .cu-upload__pictures {
   display: inline-flex;
   flex-wrap: wrap;
+  gap: 8px;
 }
 .cu-upload.is-disabled .cu-upload__pictures li {
   cursor: no-drop;
@@ -113,9 +114,8 @@
 
 .cu-upload__pictures li {
   display: inline-flex;
-  width: 120px;
-  height: 120px;
-  margin: 0 8px 8px 0;
+  width: var(--cu-upload-size, 120px);
+  height: var(--cu-upload-size, 120px);
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid var(--cu-border-color);

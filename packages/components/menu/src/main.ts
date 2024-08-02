@@ -6,11 +6,13 @@ import { MENU_PROVIDE } from './type';
 
 export const Menu = defineComponent({
   name: 'CuMenu',
+  props: menuProps,
+  emit: menuEmits,
   setup(props, { slots, emit }) {
-    function menuClick(name: string) {
+    const menuClick = (name: string) => {
       emit('menu-click', name);
       emit('update:modelValue', name);
-    }
+    };
 
     const style = computed<CSSProperties>(() => {
       return {
@@ -41,7 +43,5 @@ export const Menu = defineComponent({
         },
         slots
       );
-  },
-  props: menuProps,
-  emit: menuEmits
+  }
 });

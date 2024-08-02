@@ -18,15 +18,6 @@ export default defineComponent({
       };
     });
 
-    watch(
-      () => color.get('alpha'),
-      (val) => {
-        update(val);
-      }
-    );
-    onMounted(() => {
-      update(color.get('alpha'));
-    });
 
     function update(c: any) {
       var { clientWidth }: any = instance?.vnode.el;
@@ -67,6 +58,17 @@ export default defineComponent({
         color.set('alpha', val);
       }
     }
+
+    
+    watch(
+      () => color.get('alpha'),
+      (val) => {
+        update(val);
+      }
+    );
+    onMounted(() => {
+      update(color.get('alpha'));
+    });
 
     return () => {
       return h('div', { class: 'cu-color-picker__alpha', onmousedown: mousedown }, [

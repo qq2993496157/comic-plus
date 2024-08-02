@@ -2,21 +2,9 @@ import { computed } from 'vue';
 import type { ComponentInternalInstance, Ref } from 'vue';
 
 export function useMenu(instance: ComponentInternalInstance, currentIndex?: Ref<string>) {
-  // const indexPath = computed(() => {
-  //   let parent = instance.parent!;
-  //   const path = [currentIndex.value];
-  //   while (parent.type.name !== 'ElMenu') {
-  //     if (parent.props.index) {
-  //       path.unshift(parent.props.index as string);
-  //     }
-  //     parent = parent.parent!;
-  //   }
-  //   return path;
-  // });
-
   const parentMenu = computed(() => {
     let parent = instance.parent;
-    while (parent && !['CuMenu', 'CuSubMenu'].includes(parent.type.name!)) {
+    while (parent && parent.type.name! !== 'CuSubMenu') {
       parent = parent.parent;
     }
     return parent!;
@@ -24,6 +12,5 @@ export function useMenu(instance: ComponentInternalInstance, currentIndex?: Ref<
 
   return {
     parentMenu
-    // indexPath
   };
 }

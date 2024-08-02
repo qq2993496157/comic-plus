@@ -11,7 +11,7 @@ export default defineConfig({
     //css分离
     cssCodeSplit: true,
     rollupOptions: {
-      external: ['vue', '@vue/shared', '@vueuse/core', 'async-validator', 'axios', /.css/],
+      external: ['vue', '@vue/shared', '@vueuse/core', '@floating-ui/vue', 'async-validator', 'axios', /.css/],
       input: ['index.ts'],
       output: [
         {

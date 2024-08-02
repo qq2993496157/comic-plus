@@ -4,7 +4,7 @@
     :class="[direction ? 'is-' + direction : undefined]"
     @mouseenter="mouseenter"
     @mouseleave="mouseleave">
-    <div class="cu-carousel__container" :style="carouselStyle">
+    <div class="cu-carousel__container" :style="{ height }">
       <transition-group :name="transitionName">
         <slot></slot>
       </transition-group>
@@ -42,11 +42,6 @@ const flag = ref(true);
 const interval = ref(0);
 const itemKeyList = ref<number[]>([]);
 
-const carouselStyle = computed(() => {
-  return {
-    height: props.height
-  };
-});
 const transitionName = computed(() => {
   if (props.mode === 'transform') {
     return 'transform_' + props.direction + '_' + (flag.value ? 'nex' : 'pre');

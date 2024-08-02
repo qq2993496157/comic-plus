@@ -1,0 +1,95 @@
+.cu-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.cu-timeline-item {
+  padding-left: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  min-height: 40px;
+}
+
+.cu-timeline .cu-timeline-item:last-child .cu-timeline__line {
+  display: none;
+}
+
+.cu-timeline.is-cross .cu-timeline-item {
+  width: 50%;
+  transform: translateX(calc(100% - 5px));
+}
+.cu-timeline.is-cross .cu-timeline-item.is-reverse {
+  transform: translateX(5px);
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+.cu-timeline.is-cross .cu-timeline-item.is-reverse .cu-timeline__axle {
+  left: auto;
+  right: 0;
+}
+
+.cu-timeline__axle {
+  padding-top: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cu-timeline__dot {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--cu-timeline-dotcolor, var(--cu-border-color));
+}
+.cu-timeline__dot.fill {
+  background-color: var(--cu-timeline-dotcolor, var(--cu-border-color));
+}
+
+.cu-timeline__line {
+  margin-top: 5px;
+  width: 0;
+  border-left: 2px solid var(--cu-border-color);
+  flex: 1;
+}
+.cu-timeline__line.dashed {
+  border-left-style: dashed;
+}
+
+.cu-timeline__content {
+}
+
+.cu-timeline.is-cross .cu-timeline-item.is-reverse .cu-timeline__content {
+  text-align: right;
+}
+
+.cu-timeline__timestamp {
+  font-size: 13px;
+  color: var(--cu-color-text-light2);
+}
+
+.cu-timeline__content.top .cu-timeline__timestamp {
+  margin-bottom: 4px;
+}
+
+.cu-timeline__content.bottom .cu-timeline__timestamp {
+  margin-top: 4px;
+}
+
+.comic-plus__is-comic .cu-timeline__line {
+  border-left: 2px solid var(--cu-comic-border-color);
+}
+
+.comic-plus__is-comic .cu-timeline__dot {
+  border-color: var(--cu-timeline-dotcolor, var(--cu-comic-border-color));
+}
+.comic-plus__is-comic .cu-timeline__dot.fill {
+  background-color: var(--cu-timeline-dotcolor, var(--cu-comic-border-color));
+}

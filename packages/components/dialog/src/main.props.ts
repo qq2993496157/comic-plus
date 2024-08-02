@@ -34,7 +34,10 @@ export const dialogProps = {
     default: true
   },
   appendTo: String,
-  appendToBody: Boolean,
+  appendToBody: {
+    type: Boolean,
+    default: true
+  },
   customClass: String,
   modeClass: String
 } as const;

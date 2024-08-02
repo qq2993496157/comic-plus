@@ -20,6 +20,7 @@
   --cu-button-border-disabled: var(--cu-border-color);
   --cu-button-color-disabled: var(--cu-color-text-light2);
   --cu-button-background-disabled: #fff;
+  --cu-button-round: calc(var(--cu-size-default) / 2);
   background-color: var(--cu-button-background);
   border-color: var(--cu-button-border);
   color: var(--cu-button-color);
@@ -31,15 +32,17 @@
 
 .cu-button.large {
   height: var(--cu-size-large);
+  --cu-button-round: calc(var(--cu-size-large) / 2);
 }
 .cu-button.small {
   padding: 0 8px;
   height: var(--cu-size-small);
   font-size: 12px;
+  --cu-button-round: calc(var(--cu-size-small) / 2);
 }
 
 .cu-button.is-round {
-  border-radius: 18px;
+  border-radius: var(--cu-button-round);
 }
 .cu-button.is-circle {
   width: var(--cu-size-default);
@@ -184,11 +187,11 @@
 }
 
 .cu-button-group.is-round .cu-button:first-child {
-  border-radius: 18px 0 0 18px;
+  border-radius: var(--cu-button-round) 0 0 var(--cu-button-round);
 }
 
 .cu-button-group.is-round .cu-button:last-child {
-  border-radius: 0 18px 18px 0;
+  border-radius: 0 var(--cu-button-round) var(--cu-button-round) 0;
 }
 
 .cu-button-group .cu-button + .cu-button {

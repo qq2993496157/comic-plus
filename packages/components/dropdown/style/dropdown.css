@@ -20,7 +20,7 @@
 
 .cu-dropdown-menu {
   list-style: none;
-  padding: 4px 0;
+  padding: 8px 0;
   font-size: 14px;
   color: var(--cu-color-text);
   margin: 0;
@@ -34,6 +34,7 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 14px;
+  box-sizing: border-box;
 }
 
 .cu-dropdown-item .prefix-icon {

@@ -80,6 +80,8 @@ import { CuRate } from './rate/index';
 import { CuSpace } from './space/index';
 import { CuClock } from './clock/index';
 import { CuWebFooter } from './web-footer/index';
+import { CuTimeline } from './timeline/index';
+import { CuTimelineItem } from './timeline-item/index';
 
 import type { Plugin } from 'vue';
 
@@ -171,7 +173,9 @@ export default [
   CuRate,
   CuSpace,
   CuClock,
-  CuWebFooter
+  CuWebFooter,
+  CuTimeline,
+  CuTimelineItem
 ] as Plugin[];
 
 export {
@@ -262,5 +266,7 @@ export {
   CuRate,
   CuSpace,
   CuClock,
-  CuWebFooter
+  CuWebFooter,
+  CuTimeline,
+  CuTimelineItem
 };

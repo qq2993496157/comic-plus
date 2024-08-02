@@ -2,6 +2,7 @@
   display: inline-flex;
   position: relative;
   vertical-align: middle;
+  overflow: hidden;
 }
 .cu-image img {
   width: 100%;

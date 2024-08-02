@@ -130,6 +130,23 @@
   opacity: 0;
 }
 
+.oblique-enter-active {
+  transform-origin: left top;
+  transition: transform 400ms ease;
+  z-index: 2;
+}
+.oblique-leave-active {
+  transition-delay: 400ms;
+  z-index: 1;
+}
+
+.oblique-enter-from {
+  transform: scale(0);
+}
+.oblique-leave-to {
+  opacity: 0;
+}
+
 .transform_horizontal_nex-enter-active,
 .transform_horizontal_nex-leave-active,
 .transform_horizontal_pre-enter-active,

@@ -20,16 +20,6 @@ export default defineComponent({
       return color.get('hue');
     });
 
-    watch(
-      () => hueValue.value,
-      (val) => {
-        update(val);
-      }
-    );
-    onMounted(() => {
-      update(color.get('hue'));
-    });
-
     function update(c: any) {
       var { clientWidth }: any = instance?.vnode.el;
       clientWidth = Math.max(clientWidth, 250);
@@ -65,6 +55,16 @@ export default defineComponent({
       const ele = instance?.vnode.el;
       color.set('hue', Math.round(360 * (x.value / ele?.clientWidth)));
     }
+
+    watch(
+      () => hueValue.value,
+      (val) => {
+        update(val);
+      }
+    );
+    onMounted(() => {
+      update(color.get('hue'));
+    });
 
     return () => {
       return h('div', { class: 'cu-color-picker__hsl', onmousedown: mousedown }, [

@@ -10,13 +10,13 @@ import TooltipConstructor from './main.vue';
 function createTooltip(
   triggerRef: HTMLElement,
   content: string,
-  position: string
-): { vm: ComponentInternalInstance; destroy: () => void; update: (content: string, position: string) => void } {
+  placement: string
+): { vm: ComponentInternalInstance; destroy: () => void; update: (content: string) => void } {
   let container = document.createElement('span');
 
   const props = {
     content,
-    position,
+    placement,
     triggerRef
   };
   const destroy = function () {
@@ -31,8 +31,8 @@ function createTooltip(
   return {
     vm,
     destroy,
-    update(content, position) {
-      vm?.exposed.update(content, position);
+    update(content) {
+      vm?.exposed.update(content);
     }
   };
 }

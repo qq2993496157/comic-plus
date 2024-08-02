@@ -1,8 +1,20 @@
 <template>
   <teleport to="body">
     <transition name="cu-fade">
-      <div class="cu-tooltip" :class="[className, tooltipOptions.class]" :style="style" v-if="visible" ref="tooltipRef">
-        <span class="cu-tooltip__arrow"></span>
+      <div
+        class="cu-tooltip"
+        ref="tooltipRef"
+        :style="{ ...floatingStyles, zIndex }"
+        :data-placement="placement"
+        :class="tooltipOptions.class"
+        v-if="visible">
+        <span
+          class="cu-tooltip__arrow"
+          ref="arrowRef"
+          :style="{
+            left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
+            top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : ''
+          }"></span>
         <span>{{ text }}</span>
       </div>
     </transition>
@@ -10,25 +22,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, reactive, nextTick, onMounted } from 'vue';
+import { ref, watch, reactive, computed } from 'vue';
 import '../style/tooltip.css';
 import { useEventListener } from '@vueuse/core';
-import { getNextZIndex, useScrollSever } from '../../../utils';
-import { tooltipProps, type Position, calcPosition } from './main.props';
+import { getNextZIndex } from '../../../utils';
+import { tooltipProps } from './main.props';
+import { useFloating, offset, arrow, flip, autoUpdate, shift } from '@floating-ui/vue';
+
 defineOptions({
   name: 'CuTooltip'
 });
 
 const props = defineProps(tooltipProps);
 const visible = ref(false);
-const className = ref(props.position);
 let timer: number | null = null;
+const zIndex = ref(0);
 
-const style = reactive({
-  left: '0px',
-  top: '0px',
-  zIndex: 2000
-});
 const tooltipOptions = reactive({
   disabled: false,
   class: undefined
@@ -38,20 +47,21 @@ const tooltipOptions = reactive({
 };
 
 const text = ref(props.content);
-const tooltipRef = ref<HTMLElement>();
+const tooltipRef = ref(null);
+const arrowRef = ref(null);
+const triggerRef = ref(props.triggerRef);
 
-function getPosition() {
-  if (!visible.value) return;
-  const parent = props.triggerRef?.getBoundingClientRect();
-  const target = tooltipRef.value.getBoundingClientRect();
+const middleware = computed(() => {
+  return [offset(10), flip(), shift({ padding: 10 }), arrow({ element: arrowRef })];
+});
 
-  const { x, y } = calcPosition[className.value]?.(target, parent);
+const { floatingStyles, middlewareData, placement } = useFloating(triggerRef, tooltipRef, {
+  placement: props.placement,
+  whileElementsMounted: autoUpdate,
+  middleware
+});
 
-  style.left = x + 'px';
-  style.top = y + 'px';
-}
-
-function getTooltipStyle() {
+function getTooltipAttribute() {
   let el = props.triggerRef;
   let disabled = el.getAttribute('tooltip-disabled');
   let className = el.getAttribute('tooltip-class');
@@ -64,11 +74,11 @@ function onmouseleave() {
   timer = setTimeout(() => {
     visible.value = false;
     clearTime();
-  }, 300);
+  }, 150);
 }
 
 function onmouseenter() {
-  getTooltipStyle();
+  getTooltipAttribute();
   const { disabled } = tooltipOptions;
   if (disabled) return;
   clearTime();
@@ -89,24 +99,14 @@ watch(
   () => visible.value,
   (val) => {
     if (val) {
-      nextTick(() => {
-        getPosition();
-        style.zIndex = getNextZIndex();
-      });
+      zIndex.value = getNextZIndex();
     }
   }
 );
 
-function update(content: string, position?: Position) {
+function update(content: string) {
   text.value = content;
-  if (position) {
-    className.value = position;
-  }
 }
-
-onMounted(() => {
-  useScrollSever(props.triggerRef, getPosition);
-});
 
 defineExpose({ update });
 </script>

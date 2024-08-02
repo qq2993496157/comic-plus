@@ -8,7 +8,7 @@
     </slot>
   </span>
 
-  <span class="cu-upload__chooseItem" v-if="$slots.default">
+  <span class="cu-upload__chooseItem" v-if="$slots['default']">
     <slot></slot>
   </span>
 </template>

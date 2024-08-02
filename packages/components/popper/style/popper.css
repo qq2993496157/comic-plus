@@ -1,63 +1,39 @@
 .cu-popper {
-  position: fixed;
   transform-origin: center top;
   border-radius: var(--cu-border-radius);
   background-color: #fff;
-  /* border: 1px solid transparent; */
   filter: drop-shadow(0 0px 1px rgba(200, 200, 200, 1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12))
     drop-shadow(0 0 6px rgba(0, 0, 0, 0.04));
 }
-.cu-popper .cu-poper__arrow {
-  position: absolute;
+.cu-popper .cu-popper__arrow {
   display: block;
-  content: '';
-  width: 12px;
-  height: 6px;
-  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  width: 8px;
+  height: 8px;
+  translate: 0 -50%;
   background-color: #fff;
-  transform: translateX(-50%);
+  transform: rotate(45deg);
 }
 
-.cu-popper.top {
-  margin-top: 10px;
+.cu-popper[data-placement^='bottom'] > .cu-popper__arrow {
+  top: 0;
 }
-.cu-popper.bottom {
-  margin-bottom: 10px;
+.cu-popper[data-placement^='top'] > .cu-popper__arrow {
+  bottom: 0;
+  translate: 0 50%;
 }
-.cu-popper.is-hide-arrow {
-  margin: 0;
-}
-
-.cu-popper.top .cu-poper__arrow {
-  left: var(--cu-popper-arrow-left);
-  top: -5px;
-}
-.cu-popper.bottom .cu-poper__arrow {
-  left: var(--cu-popper-arrow-left);
-  -webkit-clip-path: polygon(100% 0, 0 0, 50% 100%);
-  clip-path: polygon(100% 0, 0 0, 50% 100%);
-  bottom: -5px;
-}
-
-.cu-popper.bottom {
+.cu-popper[data-placement^='top'] {
   transform-origin: center bottom;
 }
-.popper-enter-active {
-  animation: popperIn 200ms;
-}
+
+.popper-enter-active,
 .popper-leave-active {
-  animation: popperIn 200ms reverse;
+  transition: transform 250ms, opacity 150ms;
 }
-@keyframes popperIn {
-  0% {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
+
+.popper-enter-from,
+.popper-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
 }
 
 .comic-plus__is-comic .cu-popper {
