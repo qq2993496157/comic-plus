@@ -163,4 +163,28 @@ const deepEqual = (o1: any, o2: any): boolean => {
   return true;
 };
 
-export { debounce, throttle, deleteAfterIndex, repairZero, formatDate, findIndexOfMinOrMax, flattenArray, deepEqual };
+/**
+ * @description: 获取高度值，判断是否是number类型，如果是则返回携带px的高度，否则返回自身
+ * @param {any} height
+ * @return {*}
+ */
+const getCssHeight = (height: any): any => {
+  if (!height) return undefined;
+  if (isNaN(Number(height))) {
+    return height;
+  } else {
+    return height + 'px';
+  }
+};
+
+export {
+  debounce,
+  throttle,
+  deleteAfterIndex,
+  repairZero,
+  formatDate,
+  findIndexOfMinOrMax,
+  flattenArray,
+  deepEqual,
+  getCssHeight
+};

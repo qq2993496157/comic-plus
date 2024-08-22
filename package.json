@@ -1,6 +1,6 @@
 {
   "name": "comic-plus",
-  "version": "1.6.7",
+  "version": "1.7.0",
   "license": "MIT",
   "private": false,
   "main": "lib/index.js",

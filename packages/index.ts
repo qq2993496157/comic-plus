@@ -7,6 +7,7 @@ import { preview } from './components/preview-image/index';
 import { CuLoading, vLoading, useLoading } from './components/loading/main';
 import { vTooltip, useTooltip } from './components/tooltip/main';
 import { useInfiniteScroll, vInfiniteScroll } from './components/infinite-scroll/main';
+import { CuLoadingbar } from './components/loadingbar/main';
 
 const plugin = {
   install(app: App, config: Config) {
@@ -21,6 +22,8 @@ const plugin = {
 
     app.config.globalProperties.$preview = preview;
     app.config.globalProperties.$loading = CuLoading;
+
+    app.config.globalProperties.$loadingbar = CuLoadingbar;
 
     app.use(vLoading);
     app.use(vTooltip);
@@ -84,5 +87,6 @@ export {
   useTooltip,
   vTooltip,
   useInfiniteScroll,
-  vInfiniteScroll
+  vInfiniteScroll,
+  CuLoadingbar
 };
