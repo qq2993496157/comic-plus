@@ -33,7 +33,7 @@ export default defineComponent({
                 : injectProps.rowClass,
               { 'current-row': rowSelection.newIdx === props.rowIndex },
               getStripeClass(props.rowIndex),
-              props.data.treeExpand ? 'cu-table__row--level-' + props.data._level : undefined
+              props.data.treeExpand || props.data._parentKey ? 'cu-table__row--level-' + props.data._level : undefined
             ],
             style: [
               {

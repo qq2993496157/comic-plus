@@ -21,6 +21,7 @@ export default defineComponent({
       expandColumn,
       firstDefaultColumnIndex,
       isTreeNode,
+      selectRow,
       getCellClass,
       changeShowMore
     } = inject(TABLE_V2_PROVIDE);
@@ -64,7 +65,7 @@ export default defineComponent({
       } else if (type === 'selection') {
         return h(Checkbox, {
           modelValue: props.data.selection,
-          'onUpdate:modelValue': ($event) => (props.data.selection = $event)
+          'onUpdate:modelValue': ($event) => selectRow(props.data, $event)
         });
       } else if (type === 'expand') {
         return h(

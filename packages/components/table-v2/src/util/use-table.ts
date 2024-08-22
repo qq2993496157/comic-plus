@@ -1,5 +1,6 @@
 import { ref, watch, computed, reactive } from 'vue';
 import { TableData, RenderData, UseTableOptions } from '../type';
+import { isArray } from '../../../../utils';
 
 export const useTable = (tableData: any, { props, columns, emit }: UseTableOptions) => {
   const renderData = ref<RenderData[]>([]);
@@ -58,6 +59,15 @@ export const useTable = (tableData: any, { props, columns, emit }: UseTableOptio
     }
   };
 
+  const isTreeExpand = (data) => {
+    return (
+      (!!data[treeChildrenKeyName.value] &&
+        isArray(data[treeChildrenKeyName.value]) &&
+        data[treeChildrenKeyName.value].length > 0) ||
+      data[treeHasChildrenKeyName.value]
+    );
+  };
+
   const createRowData = ({ data, level, parentKey }) => {
     let result = {
       row: data,
@@ -74,7 +84,7 @@ export const useTable = (tableData: any, { props, columns, emit }: UseTableOptio
         _level: level,
         display: !parentKey,
         show: false,
-        treeExpand: !!data[treeChildrenKeyName.value] || data[treeHasChildrenKeyName.value],
+        treeExpand: isTreeExpand(data),
         hasChildren: () => renderData.value.some((v) => v._parentKey === data[props.rowKey]),
         loading: false
       };
@@ -135,6 +145,11 @@ export const useTable = (tableData: any, { props, columns, emit }: UseTableOptio
     emitSelectRow();
   };
 
+  const selectRow = (data, value) => {
+    data.selection = value;
+    emitSelectRow();
+  };
+
   const rowSelection = reactive({
     newRow: null,
     oldRow: null,
@@ -172,6 +187,7 @@ export const useTable = (tableData: any, { props, columns, emit }: UseTableOptio
     isTreeNode,
 
     selectAll,
+    selectRow,
     clickRow,
     updateRowShow,
     changeShowMore
