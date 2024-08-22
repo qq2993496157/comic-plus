@@ -10,10 +10,10 @@
       <span class="filename" :class="uploadFileEnum[file.uid!]?.status">{{ file.name }}</span>
       <i class="delete cu-icon-delete" @click="remove(file.uid!, index)"> </i>
       <span class="progress">
-        <cu-progress
+        <c-progress
           :progress="uploadFileEnum[file.uid!].progress"
           v-if="uploadFileEnum[file.uid!]?.status === 'uploading'"
-          style="margin-top: 4px"></cu-progress>
+          style="margin-top: 4px" />
       </span>
     </li>
   </transition-group>
@@ -22,11 +22,11 @@
       <li v-for="(file, index) in previewList" :key="file.uid || file.name" :class="uploadFileEnum[file.uid!]?.status">
         <transition name="cu-fade">
           <span class="progress" v-if="uploadFileEnum[file.uid!]?.status === 'uploading'">
-            <cu-progress
+            <c-progress
               size="100"
               type="success"
               bar-type="circle"
-              :progress="uploadFileEnum[file.uid!].progress || 0"></cu-progress>
+              :progress="uploadFileEnum[file.uid!].progress || 0" />
           </span>
           <span class="mask" v-else>
             <i class="cu-icon-zoom-in" @click="previewImg(index)"></i>
@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
-import { CuProgress } from '../../progress';
+import { CuProgress as CProgress } from '../../progress';
 import { preview } from '../../preview-image/index';
 import type { FileEnum, UploadFile } from './type';
 

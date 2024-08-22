@@ -1,0 +1,192 @@
+.cu-schedule {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
+
+.cu-schedule-calendar {
+  padding: 8px;
+  font-size: 13px;
+  user-select: none;
+  background-color: var(--cu-background-color);
+}
+
+.cu-schedule-calendar__header {
+  padding: 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 24px;
+}
+
+.cu-schedule-calendar__icons {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.cu-schedule-calendar__icons i {
+  cursor: pointer;
+}
+.cu-schedule-calendar__icons i:hover {
+  color: var(--cu-color-primary);
+}
+
+.cu-schedule-calendar__th {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.cu-schedule-calendar__td {
+  background-color: var(--cu-color-primary-light3);
+  color: var(--cu-color-primary);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  /* transition: all 450ms; */
+}
+
+.cu-schedule-calendar__td.is-prev,
+.cu-schedule-calendar__td.is-next {
+  background-color: var(--cu-background-color);
+  color: var(--cu-color-text-light2);
+}
+
+.cu-schedule-calendar__td.is-today {
+  background-color: var(--cu-color-primary);
+  color: #fff;
+  box-shadow: 1px 1px 4px 0px var(--cu-color-primary);
+}
+
+.cu-schedule-calendar__td:hover {
+  background-color: var(--cu-color-primary);
+  color: #fff;
+}
+
+.cu-schedule-calendar__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.cu-schedule-calendar__cell .dot {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--cu-color-danger);
+  border-radius: 50%;
+}
+
+.cu-schedule-content {
+  flex: 1;
+  color: var(--cu-color-text);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cu-schedule-content__header {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--cu-background-color);
+  min-height: 40px;
+  align-items: center;
+}
+
+.cu-schedule-list--warpper {
+  padding: 20px;
+  flex: 1;
+  overflow: auto;
+}
+
+.cu-schedule-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  position: relative;
+}
+
+.cu-schedule-list__li {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.cu-schedule-list__time {
+  padding-right: 8px;
+  font-size: 12px;
+  margin-top: -10px;
+}
+
+.cu-schedule-list__line {
+  flex: 1;
+  width: 0;
+  height: 0;
+  border-top: 1px dashed var(--cu-border-color);
+}
+
+.cu-schedule-cards--warpper {
+  padding-left: 40px;
+}
+
+.cu-schedule-cards {
+  position: absolute;
+  width: calc(100% - 40px);
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  padding: 10px;
+  margin: -10px;
+}
+
+.cu-schedule-cards--warpper .cu-schedule-cards {
+  box-sizing: content-box;
+}
+
+.cu-schedule-card {
+  min-width: 100px;
+  position: relative;
+  transition: transform 200ms;
+  z-index: 1;
+}
+
+.cu-schedule-cards.fold .cu-schedule-card {
+  transform: translateX(var(--x));
+}
+
+.cu-schedule-defaultcard {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  background-color: #fff;
+  box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 6px 0 rgba(0, 0, 0, 0.4);
+  border-radius: calc(var(--cu-border-radius) + 1px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+.cu-schedule-defaultcard__content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.cu-schedule-defaultcard .timer {
+  flex: 0;
+  font-size: 12px;
+  height: 15px;
+  line-height: 15px;
+  text-align: right;
+}

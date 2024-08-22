@@ -29,10 +29,7 @@
               :class="{ 'fixed-shadow-left': getStickyIndex.left == -1 }"
               width="40"
               v-if="options.selection">
-              <cu-checkbox
-                :model-value="isCheckAll"
-                @change="_changeCheckAll"
-                :indeterminate="indeterminate"></cu-checkbox>
+              <checkbox :model-value="isCheckAll" @change="_changeCheckAll" :indeterminate="indeterminate"></checkbox>
             </th>
             <th
               class="cu-table__th"
@@ -74,7 +71,7 @@
       @scroll="scroll">
       <div class="cu-table__empty" v-if="data.length === 0">
         <slot name="empty">
-          <cu-empty description="暂无数据"></cu-empty>
+          <empty description="暂无数据"></empty>
         </slot>
       </div>
       <table :style="{ width: tableResize.width - tableResize.scrollWidth + 'px' }" v-else>
@@ -90,14 +87,14 @@
         </colgroup>
         <tbody>
           <template v-for="(item, index) in data" :key="index">
-            <cu-table-row :row="item" :index="index">
+            <table-row :row="item" :index="index">
               <template v-for="td in columns" #[td.prop]="{ row }" :key="td.prop">
                 <slot :name="td.prop" :row="row" :index="index"> </slot>
               </template>
               <template #expand="{ row }" v-if="expand && $slots.expand">
                 <slot name="expand" :row="row" :index="index"> </slot>
               </template>
-            </cu-table-row>
+            </table-row>
           </template>
         </tbody>
       </table>
@@ -108,11 +105,11 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, provide, CSSProperties } from 'vue';
 import { useElementSize } from '@vueuse/core';
-import { flattenArray, useConfig, deepEqual } from '../../../utils';
+import { useConfig, deepEqual } from '../../../utils';
 import '../style/table.css';
-import CuTableRow from './components/table-row.vue';
-import { CuCheckbox } from '../../checkbox';
-import { CuEmpty } from '../../empty';
+import TableRow from './components/table-row.vue';
+import { CuCheckbox as Checkbox } from '../../checkbox';
+import { CuEmpty as Empty } from '../../empty';
 import { tableProps, tableEmits } from './main.props';
 import { Tableresize, TableColumn, TreeProps, TableData, TABLE_PROVIDE, RowOptions } from './type';
 

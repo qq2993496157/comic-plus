@@ -2,7 +2,8 @@
   <div
     class="cu-cascader"
     :class="[{ expand: show }, { 'is-disabled': disabled }, currentSize]"
-    v-click-outside:[popperRef]="onClickOutside">
+    v-click-outside:[popperRef]="onClickOutside"
+    ref="cascaderRef">
     <div class="cu-cascader__content" @click="handleClick">
       <input
         type="text"
@@ -17,10 +18,10 @@
       </span>
     </div>
 
-    <cu-popper :show="show" arrow-left placement="bottom-start">
+    <popper :show="show" :trigger="cascaderRef" arrow-left placement="bottom-start">
       <div class="cu-cascader__popper" :class="currentSize" ref="popperRef">
         <div class="cu-cascader-pane">
-          <cu-scrollbar>
+          <scrollbar>
             <div
               class="cu-cascader-pane__item"
               v-for="item in options"
@@ -33,11 +34,11 @@
               <span>{{ item[optionProps.label] }}</span>
               <i class="cu-icon-right" v-if="item[optionProps.children]"></i>
             </div>
-          </cu-scrollbar>
+          </scrollbar>
         </div>
         <template v-for="item in recodeValues">
           <div class="cu-cascader-pane" :key="item[optionProps.value]" v-if="item[optionProps.children]">
-            <cu-scrollbar>
+            <scrollbar>
               <div
                 class="cu-cascader-pane__item"
                 v-for="(child, index) in item[optionProps.children]"
@@ -50,11 +51,11 @@
                 <span>{{ child[optionProps.label] }}</span>
                 <i class="cu-icon-right" v-if="child[optionProps.children]"></i>
               </div>
-            </cu-scrollbar>
+            </scrollbar>
           </div>
         </template>
       </div>
-    </cu-popper>
+    </popper>
   </div>
 </template>
 
@@ -63,8 +64,8 @@ import { ref, computed, watch, inject } from 'vue';
 import '../style/cascader.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { CuPopper } from '../../popper';
-import { CuScrollbar } from '../../scrollbar';
+import { CuPopper as Popper } from '../../popper';
+import { CuScrollbar as Scrollbar } from '../../scrollbar';
 import { deleteAfterIndex, useClickOutside, useItemValidate } from '../../../utils';
 import { useConfig } from '../../../utils';
 import { cascaderProps, cascaderEmits } from './main.props';
@@ -76,6 +77,7 @@ const emit = defineEmits(cascaderEmits);
 
 const { itemValidate } = useItemValidate();
 const popperRef = ref(null);
+const cascaderRef = ref();
 const { SIZE } = useConfig();
 const form = inject(FORM_PROVIDE, undefined);
 

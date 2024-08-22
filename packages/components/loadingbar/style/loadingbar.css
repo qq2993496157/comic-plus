@@ -1,0 +1,26 @@
+.cu-loadingbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+}
+
+.cu-loadingbar__schedule {
+  height: 2px;
+  width: 50%;
+  background-color: var(--cu-color-primary);
+  transition: width 200ms linear, background-color 100ms;
+}
+
+.cu-loadingbar__schedule.error {
+  background-color: var(--cu-color-danger);
+}
+
+.loadingbar-leave-active {
+  transition: opacity 400ms ease !important;
+}
+
+.loadingbar-leave-to {
+  opacity: 0;
+}

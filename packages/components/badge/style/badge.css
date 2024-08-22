@@ -3,6 +3,7 @@
   --cu-badge-color: #fff;
   display: inline-block;
   vertical-align: middle;
+  line-height: inherit;
 }
 .cu-badge__inner {
   border: 1px solid #fff;
@@ -20,12 +21,18 @@
   cursor: default;
   position: relative;
 }
+
 .cu-badge__inner.position {
   position: absolute;
+
   right: calc(10px - var(--cu-badge-offsetx, 0px));
   top: var(--cu-badge-offsety, 0);
   transform: translate(100%, -50%);
 }
+.cu-badge__inner.dot {
+  padding: 3px;
+}
+
 .cu-badge__inner.position.dot {
   padding: 0;
   width: 10px;

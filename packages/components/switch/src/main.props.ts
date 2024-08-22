@@ -14,7 +14,7 @@ export const switchProps = {
   inlineText: Boolean,
   onIcon: String,
   offIcon: String,
-  changeBefore: Function as PropType<() => boolean | Promise<any>>,
+  beforeChange: Function as PropType<() => boolean | Promise<any>>,
   loading: Boolean,
   size: String as PropType<ComicSize>
 } as const;

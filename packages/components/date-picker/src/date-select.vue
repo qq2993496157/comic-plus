@@ -4,24 +4,24 @@
       <span v-for="el in props.shortcuts" @click="pickShortcut(el.value)">{{ el.label }}</span>
     </div>
     <div class="cu-date-table__box" v-if="props.range">
-      <cu-date-table :date="props.modelValue[0]" ref="dateTableRef1"></cu-date-table>
-      <cu-date-table :date="props.modelValue[1]" ref="dateTableRef2"></cu-date-table>
+      <date-table :date="props.modelValue[0]" ref="dateTableRef1"></date-table>
+      <date-table :date="props.modelValue[1]" ref="dateTableRef2"></date-table>
     </div>
-    <cu-date-table v-else :date="(props.modelValue as ValueAlone)" ref="dateTableRef"></cu-date-table>
+    <date-table v-else :date="(props.modelValue as ValueAlone)" ref="dateTableRef"></date-table>
   </div>
   <div class="cu-date-picker__footer">
-    <cu-button size="small" type="primary" @click="_confirm">确认</cu-button>
+    <c-button size="small" type="primary" @click="_confirm">确认</c-button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, inject } from 'vue';
-import CuDateTable from './date-table.vue';
-import { CuButton } from '../../button';
+import DateTable from './date-table.vue';
+import { CuButton as CButton } from '../../button';
 import { isFunction } from '../../../utils';
 import { DATEPICKER_PROVIDE, type ValueAlone, type Shortcut } from './type';
 defineOptions({
-  name: 'CuDateSelect'
+  name: 'DateSelect'
 });
 
 const { props, confirm } = inject(DATEPICKER_PROVIDE);

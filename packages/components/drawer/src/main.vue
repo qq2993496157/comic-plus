@@ -1,5 +1,5 @@
 <template>
-  <cu-mode
+  <mode
     :show="showMode"
     :lock-scroll="!appendToBody || !lockScroll ? false : lockScroll"
     :append-to-body="appendToBody"
@@ -24,13 +24,13 @@
         </div>
       </div>
     </transition>
-  </cu-mode>
+  </mode>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import '../style/drawer.css';
-import { CuMode } from '../../mode';
+import { CuMode as Mode } from '../../mode';
 import { usePopup } from '../../../utils';
 import { drawerProps, drawerEmits } from './main.props';
 defineOptions({

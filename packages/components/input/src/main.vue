@@ -12,7 +12,7 @@
       <input
         class="cu-input__inner"
         :value="modelValue"
-        @input="input"
+        @input="inputEvent"
         @focus="emit('focus', $event)"
         @blur="blur"
         @change="change((<HTMLInputElement>$event.target).value)"
@@ -58,7 +58,7 @@ const currentSize = computed(() => {
   return props.size ?? form?.props.size ?? SIZE?.value;
 });
 
-function input(e: Event) {
+function inputEvent(e: Event) {
   let val: string | number = (<HTMLInputElement>e.target).value;
   if (props.type === 'number') {
     val = Number(val);

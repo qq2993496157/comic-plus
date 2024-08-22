@@ -21,18 +21,18 @@
         </div>
       </slot>
     </div>
-    <cu-scrollbar @scroll="onScroll" ref="scrollBarRef" :display="scrollbarDisplay">
+    <scrollbar @scroll="onScroll" ref="scrollBarRef" :display="scrollbarDisplay">
       <div class="cu-elevator__container" ref="container">
         <slot></slot>
       </div>
-    </cu-scrollbar>
+    </scrollbar>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, provide, computed, onMounted, watch } from 'vue';
 import '../style/elevator.css';
-import { CuScrollbar } from '../../scrollbar';
+import { CuScrollbar as Scrollbar } from '../../scrollbar';
 import { debounce } from '../../../utils';
 import { elevatorProps, elevatorEmits } from './main.props';
 import { ELEVATOR_PROVIDE, ElevatorItemInstance } from './type';

@@ -1,5 +1,5 @@
 <template>
-  <cu-mode
+  <mode
     :show="showMode"
     :lock-scroll="lockScroll"
     :append-to-body="appendToBody"
@@ -24,13 +24,13 @@
         </div>
       </div>
     </transition>
-  </cu-mode>
+  </mode>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import '../style/dialog.css';
-import { CuMode } from '../../mode';
+import { CuMode as Mode } from '../../mode';
 import { usePopup } from '../../../utils';
 import { dialogProps, dialogEmits } from './main.props';
 

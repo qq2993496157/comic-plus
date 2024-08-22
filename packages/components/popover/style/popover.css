@@ -1,0 +1,13 @@
+.cu-popover__container {
+  padding: 12px;
+  font-size: 14px;
+}
+
+.cu-popover__title {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.cu-popover__content {
+  font-size: 13px;
+}

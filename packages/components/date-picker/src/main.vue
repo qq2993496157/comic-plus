@@ -2,7 +2,8 @@
   <div
     class="cu-date-picker"
     :class="[{ expand: show }, { 'is-disabled': disabled }, { 'is-range': range }, currentSize]"
-    v-click-outside:[popperRef]="onClickOutside">
+    v-click-outside:[popperRef]="onClickOutside"
+    ref="datePickerRef">
     <div class="cu-date-picker__content" @click="handleClick">
       <span class="prefix-icon">
         <i :class="icon"></i>
@@ -27,11 +28,11 @@
         <i class="cu-icon-close-one" v-show="hasValue" @click.stop="clear"></i>
       </span>
     </div>
-    <cu-popper :show="show">
+    <popper :show="show" :trigger="datePickerRef">
       <div class="cu-date-picker__popper" ref="popperRef" :class="[{ 'is-range': range }, currentSize]">
-        <cu-date-select></cu-date-select>
+        <date-select></date-select>
       </div>
-    </cu-popper>
+    </popper>
   </div>
 </template>
 
@@ -40,8 +41,8 @@ import { ref, computed, inject, provide } from 'vue';
 import '../style/date-picker.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { CuPopper } from '../../popper';
-import CuDateSelect from './date-select.vue';
+import { CuPopper as Popper } from '../../popper';
+import DateSelect from './date-select.vue';
 import { useClickOutside, formatDate, useConfig, isArray } from '../../../utils';
 import { datePickerProps, datePickerEmits } from './main.props';
 import { DATEPICKER_PROVIDE, type ValueType } from './type';
@@ -53,6 +54,7 @@ const props = defineProps(datePickerProps);
 const emit = defineEmits(datePickerEmits);
 
 const popperRef = ref(null);
+const datePickerRef = ref();
 
 const { SIZE } = useConfig();
 const form = inject(FORM_PROVIDE, undefined);

@@ -5,7 +5,7 @@
       :class="{ 'fixed-shadow-left': getStickyIndex.left == -1 }"
       width="40"
       v-if="injectProps.options.selection">
-      <cu-checkbox v-model="isCheck" @change="changeSelection"></cu-checkbox>
+      <checkbox v-model="isCheck" @change="changeSelection"></checkbox>
     </td>
     <td
       colspan="1"
@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref, watch, CSSProperties, onMounted, getCurrentInstance, onBeforeUnmount } from 'vue';
-import { CuCheckbox } from '../../../checkbox';
+import { CuCheckbox as Checkbox } from '../../../checkbox';
 import { isFunction, isArray } from '../../../../utils';
 import { tableRowProps } from './row.props';
 import { TABLE_PROVIDE, TableData } from '../type';

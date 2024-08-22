@@ -3,13 +3,14 @@
     class="cu-color-picker"
     :class="[currentSize, { 'is-disabled': disabled }, { expand: show }]"
     v-click-outside:[popperRef]="onClickOutside"
-    @click="handleClick">
+    @click="handleClick"
+    ref="colorPickerRef">
     <div class="cu-color-picker__container" :class="{ alpha }">
       <div class="preview__box" :style="{ background: disabled ? undefined : modelValue }"></div>
       <i class="cu-icon-minus" v-if="!modelValue"></i>
       <i class="cu-icon-down-filled" v-else></i>
     </div>
-    <cu-popper :show="show" hide-arrow :offset="0" placement="bottom">
+    <popper :show="show" :trigger="colorPickerRef" hide-arrow :offset="0" placement="bottom">
       <div class="cu-color-picker__popper" ref="popperRef">
         <pane></pane>
         <div class="cu-color-picker__huering">
@@ -21,19 +22,19 @@
         </div>
         <preset-list v-if="predefine" :predefine="predefine"></preset-list>
         <div class="cu-color-picker__buttons">
-          <cu-input
+          <c-input
             v-model="colorValue"
             @keyup.enter="convertColors"
             @blur="convertColors"
             size="small"
-            style="width: 140px"></cu-input>
+            style="width: 140px"></c-input>
           <div class="cu-color-picker__buttonbox">
-            <cu-button plain size="small" @click="clear">清空</cu-button>
-            <cu-button type="primary" size="small" @click="confirm">确认</cu-button>
+            <c-button plain size="small" @click="clear">清空</c-button>
+            <c-button type="primary" size="small" @click="confirm">确认</c-button>
           </div>
         </div>
       </div>
-    </cu-popper>
+    </popper>
   </div>
 </template>
 
@@ -42,9 +43,9 @@ import { ref, provide, watch, reactive, inject, computed } from 'vue';
 import '../style/color-picker.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { CuPopper } from '../../popper';
-import { CuButton } from '../../button';
-import { CuInput } from '../../input';
+import { CuPopper as Popper } from '../../popper';
+import { CuButton as CButton } from '../../button';
+import { CuInput as CInput } from '../../input';
 import pane from './components/pane';
 import hslSlider from './components/hsl-slider';
 import alphaSlider from './components/alpha-slider';
@@ -62,6 +63,7 @@ const props = defineProps(colorPickerProps);
 const emit = defineEmits(colorPickerEmits);
 
 const popperRef = ref(null);
+const colorPickerRef = ref();
 const { itemValidate } = useItemValidate();
 const { SIZE } = useConfig();
 const form = inject(FORM_PROVIDE, undefined);

@@ -1,7 +1,7 @@
 <template>
   <div class="cu-clock cu-clock--number">
     <div class="cu-clock__container">
-      <cu-space :split="spacer" :size="props.size">
+      <space :split="spacer" :size="props.size">
         <template v-for="(_, index) in 3">
           <ul class="cu-clock-group">
             <li class="cu-clock-lamp" v-for="(_, idx) in 7" :class="{ show: NUMBER_SHOW_ENUM[times[index * 2]][idx] }">
@@ -21,7 +21,7 @@
             </li>
           </ul>
         </template>
-      </cu-space>
+      </space>
       <div
         v-if="props.modules?.includes('date')"
         class="cu-clock-date"
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { inject, ref, computed, h, watch } from 'vue';
-import { CuSpace } from '../../../space';
+import { CuSpace as Space } from '../../../space';
 import { formatDate } from '../../../../utils';
 import { CLOCK_PROVIDE, NUMBER_SHOW_ENUM } from '../type';
 

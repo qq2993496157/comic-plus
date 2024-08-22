@@ -41,7 +41,7 @@ const { props: injectProps } = inject(MENU_PROVIDE);
 
 const popperRef = ref(null);
 
-const triggerRef = ref(props.trigger);
+const triggerRef = computed(() => props.trigger);
 var cleanup: (() => void) | null;
 
 const middleware = computed(() => {

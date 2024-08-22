@@ -9,19 +9,19 @@
         <span class="cu-icon-right" :class="{ active: showItem }"></span>
       </slot>
     </div>
-    <cu-transition-collapse>
+    <transition-collapse>
       <div v-show="showItem">
         <div class="cu-collapse-item__content">
           <slot></slot>
         </div>
       </div>
-    </cu-transition-collapse>
+    </transition-collapse>
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject, computed } from 'vue';
-import { CuTransitionCollapse } from '../../transition-collapse';
+import { CuTransitionCollapse as TransitionCollapse } from '../../transition-collapse';
 import { collapseItemProps } from './item.props';
 import { COLLAPSE_PROVIDE } from './type';
 

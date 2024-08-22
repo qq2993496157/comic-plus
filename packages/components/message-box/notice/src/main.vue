@@ -1,13 +1,13 @@
 <template>
   <template v-for="(value, key) in notices">
-    <cu-notice-list :list="value" :position="key" @empty="changeLength"></cu-notice-list>
+    <notice-list :list="value" :position="key" @empty="changeLength"></notice-list>
   </template>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import '../../style/message-box.css';
-import CuNoticeList from './list.vue';
+import NoticeList from './list.vue';
 import { noticeInstances } from './instance';
 defineOptions({
   name: 'CuNotice'

@@ -13,19 +13,19 @@ export default defineComponent({
     const waterfallRef = ref(null);
     const debounceSetStyle = debounce(setWaterfallStyle);
 
-    const { width, height } = useElementSize(waterfallRef);
+    const { width } = useElementSize(waterfallRef);
 
-    watch([width, height], () => {
+    watch(width, () => {
       debounceSetStyle();
     });
 
     function setWaterfallStyle() {
-      if (!waterfallRef.value) return;
-      let waterfallStyle = waterfallRef.value.getBoundingClientRect();
+      if (!waterfallRef.value || !width.value) return;
+
       let childrenList = new Array();
       let colNum: number;
       if (props.itemWidth) {
-        colNum = Math.floor(waterfallStyle.width / props.itemWidth);
+        colNum = Math.floor((width.value + props.gutter) / (props.itemWidth + props.gutter));
         colNum = Math.min(colNum, waterfallRef.value.children.length);
       } else {
         colNum = props.col;
@@ -35,14 +35,14 @@ export default defineComponent({
       }
       let gutterSize = props.gutter;
       if (props.itemWidth) {
-        gutterSize = (waterfallStyle.width - colNum * props.itemWidth) / (colNum - 1);
+        gutterSize = (width.value - colNum * props.itemWidth) / (colNum - 1);
       }
       let list = Array.from(waterfallRef.value.children);
       for (let i = 0; i < list.length; i++) {
         let item: any = list[i];
         let itemRect = item.getBoundingClientRect();
         let maxIdx = findIndexOfMinOrMax(childrenList);
-        let w = props.itemWidth ? props.itemWidth : (waterfallStyle.width - props.gutter * (props.col - 1)) / props.col;
+        let w = props.itemWidth ? props.itemWidth : (width.value - props.gutter * (props.col - 1)) / props.col;
         let x = maxIdx * w + maxIdx * (gutterSize <= 0 ? props.gutter : gutterSize);
         let y = childrenList[maxIdx];
         item.style.setProperty('width', w + 'px');

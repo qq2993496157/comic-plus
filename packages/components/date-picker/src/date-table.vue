@@ -51,7 +51,7 @@ import { ref, computed, watch, inject } from 'vue';
 import { dateTableProps, dateTableEmits } from './table.props';
 import { DATEPICKER_PROVIDE } from './type';
 defineOptions({
-  name: 'CuDateTable'
+  name: 'DateTable'
 });
 const props = defineProps(dateTableProps);
 const emit = defineEmits(dateTableEmits);

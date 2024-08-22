@@ -1,7 +1,8 @@
 import { Placement } from '@floating-ui/vue';
-import type { ExtractPropTypes, PropType, Ref } from 'vue';
+import { effect, type ExtractPropTypes, type PropType, type Ref } from 'vue';
 
 export const popperProps = {
+  trigger: Object as PropType<Ref<any>>,
   show: Boolean,
   hideArrow: Boolean,
   offset: {
@@ -12,6 +13,15 @@ export const popperProps = {
     type: String as PropType<Placement>,
     default: 'bottom'
   },
-  arrowLeft: Boolean
+  arrowLeft: Boolean,
+  transitionName: {
+    type: String,
+    default: 'popper'
+  },
+  effect: {
+    type: String as PropType<'light' | 'dark'>,
+    default: 'light'
+  },
+  customClass: String
 } as const;
 export type PopperProps = ExtractPropTypes<typeof popperProps>;

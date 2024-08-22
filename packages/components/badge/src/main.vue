@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import '../style/badge.css';
-import { isNumber, isArray } from '../../../utils';
+import { isNumber } from '../../../utils';
 import { badgeProps } from './main.props';
 
 defineOptions({

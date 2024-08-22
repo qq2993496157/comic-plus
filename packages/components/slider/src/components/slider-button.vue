@@ -32,7 +32,7 @@ const emit = defineEmits({
   'update:modelValue': (val: number) => isNumber(val)
 });
 
-const { injectProps, isMouseEnter, isMouseDown, recordValue, onmousedown, onmousemove } = useSliderButton(props, emit);
+const { injectProps, isMouseEnter, isMouseDown, recordValue, onmousedown, onmousemove } = useSliderButton(emit);
 
 const formatValue = computed(() => {
   if (injectProps.formatTooltip) {

@@ -194,16 +194,26 @@
   border-radius: 0 var(--cu-button-round) var(--cu-button-round) 0;
 }
 
-.cu-button-group .cu-button + .cu-button {
+.cu-button-group .cu-button:not(:first-child):not(:last-child) {
   border-left-color: var(--cu-border-color);
-  margin-left: -1px;
+  border-right-color: var(--cu-border-color);
 }
+
 .cu-button-group + .cu-button-group,
 .cu-button-group + .cu-button,
 .cu-button + .cu-button,
 .cu-button + .cu-button-group {
   margin-left: 10px;
 }
+
+.cu-button-group .cu-button:not(:last-child) {
+  margin-right: -1px;
+}
+
+.cu-button-group .cu-button {
+  margin-left: 0;
+}
+
 .cu-button-group {
   display: inline-block;
   vertical-align: middle;

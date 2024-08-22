@@ -1,6 +1,6 @@
 <template>
   <div class="cu-time-picker__listbox" style="height: 210px">
-    <cu-scrollbar @scroll="onScroll($event, 0)" ref="hourRef">
+    <scrollbar @scroll="onScroll($event, 0)" ref="hourRef">
       <div class="cu-time-picker__list">
         <span
           v-for="(item, idx) in 24"
@@ -9,8 +9,8 @@
           >{{ repairZero(item - 1) }}</span
         >
       </div>
-    </cu-scrollbar>
-    <cu-scrollbar @scroll="onScroll($event, 1)" ref="minuteRef" style="height: 210px">
+    </scrollbar>
+    <scrollbar @scroll="onScroll($event, 1)" ref="minuteRef" style="height: 210px">
       <div class="cu-time-picker__list">
         <span
           v-for="(item, idx) in 60"
@@ -19,8 +19,8 @@
           >{{ repairZero(item - 1) }}</span
         >
       </div>
-    </cu-scrollbar>
-    <cu-scrollbar @scroll="onScroll($event, 2)" ref="secondRef" style="height: 210px">
+    </scrollbar>
+    <scrollbar @scroll="onScroll($event, 2)" ref="secondRef" style="height: 210px">
       <div class="cu-time-picker__list">
         <span
           v-for="(item, idx) in 60"
@@ -29,13 +29,13 @@
           >{{ repairZero(item - 1) }}</span
         >
       </div>
-    </cu-scrollbar>
+    </scrollbar>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, inject, reactive } from 'vue';
-import { CuScrollbar } from '../../scrollbar';
+import { CuScrollbar as Scrollbar } from '../../scrollbar';
 import { repairZero, debounce } from '../../../utils';
 import { listProps, listEmits } from './list.props';
 import { TIMEPICKER_PROVIDE } from './type';

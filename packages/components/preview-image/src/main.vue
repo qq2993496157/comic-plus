@@ -1,5 +1,5 @@
 <template>
-  <cu-mode
+  <mode
     :show="showMode"
     @open="onAfterEnter"
     @close="onModeAfterLeave"
@@ -25,14 +25,14 @@
         </div>
       </div>
     </transition>
-  </cu-mode>
+  </mode>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { useDraggable } from '@vueuse/core';
 import '../style/preview-image.css';
-import { CuMode } from '../../mode';
+import { CuMode as Mode } from '../../mode';
 import { previewImageProps } from './main.props';
 defineOptions({
   name: 'CuPreviewImage'

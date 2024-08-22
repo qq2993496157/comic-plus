@@ -6,14 +6,14 @@
           {{ `共${total}条` }}
         </template>
         <template v-else-if="name === 'sizes'">
-          <cu-select
+          <c-select
             v-model="currentPageSize"
             @change="changeSelect"
             style="width: 100px"
             v-if="pageSizes?.length > 0"
             :size="size">
-            <cu-option v-for="item in pageSizes" :label="item + '条/页'" :value="item"></cu-option>
-          </cu-select>
+            <c-option v-for="item in pageSizes" :label="item + '条/页'" :value="item"></c-option>
+          </c-select>
         </template>
         <template v-else-if="name === 'pages'">
           <span class="cu-icon-left button" @click="pagesPrev()" :class="{ disabled: currentPageRef <= 1 }"></span>
@@ -41,13 +41,13 @@
             :class="{ disabled: currentPageRef >= LAST_VALUE }"></span>
         </template>
         <template v-else-if="name === 'jumper'">
-          跳转至<cu-input
+          跳转至<c-input
             type="number"
             :model-value="currentPageRef"
             @blur="change"
             @keyup.enter="change"
             style="width: 50px; margin: 0 4px"
-            :size="size"></cu-input
+            :size="size"></c-input
           >页
         </template>
       </div>
@@ -58,9 +58,9 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import '../style/pagination.css';
-import { CuSelect } from '../../select/index';
-import { CuOption } from '../../option/index';
-import { CuInput } from '../../input/index';
+import { CuSelect as CSelect } from '../../select/index';
+import { CuOption as COption } from '../../option/index';
+import { CuInput as CInput } from '../../input/index';
 import { paginationProps, paginationEmits } from './main.props';
 
 defineOptions({

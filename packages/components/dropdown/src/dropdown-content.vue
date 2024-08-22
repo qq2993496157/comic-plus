@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="button ? CuButton : 'div'"
+    :is="button ? CButton : 'div'"
     :size="size"
     :type="buttonType"
     :disabled="disabled"
@@ -14,19 +14,19 @@
       </template>
       <slot v-else></slot>
     </div>
-    <cu-popper :show="show">
+    <popper :show="show" :custom-class="popperClass" :trigger="dropdownTriggerRef">
       <div ref="popperRef" class="cu-dropdown__popper" @click="chooseAfterHideClick">
         <slot name="dropdown"></slot>
       </div>
-    </cu-popper>
+    </popper>
   </component>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import '../style/dropdown.css';
-import { CuPopper } from '../../popper';
-import { CuButton } from '../../button';
+import { CuPopper as Popper } from '../../popper';
+import { CuButton as CButton } from '../../button';
 import { useEventListener } from '@vueuse/core';
 import { useClickOutside } from '../../../utils';
 import { dropdownProps } from './main.props';

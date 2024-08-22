@@ -1,7 +1,7 @@
 <template>
   <span class="cu-upload__chooseItem" @click="emit('choose')">
     <slot name="trigger">
-      <cu-button :disabled="disabled" size="small" type="primary" v-if="type === 'list'">选择文件</cu-button>
+      <c-button :disabled="disabled" size="small" type="primary" v-if="type === 'list'">选择文件</c-button>
       <div class="cu-upload__trigger" v-else>
         <i class="cu-icon-plus"></i>
       </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { CuButton } from '../../button';
+import { CuButton as CButton } from '../../button';
 
 defineOptions({
   name: 'CuUploadChoose'

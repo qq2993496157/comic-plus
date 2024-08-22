@@ -4,29 +4,29 @@
     :class="[type ? 'cu-slider--' + type : undefined, { 'is-disabled': disabled }, currentSize]"
     :style="{ '--cu-slider-color': props.color }">
     <div class="cu-slider__container" ref="containerRef" @mousedown="containerMouseDown">
-      <slider-steps :steps="steps" v-if="steps > 0 && props.showStep"></slider-steps>
-      <slider-bar></slider-bar>
-      <slider-marks :marks="marks" v-if="marks"></slider-marks>
+      <slider-steps :steps="steps" v-if="steps > 0 && props.showStep" />
+      <slider-bar />
+      <slider-marks :marks="marks" v-if="marks" />
       <slider-button
         ref="sliderMinButtonRef"
         :tooltip-value="range ? props.modelValue[0] : props.modelValue"
         :model-value="sliderValue"
-        @update:model-value="recordValue = $event"></slider-button>
+        @update:model-value="recordValue = $event" />
       <slider-button
         v-if="range"
         :tooltip-value="props.modelValue[1]"
         ref="sliderMaxButtonRef"
         :model-value="sliderValue2"
-        @update:model-value="recordValue2 = $event"></slider-button>
+        @update:model-value="recordValue2 = $event" />
     </div>
     <div class="cu-slider__input" v-if="showInput && !props.range">
-      <cu-input-number
+      <input-number
         :model-value="props.modelValue"
         @update:model-value="_emit($event)"
         :max="props.max"
         :min="props.min"
         :step="step"
-        :size="currentSize"></cu-input-number>
+        :size="currentSize" />
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ import sliderButton from './components/slider-button.vue';
 import sliderBar from './components/slider-bar';
 import sliderSteps from './components/slider-steps';
 import sliderMarks from './components/slider-marks';
-import { CuInputNumber } from '../../input-number';
+import { CuInputNumber as InputNumber } from '../../input-number';
 import { sliderEmits, sliderProps } from './main.props';
 import { SLIDER_PROVIDE } from './type';
 import { FORM_PROVIDE } from '../../form/src/type';

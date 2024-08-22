@@ -1,5 +1,5 @@
 <template>
-  <cu-mode
+  <mode
     :show="showMode"
     :custom-class="['cu-mode__flex', modeClass]"
     :lock-scroll="lockScroll"
@@ -28,7 +28,7 @@
           </template>
         </div>
         <div class="cu-popup__footer">
-          <cu-button
+          <c-button
             size="small"
             plain
             :color="color"
@@ -36,28 +36,28 @@
             @click="cancel('cancel')"
             v-if="showCancelButton">
             {{ cancelButtonText }}
-          </cu-button>
-          <cu-button
+          </c-button>
+          <c-button
             v-if="showConfirmButton"
             size="small"
             :type="color ? undefined : type === 'error' ? 'danger' : type || 'primary'"
             :color="color"
             @click="confirm">
             {{ confirmButtonText }}
-          </cu-button>
+          </c-button>
         </div>
       </div>
     </transition>
-  </cu-mode>
+  </mode>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
 import '../../style/message-box.css';
-import { CuMode } from '../../../mode';
+import { CuMode as Mode } from '../../../mode';
 import { usePopup, isString } from '../../../../utils';
-import CuButton from '../../../button/src/main.vue';
+import {CuButton as CButton} from '../../../button';
 import { confirmProps } from './main.props';
 defineOptions({
   name: 'CuConfirm'

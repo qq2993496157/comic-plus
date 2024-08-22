@@ -1,7 +1,7 @@
 <template>
   <div class="cu-rate" :class="{ 'read-only': disabled }">
     <div class="cu-rate__container" ref="rateContainerRef" :style="{ fontSize: calcRateSize + 'px' }">
-      <cu-rate-item v-for="idx in count" :current="idx" @click="itemHandleClick"></cu-rate-item>
+      <rate-item v-for="idx in count" :current="idx" @click="itemHandleClick"></rate-item>
     </div>
     <span v-if="showText" class="cu-rate__text" :style="{ color: disabled ? activeColor : undefined }">
       <slot name="text" :value="activeIdx"> {{ textContent }}</slot>
@@ -13,7 +13,7 @@
 import { computed, provide, ref, watch, watchEffect } from 'vue';
 import '../style/rate.css';
 import { useMouseInElement } from '@vueuse/core';
-import CuRateItem from './item.vue';
+import RateItem from './item.vue';
 import { rateProps, rateEmits } from './main.props';
 import { RATE_PROVIDE } from './type';
 

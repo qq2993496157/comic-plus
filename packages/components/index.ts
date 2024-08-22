@@ -82,6 +82,11 @@ import { CuClock } from './clock/index';
 import { CuWebFooter } from './web-footer/index';
 import { CuTimeline } from './timeline/index';
 import { CuTimelineItem } from './timeline-item/index';
+import { CuCalendar } from './calendar/index';
+import { CuSchedule } from './schedule/index';
+import { CuPopover } from './popover/index';
+import { CuTableV2 } from './table-v2/index';
+import { CuTableColumn } from './table-column/index';
 
 import type { Plugin } from 'vue';
 
@@ -175,7 +180,12 @@ export default [
   CuClock,
   CuWebFooter,
   CuTimeline,
-  CuTimelineItem
+  CuTimelineItem,
+  CuCalendar,
+  CuSchedule,
+  CuPopover,
+  CuTableV2,
+  CuTableColumn
 ] as Plugin[];
 
 export {
@@ -268,5 +278,10 @@ export {
   CuClock,
   CuWebFooter,
   CuTimeline,
-  CuTimelineItem
+  CuTimelineItem,
+  CuCalendar,
+  CuSchedule,
+  CuPopover,
+  CuTableV2,
+  CuTableColumn
 };

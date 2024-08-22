@@ -6,11 +6,7 @@
         <i :class="injectProps.icon ?? 'cu-icon-right-filled'" v-show="!loading || !injectProps.lazy" v-if="isIcon"></i>
       </span>
       <span class="checkbox" v-if="injectProps.selection">
-        <cu-checkbox
-          v-model="checked"
-          :indeterminate="indeterminate"
-          @change="_checkChange"
-          :disabled="data.disabled"></cu-checkbox>
+        <checkbox v-model="checked" :indeterminate="indeterminate" @change="_checkChange" :disabled="data.disabled" />
       </span>
       <div class="cu-tree__info" @click="_nodeClick">
         <i v-if="data.icon" class="node-icon" :class="isFunction(data.icon) ? data.icon(nodeShow) : data.icon"></i>
@@ -19,7 +15,7 @@
         </slot>
       </div>
     </div>
-    <cu-transition-collapse>
+    <transition-collapse>
       <div class="cu-tree__children" v-show="nodeShow">
         <tree-node
           v-for="(item, index) in childrenList"
@@ -34,14 +30,14 @@
           </template>
         </tree-node>
       </div>
-    </cu-transition-collapse>
+    </transition-collapse>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, inject, getCurrentInstance, onMounted, nextTick, onUnmounted } from 'vue';
-import { CuTransitionCollapse } from '../../transition-collapse';
-import { CuCheckbox } from '../../checkbox';
+import { CuTransitionCollapse as TransitionCollapse } from '../../transition-collapse';
+import { CuCheckbox as Checkbox } from '../../checkbox';
 import emitter from '../../../utils/emitter';
 import { isFunction } from '../../../utils';
 import { TREE_PROVIDE, ChildNodeInstance } from './type';

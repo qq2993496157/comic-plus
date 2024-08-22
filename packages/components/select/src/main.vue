@@ -26,19 +26,19 @@
       </span>
     </div>
 
-    <cu-popper :show="show">
+    <popper :show="show" :trigger="selectRef">
       <div
         class="cu-select__popper"
         ref="popperRef"
         :class="currentSize"
         :style="{ width: selectRef?.offsetWidth + 'px' }">
-        <cu-scrollbar max-height="280px">
+        <scrollbar max-height="280px">
           <ul class="cu-select__dropdown">
             <slot></slot>
           </ul>
-        </cu-scrollbar>
+        </scrollbar>
       </div>
-    </cu-popper>
+    </popper>
   </div>
 </template>
 
@@ -47,8 +47,8 @@ import { ref, provide, reactive, computed, inject } from 'vue';
 import '../style/select.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { CuPopper } from '../../popper';
-import { CuScrollbar } from '../../scrollbar';
+import { CuPopper as Popper } from '../../popper';
+import { CuScrollbar as Scrollbar } from '../../scrollbar';
 import { useConfig, useItemValidate, useClickOutside } from '../../../utils';
 import { selectProps, selectEmits } from './main.props';
 import { SelectValue, SELECT_PROVIDE, OptionInstance } from './type';

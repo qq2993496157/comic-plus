@@ -2,7 +2,8 @@
   <div
     class="cu-time-picker"
     :class="[{ expand: show }, { 'is-disabled': disabled }, { 'is-range': range }, currentSize]"
-    v-click-outside:[popperRef]="onClickOutside">
+    v-click-outside:[popperRef]="onClickOutside"
+    ref="timePickerRef">
     <div class="cu-time-picker__content" @click="handleClick">
       <span class="prefix-icon">
         <i :class="icon"></i>
@@ -28,11 +29,11 @@
       </span>
     </div>
 
-    <cu-popper :show="show">
+    <popper :show="show" :trigger="timePickerRef">
       <div class="cu-time-picker__popper" ref="popperRef" :class="{ range }">
         <time-select></time-select>
       </div>
-    </cu-popper>
+    </popper>
   </div>
 </template>
 
@@ -41,7 +42,7 @@ import { ref, computed, inject, provide } from 'vue';
 import '../style/time-picker.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { CuPopper } from '../../popper';
+import { CuPopper as Popper } from '../../popper';
 import timeSelect from './time-select.vue';
 import { useConfig, useClickOutside, useItemValidate, isArray } from '../../../utils';
 import { timePickerProps, timePickerEmits } from './main.props';
@@ -54,6 +55,7 @@ const props = defineProps(timePickerProps);
 const emit = defineEmits(timePickerEmits);
 
 const popperRef = ref(null);
+const timePickerRef = ref();
 const { itemValidate } = useItemValidate();
 const { SIZE } = useConfig();
 const form = inject(FORM_PROVIDE, undefined);

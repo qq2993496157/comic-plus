@@ -1,8 +1,8 @@
-import { inject, ref, computed } from 'vue';
+import { inject, ref } from 'vue';
 import { SLIDER_PROVIDE } from '../type';
 import { useEventListener } from '@vueuse/core';
 
-export const useSliderButton = (props, emit) => {
+export const useSliderButton = (emit) => {
   const { props: injectProps, containerRef, updateValue } = inject(SLIDER_PROVIDE);
 
   const isMouseEnter = ref(false);

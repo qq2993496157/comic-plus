@@ -75,13 +75,13 @@ function getChecked() {
 
 function changeValue() {
   let checked = !getChecked();
-  if (props.changeBefore) {
-    let before = props.changeBefore?.();
+  if (props.beforeChange) {
+    let before = props.beforeChange?.();
 
     const included = [isBoolean(before), isPromise(before)].includes(true);
 
     if (!included) {
-      throw 'ChangeBefore must be a function that provides a return Boolean value or Promise';
+      throw 'beforeChange must be a function that provides a return Boolean value or Promise';
     }
 
     if (isPromise(before)) {

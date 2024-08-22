@@ -1,17 +1,28 @@
 .cu-popper {
   transform-origin: center top;
   border-radius: var(--cu-border-radius);
-  background-color: #fff;
   filter: drop-shadow(0 0px 1px rgba(200, 200, 200, 1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12))
-    drop-shadow(0 0 6px rgba(0, 0, 0, 0.04));
+    drop-shadow(0 0 4px rgba(0, 0, 0, 0.04));
+  position: relative;
 }
+.cu-popper.light {
+  background-color: #fff;
+  color: var(--cu-color-text);
+}
+
+.cu-popper.dark {
+  background-color: #333;
+  color: #fff;
+}
+
 .cu-popper .cu-popper__arrow {
+  position: absolute;
   display: block;
   width: 8px;
   height: 8px;
   translate: 0 -50%;
-  background-color: #fff;
-  transform: rotate(45deg);
+  rotate: 45deg;
+  background-color: inherit;
 }
 
 .cu-popper[data-placement^='bottom'] > .cu-popper__arrow {
@@ -21,6 +32,17 @@
   bottom: 0;
   translate: 0 50%;
 }
+.cu-popper[data-placement^='left'] > .cu-popper__arrow {
+  right: 0;
+  translate: 50% 0;
+  rotate: -45deg;
+}
+.cu-popper[data-placement^='right'] > .cu-popper__arrow {
+  left: 0;
+  translate: -50% 0;
+  rotate: 135deg;
+}
+
 .cu-popper[data-placement^='top'] {
   transform-origin: center bottom;
 }

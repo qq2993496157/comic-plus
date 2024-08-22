@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, watch } from 'vue';
+import { computed, inject } from 'vue';
 import '../style/checkbox.css';
 import { useConfig, useItemValidate, isBoolean } from '../../../utils';
 import { checkboxProps, checkboxEmits } from './main.props';
@@ -57,11 +57,4 @@ function changeValue(e: MouseEvent) {
     itemValidate('change');
   }
 }
-
-watch(
-  () => props.modelValue,
-  (val) => {
-    console.log(val);
-  }
-);
 </script>

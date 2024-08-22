@@ -3,7 +3,7 @@
     <div class="cu-skeleton" :class="{ animated }" v-bind="$attrs">
       <slot name="template" v-for="_ in count">
         <div class="template-default">
-          <cu-skeleton-item v-for="_ in rows"></cu-skeleton-item>
+          <skeleton-item v-for="_ in rows"></skeleton-item>
         </div>
       </slot>
     </div>
@@ -17,7 +17,7 @@
 import { ref, watch } from 'vue';
 import '../style/skeleton.css';
 import { throttle } from '../../../utils';
-import { CuSkeletonItem } from '../../skeleton-item';
+import { CuSkeletonItem as SkeletonItem } from '../../skeleton-item';
 import { skeletonProps } from './main.props';
 
 defineOptions({

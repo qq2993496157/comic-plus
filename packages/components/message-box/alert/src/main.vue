@@ -1,5 +1,5 @@
 <template>
-  <cu-mode
+  <mode
     :show="showMode"
     :lock-scroll="lockScroll"
     :custom-class="['cu-mode__flex', modeClass]"
@@ -38,14 +38,14 @@
         </div>
       </div>
     </transition>
-  </cu-mode>
+  </mode>
 </template>
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
 import '../../style/message-box.css';
-import { CuMode } from '../../../mode';
+import { CuMode as Mode } from '../../../mode';
 import { usePopup, isString } from '../../../../utils';
 import { CuButton } from '../../../button';
 import { alertProps } from './main.props';

@@ -1,15 +1,15 @@
 <template>
   <template v-if="button">
-    <cu-button-group>
-      <cu-button :size="size" :type="buttonType" @click="emit('button-click', $event)" :disabled="disabled">
+    <button-group>
+      <c-button :size="size" :type="buttonType" @click="emit('button-click', $event)" :disabled="disabled">
         <slot></slot>
-      </cu-button>
+      </c-button>
       <dropdown-content v-bind="props">
         <template #dropdown>
           <slot name="dropdown"></slot>
         </template>
       </dropdown-content>
-    </cu-button-group>
+    </button-group>
   </template>
   <div class="cu-dropdown" v-else>
     <dropdown-content v-bind="props">
@@ -24,8 +24,8 @@
 <script setup lang="ts">
 import { provide } from 'vue';
 import '../style/dropdown.css';
-import { CuButton } from '../../button';
-import { CuButtonGroup } from '../../button-group';
+import { CuButton as CButton } from '../../button';
+import { CuButtonGroup as ButtonGroup } from '../../button-group';
 import DropdownContent from './dropdown-content.vue';
 import { dropdownProps, dropdownEmits } from './main.props';
 import { DROPDOWN_PROVIDE } from './type';

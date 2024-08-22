@@ -15,8 +15,7 @@
         :class="[{ unfold }, injectProps.mode === 'horizontal' ? 'cu-icon-down' : 'cu-icon-right']"></span>
     </div>
     <template v-if="float">
-      <cu-menu-popper
-        v-if="isMount"
+      <menu-popper
         :trigger="submenuRef"
         :show="unfold"
         :fixed="!teleportDisabled"
@@ -25,36 +24,25 @@
         <ul class="cu-sub-menu__content" :style="style">
           <slot></slot>
         </ul>
-      </cu-menu-popper>
+      </menu-popper>
     </template>
     <template v-else>
-      <cu-transition-collapse>
+      <transition-collapse>
         <ul class="cu-sub-menu__content" v-show="unfold" :style="{ '--cu-menu-padding': deptOffset * 20 + 'px' }">
           <slot></slot>
         </ul>
-      </cu-transition-collapse>
+      </transition-collapse>
     </template>
   </li>
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  inject,
-  reactive,
-  computed,
-  provide,
-  onBeforeUnmount,
-  getCurrentInstance,
-  onMounted,
-  watch,
-  Ref
-} from 'vue';
+import { ref, inject, reactive, computed, provide, onBeforeUnmount, getCurrentInstance, onMounted, watch } from 'vue';
 import { useTooltip } from '../../tooltip/main';
 import { useMenu } from '../utils/menu';
 import { useEventListener } from '@vueuse/core';
-import { CuTransitionCollapse } from '../../transition-collapse';
-import CuMenuPopper from './menu-popper.vue';
+import { CuTransitionCollapse as TransitionCollapse } from '../../transition-collapse';
+import MenuPopper from './menu-popper.vue';
 import { submenuProps } from './submenu.props';
 import { MENU_PROVIDE, SubmenuProvide, MenuItem } from './type';
 
@@ -66,11 +54,6 @@ const vMenuTooltip = useTooltip();
 
 const props = defineProps(submenuProps);
 const instance = getCurrentInstance()!;
-// 为了实现popper组件和submenu组件的解耦
-// 这里只能在mounted之后再渲染popper并将submenuRef这个dom触发器传递给popper
-// 也不知道为什么只能这样，如果直接传递，popper的useFloating函数会找不到锚定的位置
-// 等我弄明白floating-ui库的实现方式再尝试该这里
-const isMount = ref(false);
 
 const submenuKey = props.index ?? instance.uid.toString();
 
@@ -139,7 +122,7 @@ function createTimes() {
   if (!timer) {
     timer = setTimeout(() => {
       closeMenu();
-    }, 300);
+    }, 150);
   }
 }
 
@@ -181,7 +164,6 @@ onMounted(() => {
     idx: submenuKey,
     active
   });
-  isMount.value = true;
 });
 
 onBeforeUnmount(() => {
