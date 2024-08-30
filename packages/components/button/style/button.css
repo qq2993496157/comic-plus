@@ -11,22 +11,21 @@
   line-height: 1;
   user-select: none;
   white-space: nowrap;
+  --cu-button-color: var(--cu-text-color);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-text-color-light5);
   --cu-button-border: var(--cu-border-color);
-  --cu-button-color: var(--cu-color-text);
-  --cu-button-background: #fff;
   --cu-button-border-hover: var(--cu-color-primary);
-  --cu-button-background-hover: var(--cu-color-primary);
-  --cu-button-color-hover: #fff;
   --cu-button-border-disabled: var(--cu-border-color);
-  --cu-button-color-disabled: var(--cu-color-text-light2);
-  --cu-button-background-disabled: #fff;
+  --cu-button-background: #ffffff;
+  --cu-button-background-hover: var(--cu-color-primary);
+  --cu-button-background-disabled: #ffffff;
   --cu-button-round: calc(var(--cu-size-default) / 2);
   background-color: var(--cu-button-background);
   border-color: var(--cu-button-border);
   color: var(--cu-button-color);
-  transition: all 200ms;
+  transition: all 200ms ease;
   outline: none;
-  position: relative;
   vertical-align: middle;
 }
 
@@ -58,122 +57,277 @@
   width: var(--cu-size-large);
 }
 
+.cu-button.is-raised {
+  box-shadow: var(--cu-boxshadow-base);
+}
+
 .cu-button--primary {
-  --cu-button-border: var(--cu-color-primary);
   --cu-button-color: #ffffff;
+  --cu-button-color-disabled: #ffffff;
+  --cu-button-border: var(--cu-color-primary);
+  --cu-button-border-hover: var(--cu-color-primary-light2);
+  --cu-button-border-disabled: var(--cu-color-primary-light4);
   --cu-button-background: var(--cu-color-primary);
-  --cu-button-border-hover: var(--cu-color-primary-light);
-  --cu-button-background-hover: var(--cu-color-primary-light);
-  --cu-button-border-disabled: var(--cu-color-primary-light2);
-  --cu-button-color-disabled: #fff;
-  --cu-button-background-disabled: var(--cu-color-primary-light2);
+  --cu-button-background-hover: var(--cu-color-primary-light2);
+  --cu-button-background-disabled: var(--cu-color-primary-light4);
 }
 
 .cu-button--success {
-  --cu-button-border: var(--cu-color-success);
   --cu-button-color: #ffffff;
+  --cu-button-color-disabled: #ffffff;
+  --cu-button-border: var(--cu-color-success);
+  --cu-button-border-hover: var(--cu-color-success-light2);
+  --cu-button-border-disabled: var(--cu-color-success-light4);
   --cu-button-background: var(--cu-color-success);
-  --cu-button-border-hover: var(--cu-color-success-light);
-  --cu-button-background-hover: var(--cu-color-success-light);
-  --cu-button-border-disabled: var(--cu-color-success-light2);
-  --cu-button-color-disabled: #fff;
-  --cu-button-background-disabled: var(--cu-color-success-light2);
+  --cu-button-background-hover: var(--cu-color-success-light2);
+  --cu-button-background-disabled: var(--cu-color-success-light4);
 }
 .cu-button--warning {
-  --cu-button-border: var(--cu-color-warning);
   --cu-button-color: #ffffff;
+  --cu-button-color-disabled: #ffffff;
+  --cu-button-border: var(--cu-color-warning);
+  --cu-button-border-hover: var(--cu-color-warning-light2);
+  --cu-button-border-disabled: var(--cu-color-warning-light4);
   --cu-button-background: var(--cu-color-warning);
-  --cu-button-border-hover: var(--cu-color-warning-light);
-  --cu-button-background-hover: var(--cu-color-warning-light);
-  --cu-button-border-disabled: var(--cu-color-warning-light2);
-  --cu-button-color-disabled: #fff;
-  --cu-button-background-disabled: var(--cu-color-warning-light2);
+  --cu-button-background-hover: var(--cu-color-warning-light2);
+  --cu-button-background-disabled: var(--cu-color-warning-light4);
 }
 .cu-button--danger {
-  --cu-button-border: var(--cu-color-danger);
   --cu-button-color: #ffffff;
+  --cu-button-color-disabled: #ffffff;
+  --cu-button-border: var(--cu-color-danger);
+  --cu-button-border-hover: var(--cu-color-danger-light2);
+  --cu-button-border-disabled: var(--cu-color-danger-light4);
   --cu-button-background: var(--cu-color-danger);
-  --cu-button-border-hover: var(--cu-color-danger-light);
-  --cu-button-background-hover: var(--cu-color-danger-light);
-  --cu-button-border-disabled: var(--cu-color-danger-light2);
-  --cu-button-color-disabled: #fff;
-  --cu-button-background-disabled: var(--cu-color-danger-light2);
+  --cu-button-background-hover: var(--cu-color-danger-light2);
+  --cu-button-background-disabled: var(--cu-color-danger-light4);
 }
 .cu-button--info {
-  --cu-button-border: var(--cu-color-info);
   --cu-button-color: #ffffff;
+  --cu-button-color-disabled: #ffffff;
+  --cu-button-border: var(--cu-color-info);
+  --cu-button-border-hover: var(--cu-color-info-light2);
+  --cu-button-border-disabled: var(--cu-color-info-light4);
   --cu-button-background: var(--cu-color-info);
-  --cu-button-border-hover: var(--cu-color-info-light);
-  --cu-button-background-hover: var(--cu-color-info-light);
-  --cu-button-border-disabled: var(--cu-color-info-light2);
-  --cu-button-color-disabled: #fff;
-  --cu-button-background-disabled: var(--cu-color-info-light2);
+  --cu-button-background-hover: var(--cu-color-info-light2);
+  --cu-button-background-disabled: var(--cu-color-info-light4);
 }
 .cu-button.is-plain {
-  --cu-button-border: var(--cu-border-color);
-  --cu-button-color: var(--cu-color-text);
-  --cu-button-background: #fff;
-  --cu-button-background-hover: #fff;
   --cu-button-color-hover: var(--cu-color-primary);
-  --cu-button-background-disabled: #fff;
+  --cu-button-background-hover: var(--cu-color-primary-light9);
+  --cu-button-background-disabled: #ffffff;
 }
 
 .cu-button--primary.is-plain {
-  --cu-button-border: var(--cu-color-primary);
   --cu-button-color: var(--cu-color-primary);
-  --cu-button-background: #fff;
-  --cu-button-background-hover: var(--cu-color-primary-light3);
-  --cu-button-color-hover: var(--cu-color-primary);
-  --cu-button-color-disabled: var(--cu-color-primary-light2);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-color-primary-light4);
+  --cu-button-border: var(--cu-color-primary);
+  --cu-button-border-hover: var(--cu-color-primary);
+  --cu-button-border-disabled: var(--cu-color-primary-light4);
+  --cu-button-background: var(--cu-color-primary-light9);
+  --cu-button-background-hover: var(--cu-color-primary);
+  --cu-button-background-disabled: var(--cu-color-primary-light9);
 }
 .cu-button--success.is-plain {
-  --cu-button-border: var(--cu-color-success);
   --cu-button-color: var(--cu-color-success);
-  --cu-button-background: #fff;
-  --cu-button-background-hover: var(--cu-color-success-light3);
-  --cu-button-color-hover: var(--cu-color-success);
-  --cu-button-color-disabled: var(--cu-color-success-light2);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-color-success-light4);
+  --cu-button-border: var(--cu-color-success);
+  --cu-button-border-hover: var(--cu-color-success);
+  --cu-button-border-disabled: var(--cu-color-success-light4);
+  --cu-button-background: var(--cu-color-success-light9);
+  --cu-button-background-hover: var(--cu-color-success);
+  --cu-button-background-disabled: var(--cu-color-success-light9);
 }
 .cu-button--warning.is-plain {
-  --cu-button-border: var(--cu-color-warning);
   --cu-button-color: var(--cu-color-warning);
-  --cu-button-background: #fff;
-  --cu-button-background-hover: var(--cu-color-warning-light3);
-  --cu-button-color-hover: var(--cu-color-warning);
-  --cu-button-color-disabled: var(--cu-color-warning-light2);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-color-warning-light4);
+  --cu-button-border: var(--cu-color-warning);
+  --cu-button-border-hover: var(--cu-color-warning);
+  --cu-button-border-disabled: var(--cu-color-warning-light4);
+  --cu-button-background: var(--cu-color-warning-light9);
+  --cu-button-background-hover: var(--cu-color-warning);
+  --cu-button-background-disabled: var(--cu-color-warning-light9);
 }
 .cu-button--danger.is-plain {
-  --cu-button-border: var(--cu-color-danger);
   --cu-button-color: var(--cu-color-danger);
-  --cu-button-background: #fff;
-  --cu-button-background-hover: var(--cu-color-danger-light3);
-  --cu-button-color-hover: var(--cu-color-danger);
-  --cu-button-color-disabled: var(--cu-color-danger-light2);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-color-danger-light4);
+  --cu-button-border: var(--cu-color-danger);
+  --cu-button-border-hover: var(--cu-color-danger);
+  --cu-button-border-disabled: var(--cu-color-danger-light4);
+  --cu-button-background: var(--cu-color-danger-light9);
+  --cu-button-background-hover: var(--cu-color-danger);
+  --cu-button-background-disabled: var(--cu-color-danger-light9);
 }
 .cu-button--info.is-plain {
-  --cu-button-border: var(--cu-color-info);
   --cu-button-color: var(--cu-color-info);
-  --cu-button-background: #fff;
-  --cu-button-background-hover: var(--cu-color-info-light3);
-  --cu-button-color-hover: var(--cu-color-info);
-  --cu-button-color-disabled: var(--cu-color-info-light2);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-color-info-light4);
+  --cu-button-border: var(--cu-color-info);
+  --cu-button-border-hover: var(--cu-color-info);
+  --cu-button-border-disabled: var(--cu-color-info-light4);
+  --cu-button-background: var(--cu-color-info-light9);
+  --cu-button-background-hover: var(--cu-color-info);
+  --cu-button-background-disabled: var(--cu-color-info-light9);
 }
 
-.cu-button.loading,
-.cu-button.is-disabled {
+.cu-button.is-light {
+  --cu-button-color-hover: var(--cu-color-primary);
+  --cu-button-border-hover: var(--cu-color-primary);
+  --cu-button-background: transparent;
+  --cu-button-background-hover: transparent;
+  --cu-button-background-disabled: transparent;
+}
+
+.cu-button--primary.is-light {
+  --cu-button-color: var(--cu-color-primary);
+  --cu-button-color-hover: var(--cu-color-primary);
+  --cu-button-color-disabled: var(--cu-color-primary-light4);
+  --cu-button-border: var(--cu-color-primary);
+  --cu-button-border-hover: var(--cu-color-primary);
+  --cu-button-border-disabled: var(--cu-color-primary-light4);
+  --cu-button-background-hover: var(--cu-color-primary-light9);
+}
+.cu-button--success.is-light {
+  --cu-button-color: var(--cu-color-success);
+  --cu-button-color-hover: var(--cu-color-success);
+  --cu-button-color-disabled: var(--cu-color-success-light4);
+  --cu-button-border: var(--cu-color-success);
+  --cu-button-border-hover: var(--cu-color-success);
+  --cu-button-border-disabled: var(--cu-color-success-light4);
+  --cu-button-background-hover: var(--cu-color-success-light9);
+}
+.cu-button--warning.is-light {
+  --cu-button-color: var(--cu-color-warning);
+  --cu-button-color-hover: var(--cu-color-warning);
+  --cu-button-color-disabled: var(--cu-color-warning-light4);
+  --cu-button-border: var(--cu-color-warning);
+  --cu-button-border-hover: var(--cu-color-warning);
+  --cu-button-border-disabled: var(--cu-color-warning-light4);
+  --cu-button-background-hover: var(--cu-color-warning-light9);
+}
+.cu-button--danger.is-light {
+  --cu-button-color: var(--cu-color-danger);
+  --cu-button-color-hover: var(--cu-color-danger);
+  --cu-button-color-disabled: var(--cu-color-danger-light4);
+  --cu-button-border: var(--cu-color-danger);
+  --cu-button-border-hover: var(--cu-color-danger);
+  --cu-button-border-disabled: var(--cu-color-danger-light4);
+  --cu-button-background-hover: var(--cu-color-danger-light9);
+}
+.cu-button--info.is-light {
+  --cu-button-color: var(--cu-color-info);
+  --cu-button-color-hover: var(--cu-color-info);
+  --cu-button-color-disabled: var(--cu-color-info-light4);
+  --cu-button-border: var(--cu-color-info);
+  --cu-button-border-hover: var(--cu-color-info);
+  --cu-button-border-disabled: var(--cu-color-info-light4);
+  --cu-button-background-hover: var(--cu-color-info-light9);
+}
+
+.cu-button.is-dashed {
+  border-style: dashed;
+  --cu-button-color: var(--cu-text-color);
+  --cu-button-color-hover: var(--cu-color-primary-light);
+  --cu-button-color-disabled: var(--cu-text-color-light4);
+  --cu-button-border: var(--cu-border-color);
+  --cu-button-border-hover: var(--cu-color-primary-light);
+  --cu-button-border-active: var(--cu-color-primary-light8);
+  --cu-button-border-disabled: var(--cu-border-color-disabled);
+  --cu-button-background: transparent;
+  --cu-button-background-hover: transparent;
+  --cu-button-background-disabled: transparent;
+}
+
+.cu-button--primary.is-dashed {
+  --cu-button-color-hover: var(--cu-color-primary-light);
+  --cu-button-border-hover: var(--cu-color-primary-light);
+  --cu-button-border-active: var(--cu-color-primary-light8);
+}
+.cu-button--success.is-dashed {
+  --cu-button-color-hover: var(--cu-color-success-light);
+  --cu-button-border-hover: var(--cu-color-success-light);
+  --cu-button-border-active: var(--cu-color-success-light8);
+}
+.cu-button--warning.is-dashed {
+  --cu-button-color-hover: var(--cu-color-warning-light);
+  --cu-button-border-hover: var(--cu-color-warning-light);
+  --cu-button-border-active: var(--cu-color-warning-light8);
+}
+.cu-button--danger.is-dashed {
+  --cu-button-color-hover: var(--cu-color-danger-light);
+  --cu-button-border-hover: var(--cu-color-danger-light);
+  --cu-button-border-active: var(--cu-color-danger-light8);
+}
+.cu-button--info.is-dashed {
+  --cu-button-color-hover: var(--cu-color-info-light);
+  --cu-button-border-hover: var(--cu-color-info-light);
+  --cu-button-border-active: var(--cu-color-info-light8);
+}
+
+.cu-button.is-text {
+  border: none;
+  --cu-button-color: var(--cu-text-color);
+  --cu-button-color-hover: var(--cu-text-color);
+  --cu-button-background: transparent;
+  --cu-button-background-hover: var(--cu-background-color-light);
+  --cu-button-background-disabled: transparent;
+  --cu-button-background-active: var(--cu-background-color);
+}
+
+.cu-button--primary.is-text {
+  --cu-button-color: var(--cu-color-primary);
+  --cu-button-color-hover: var(--cu-color-primary);
+  --cu-button-color-disabled: var(--cu-color-primary-light4);
+  --cu-button-background-hover: var(--cu-color-primary-light9);
+  --cu-button-background-active: var(--cu-color-primary-light8);
+}
+.cu-button--success.is-text {
+  --cu-button-color: var(--cu-color-success);
+  --cu-button-color-hover: var(--cu-color-success);
+  --cu-button-color-disabled: var(--cu-color-success-light4);
+  --cu-button-background-hover: var(--cu-color-success-light9);
+  --cu-button-background-active: var(--cu-color-success-light8);
+}
+.cu-button--warning.is-text {
+  --cu-button-color: var(--cu-color-warning);
+  --cu-button-color-hover: var(--cu-color-warning);
+  --cu-button-color-disabled: var(--cu-color-warning-light4);
+  --cu-button-background-hover: var(--cu-color-warning-light9);
+  --cu-button-background-active: var(--cu-color-warning-light8);
+}
+.cu-button--danger.is-text {
+  --cu-button-color: var(--cu-color-danger);
+  --cu-button-color-hover: var(--cu-color-danger);
+  --cu-button-color-disabled: var(--cu-color-danger-light4);
+  --cu-button-background-hover: var(--cu-color-danger-light9);
+  --cu-button-background-active: var(--cu-color-danger-light8);
+}
+.cu-button--info.is-text {
+  --cu-button-color: var(--cu-color-info);
+  --cu-button-color-hover: var(--cu-color-info);
+  --cu-button-color-disabled: var(--cu-color-info-light4);
+  --cu-button-background-hover: var(--cu-color-info-light9);
+  --cu-button-background-active: var(--cu-color-info-light8);
+}
+
+.cu-button:disabled {
   cursor: no-drop;
   color: var(--cu-button-color-disabled);
   background-color: var(--cu-button-background-disabled);
   border-color: var(--cu-button-border-disabled);
 }
 
-.cu-button:not(.is-disabled):not(.loading):hover {
+.cu-button:not(:disabled):hover {
   background-color: var(--cu-button-background-hover);
   color: var(--cu-button-color-hover);
   border-color: var(--cu-button-border-hover);
 }
 
-.cu-button:active {
+.cu-button:not(.is-text):not(:disabled):active {
   box-shadow: inset 0 0 0 1px;
 }
 .cu-button-group .cu-button:first-child {
@@ -198,6 +352,12 @@
   border-left-color: var(--cu-border-color);
   border-right-color: var(--cu-border-color);
 }
+.cu-button-group .cu-button:not(:disabled):first-child {
+  border-right-color: var(--cu-border-color);
+}
+.cu-button-group .cu-button:not(:disabled):last-child {
+  border-left-color: var(--cu-border-color);
+}
 
 .cu-button-group + .cu-button-group,
 .cu-button-group + .cu-button,
@@ -206,62 +366,30 @@
   margin-left: 10px;
 }
 
-.cu-button-group .cu-button:not(:last-child) {
-  margin-right: -1px;
+.cu-button-group .cu-button:first-child {
+  margin-left: 0;
 }
 
 .cu-button-group .cu-button {
-  margin-left: 0;
+  margin-left: -1px;
 }
 
 .cu-button-group {
   display: inline-block;
   vertical-align: middle;
 }
-
-.comic-plus__is-comic .cu-button {
-  --cu-button-border: var(--cu-comic-border-color);
-  position: relative;
-  --cu-button-border-hover: var(--cu-comic-border-color);
+.cu-button.is-raised:not(:disabled):active {
+  box-shadow: none;
+  transform: translateY(1px);
 }
 
-.cu-button.is-disabled:active,
-.cu-button.loading:active,
-.comic-plus__is-comic .cu-button:active {
+.cu-button:disabled:not(.is-raised):active {
   box-shadow: none;
 }
-
-.comic-plus__is-comic .cu-button::before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 18px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  top: -1px;
-  right: 10%;
-  transition: all 200ms;
-  box-sizing: border-box;
+.cu-button.is-dashed:not(:disabled):active {
+  box-shadow: 0 0 0 2px var(--cu-button-border-active);
 }
 
-.comic-plus__is-comic .cu-button:not(.is-disabled):active:before {
-  transform: scaleX(0);
-}
-
-.comic-plus__is-comic .cu-button.is-round::before {
-  right: 20%;
-}
-
-.comic-plus__is-comic .cu-button.is-circle::before {
-  right: 40%;
-  width: 8px;
-}
-
-.comic-plus__is-comic .cu-button.loading,
-.comic-plus__is-comic .cu-button.is-disabled {
-  --cu-button-border-disabled: var(--cu-disabled-border);
-}
-
-.comic-plus__is-comic .cu-button-group .cu-button + .cu-button {
-  border-left-color: var(--cu-comic-border-color);
+.cu-button:not(:disabled).is-text:active {
+  background-color: var(--cu-button-background-active);
 }

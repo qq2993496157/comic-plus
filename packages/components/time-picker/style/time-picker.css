@@ -17,14 +17,14 @@
   height: 100%;
   cursor: inherit;
   transition: transform 200ms;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light6);
 }
 
 .cu-time-picker__content .clearable {
   min-width: 22px;
   padding-left: 8px;
   box-sizing: border-box;
-  color: var(--cu-color-text-light2);
+  color: var(--cu-text-color-light6);
 }
 
 .cu-time-picker__content .clearable i {
@@ -36,7 +36,7 @@
 }
 
 .cu-time-picker__content .clearable i:hover {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 
 .cu-time-picker__popper {
@@ -90,7 +90,7 @@
 }
 
 .cu-time-picker__popper .cu-time-picker__list > span:hover {
-  background-color: var(--cu-background-color);
+  background-color: var(--cu-background-color-light);
 }
 
 .cu-time-picker__listbox::before,

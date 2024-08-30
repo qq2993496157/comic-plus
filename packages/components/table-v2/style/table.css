@@ -1,7 +1,6 @@
 .cu-table-v2 {
   width: 100%;
-  color: var(--cu-color-text);
-  /* border-bottom: 1px solid var(--cu-border-color); */
+  color: var(--cu-text-color-light);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -11,7 +10,6 @@
 
 .cu-table-v2 .cu-table__row {
   height: calc(var(--cu-size-default) + 8px);
-  /* transition: height 200ms ease; */
 }
 
 .cu-table-v2.large .cu-table__row {
@@ -35,13 +33,13 @@
   width: 100%;
   height: 100%;
   font-size: 14px;
-  font-weight: normal;
+  /* font-weight: normal; */
   table-layout: fixed;
 }
 
 .cu-table-v2 table th,
 .cu-table-v2 table td {
-  font-weight: normal;
+  /* font-weight: normal; */
   padding: 10px 0;
   border-bottom: 1px solid var(--cu-border-color);
   text-align: left;
@@ -59,7 +57,7 @@
 
 .cu-table-v2__footer .cu-table__row,
 .cu-table-v2__header .cu-table__row {
-  background-color: #f8f8f9;
+  background-color: #fff;
 }
 .cu-table-v2 .cu-table__row.current-row {
   background-color: var(--cu-table-highlight-color, var(--cu-color-primary-light3));
@@ -160,7 +158,7 @@
 }
 
 .cu-table-v2__body .cu-table__row:hover {
-  filter: brightness(0.955);
+  filter: brightness(0.97);
 }
 
 .cu-table-v2__empty {

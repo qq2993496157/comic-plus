@@ -1,7 +1,7 @@
 .cu-table {
   position: relative;
   width: 100%;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color-light);
   border-bottom: 1px solid var(--cu-border-color);
   overflow: hidden;
   font-size: 14px;
@@ -17,7 +17,6 @@
   text-align: left;
   padding: 8px 12px;
   background-color: inherit;
-  font-weight: normal;
 }
 .cu-table.is-border {
   border-top: 1px solid;
@@ -33,8 +32,7 @@
 }
 
 .cu-table .cu-table__head {
-  background-color: #f8f8f9;
-  color: var(--cu-color-text-light);
+  background-color: #fff;
   overflow-x: scroll;
   scrollbar-width: none;
 }
@@ -119,7 +117,7 @@
   transition: filter 200ms;
 }
 .cu-table .cu-table__body .cu-table__row:hover {
-  filter: brightness(0.965);
+  filter: brightness(0.97);
 }
 
 .cu-table .cu-table__body .cu-table__td .cu-table__td-placeholder.unfold {
@@ -135,7 +133,7 @@
   line-height: 40px;
   text-align: center;
   font-size: 12px;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light);
   width: 100%;
 }
 

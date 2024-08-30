@@ -1,7 +1,7 @@
 .cu-divider {
   display: inline-flex;
   font-size: 14px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   align-items: center;
   justify-content: center;
   vertical-align: middle;

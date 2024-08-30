@@ -15,10 +15,8 @@ export type Config = {
         danger?: string;
         warning?: string;
         info?: string;
-        text?: string;
       };
   zIndex?: number;
-  isComic?: boolean;
 };
 
 export type Arrayable<T> = T | T[];

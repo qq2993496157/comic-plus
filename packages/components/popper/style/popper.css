@@ -7,11 +7,11 @@
 }
 .cu-popper.light {
   background-color: #fff;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 
 .cu-popper.dark {
-  background-color: #333;
+  background-color: #333333;
   color: #fff;
 }
 
@@ -56,8 +56,4 @@
 .popper-leave-to {
   opacity: 0;
   transform: scaleY(0);
-}
-
-.comic-plus__is-comic .cu-popper {
-  border-color: var(--cu-comic-border-color);
 }

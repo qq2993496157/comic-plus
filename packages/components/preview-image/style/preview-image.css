@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-.cu-preview-image__tools i {
+.cu-preview__buttons i {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -13,12 +13,13 @@
   height: 40px;
   font-size: 20px;
   border-radius: 50%;
-  background-color: #fff;
-  color: var(--cu-color-text);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: #fff;
   z-index: 2;
   cursor: pointer;
   transition: all 200ms;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .cu-preview-image .cu-icon-close {
@@ -36,7 +37,7 @@
   top: 50%;
 }
 
-.cu-preview-image__pic {
+.cu-preview__list {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -46,46 +47,44 @@
   align-items: center;
 }
 
-.cu-preview-image__pic > div {
+.cu-preview__list > div {
   position: absolute;
 }
 
-.cu-preview-image__pic img {
+.cu-preview__list img {
   transition: transform 200ms;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-.cu-preview-image__imgtools {
+.cu-preview__tools {
   position: absolute;
   left: 50%;
   bottom: 80px;
   transform: translateX(-50%);
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   z-index: 2;
   padding: 8px 12px;
   font-size: 23px;
   line-height: 1;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  box-shadow: var(--cu-boxshadow-base);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.cu-preview-image__imgtools > i {
+.cu-preview__tools > i {
   margin: 0 10px;
-  color: var(--cu-color-text);
+  color: #fff;
   cursor: pointer;
   display: inline-block;
   transition: all 200ms;
 }
 
-.comic-plus__is-comic .cu-preview-image__tools i {
-  border: 1px solid var(--cu-comic-border-color);
+.cu-preview__buttons i:hover {
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
-.cu-preview-image i:hover {
-  color: var(--cu-color-primary);
-}
-
-.cu-preview-image__imgtools > i:hover {
+.cu-preview__tools > i:hover {
   transform: scale(1.1);
 }

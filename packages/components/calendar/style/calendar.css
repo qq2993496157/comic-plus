@@ -1,6 +1,6 @@
 .cu-calendar {
   font-size: 14px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   --cu-calendar-td-height: 80px;
   --cu-calendar-th-height: 40px;
 }
@@ -57,11 +57,11 @@
 
 .cu-calendar__td.is-prev,
 .cu-calendar__td.is-next {
-  color: var(--cu-color-text-light2);
+  color: var(--cu-text-color-light6);
 }
 
 .cu-calendar__td.is-today {
-  background-color: var(--cu-color-primary-light3);
+  background-color: var(--cu-color-primary-light9);
   color: var(--cu-color-primary);
 }
 
@@ -73,5 +73,5 @@
 }
 
 .cu-calendar__cell:hover {
-  background-color: var(--cu-color-primary-light3);
+  background-color: var(--cu-color-primary-light9);
 }

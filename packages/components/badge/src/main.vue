@@ -1,5 +1,5 @@
 <template>
-  <span class="cu-badge" :class="type ? 'cu-badge--' + type : undefined" :style="{ '--cu-badge-color': color }">
+  <span class="cu-badge" :class="type ? 'cu-badge--' + type : undefined">
     <slot v-if="$slots['default']"></slot>
     <sup
       class="cu-badge__inner"
@@ -34,6 +34,7 @@ const showBadge = computed(() => {
 const badgeStyle = computed(() => {
   let offset = [].concat(props.offset);
   return {
+    backgroundColor: props.color,
     '--cu-badge-offsetx': offset[0] ? offset[0] + 'px' : undefined,
     '--cu-badge-offsety': offset[1] ? offset[1] + 'px' : undefined,
     maxWidth: props.ellipsis ? '100%' : undefined

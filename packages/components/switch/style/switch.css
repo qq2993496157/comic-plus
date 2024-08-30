@@ -1,13 +1,13 @@
 .cu-switch {
   font-size: 14px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   cursor: pointer;
   display: inline-flex;
   vertical-align: middle;
   --cu-switch-on-color: var(--cu-color-primary);
-  --cu-switch-off-color: var(--cu-border-color);
-  --cu-switch-on-disabled: var(--cu-color-primary-light2);
-  --cu-switch-off-disabled: #eaecf0;
+  --cu-switch-off-color: var(--cu-background-color);
+  --cu-switch-on-disabled: var(--cu-color-primary-light4);
+  --cu-switch-off-disabled: var(--cu-background-color-disabled);
   --cu-switch-size: 20px;
   --cu-switch-inner-size: 16px;
   --cu-switch-active-size: 22px;
@@ -40,8 +40,6 @@
 .cu-switch > span {
   display: inline-block;
   vertical-align: middle;
-  color: inherit;
-  font-size: inherit;
   white-space: nowrap;
 }
 
@@ -141,21 +139,4 @@
 
 .cu-switch.is-disabled {
   cursor: no-drop;
-}
-
-.comic-plus__is-comic .cu-switch .cu-switch__inner {
-  border-color: var(--cu-comic-border-color);
-}
-
-.comic-plus__is-comic .cu-switch .cu-switch__inner::after {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 12px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  top: -1px;
-  right: 10px;
-  transition: all 200ms;
-  box-sizing: border-box;
 }

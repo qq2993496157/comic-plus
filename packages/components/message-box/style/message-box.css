@@ -1,7 +1,7 @@
 .cu-popup {
   background-color: #fff;
   border-radius: var(--cu-border-radius);
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   width: 360px;
   font-size: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
@@ -53,7 +53,7 @@
   font-size: 13px;
   min-height: 60px;
   color: inherit;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light);
 }
 
 .cu-popup__footer {
@@ -89,35 +89,34 @@
   transform: translateX(-50%);
   align-items: center;
   border: 1px solid var(--cu-border-color);
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   border-radius: var(--cu-border-radius);
   font-size: 14px;
   min-width: 200px;
   background-color: #fff;
   padding: 8px 15px;
   transition: all 300ms;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
 }
 
 .cu-message.cu-message--primary {
-  background-color: var(--cu-color-primary-light3);
+  background-color: var(--cu-color-primary-light9);
   color: var(--cu-color-primary);
 }
 .cu-message.cu-message--success {
-  background-color: var(--cu-color-success-light3);
+  background-color: var(--cu-color-success-light9);
   color: var(--cu-color-success);
 }
 .cu-message.cu-message--warning {
-  background-color: var(--cu-color-warning-light3);
-  border-color: var(--cu-color-warning-light3);
+  background-color: var(--cu-color-warning-light9);
   color: var(--cu-color-warning);
 }
 .cu-message.cu-message--error {
-  background-color: var(--cu-color-danger-light3);
+  background-color: var(--cu-color-danger-light9);
   color: var(--cu-color-danger);
 }
 .cu-message.cu-message--info {
-  background-color: var(--cu-color-info-light3);
+  background-color: var(--cu-color-info-light9);
   color: var(--cu-color-info);
 }
 
@@ -173,8 +172,8 @@
   background-color: #fff;
   border-radius: var(--cu-border-radius);
   padding: 8px 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  color: var(--cu-color-text);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  color: var(--cu-text-color);
   font-size: 14px;
   transition: all 200ms;
   border: 1px solid var(--cu-border-color);
@@ -199,7 +198,7 @@
   cursor: pointer;
 }
 .cu-notice.is-click:hover {
-  border-color: var(--cu-notice-hovercolor, var(--cu-color-text-light));
+  border-color: var(--cu-notice-hovercolor, var(--cu-text-color-light));
 }
 .cu-notice.is-click.cu-notice--primary:hover {
   border-color: var(--cu-notice-hovercolor, var(--cu-color-primary));
@@ -231,12 +230,12 @@
   right: 0;
   top: 0;
   cursor: pointer;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 
 .cu-notice__main {
   margin-top: 4px;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light);
   font-size: 12px;
 }
 
@@ -306,28 +305,4 @@
 .cu-notice-lb-leave-to,
 .cu-notice-lt-leave-to {
   opacity: 0;
-}
-
-.comic-plus__is-comic .cu-message,
-.comic-plus__is-comic .cu-notice,
-.comic-plus__is-comic .cu-popup {
-  border-color: var(--cu-comic-border-color);
-}
-.comic-plus__is-comic .cu-notice::before,
-.comic-plus__is-comic .cu-message::before,
-.comic-plus__is-comic .cu-popup::before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 18px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  top: -1px;
-  left: 10%;
-  transition: all 200ms;
-  box-sizing: border-box;
-}
-
-.comic-plus__is-comic .cu-popup::before {
-  width: 58px;
 }

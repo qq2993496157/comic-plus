@@ -39,8 +39,8 @@
   position: absolute;
   display: block;
   border-radius: 4px;
-  background: #a6a8ad;
-  opacity: 0.6;
+  background: #909399;
+  opacity: 0.4;
   transition: opacity 200ms;
 }
 .cu-scrollbar__thumb.thumby::after {

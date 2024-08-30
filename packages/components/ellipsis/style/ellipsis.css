@@ -1,6 +1,6 @@
 .cu-ellipsis {
   /* overflow: hidden; */
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -11,7 +11,7 @@
   transition: all 200ms;
   display: flex;
   align-items: center;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light4);
 }
 
 .float {

@@ -7,18 +7,18 @@
     @mode-click="showPreview = false">
     <transition name="cu-fade-top" @after-leave="onAfterLeave">
       <div class="cu-preview-image" v-show="showPreview">
-        <div class="cu-preview-image__tools">
+        <div class="cu-preview__buttons">
           <i class="cu-icon-close" @click="showPreview = false"></i>
           <i class="cu-icon-left" @click="minus"></i>
           <i class="cu-icon-right" @click="plus"></i>
         </div>
-        <div class="cu-preview-image__imgtools">
+        <div class="cu-preview__tools">
           <i class="cu-icon-zoom-in" @click="scale += 0.2"></i>
           <i class="cu-icon-zoom-out" @click="scale -= 0.2"></i>
           <i class="cu-icon-undo" @click="rotate -= 90"></i>
           <i class="cu-icon-redo" @click="rotate += 90"></i>
         </div>
-        <div class="cu-preview-image__pic">
+        <div class="cu-preview__list">
           <div ref="imageBoxRef" :style="customStyle">
             <img :src="list[currentIndex]" :style="imgStyle" :key="list[currentIndex]" />
           </div>

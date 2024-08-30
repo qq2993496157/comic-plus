@@ -26,6 +26,7 @@
     "@vue/shared": "^3.4.21",
     "async-validator": "^4.2.5",
     "axios": "^1.6.8",
-    "@floating-ui/vue": "^1.1.2"
+    "@floating-ui/vue": "^1.1.2",
+    "@vueuse/core": "^11.0.3"
   }
 }

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { inject, computed, onBeforeUnmount, getCurrentInstance, onMounted } from 'vue';
-import { useTooltip } from '../../tooltip/main';
+import { useTooltip } from '../../tooltip';
 import { useMenu } from '../utils/menu';
 import { menuItemProps } from './item.props';
 import { MENU_PROVIDE, SubmenuProvide } from './type';

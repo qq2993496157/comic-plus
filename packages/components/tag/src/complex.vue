@@ -3,7 +3,7 @@
     v-if="!transition"
     class="cu-tag-complex"
     :class="type ? 'cu-tag--' + type : undefined"
-    :style="{ height: size + 'px', borderColor: IS_COMIC ? undefined : props.color }">
+    :style="{ height: size + 'px', borderColor: props.color, '--cu-tag-closecolor': props.color }">
     <span class="cu-tag-content">
       <slot></slot>
     </span>
@@ -16,7 +16,7 @@
     <span
       class="cu-tag-complex"
       :class="type ? 'cu-tag--' + type : undefined"
-      :style="{ height: size + 'px', borderColor: IS_COMIC ? undefined : props.color }">
+      :style="{ height: size + 'px', borderColor: props.color }">
       <span class="cu-tag-content">
         <slot></slot>
       </span>
@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import '../style/tag.css';
-import { useConfig } from '../../../utils';
 import { tagComplexProps, tagComplexEmits } from './complex.props';
 defineOptions({
   name: 'CuTagComplex'
@@ -38,7 +37,6 @@ defineOptions({
 
 const props = defineProps(tagComplexProps);
 const emit = defineEmits(tagComplexEmits);
-const { IS_COMIC } = useConfig();
 
 function handleClose() {
   emit('close');

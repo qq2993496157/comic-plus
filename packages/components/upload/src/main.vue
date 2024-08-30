@@ -37,8 +37,7 @@
         :type="type"
         :previewList="previewList"
         :uploadFileEnum="uploadFileEnum"
-        @remove="removeFile">
-      </upload-list>
+        @remove="removeFile" />
     </template>
 
     <input

@@ -1,7 +1,8 @@
 .cu-pistol {
+  --cu-pistol-bs: 0 0 6px rgba(0, 0, 0, 0.12);
   display: inline-flex;
   position: relative;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color-light);
 }
 
 .cu-pistol__container {
@@ -14,7 +15,7 @@
   position: relative;
   background-color: #fff;
   font-size: 12px;
-  box-shadow: var(--cu-boxshadow-base);
+  box-shadow: var(--cu-pistol-bs);
   z-index: 3;
   transition: background-color 400ms, color 400ms, box-shadow 200ms;
   overflow: hidden;
@@ -64,7 +65,7 @@
   transition: all 200ms;
   transition-delay: var(--cu-pistol-delay);
   font-size: 12px;
-  box-shadow: var(--cu-boxshadow-base);
+  box-shadow: var(--cu-pistol-bs);
   opacity: 0;
   cursor: pointer;
   overflow: hidden;
@@ -143,13 +144,13 @@
 
 .cu-bullet.is-disabled .cu-bullet-content,
 .cu-pistol.is-disabled .cu-pistol__container {
-  background-color: var(--cu-disabled-background);
-  border-color: var(--cu-disabled-border);
-  color: var(--cu-disabled-font);
+  background-color: var(--cu-background-color-disabled);
+  border-color: var(--cu-border-color-disabled);
+  color: var(--cu-text-color-light5);
   cursor: no-drop;
 }
 
 .cu-pistol:not(.is-disabled) .cu-pistol__container:active,
 .cu-bullet:not(.is-disabled):active .cu-bullet-content {
-  box-shadow: var(--cu-boxshadow-base), inset 0 0 0 1px;
+  box-shadow: var(--cu-pistol-bs), inset 0 0 0 1px;
 }

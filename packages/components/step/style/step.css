@@ -1,6 +1,6 @@
 .cu-step {
   display: flex;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color);
   font-size: 14px;
 }
 .cu-step.is-vertical {
@@ -17,7 +17,7 @@
   align-items: flex-start;
   position: relative;
   flex-shrink: 1;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light5);
 }
 .cu-step.is-vertical .cu-step-item {
   flex-direction: row;
@@ -52,7 +52,7 @@
   right: 0;
   top: 9px;
   height: 2px;
-  background-color: var(--cu-color-text-light);
+  background-color: var(--cu-text-color-light5);
 }
 
 .cu-step-item:last-child .cu-step-item__line {
@@ -83,7 +83,7 @@
   color: var(--cu-step-active-color, var(--cu-color-primary));
 }
 .cu-step-item.is-active {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 .cu-step-item.is-active .cu-step-item__header {
   color: var(--cu-step-active-color, var(--cu-color-primary));
@@ -130,7 +130,7 @@
   align-items: center;
   justify-content: center;
   min-width: 80px;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light4);
   border: 1px solid var(--cu-border-color);
   border-radius: var(--cu-border-radius);
 }
@@ -160,8 +160,8 @@
 }
 
 .cu-step-card.is-active {
-  border-color: var(--cu-color-text);
-  color: var(--cu-color-text);
+  border-color: var(--cu-text-color);
+  color: var(--cu-text-color);
 }
 
 .cu-step-card.error {

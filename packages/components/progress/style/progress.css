@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   align-items: center;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 .cu-progress__inner {
   flex: 1;
@@ -73,7 +73,7 @@
 }
 
 .cu-progress__circle_bg {
-  stroke: var(--cu-border-color);
+  stroke: var(--cu-background-color);
   stroke-width: var(--cu-progress-strokewidth, 6);
   stroke-dasharray: var(--cu-progress-dasharray);
   stroke-dashoffset: 0;
@@ -139,22 +139,4 @@
 
 .cu-progress.is-trends .cu-progress__inner {
   overflow: hidden;
-}
-
-.comic-plus__is-comic .cu-progress:not(.is-trends) .cu-progress__inner {
-  border-color: var(--cu-comic-border-color);
-  position: relative;
-}
-
-.comic-plus__is-comic .cu-progress:not(.is-trends) .cu-progress__inner::before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 18px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  top: -1px;
-  right: 10%;
-  transition: all 200ms;
-  box-sizing: border-box;
 }

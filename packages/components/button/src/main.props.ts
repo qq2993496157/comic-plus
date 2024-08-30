@@ -6,12 +6,16 @@ export const buttonProps = {
   size: String as PropType<ComicSize>,
   disabled: Boolean,
   plain: Boolean,
+  light: Boolean,
   icon: String,
   round: Boolean,
   circle: Boolean,
   color: String,
   loading: Boolean,
-  loadingIcon: String
+  loadingIcon: String,
+  dashed: Boolean,
+  text: Boolean,
+  raised: Boolean
 } as const;
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>;

@@ -9,19 +9,31 @@
       </slot>
     </div>
     <div class="cu-schedule-list--warpper">
-      <ul class="cu-schedule-list">
-        <li v-for="el in timeList" class="cu-schedule-list__li">
-          <span class="cu-schedule-list__time">{{ (el.key < 10 ? '0' + el.key : el.key) + ':00' }}</span>
-          <span class="cu-schedule-list__line"></span>
-        </li>
-        <div class="cu-schedule-cards--warpper">
-          <schedule-cards v-for="(item, idx) in cardForArr" :data="item" :key="idx">
-            <template #card="{ data }" v-if="$slots['card']">
-              <slot name="card" :data="data" />
-            </template>
-          </schedule-cards>
+      <div class="cu-schedule-list--scroll">
+        <ul class="cu-schedule-list">
+          <li v-for="el in timeList" class="cu-schedule-list__li" :style="{ height: spacing + 'px' }">
+            <span class="cu-schedule-list__time">
+              <span>{{ (el.key < 10 ? '0' + el.key : el.key) + ':00' }}</span>
+            </span>
+            <span class="cu-schedule-list__line"></span>
+          </li>
+          <div class="cu-schedule-cards--warpper">
+            <schedule-cards v-for="(item, idx) in cardForArr" :data="item" :key="idx">
+              <template #card="{ data }" v-if="$slots['card']">
+                <slot name="card" :data="data" />
+              </template>
+            </schedule-cards>
+          </div>
+        </ul>
+      </div>
+      <div class="cu-schedule-empty" v-if="props.showEmpty && cardForArr.length === 0">
+        <slot name="empty" :date="date">{{ props.emptyText }}</slot>
+      </div>
+      <transition name="cu-fade">
+        <div class="loading-mask" v-show="props.loading">
+          <i class="cu-icon-loading"></i>
         </div>
-      </ul>
+      </transition>
     </div>
   </div>
 </template>
@@ -32,7 +44,7 @@ import { SCHEDULE_PROVIDE } from './type';
 import ScheduleCards from './card.vue';
 import { formatDate } from '../../../utils';
 
-const { date, props } = inject(SCHEDULE_PROVIDE);
+const { date, props, spacing } = inject(SCHEDULE_PROVIDE);
 
 const flag = 100 / 60;
 
@@ -64,10 +76,11 @@ function getNumber(t) {
 const cardForArr = computed(() => {
   let arr = props.schedules ?? [];
   arr = arr
-    .map((v) => {
+    .map((v, index) => {
       v.getTimes = v.time.split('~').map((v) => {
         return getNumber(Number(v.replace(/:/g, '.')));
       });
+      v._index = index;
       return v;
     })
     .sort((a, b) => {

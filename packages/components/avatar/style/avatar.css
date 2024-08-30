@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #c0c4cc;
+  background-color: var(--cu-background-color);
   overflow: hidden;
   font-size: 14px;
   color: #fff;
@@ -28,7 +28,6 @@
 
 .cu-avatar-group .cu-avatar {
   border: 1px solid var(--cu-border-color);
-  background-color: #c0c4cc;
   overflow: hidden;
 }
 
@@ -45,7 +44,7 @@
 
 .cu-avatar-group.shadow .cu-avatar-group__surplus,
 .cu-avatar-group.shadow .cu-avatar {
-  box-shadow: 0 0 4px #000;
+  box-shadow: rgba(50, 50, 93, 0.45) 0px 0px 5px -1px, rgba(0, 0, 0, 0.8) 0px 0px 3px -1px;
 }
 
 .cu-avatar-group.mode-stack .cu-avatar-group__surplus,
@@ -88,7 +87,6 @@
 }
 .cu-avatar-group .cu-avatar-group__surplus.can-click:hover {
   background-color: var(--cu-color-primary-light);
-  text-shadow: 0 0 2px;
 }
 
 .avatar-move,
@@ -101,10 +99,4 @@
 .avatar-leave-to {
   opacity: 0;
   transform: translate(-30px, 0);
-}
-
-.comic-plus__is-comic .cu-avatar,
-.comic-plus__is-comic .cu-avatar-group .cu-avatar-group__item {
-  border-color: var(--cu-comic-border-color);
-  border: 1px solid var(--cu-comic-border-color);
 }

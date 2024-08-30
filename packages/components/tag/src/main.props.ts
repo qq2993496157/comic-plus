@@ -3,7 +3,9 @@ import type { ComicType } from '../../../utils';
 
 export const tagProps = {
   type: String as PropType<ComicType>,
-  mode: String as PropType<'light' | 'plain'>,
+  // mode: String as PropType<'light' | 'plain'>,
+  plain: Boolean,
+  light: Boolean,
   border: Boolean,
   size: {
     type: Number,

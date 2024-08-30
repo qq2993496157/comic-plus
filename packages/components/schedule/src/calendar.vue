@@ -118,10 +118,12 @@ const dates = computed(() => {
 });
 
 function prevMonth() {
+  if (props.loading) return;
   tm.value === 0 ? (--ty.value, (tm.value = 11)) : --tm.value;
   dn.value = new Date(ty.value, tm.value, 1).getTime();
 }
 function nextMonth() {
+  if (props.loading) return;
   tm.value === 11 ? (++ty.value, (tm.value = 0)) : ++tm.value;
   dn.value = new Date(ty.value, tm.value, 1).getTime();
 }
@@ -159,6 +161,7 @@ function getTime(item) {
 }
 
 function selectDay(item: DateItem) {
+  if (props.loading) return;
   item.isPrevMonth
     ? tm.value === 0
       ? (--ty.value, (tm.value = 11))
@@ -182,6 +185,7 @@ const dateTypeFn = {
 type DateType = keyof typeof dateTypeFn | Date;
 
 function selectDate(value: DateType) {
+  if (props.loading) return;
   if (value in dateTypeFn) {
     dateTypeFn[value]?.();
   } else if (value instanceof Date) {

@@ -10,7 +10,7 @@
     <date-table v-else :date="(props.modelValue as ValueAlone)" ref="dateTableRef"></date-table>
   </div>
   <div class="cu-date-picker__footer">
-    <c-button size="small" type="primary" @click="_confirm">确认</c-button>
+    <c-button size="small" type="primary" text @click="_confirm">确认</c-button>
   </div>
 </template>
 

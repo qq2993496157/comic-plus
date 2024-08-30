@@ -19,8 +19,8 @@
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  color: var(--cu-color-text-light);
-  background-color: var(--cu-disabled-background);
+  color: var(--cu-text-color-light6);
+  background-color: var(--cu-background-color-disabled);
 }
 
 .cu-image .empty {

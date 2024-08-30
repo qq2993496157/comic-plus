@@ -12,16 +12,17 @@
 }
 
 .cu-web-footer__link {
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light4);
   text-decoration: none;
 }
 
 .cu-web-footer__link:hover {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 
 .cu-web-footer__copyright {
   text-align: center;
+  color: var(--cu-text-color);
 }
 
 .cu-web-footer__links ~ .cu-web-footer__copyright {

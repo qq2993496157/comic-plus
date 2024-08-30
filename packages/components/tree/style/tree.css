@@ -1,5 +1,5 @@
 .cu-tree {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color-light);
   font-size: 14px;
 }
 
@@ -7,8 +7,7 @@
   height: 40px;
   line-height: 40px;
   text-align: center;
-  font-size: var(--cu-color-text-light);
-  background-color: var(--cu-background-color);
+  font-size: var(--cu-text-color-light);
 }
 .cu-tree .tree-icon {
   display: inline-flex;
@@ -17,7 +16,7 @@
   align-items: center;
   justify-content: center;
   transition: all 200ms;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light4);
 }
 
 .cu-tree .tree-icon.unfold {
@@ -34,7 +33,7 @@
 }
 
 .cu-tree__content:hover {
-  background-color: var(--cu-background-color);
+  background-color: var(--cu-background-color-light);
 }
 
 .cu-tree__content .checkbox {

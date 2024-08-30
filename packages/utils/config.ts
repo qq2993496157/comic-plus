@@ -3,7 +3,6 @@ import { computed, ComputedRef } from 'vue';
 
 interface UseConfig {
   SIZE?: ComputedRef<string | undefined>;
-  IS_COMIC?: ComputedRef<boolean>;
 }
 
 const useConfig = (): UseConfig => {
@@ -12,13 +11,9 @@ const useConfig = (): UseConfig => {
   const SIZE = computed(() => {
     return COMIC?.size;
   });
-  const IS_COMIC = computed(() => {
-    return COMIC?.isComic;
-  });
 
   return {
-    SIZE,
-    IS_COMIC
+    SIZE
   };
 };
 

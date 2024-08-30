@@ -33,9 +33,7 @@
   height: 100%;
 }
 
-.cu-card.always .cu-card__container {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
-}
+.cu-card.always .cu-card__container,
 .cu-card.hover:hover .cu-card__container {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
 }
@@ -88,9 +86,4 @@
 
 .cu-card-group.stack .cu-card:hover + .cu-card {
   margin-left: 10px;
-}
-
-.comic-plus__is-comic .cu-card__container,
-.comic-plus__is-comic .cu-card__opposite {
-  border-color: var(--cu-comic-border-color);
 }

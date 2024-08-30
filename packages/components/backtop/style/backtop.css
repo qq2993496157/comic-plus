@@ -20,21 +20,3 @@
 .cu-backtop__container:hover {
   color: var(--cu-color-primary);
 }
-
-.comic-plus__is-comic .cu-backtop__container {
-  border-color: var(--cu-comic-border-color);
-  position: relative;
-}
-
-.comic-plus__is-comic .cu-backtop__container::before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 14px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  top: -1px;
-  left: 4px;
-  transition: all 200ms;
-  box-sizing: border-box;
-}

@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   font-size: 14px;
   background-color: rgba(255, 255, 255, 0.9);
 }

@@ -3,7 +3,7 @@
   align-items: center;
   cursor: pointer;
   font-size: 14px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   --cu-checkbox-color: var(--cu-color-primary);
   vertical-align: middle;
 }
@@ -13,13 +13,12 @@
 
 .cu-checkbox.is-disabled {
   cursor: no-drop;
-  color: var(--cu-disabled-font);
+  color: var(--cu-text-color-light5);
 }
-.comic-plus__is-comic .cu-checkbox.is-disabled .cu-checkbox__inner,
 .cu-checkbox.is-disabled .cu-checkbox__inner {
-  background-color: var(--cu-disabled-background);
-  color: var(--cu-disabled-font);
-  border-color: var(--cu-disabled-border);
+  background-color: var(--cu-background-color-disabled);
+  color: var(--cu-text-color-light5);
+  border-color: var(--cu-border-color-disabled);
 }
 
 .cu-checkbox:not(.is-disabled):hover {
@@ -37,9 +36,6 @@
   height: 0;
 }
 
-.cu-checkbox input:not(:disabled):active ~ .cu-checkbox__inner {
-  transform: scale(0.9);
-}
 .cu-checkbox:not(.is-disabled).is-check .cu-checkbox__inner,
 .cu-checkbox:not(.is-disabled) .cu-checkbox__inner.indeterminate {
   background-color: var(--cu-checkbox-color);
@@ -81,10 +77,10 @@
   border-bottom: 2px solid transparent;
   border-left: 2px solid transparent;
   box-sizing: border-box;
-  transition: all 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
 }
 
-.cu-checkbox:not(.is-check) .cu-checkbox__inner.indeterminate::after {
+.cu-checkbox:not(.is-check) .indeterminate::after {
   border-bottom-color: #fff;
   border-left: 0;
 }
@@ -92,6 +88,11 @@
 .cu-checkbox.is-check .cu-checkbox__inner::after {
   border-color: #fff;
   transform: rotate(-45deg);
+}
+
+.cu-checkbox.is-disabled:not(.is-check) .indeterminate::after,
+.cu-checkbox.is-disabled.is-check .cu-checkbox__inner::after {
+  border-color: var(--cu-text-color-light7);
 }
 
 .cu-checkbox.small .cu-checkbox__inner::after {
@@ -110,10 +111,6 @@
   margin-top: -4px;
 }
 
-.cu-checkbox.is-disabled.is-check .cu-checkbox__inner::after {
-  border-color: var(--cu-disabled-border);
-}
-
 .cu-checkbox-group {
   display: inline-flex;
   flex-wrap: wrap;
@@ -125,8 +122,4 @@
 
 .cu-checkbox .cu-checkbox__label {
   margin-left: 4px;
-}
-
-.comic-plus__is-comic .cu-checkbox .cu-checkbox__inner {
-  border-color: var(--cu-comic-border-color);
 }

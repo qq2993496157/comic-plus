@@ -2,6 +2,7 @@
   display: block;
   width: 100%;
   font-size: 14px;
+  color: var(--cu-text-color-light);
 }
 .cu-collapse-item .cu-collapse-item__head {
   padding: 8px;
@@ -44,26 +45,4 @@
 }
 .cu-collapse.fill .cu-collapse-item + .cu-collapse-item {
   margin-top: var(--cu-collapse-gap);
-}
-
-.comic-plus__is-comic .cu-collapse .cu-collapse-item .cu-collapse-item__line {
-  border-color: var(--cu-comic-border-color);
-}
-
-.comic-plus__is-comic .cu-collapse.fill .cu-collapse-item {
-  position: relative;
-  border-color: var(--cu-comic-border-color);
-}
-
-.comic-plus__is-comic .cu-collapse.fill .cu-collapse-item::before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  top: -1px;
-  left: 20px;
-  transition: all 200ms;
-  box-sizing: border-box;
 }

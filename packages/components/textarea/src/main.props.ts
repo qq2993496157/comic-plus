@@ -10,7 +10,8 @@ export const textareaProps = {
     default: false
   },
   disabled: Boolean,
-  autoHeight: Boolean
+  // autoHeight: Boolean, //autoHeight发现隐藏bug，暂停使用
+  rows: Number
 } as const;
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>;
 

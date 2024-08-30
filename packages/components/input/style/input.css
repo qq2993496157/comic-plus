@@ -15,7 +15,7 @@
   align-items: center;
   line-height: 1;
   box-sizing: border-box;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light6);
 }
 .cu-input .prefix-icon {
   padding-right: 8px;
@@ -28,8 +28,8 @@
 .cu-input .suffix-slot {
   padding: 0 10px;
   height: 100%;
-  background-color: var(--cu-background-color);
-  color: var(--cu-color-text-light);
+  background-color: var(--cu-background-color-light);
+  color: var(--cu-text-color-light6);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -46,7 +46,7 @@
 }
 .cu-input__content .clearable {
   padding-left: 8px;
-  color: var(--cu-color-text-light2);
+  color: var(--cu-text-color-light6);
   min-width: 22px;
   height: 100%;
   box-sizing: border-box;
@@ -61,5 +61,5 @@
   display: initial;
 }
 .cu-input__content .clearable i:hover {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }

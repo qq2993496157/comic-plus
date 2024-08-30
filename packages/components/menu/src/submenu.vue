@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import { ref, inject, reactive, computed, provide, onBeforeUnmount, getCurrentInstance, onMounted, watch } from 'vue';
-import { useTooltip } from '../../tooltip/main';
+import { useTooltip } from '../../tooltip';
 import { useMenu } from '../utils/menu';
 import { useEventListener } from '@vueuse/core';
 import { CuTransitionCollapse as TransitionCollapse } from '../../transition-collapse';

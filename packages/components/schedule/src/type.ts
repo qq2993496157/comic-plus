@@ -1,9 +1,9 @@
-import { InjectionKey, Ref, VNode } from 'vue';
+import { ComputedRef, InjectionKey, Ref, VNode } from 'vue';
 import { ScheduleProps } from './main.props';
 
 export type Schedules = {
   time: string;
-  content: string | VNode;
+  content?: string | VNode;
   [key: string]: any;
 }[];
 
@@ -36,6 +36,7 @@ export type Times =
 export type ScheduleProvide = {
   date: Ref<Date>;
   props: ScheduleProps;
+  spacing: ComputedRef<number>;
 };
 
 export const SCHEDULE_PROVIDE: InjectionKey<ScheduleProvide> = Symbol('SCHEDULE_PROVIDE');

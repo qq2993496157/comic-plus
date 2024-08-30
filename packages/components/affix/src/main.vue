@@ -19,8 +19,8 @@ defineOptions({
 const props = defineProps(affixProps);
 const emit = defineEmits(affixEmits);
 
-const affixRef = ref<HTMLElement>();
-const containerEl = ref<HTMLElement>();
+const affixRef = ref();
+const containerEl = ref();
 const transform = ref<number>(0);
 
 const { top: refT, bottom: refB, width: refW, height: refH } = useElementBounding(affixRef);

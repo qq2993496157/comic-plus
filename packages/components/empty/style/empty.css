@@ -12,7 +12,7 @@
 
 .cu-empty__description {
   margin-top: 20px;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light);
 }
 
 .cu-empty__tools {

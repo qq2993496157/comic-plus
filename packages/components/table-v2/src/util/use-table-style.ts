@@ -22,13 +22,14 @@ export const useTableStyle = ({ containerRef, columns, MIN_SIZE }: UseTableStyle
 
   const onscroll = (e: any) => {
     leftShadow.value = e.target.scrollLeft > 0;
-    rightShadow.value = e.target.scrollWidth - e.target.scrollLeft - e.target.offsetWidth > 0;
+    rightShadow.value = e.target.scrollWidth - (e.target.scrollLeft + e.target.clientWidth) > 1;
   };
 
   const updateShadow = () => {
     let e = containerEl.value;
+
     leftShadow.value = e.scrollLeft > 0;
-    rightShadow.value = e.scrollWidth - e.scrollLeft - e.offsetWidth > 0;
+    rightShadow.value = e.scrollWidth - (e.scrollLeft + e.clientWidth) > 1;
   };
 
   const updateColumnDefaultWidth = () => {

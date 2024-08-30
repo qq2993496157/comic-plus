@@ -8,7 +8,7 @@
 .cu-drawer {
   position: absolute;
   background-color: #fff;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08), 0px 0px 58px rgba(0, 0, 0, 0.16);
@@ -92,8 +92,4 @@
 .cu-drawer-bottom-enter-from,
 .cu-drawer-bottom-leave-to {
   transform: translateY(100%);
-}
-
-.comic-plus__is-comic .cu-drawer .cu-drawer__header {
-  border-color: var(--cu-comic-border-color);
 }

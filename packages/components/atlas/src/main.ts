@@ -1,4 +1,5 @@
-import { DefineComponent, PropType, computed, defineComponent, h, warn } from 'vue';
+import { DefineComponent, computed, defineComponent, h, provide, warn } from 'vue';
+import { colorToRgba, colorBlend } from '../../../utils';
 
 import Atlas404 from '../svg/404.vue';
 import Atlas500 from '../svg/500.vue';
@@ -12,6 +13,8 @@ import AtlasNoAddress from '../svg/no-address.vue';
 import AtlasNoEval from '../svg/no-eval.vue';
 import AtlasNoWeb from '../svg/no-web.vue';
 import AtlasPageError from '../svg/page-error.vue';
+import { atlasProps } from './main.props';
+import { ATLAS_PROVIDE } from './type';
 
 export default defineComponent({
   name: 'CuAtlas',
@@ -29,13 +32,7 @@ export default defineComponent({
     AtlasNoEval,
     AtlasPageError
   },
-  props: {
-    svg: String,
-    size: {
-      type: [String, Number] as PropType<string | number>,
-      default: 200
-    }
-  },
+  props: atlasProps,
   setup(props, { slots }) {
     const atlasEnum = {
       404: Atlas404,
@@ -56,11 +53,29 @@ export default defineComponent({
       return atlasEnum[props.svg];
     });
 
+    const color = computed(() => {
+      return props.color ?? 'var(--cu-color-primary)';
+    });
+    const colorLight = computed(() => {
+      return props.color ? colorBlend(colorToRgba(props.color), 10) : 'var(--cu-color-primary-light)';
+    });
+    const style = computed(() => {
+      return {
+        width: props.size! + 'px',
+        height: props.size! + 'px'
+      };
+    });
+
+    provide(ATLAS_PROVIDE, {
+      color,
+      colorLight
+    });
+
     return () => {
       if (!componentName.value) {
         warn('The svg attributes field passed in is illegal');
       }
-      return h(componentName.value, { size: props.size }, slots);
+      return h(componentName.value, { style: style.value }, slots);
     };
   }
 });

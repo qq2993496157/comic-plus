@@ -1,15 +1,16 @@
 .cu-radio {
+  --cu-radio-active-color: var(--cu-color-primary);
   display: inline-flex;
   font-size: 14px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   border-color: var(--cu-border-color);
   cursor: pointer;
   align-items: center;
   vertical-align: middle;
-  --cu-radio-active-color: var(--cu-color-primary);
 }
 
 .cu-radio-button {
+  --cu-radio-active-color: var(--cu-color-primary);
   border-radius: var(--cu-border-radius);
   display: inline-flex;
   align-items: center;
@@ -19,7 +20,6 @@
   border: 1px solid;
   border-color: var(--cu-border-color);
   cursor: pointer;
-  --cu-radio-active-color: var(--cu-color-primary);
   height: var(--cu-size-default);
   line-height: 1;
   transition: all 200ms;
@@ -97,10 +97,6 @@
   color: inherit;
 }
 
-.cu-radio input:not(:disabled):active ~ .cu-radio__inner {
-  transform: scale(0.9);
-}
-
 .cu-radio-button.is-checked,
 .cu-radio input:not(:disabled):checked ~ .cu-radio__inner {
   border-color: var(--cu-radio-active-color);
@@ -142,35 +138,16 @@
 
 .cu-radio-button.is-disabled,
 .cu-radio.is-disabled {
-  color: var(--cu-disabled-font);
-  border-color: var(--cu-disabled-border);
+  color: var(--cu-text-color-light5);
+  border-color: var(--cu-border-color-disabled);
   cursor: no-drop;
 }
 
 .cu-radio-button.is-checked.is-disabled {
-  color: #fff;
-  background-color: var(--cu-disabled-border);
+  background-color: var(--cu-background-color-disabled);
 }
 
 .cu-radio input:disabled:checked ~ .cu-radio__inner::after {
-  background-color: var(--cu-disabled-border);
+  background-color: var(--cu-border-color-disabled);
   display: block;
-}
-
-.comic-plus__is-comic .cu-radio,
-.comic-plus__is-comic .cu-radio-button {
-  border-color: var(--cu-comic-border-color);
-}
-
-.comic-plus__is-comic .cu-radio-button::before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 18px;
-  height: 1px;
-  background: var(--cu-comic-fill-background);
-  bottom: -1px;
-  right: 10%;
-  transition: all 200ms;
-  box-sizing: border-box;
 }

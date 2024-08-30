@@ -29,7 +29,7 @@
             size="small"
             style="width: 140px"></c-input>
           <div class="cu-color-picker__buttonbox">
-            <c-button plain size="small" @click="clear">清空</c-button>
+            <c-button text type="primary" size="small" @click="clear">清空</c-button>
             <c-button type="primary" size="small" @click="confirm">确认</c-button>
           </div>
         </div>

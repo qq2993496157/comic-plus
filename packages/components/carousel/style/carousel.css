@@ -1,7 +1,7 @@
 .cu-carousel {
   width: 100%;
   position: relative;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
   overflow: hidden;
   user-select: none;
 }
@@ -27,18 +27,19 @@
 .cu-carousel__buttons i {
   position: absolute;
   width: 30px;
-  height: 30px;
+  height: 60px;
   border-radius: var(--cu-border-radius);
-  border: 1px solid var(--cu-border-color);
+  /* border: 1px solid var(--cu-border-color); */
+  color: #fff;
   font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.23);
   cursor: pointer;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  transition: transform 200ms;
+  transition: transform 200ms ease;
 }
 .cu-carousel__buttons .left {
   left: 10px;
@@ -52,13 +53,15 @@
 }
 
 .cu-carousel__buttons .top {
-  right: 12px;
+  height: 30px;
+  right: 30px;
   top: 12px;
   transform: translate(0, calc(-100% - 16px));
 }
 
 .cu-carousel__buttons .bottom {
-  right: 12px;
+  height: 30px;
+  right: 30px;
   bottom: 12px;
   transform: translate(0, calc(100% + 16px));
 }
@@ -68,7 +71,7 @@
   transform: translate(0, 0);
 }
 .cu-carousel:hover .cu-carousel__buttons i:hover {
-  color: var(--cu-color-primary);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .cu-carousel__indicator {
@@ -82,7 +85,7 @@
   height: 4px;
   width: 12px;
   margin: 4px;
-  opacity: 0.5;
+  opacity: 0.4;
   transition: all 200ms;
   cursor: pointer;
 }
@@ -189,8 +192,4 @@
 }
 .transform_vertical_pre-leave-to {
   transform: translateY(100%);
-}
-
-.comic-plus__is-comic .cu-carousel__buttons i {
-  border-color: var(--cu-comic-border-color);
 }

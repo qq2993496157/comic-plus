@@ -2,7 +2,7 @@
   list-style: none;
   font-size: 12px;
   padding-left: 6px;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light);
   border-left: var(--cu-anchor-line-weight, 4px) solid transparent;
   border-bottom: 0;
   position: relative;

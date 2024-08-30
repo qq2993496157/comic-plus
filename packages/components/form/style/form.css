@@ -1,6 +1,6 @@
 .cu-form {
   font-size: 14px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 .cu-form.small {
   font-size: 12px;
@@ -8,7 +8,6 @@
 
 .cu-form-item {
   display: flex;
-  /* align-items: center; */
   margin-bottom: 22px;
 }
 .cu-form.small .cu-form-item {
@@ -20,7 +19,6 @@
   padding-right: 8px;
   height: 100%;
   line-height: var(--cu-size-default);
-  /* transition: all 200ms; */
 }
 
 .cu-form.small .cu-form-item .label,

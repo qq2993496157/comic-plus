@@ -99,7 +99,7 @@
 
 .cu-menu-item.is-active {
   color: var(--cu-menu-active-text, var(--cu-color-primary));
-  background-color: var(--cu-menu-active-background, var(--cu-color-primary-light3));
+  background-color: var(--cu-menu-active-background, var(--cu-color-primary-light9));
 }
 .cu-sub-menu.is-active > .cu-sub-menu__head {
   color: var(--cu-menu-active-text, var(--cu-color-primary));
@@ -107,7 +107,7 @@
 
 .cu-sub-menu .cu-sub-menu__head:hover,
 .cu-menu-item:hover {
-  background-color: var(--cu-menu-active-background, var(--cu-color-primary-light3));
+  background-color: var(--cu-menu-active-background, var(--cu-color-primary-light9));
 }
 
 .cu-menu.is-vertical .cu-menu-item,

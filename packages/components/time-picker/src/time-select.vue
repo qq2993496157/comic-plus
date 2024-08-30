@@ -12,7 +12,7 @@
   <list v-else :time="(props.modelValue as string)" ref="listRef"></list>
 
   <div class="cu-time-picker__footer">
-    <cu-button size="small" type="primary" @click="_confirm">确认</cu-button>
+    <cu-button size="small" type="primary" text @click="_confirm">确认</cu-button>
   </div>
 </template>
 

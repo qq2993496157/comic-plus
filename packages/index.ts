@@ -1,13 +1,13 @@
 import { reactive, type Plugin, type Component, type App } from 'vue';
-import { colorToRgba, colorBlend, type Config } from './utils';
-import { deepMerge } from './tools/index';
+import { colorToRgba, colorBlendArray, toHex, type Config } from './utils';
+import { deepMerge } from './tools';
 import components from './components';
-import CuMessageBox from './components/message-box/index';
-import { preview } from './components/preview-image/index';
-import { CuLoading, vLoading, useLoading } from './components/loading/main';
-import { vTooltip, useTooltip } from './components/tooltip/main';
-import { useInfiniteScroll, vInfiniteScroll } from './components/infinite-scroll/main';
-import { CuLoadingbar } from './components/loadingbar/main';
+import CuMessageBox from './components/message-box';
+import { preview } from './components/preview-image';
+import { CuLoading, vLoading, useLoading } from './components/loading';
+import { vTooltip, useTooltip } from './components/tooltip';
+import { useInfiniteScroll, vInfiniteScroll } from './components/infinite-scroll';
+import { CuLoadingbar } from './components/loadingbar';
 
 const plugin = {
   install(app: App, config: Config) {
@@ -38,8 +38,11 @@ var assignConfig = reactive({}) as Config;
 const useComicConfig = (config: Config): void => {
   setColor(config?.color);
   assignConfig = reactive(deepMerge(assignConfig, config));
-  setComicClassName(assignConfig.isComic);
   window['$COMIC'] = assignConfig;
+};
+
+const getHexColor = (rgba: number[]) => {
+  return toHex({ r: rgba[0], g: rgba[1], b: rgba[2] });
 };
 
 const setColor = (value?: Config['color']): void => {
@@ -50,26 +53,27 @@ const setColor = (value?: Config['color']): void => {
   } else {
     obj = value;
   }
-  const colors = ['primary', 'success', 'warning', 'danger', 'info', 'text'];
-  for (const key in obj) {
-    if (colors.includes(key)) {
-      const c = colorToRgba(obj[key]) || [];
-      if (c.length > 0) {
-        document.documentElement.style.setProperty(`--cu-color-${key}`, `rgba(${c.join(',')})`);
-        document.documentElement.style.setProperty(`--cu-color-${key}-light`, colorBlend(c, 70));
-        document.documentElement.style.setProperty(`--cu-color-${key}-light2`, colorBlend(c, 50));
-        document.documentElement.style.setProperty(`--cu-color-${key}-light3`, colorBlend(c, 10));
-      }
+  const colors = ['primary', 'success', 'warning', 'danger', 'info'];
+  colors.forEach((colorKey) => {
+    const rgba = colorToRgba(obj[colorKey]) || [];
+    if (rgba.length > 0) {
+      Array.from({ length: 10 }).forEach((_, index) => {
+        if (index === 0) {
+          document.documentElement.style.setProperty(`--cu-color-${colorKey}`, getHexColor(rgba));
+        } else if (index === 1) {
+          document.documentElement.style.setProperty(
+            `--cu-color-${colorKey}-light`,
+            getHexColor(colorBlendArray(rgba, 90))
+          );
+        } else {
+          document.documentElement.style.setProperty(
+            `--cu-color-${colorKey}-light${index}`,
+            getHexColor(colorBlendArray(rgba, 100 - index * 10))
+          );
+        }
+      });
     }
-  }
-};
-
-const setComicClassName = (comic?: boolean): void => {
-  if (comic) {
-    document.body.classList.add('comic-plus__is-comic');
-  } else {
-    document.body.classList.remove('comic-plus__is-comic');
-  }
+  });
 };
 
 export default plugin;

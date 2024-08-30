@@ -13,8 +13,8 @@
       <svg width="1em" height="1em" viewBox="0 0 48 48">
         <path
           d="M23.9986 5L17.8856 17.4776L4 19.4911L14.0589 29.3251L11.6544 43L23.9986 36.4192L36.3454 43L33.9586 29.3251L44 19.4911L30.1913 17.4776L23.9986 5Z"
-          :fill="active ? activeColor : injectProps.disabled ? '#f0f2f5' : 'none'"
-          :stroke="active ? activeColor : injectProps.disabled ? '#f0f2f5' : injectProps.unColor"
+          :fill="active ? activeColor : injectProps.disabled ? 'var(--cu-background-color)' : 'none'"
+          :stroke="active ? activeColor : injectProps.disabled ? 'var(--cu-background-color)' : injectProps.unColor"
           :stroke-width="active ? 0 : 2"
           stroke-linejoin="round"></path>
       </svg>

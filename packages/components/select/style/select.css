@@ -30,8 +30,8 @@
 
 .cu-select--em {
   font-style: normal;
-  background-color: var(--cu-background-color);
-  color: var(--cu-color-text-light);
+  background-color: var(--cu-color-info-light9);
+  color: var(--cu-text-color-light4);
   font-size: inherit;
   margin: 2px;
   padding: 4px;
@@ -52,26 +52,27 @@
 }
 .cu-select__content .suffix-icon {
   padding-left: 8px;
-  color: var(--cu-color-text-light2);
+  color: var(--cu-text-color-light6);
   min-width: 22px;
   box-sizing: border-box;
 }
 
-.cu-select:hover .has-value .cu-select__down,
+.cu-select:not(.is-disabled):hover .has-value .cu-select__down,
 .cu-select__content .clearable {
   display: none;
 }
 
 .cu-select__content .clearable {
   cursor: pointer;
+  color: var(--cu-text-color-light6);
 }
 
-.cu-select:hover .has-value .clearable {
+.cu-select:not(.is-disabled):hover .has-value .clearable {
   display: initial;
 }
 
 .cu-select__content .clearable:hover {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 
 .cu-select__down {
@@ -105,17 +106,17 @@
   line-height: var(--cu-size-default);
   padding: 0 20px;
   cursor: pointer;
-  font-size: 14px;
-  color: var(--cu-color-text);
+  font-size: 13px;
+  color: var(--cu-text-color-light2);
   transition: background-color 200ms;
 }
 .cu-option.is-disabled {
-  color: var(--cu-disabled-font);
+  color: var(--cu-text-color-light7);
   cursor: no-drop;
 }
 
 .cu-option:not(.is-disabled):hover {
-  background-color: var(--cu-background-color);
+  background-color: var(--cu-background-color-light);
 }
 .cu-option.is-active {
   color: var(--cu-color-primary);
@@ -129,6 +130,7 @@
 .cu-select__popper.large .cu-option {
   height: var(--cu-size-large);
   line-height: var(--cu-size-large);
+  font-size: 14px;
 }
 
 .cu-option-group {

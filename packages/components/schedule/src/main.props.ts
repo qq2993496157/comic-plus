@@ -11,7 +11,24 @@ export const scheduleProps = {
     type: Number as PropType<Times>,
     default: 18
   },
-  hasScheduleDays: Array as PropType<(string | number | Date)[]>
+  hasScheduleDays: Array as PropType<(string | number | Date)[]>,
+  gap: {
+    type: Number,
+    default: 100
+  },
+  loading: Boolean,
+  cardShadow: {
+    type: Boolean,
+    default: true
+  },
+  showEmpty: {
+    type: Boolean,
+    default: true
+  },
+  emptyText: {
+    type: String,
+    default: '暂无日程'
+  }
 } as const;
 
 export type ScheduleProps = ExtractPropTypes<typeof scheduleProps>;

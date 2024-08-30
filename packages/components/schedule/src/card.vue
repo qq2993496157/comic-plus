@@ -3,14 +3,19 @@
     <div
       v-for="(card, idx) in data.children"
       class="cu-schedule-card"
-      :style="{ ...cardStyleFn(card), '--x': 0 - tr * idx + 'px' }"
-      :key="card.time">
+      :class="{ 'is-shadow': injectProps.cardShadow }"
+      :style="{
+        ...cardStyleFn(card),
+        '--x': 0 - tr * idx + 'px',
+        backgroundColor: `var(--cu-color-${colors[card._index % 4]})`
+      }"
+      :key="card.time + idx">
       <slot name="card" :data="card">
-        <component v-if="isVNode(card.content)" :is="card.content"></component>
+        <component v-if="isVNode(card.content!)" :is="card.content!"></component>
         <template v-else>
-          <div class="cu-schedule-defaultcard" :style="{ backgroundColor: `var(--cu-color-${colors[idx % 4]})` }">
+          <div class="cu-schedule-defaultcard">
             <div class="cu-schedule-defaultcard__content">
-              {{ card.content }}
+              {{ card.content! }}
             </div>
             <div class="timer">{{ card.time }}</div>
           </div>
@@ -34,32 +39,50 @@ const props = defineProps({
   data: Object
 });
 
-const { props: injectProps } = inject(SCHEDULE_PROVIDE);
+const { props: injectProps, spacing } = inject(SCHEDULE_PROVIDE);
 
 const colors = ['primary', 'success', 'warning', 'danger'];
 
 const cardRef = ref();
 const isFold = ref(cardRef.value?.scrollWidth > cardRef.value?.offsetWidth);
 const tr = ref(0);
+
+const maxHeight = computed(() => {
+  return (injectProps.end + 1 - injectProps.start) * spacing.value;
+});
+
+const startTime = computed(() => {
+  return Math.max(props.data.startTime, injectProps.start);
+});
+
+const endTime = computed(() => {
+  return Math.min(props.data.endTime, injectProps.end + 1);
+});
+
+const getMaxPx = (number) => {
+  return Math.min(Math.max(number, 0), maxHeight.value);
+};
+
 const updateDebounceFold = debounce(updateFold);
 
 const cardStyle = computed(() => {
   return {
-    top: (props.data.startTime - injectProps.start) * 100 + 'px',
-    height: (props.data.endTime - props.data.startTime) * 100 + 'px'
+    top: getMaxPx((startTime.value - injectProps.start) * spacing.value) + 'px',
+    height: Math.min((endTime.value - startTime.value) * spacing.value, maxHeight.value) + 'px'
   };
 });
 
 function cardStyleFn(card) {
   return {
-    marginTop: (card.getTimes[0] - props.data.startTime) * 100 + 'px',
-    marginBottom: (props.data.endTime - card.getTimes[1]) * 100 + 'px'
+    marginTop: getMaxPx((card.getTimes[0] - startTime.value) * spacing.value) + 'px',
+    marginBottom: getMaxPx((endTime.value - card.getTimes[1]) * spacing.value) + 'px'
   };
 }
 
 function updateFold() {
   isFold.value = cardRef.value?.scrollWidth > cardRef.value?.offsetWidth;
-  tr.value = (cardRef.value?.scrollWidth - cardRef.value?.offsetWidth) / (props.data.children.length - 1);
+  let sum = (cardRef.value?.scrollWidth - cardRef.value?.offsetWidth) / (props.data.children.length - 1);
+  tr.value = isNaN(sum) ? 0 : sum;
 }
 
 const { width, height } = useElementSize(cardRef);

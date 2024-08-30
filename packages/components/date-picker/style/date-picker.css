@@ -16,14 +16,14 @@
   box-sizing: border-box;
   cursor: inherit;
   transition: transform 200ms;
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light6);
 }
 
 .cu-date-picker__content .clearable {
   min-width: 22px;
   padding-left: 8px;
   box-sizing: border-box;
-  color: var(--cu-color-text-light2);
+  color: var(--cu-text-color-light6);
 }
 
 .cu-date-picker__content .clearable i {
@@ -35,12 +35,12 @@
 }
 
 .cu-date-picker__content .clearable i:hover {
-  color: var(--cu-color-text);
+  color: var(--cu-text-color);
 }
 
 .cu-date-picker__popper {
   font-size: 13px;
-  color: var(--cu-color-text);
+  color: var(--cu-text-color-light2);
 }
 .cu-date-picker__popper.is-range .cu-date-picker__select {
   padding: 4px;
@@ -125,10 +125,11 @@
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
+  transition: all 200ms ease;
 }
 
 .cu-data-picker__select-days > div > .is-notcur:not(.is-disabled) {
-  color: var(--cu-color-text-light);
+  color: var(--cu-text-color-light6);
 }
 .cu-data-picker__select-month,
 .cu-data-picker__select-year {
@@ -141,21 +142,22 @@
   line-height: 60px;
   text-align: center;
   cursor: pointer;
+  transition: all 200ms ease;
 }
 
 .cu-data-picker__select-days span:hover,
 .cu-data-picker__select-month > div:hover,
 .cu-data-picker__select-year > div:hover {
-  background-color: var(--cu-background-color);
+  background-color: var(--cu-background-color-light);
 }
 
 .cu-data-picker__select-content .is-selected {
   color: var(--cu-color-primary);
 }
 
-.cu-data-picker__select-content .is-disabled {
-  background-color: var(--cu-disabled-background);
-  color: var(--cu-disabled-font);
+.cu-data-picker__select-content [class^='cu-data-picker__select'] .is-disabled {
+  background-color: var(--cu-background-color-disabled);
+  color: var(--cu-text-color-light5);
   cursor: no-drop;
 }
 
