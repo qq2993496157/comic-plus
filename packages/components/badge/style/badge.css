@@ -1,8 +1,6 @@
 .cu-badge {
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: inherit;
+  display: inline-flex;
 }
 .cu-badge__inner {
   border: 1px solid #fff;

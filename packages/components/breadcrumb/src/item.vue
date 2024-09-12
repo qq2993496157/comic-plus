@@ -4,7 +4,10 @@
       <slot></slot>
     </span>
     <span class="cu-breadcrumb__separator" v-if="!injectProps.fill">
-      <i :class="injectProps.separatorIcon">{{ injectProps.separatorIcon ? undefined : injectProps.separator }}</i>
+      <component v-if="isVueComponent(injectProps.separator)" :is="injectProps.separator" />
+      <template v-else>
+        {{ injectProps.separator ?? '/' }}
+      </template>
     </span>
   </div>
 </template>
@@ -14,6 +17,8 @@ import { inject, getCurrentInstance } from 'vue';
 import type { Router } from 'vue-router';
 import { breadcrumbItemProps } from './item.props';
 import { BREADCRUMB_PROVIDE } from './type';
+import { isVueComponent } from '../../../utils';
+
 defineOptions({
   name: 'CuBreadcrumbItem'
 });

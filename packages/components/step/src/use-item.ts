@@ -1,6 +1,8 @@
 import { getCurrentInstance, computed, inject, onMounted, onBeforeUnmount } from 'vue';
 import type { StepItemProps } from './item.props';
 import { STEP_PROVIDE } from './type';
+import { isVueComponent } from '../../../utils';
+import { CheckOne, CloseFilled } from '../../../icons';
 
 export const useStepItem = (props: StepItemProps) => {
   const instance = getCurrentInstance()!;
@@ -21,11 +23,11 @@ export const useStepItem = (props: StepItemProps) => {
   });
 
   const currentIcon = computed(() => {
-    if (props.icon) return props.icon;
+    if (isVueComponent(props.icon)) return props.icon;
     if (isCurrent.value) {
-      return props.error ? 'cu-icon-close-filled' : false;
+      return props.error ? CloseFilled : null;
     }
-    return isFinish.value ? 'cu-icon-check-one' : false;
+    return isFinish.value ? CheckOne : null;
   });
 
   onMounted(() => {

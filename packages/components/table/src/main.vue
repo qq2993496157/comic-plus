@@ -209,7 +209,7 @@ function findLastObjectWithProperty() {
 
 function styles(css: TableColumn, index: number, offset?: number) {
   let obj = {} as CSSProperties;
-  obj['text-align'] = css.align;
+  obj['text-align'] = css.align as CSSProperties['text-align'];
   if (css.fixed === 'left') {
     obj.left = getStickyLeft(index) + 'px';
   } else if (css.fixed === 'right') {

@@ -11,7 +11,7 @@
     :style="{ '--cu-pistol-size': props.size + 'px' }">
     <div class="cu-pistol__container" ref="pistolContainerRef" :style="pistolStyle">
       <slot>
-        <i class="default-icon" :class="icon ?? 'cu-icon-hamburger-button'"></i>
+        <component class="default-icon" :is="isVueComponent(icon) ? icon : HamburgerButton" />
       </slot>
     </div>
     <ul class="cu-pistol__magazine" :class="props.direction">
@@ -26,6 +26,8 @@ import { onClickOutside, useEventListener } from '@vueuse/core';
 import '../style/pistol.css';
 import { pistolProps, pistolEmits } from './main.props';
 import { BulletInstance, Bullets, PISTOL_PROVIDE } from './type';
+import { isVueComponent } from '../../../utils';
+import { HamburgerButton } from '../../../icons';
 
 defineOptions({
   name: 'CuPistol'

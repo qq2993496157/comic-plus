@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, inject, isVNode, ref } from 'vue';
+import { defineComponent, h, inject, ref } from 'vue';
 import { TABLE_V2_PROVIDE } from '../type';
 import TableColgroup from '../components/table-colgroup';
 

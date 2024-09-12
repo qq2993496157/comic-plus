@@ -1,4 +1,4 @@
-import type { PropType, VNode } from 'vue';
+import type { Component, PropType, VNode } from 'vue';
 import type { ComicType2 } from '../../../../utils';
 
 const alertOptions = {
@@ -12,7 +12,7 @@ const alertOptions = {
     type: String,
     default: '关闭'
   },
-  icon: String,
+  icon: Object as PropType<Component>,
   color: String,
   center: Boolean,
   modeClose: Boolean,
@@ -51,7 +51,7 @@ export type AlertOptions = {
   readonly type?: 'primary' | 'success' | 'warning' | 'info' | 'error';
   readonly content?: string | VNode;
   readonly closeButtonText?: string;
-  readonly icon?: string;
+  readonly icon?: Component;
   readonly color?: string;
   readonly center?: boolean;
   readonly modeClose?: boolean;

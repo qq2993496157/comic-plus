@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, VNode } from 'vue';
+import type { Component, ExtractPropTypes, PropType, VNode } from 'vue';
 import type { ComicType2 } from '../../../../utils';
 
 export const noticeProps = {
@@ -9,7 +9,7 @@ export const noticeProps = {
   type: String as PropType<ComicType2>,
   title: String,
   content: [String, Object] as PropType<string | VNode>,
-  icon: String,
+  icon: Object as PropType<Component>,
   color: String,
   showClose: {
     type: Boolean,
@@ -28,7 +28,7 @@ export type NoticeOptions = {
   readonly type?: ComicType2;
   readonly title?: string;
   readonly content?: string | VNode;
-  readonly icon?: string;
+  readonly icon?: Component;
   readonly color?: string;
   readonly showClose?: boolean;
   readonly duration?: number;

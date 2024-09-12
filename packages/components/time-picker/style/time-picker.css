@@ -20,23 +20,25 @@
   color: var(--cu-text-color-light6);
 }
 
-.cu-time-picker__content .clearable {
-  min-width: 22px;
+.cu-time-picker__content .suffix-icon {
   padding-left: 8px;
-  box-sizing: border-box;
   color: var(--cu-text-color-light6);
+  min-width: 22px;
+  line-height: 1;
+  box-sizing: border-box;
 }
 
-.cu-time-picker__content .clearable i {
-  cursor: pointer;
+.cu-time-picker__content .clearable {
   display: none;
+  cursor: pointer;
+  color: var(--cu-text-color-light6);
 }
-.cu-time-picker:hover .clearable i {
+.cu-time-picker:hover .clearable {
   display: initial;
 }
 
-.cu-time-picker__content .clearable i:hover {
-  color: var(--cu-text-color);
+.cu-time-picker__content .clearable:hover {
+  color: var(--cu-text-color-light3);
 }
 
 .cu-time-picker__popper {

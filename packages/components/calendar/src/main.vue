@@ -205,14 +205,14 @@ const dateTypeFn = {
   'next-year': nextYear
 } as const;
 
-type DateType = keyof typeof dateTypeFn | Date;
+type DateType = keyof typeof dateTypeFn;
 
-function selectDate(value: DateType) {
-  if (value in dateTypeFn) {
-    dateTypeFn[value]?.();
-  } else if (value instanceof Date) {
+function selectDate(value: DateType | Date) {
+  if (value instanceof Date) {
     dn.value = new Date(value).setHours(0, 0, 0, 0);
     setValue();
+  } else if (value in dateTypeFn) {
+    dateTypeFn[value]?.();
   } else {
     warn('SelectDate can only pass in parameters in Date or specified string format');
     return;

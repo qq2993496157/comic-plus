@@ -23,9 +23,8 @@
 import { nextTick, ref, onMounted, watch, computed } from 'vue';
 import '../style/textarea.css';
 import '../../form-common.css';
-import { useItemValidate } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { textareaProps, textareaEmits } from './main.props';
-// import { useElementSize } from '@vueuse/core';
 defineOptions({
   name: 'CuTextarea'
 });

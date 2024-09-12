@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, Component } from 'vue';
 import type { ComicType, ComicSize } from '../../../utils';
 
 export const buttonProps = {
@@ -7,16 +7,16 @@ export const buttonProps = {
   disabled: Boolean,
   plain: Boolean,
   light: Boolean,
-  icon: String,
+  icon: Object as PropType<Component>,
   round: Boolean,
   circle: Boolean,
   color: String,
   loading: Boolean,
-  loadingIcon: String,
+  loadingIcon: Object as PropType<Component>,
   dashed: Boolean,
   text: Boolean,
   raised: Boolean
-} as const;
+};
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>;
 

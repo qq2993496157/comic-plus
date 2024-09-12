@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, Component } from 'vue';
 import type { ComicType } from '../../../utils';
 
 export const pistolProps = {
@@ -28,12 +28,13 @@ export const pistolProps = {
     type: String as PropType<'top' | 'left' | 'bottom' | 'right'>,
     default: 'top'
   },
-  icon: String,
+  icon: Object as PropType<Component>,
   chooseAfterHide: {
     type: Boolean,
     default: true
   },
-  disabled: Boolean
+  disabled: Boolean,
+  dept: Number
 } as const;
 
 export type PistolProps = ExtractPropTypes<typeof pistolProps>;

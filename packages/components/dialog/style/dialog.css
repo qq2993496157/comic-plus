@@ -23,9 +23,10 @@
 }
 .cu-dialog .cu-dialog__header .close {
   cursor: pointer;
+  color: var(--cu-text-color-light3);
 }
 .cu-dialog .cu-dialog__header .close:hover {
-  text-shadow: 0 0 2px;
+  color: var(--cu-text-color-light);
 }
 .cu-dialog__content {
   padding: 20px;

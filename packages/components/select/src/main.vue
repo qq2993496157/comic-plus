@@ -9,7 +9,7 @@
         <i v-if="inputValue.length === 0" class="placeholder">{{ placeholder }}</i>
         <em v-for="val in inputValue" class="cu-select--em" :key="val">
           {{ options[val].props.label }}
-          <i class="cu-icon-close-one em-clearable" @click.stop="removeSelectItem(val)"></i>
+          <CloseOne class="em-clearable" @click.stop="removeSelectItem(val)" />
         </em>
       </span>
       <input
@@ -21,8 +21,8 @@
         :disabled="disabled"
         v-else />
       <span class="suffix-icon" :class="{ 'has-value': modelValue && clearable }">
-        <i class="cu-icon-down cu-select__down"></i>
-        <i class="cu-icon-close-one clearable" v-if="clearable" @click.stop="clear"></i>
+        <Down class="cu-select__down" />
+        <CloseOne class="clearable" v-if="clearable" @click.stop="clear" />
       </span>
     </div>
 
@@ -49,9 +49,11 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import { CuScrollbar as Scrollbar } from '../../scrollbar';
-import { useConfig, useItemValidate, useClickOutside } from '../../../utils';
+import { useConfig, useClickOutside } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { selectProps, selectEmits } from './main.props';
 import { SelectValue, SELECT_PROVIDE, OptionInstance } from './type';
+import { CloseOne, Down } from '../../../icons';
 defineOptions({
   name: 'CuSelect'
 });

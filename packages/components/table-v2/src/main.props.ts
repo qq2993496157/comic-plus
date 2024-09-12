@@ -28,9 +28,9 @@ export const tableV2Props = {
     CSSProperties | ((data: { row: any; rowIndex: number; col: any; colIndex: number }) => CSSProperties)
   >,
   stripe: Boolean,
-  stripeColors: Array as PropType<string[]>,
+  stripeColors: Array as PropType<CSSProperties['color'][]>,
   highlightCurrentRow: Boolean,
-  highlightColor: String,
+  highlightColor: String as PropType<CSSProperties['color']>,
   rowKey: String,
   treeProps: Object as PropType<TreeProps>,
   indent: {

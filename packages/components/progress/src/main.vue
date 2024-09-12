@@ -6,7 +6,7 @@
         <div class="cu-progress__bar" :style="barsStyle">
           <div class="cu-progress__describe" v-if="insetFormat && showText">
             <span v-if="format">{{ format }}</span>
-            <span v-else-if="STATUS[status]" :class="[STATUS[status], status]"></span>
+            <component v-else-if="STATUS[status]" :size="formatSize[barType]" :class="status" :is="STATUS[status]" />
             <span v-else>{{ schedule + '%' }}</span>
           </div>
         </div>
@@ -44,9 +44,9 @@
       :style="{
         color: barType === 'trends' && schedule > 50 ? '#fff' : undefined
       }"
-      v-if="!insetFormat && showText">
+      v-if="(!insetFormat && showText) || barType === 'circle' || barType === 'trends'">
       <span v-if="format">{{ format }}</span>
-      <span v-else-if="STATUS[status]" :class="[STATUS[status], status]"></span>
+      <component v-else-if="STATUS[status]" :size="formatSize[barType]" :class="status" :is="STATUS[status]" />
       <span v-else>{{ schedule + '%' }}</span>
     </div>
   </div>
@@ -56,10 +56,24 @@
 import { computed, onMounted, ref } from 'vue';
 import '../style/progress.css';
 import { isString, isFunction } from '../../../utils';
-import { progressProps, STATUS } from './main.props';
+import { progressProps } from './main.props';
+import { CloseOne, Success, Warning } from '../../../icons';
+
 defineOptions({
   name: 'CuProgress'
 });
+const STATUS = {
+  success: Success,
+  warning: Warning,
+  fail: CloseOne
+};
+const formatSize = {
+  trends: 17,
+  circle: 17,
+  line: 13,
+  'line-trends': 13
+};
+
 const props = defineProps(progressProps);
 const circleRef = ref();
 const circleLength = ref(0);

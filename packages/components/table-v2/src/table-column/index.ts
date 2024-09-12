@@ -30,7 +30,6 @@ export default defineComponent({
       showExpand: false,
       default: slots.default,
       header: slots.header,
-      icon: slots.icon,
       style: {}
     }) as Column;
 

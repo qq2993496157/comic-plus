@@ -1,7 +1,10 @@
+import { Component, PropType, VNode } from 'vue';
+import { Loading } from '../../../icons';
+
 export const loadingProps = {
   icon: {
-    tyoe: String,
-    default: 'cu-icon-loading'
+    type: Object as PropType<Component | VNode>,
+    default: Loading
   },
   defaultVisible: {
     type: Boolean,
@@ -16,7 +19,7 @@ export const loadingProps = {
 } as const;
 
 export type LoadingProps = {
-  readonly icon?: string;
+  readonly icon?: Component | VNode;
   readonly defaultVisible?: boolean;
   readonly text?: string;
   readonly blur?: boolean;

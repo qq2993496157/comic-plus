@@ -1,4 +1,4 @@
-import { ComputedRef, Ref, InjectionKey } from 'vue';
+import { ComputedRef, InjectionKey } from 'vue';
 import { ClockProps } from './main.props';
 
 export const NUMBER_SHOW_ENUM = [

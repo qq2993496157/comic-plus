@@ -5,24 +5,27 @@
     :class="[{ 'is-disabled': disabled || loading, 'is-square': square }, status, currentSize]">
     <input type="checkbox" :checked="isOn" :disabled="disabled" @change="changeValue" />
     <span class="cu-switch__label cu-switch__label--off" v-if="!inlineText && (offIcon || offText)">
-      <span :class="offIcon">
-        {{ offIcon ? undefined : offText }}
-      </span>
+      <component v-if="isVueComponent(offIcon)" :is="offIcon" />
+      <template v-else>{{ offText }}</template>
     </span>
     <div class="cu-switch__inner">
       <span v-if="inlineText" class="cu-switch__text">
-        <span :class="isOn ? onIcon : offIcon">
-          {{ isOn ? (onIcon ? undefined : onText) : offIcon ? undefined : offText }}
+        <span v-if="isOn">
+          <component v-if="isVueComponent(onIcon)" :is="onIcon" />
+          <template v-else>{{ onText }}</template>
+        </span>
+        <span v-else>
+          <component v-if="isVueComponent(offIcon)" :is="offIcon" />
+          <template v-else>{{ offText }}</template>
         </span>
       </span>
-      <span class="cu-switch__span">
-        <i class="cu-icon-loading" v-if="loading"></i>
+      <span class="cu-switch__loading-warpper">
+        <Loading v-if="loading" class="is-loading" />
       </span>
     </div>
     <span class="cu-switch__label cu-switch__label--on" v-if="!inlineText && (onIcon || onText)">
-      <span :class="onIcon">
-        {{ onIcon ? undefined : onText }}
-      </span>
+      <component v-if="isVueComponent(onIcon)" :is="onIcon" />
+      <template v-else>{{ onText }}</template>
     </span>
   </label>
 </template>
@@ -30,10 +33,11 @@
 <script setup lang="ts">
 import { computed, warn, inject } from 'vue';
 import '../style/switch.css';
-import { useConfig, colorToRgba, colorBlend, isBoolean, isPromise } from '../../../utils';
-import { useItemValidate } from '../../../utils';
+import { useConfig, colorToRgba, colorBlend, isBoolean, isPromise, isVueComponent } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { switchProps, switchEmits } from './main.props';
 import { FORM_PROVIDE } from '../../form/src/type';
+import { Loading } from '../../../icons';
 defineOptions({
   name: 'CuSwitch'
 });

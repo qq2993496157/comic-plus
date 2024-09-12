@@ -10,4 +10,6 @@ const CuMessageBox = {
   notice
 };
 
+export { CuMessageBox };
+
 export default CuMessageBox;

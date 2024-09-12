@@ -17,7 +17,7 @@
           </ul>
         </transition>
         <div class="fold" v-if="fold && postion !== 'none'" @click="foldClick()">
-          <i :class="menuContext.iconName"></i>
+          <component :is="menuContext.icon" />
         </div>
       </slot>
     </div>
@@ -36,6 +36,7 @@ import { CuScrollbar as Scrollbar } from '../../scrollbar';
 import { debounce } from '../../../utils';
 import { elevatorProps, elevatorEmits } from './main.props';
 import { ELEVATOR_PROVIDE, ElevatorItemInstance } from './type';
+import { DownFilled, UpFilled } from '../../../icons';
 
 defineOptions({
   name: 'CuElevator'
@@ -61,19 +62,19 @@ const menuContext = computed(() => {
     return {
       class: 'reversal',
       transitionName: 'cu-zoom-top',
-      iconName: 'cu-icon-down-filled'
+      icon: DownFilled
     };
   } else if (props.postion.indexOf('bottom') >= 0) {
     return {
       class: '',
       transitionName: 'cu-zoom-bottom',
-      iconName: 'cu-icon-up-filled'
+      icon: UpFilled
     };
   } else {
     return {
       class: '',
       transitionName: 'cu-zoom-bottom',
-      iconName: 'cu-icon-up-filled'
+      icon: UpFilled
     };
   }
 });

@@ -41,19 +41,17 @@
   border-radius: 4px;
   background: #909399;
   opacity: 0.4;
-  transition: opacity 200ms;
+  transition: opacity 200ms ease-in-out, height 200ms ease-in-out, width 200ms ease-in-out;
 }
 .cu-scrollbar__thumb.thumby::after {
   top: var(--cu-scrollbar-bartop);
   height: var(--cu-scrollbar-barheight);
   width: 100%;
-  transition: height 200ms;
 }
 .cu-scrollbar__thumb.thumbx::after {
   left: var(--cu-scrollbar-barleft);
   height: 100%;
   width: var(--cu-scrollbar-barwidth);
-  transition: width 200ms;
 }
 
 .cu-scrollbar:hover .cu-scrollbar__thumb {

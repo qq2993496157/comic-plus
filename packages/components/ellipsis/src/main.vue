@@ -7,7 +7,9 @@
         </div>
       </template>
       <div @click="showMore = !showMore" v-if="data.length > clamp" class="cu-ellipsis__button">
-        {{ showMore ? closeText : openText }}<i :class="`cu-icon-double-${showMore ? 'up' : 'down'}`"></i>
+        {{ showMore ? closeText : openText }}
+        <DoubleUp v-if="showMore" />
+        <DoubleDown v-else />
       </div>
     </template>
     <template v-else-if="type === 'text'">
@@ -22,7 +24,9 @@
             ref="buttonRef"
             class="cu-ellipsis__button float"
             v-if="hasButton && !isIOS">
-            {{ showMore ? closeText : openText }}<i :class="`cu-icon-double-${showMore ? 'up' : 'down'}`"></i>
+            {{ showMore ? closeText : openText }}
+            <DoubleUp v-if="showMore" />
+            <DoubleDown v-else />
           </span>
           <slot>
             {{ text }}
@@ -30,7 +34,9 @@
         </div>
       </div>
       <span @click="showMore = !showMore" class="cu-ellipsis__button" v-if="hasButton && isIOS">
-        {{ showMore ? closeText : openText }}<i :class="`cu-icon-double-${showMore ? 'up' : 'down'}`"></i>
+        {{ showMore ? closeText : openText }}
+        <DoubleUp v-if="showMore" />
+        <DoubleDown v-else />
       </span>
     </template>
   </div>
@@ -41,6 +47,7 @@ import { nextTick, onMounted, ref, watch, computed } from 'vue';
 import { isIOS } from '@vueuse/core';
 import '../style/ellipsis.css';
 import { ellipsisProps } from './main.props';
+import { DoubleDown, DoubleUp } from '../../../icons';
 defineOptions({
   name: 'CuEllipsis'
 });

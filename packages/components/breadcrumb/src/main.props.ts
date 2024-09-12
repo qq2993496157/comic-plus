@@ -1,11 +1,9 @@
-import { ExtractPropTypes } from 'vue';
+import { ExtractPropTypes, PropType, Component } from 'vue';
 
 export const breadcrumbProps = {
   separator: {
-    type: String,
-    default: '/'
+    type: [String, Object] as PropType<string | Component>
   },
-  separatorIcon: String,
   color: String,
   fill: Boolean,
   closeboth: Boolean

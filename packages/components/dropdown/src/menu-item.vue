@@ -1,7 +1,7 @@
 <template>
   <li class="cu-dropdown-item" :class="{ divider, disabled }" @click="itemHandleClick">
     <div>
-      <i class="prefix-icon" :class="icon" v-if="icon"></i>
+      <component v-if="isVueComponent(icon)" class="prefix-icon" :is="icon" />
       <slot></slot>
     </div>
   </li>
@@ -11,6 +11,7 @@
 import { inject, warn } from 'vue';
 import { dropdownItemProps } from './menu-item.props';
 import { DROPDOWN_PROVIDE } from './type';
+import { isVueComponent } from '../../../utils';
 defineOptions({
   name: 'CuDropdownItem'
 });

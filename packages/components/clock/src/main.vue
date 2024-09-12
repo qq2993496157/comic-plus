@@ -1,14 +1,10 @@
 <template>
-  <template v-if="type === 'circle'">
-    <circle-clock :class="[size, shadow]" :style="clockStyle"></circle-clock>
-  </template>
-  <template v-else-if="type === 'number'">
-    <number-clock :class="[size, shadow]" :style="clockStyle"></number-clock>
-  </template>
+  <circle-clock v-if="type === 'circle'" :class="[size, shadow]" :style="clockStyle" />
+  <number-clock v-else-if="type === 'number'" :class="[size, shadow]" :style="clockStyle" />
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue';
+import { computed, provide } from 'vue';
 import '../style/clock.css';
 import { useNow } from '@vueuse/core';
 import circleClock from './components/circle-clock.vue';
@@ -23,7 +19,6 @@ defineOptions({
 const props = defineProps(clockProps);
 
 const now = useNow({ interval: 1000 });
-// const now = ref(new Date('2024/06/24 12:00:00'));
 
 const getTimes = computed(() => {
   return {

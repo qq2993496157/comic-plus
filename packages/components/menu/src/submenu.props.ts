@@ -1,8 +1,8 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType, Component } from 'vue';
 
 export const submenuProps = {
   label: String,
-  icon: String,
+  icon: Object as PropType<Component>,
   index: String,
   showEllipsis: Boolean
 } as const;

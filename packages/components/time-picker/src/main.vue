@@ -6,7 +6,7 @@
     ref="timePickerRef">
     <div class="cu-time-picker__content" @click="handleClick">
       <span class="prefix-icon">
-        <i :class="icon"></i>
+        <Time />
       </span>
       <input
         class="cu-input__inner"
@@ -24,8 +24,8 @@
         :value="modelValue[1]"
         :placeholder="endPlaceholder"
         :disabled="disabled" />
-      <span class="clearable" v-if="clearable">
-        <i class="cu-icon-close-one" v-show="hasValue" @click.stop="clear"></i>
+      <span class="suffix-icon" v-if="clearable">
+        <CloseOne class="clearable" v-show="hasValue" @click.stop="clear" />
       </span>
     </div>
 
@@ -44,9 +44,11 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import timeSelect from './time-select.vue';
-import { useConfig, useClickOutside, useItemValidate, isArray } from '../../../utils';
+import { useConfig, useClickOutside, isArray } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { timePickerProps, timePickerEmits } from './main.props';
 import { TIMEPICKER_PROVIDE } from './type';
+import { CloseOne, Time } from '../../../icons';
 
 defineOptions({
   name: 'CuTimePicker'

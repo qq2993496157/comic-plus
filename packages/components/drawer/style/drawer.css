@@ -46,9 +46,10 @@
 
 .cu-drawer__header .close {
   cursor: pointer;
+  color: var(--cu-text-color-light3);
 }
 .cu-drawer__header .close:hover {
-  text-shadow: 0 0 2px;
+  color: var(--cu-text-color);
 }
 
 .cu-drawer__content {

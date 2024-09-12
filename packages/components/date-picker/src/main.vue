@@ -6,7 +6,7 @@
     ref="datePickerRef">
     <div class="cu-date-picker__content" @click="handleClick">
       <span class="prefix-icon">
-        <i :class="icon"></i>
+        <Calendar />
       </span>
       <input
         type="text"
@@ -25,7 +25,7 @@
         :placeholder="endPlaceholder"
         :disabled="disabled" />
       <span class="clearable" v-if="clearable">
-        <i class="cu-icon-close-one" v-show="hasValue" @click.stop="clear"></i>
+        <CloseOne v-show="hasValue" @click.stop="clear" />
       </span>
     </div>
     <popper :show="show" :trigger="datePickerRef">
@@ -46,6 +46,7 @@ import DateSelect from './date-select.vue';
 import { useClickOutside, formatDate, useConfig, isArray } from '../../../utils';
 import { datePickerProps, datePickerEmits } from './main.props';
 import { DATEPICKER_PROVIDE, type ValueType } from './type';
+import { Calendar, CloseOne } from '../../../icons';
 
 defineOptions({
   name: 'CuDatePicker'

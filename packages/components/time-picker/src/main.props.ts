@@ -10,10 +10,6 @@ export const timePickerProps = {
     type: String,
     default: '/'
   },
-  icon: {
-    type: String,
-    default: 'cu-icon-time'
-  },
   size: String as PropType<ComicSize>,
   range: Boolean,
   placeholder: String,

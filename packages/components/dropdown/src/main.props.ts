@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, Component } from 'vue';
 import type { ComicType, ComicSize } from '../../../utils';
 
 export const dropdownProps = {
@@ -13,10 +13,7 @@ export const dropdownProps = {
   button: Boolean,
   size: String as PropType<ComicSize>,
   buttonType: String as PropType<ComicType>,
-  buttonIcon: {
-    type: String,
-    default: 'cu-icon-down'
-  },
+  buttonIcon: [Object, String] as PropType<Component | string>,
   disabled: Boolean,
   popperClass: String
 } as const;

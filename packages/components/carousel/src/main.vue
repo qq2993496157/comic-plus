@@ -11,10 +11,18 @@
     </div>
     <div class="cu-carousel__tools">
       <div class="cu-carousel__buttons" :class="arrow" v-if="arrow != 'never'">
-        <i class="cu-icon-left left" v-if="direction === 'horizontal'" @click="changeActive(-1)"></i>
-        <i class="cu-icon-right right" v-if="direction === 'horizontal'" @click="changeActive(1)"></i>
-        <i class="cu-icon-up top" v-if="direction === 'vertical'" @click="changeActive(-1)"></i>
-        <i class="cu-icon-down bottom" v-if="direction === 'vertical'" @click="changeActive(1)"></i>
+        <i class="left" v-if="direction === 'horizontal'" @click="changeActive(-1)">
+          <Left />
+        </i>
+        <i class="right" v-if="direction === 'horizontal'" @click="changeActive(1)">
+          <Right />
+        </i>
+        <i class="top" v-if="direction === 'vertical'" @click="changeActive(-1)">
+          <Up />
+        </i>
+        <i class="bottom" v-if="direction === 'vertical'" @click="changeActive(1)">
+          <Down />
+        </i>
       </div>
       <div class="cu-carousel__indicator" :class="arrow" v-if="showIndicator">
         <span v-for="dot in itemKeyList" :key="dot" @click="dotClick(dot)" :class="{ active: current === dot }"></span>
@@ -29,6 +37,7 @@ import '../style/carousel.css';
 import { CAROUSEL_PROVIDE } from './type';
 import { isNumber } from '../../../utils';
 import { carouselProps, carouselEmits } from './main.props';
+import { Down, Left, Right, Up } from '../../../icons';
 
 defineOptions({
   name: 'CuCarousel'

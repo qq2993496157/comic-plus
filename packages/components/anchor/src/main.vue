@@ -29,9 +29,9 @@ const { SIZE } = useConfig();
 const currentHref = ref('');
 
 const links: Record<string, AnchorLinkInstance> = {};
-const currentLinkEl = ref(null);
-const containerEl = ref(null);
-const anchorRef = ref(null);
+const currentLinkEl = ref();
+const containerEl = ref();
+const anchorRef = ref();
 
 var hashChangeFlag = false;
 var rolling = false;

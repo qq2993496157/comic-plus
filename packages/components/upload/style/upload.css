@@ -1,10 +1,15 @@
 .cu-upload {
+  vertical-align: middle;
   display: inline-flex;
   flex-direction: column;
   font-size: 14px;
   color: var(--cu-text-color);
   --cu-upload-size: var(--cu-upload-size, 120px);
 }
+.cu-upload-choose--warpper {
+  display: inline-flex;
+}
+
 .cu-upload.picture {
   display: flex;
   flex-wrap: wrap;
@@ -71,7 +76,7 @@
   opacity: 1;
 }
 
-.cu-upload__list li i {
+.cu-upload__list li {
   font-size: 14px;
   color: var(--cu-text-color-light);
 }
@@ -154,9 +159,13 @@
   display: none;
 }
 
-.cu-upload__pictures li .mask i {
+.cu-upload__pictures li .mask svg {
   margin: 0 4px;
   cursor: pointer;
+  transition: all 200ms ease;
+}
+.cu-upload__pictures li .mask svg:hover {
+  transform: scale(1.1);
 }
 
 .cu-upload__pictures img {

@@ -2,14 +2,17 @@
   <div class="cu-tree-node">
     <div class="cu-tree__content" :class="data.className" :style="{ 'padding-left': (node.length - 1) * 14 + 'px' }">
       <span :class="{ unfold: nodeShow }" class="tree-icon" @click="_nodeExpanded">
-        <i class="cu-icon-loading" v-if="loading && injectProps.lazy"></i>
-        <i :class="injectProps.icon ?? 'cu-icon-right-filled'" v-show="!loading || !injectProps.lazy" v-if="isIcon"></i>
+        <Loading class="is-loading" v-if="loading && injectProps.lazy" />
+        <component
+          :is="isVueComponent(injectProps.icon) ? injectProps.icon : RightFilled"
+          v-show="!loading || !injectProps.lazy"
+          v-if="isIcon" />
       </span>
       <span class="checkbox" v-if="injectProps.selection">
         <checkbox v-model="checked" :indeterminate="indeterminate" @change="_checkChange" :disabled="data.disabled" />
       </span>
       <div class="cu-tree__info" @click="_nodeClick">
-        <i v-if="data.icon" class="node-icon" :class="isFunction(data.icon) ? data.icon(nodeShow) : data.icon"></i>
+        <component v-if="data.icon" class="node-icon" :is="nodeIcon" />
         <slot :node="data" :parentNode="parentNode" :childNodes="childrenList">
           {{ data[nodeKeys.label] }}
         </slot>
@@ -39,9 +42,10 @@ import { ref, computed, inject, getCurrentInstance, onMounted, nextTick, onUnmou
 import { CuTransitionCollapse as TransitionCollapse } from '../../transition-collapse';
 import { CuCheckbox as Checkbox } from '../../checkbox';
 import emitter from '../../../utils/emitter';
-import { isFunction } from '../../../utils';
+import { isFunction, isVueComponent } from '../../../utils';
 import { TREE_PROVIDE, ChildNodeInstance } from './type';
 import { treeNodeProps, treeNodeEmits } from './tree-node.props';
+import { Loading, RightFilled } from '../../../icons';
 defineOptions({
   name: 'CuTreeNode'
 });
@@ -66,6 +70,11 @@ const loadList = ref<any[]>([]);
 
 const childrenList = computed(() => {
   return [...(props.data?.[nodeKeys.children!] ?? []), ...loadList.value];
+});
+
+const nodeIcon = computed(() => {
+  let icon = isFunction(props.data.icon) ? props.data.icon(nodeShow.value) : props.data.icon;
+  return isVueComponent(icon) ? icon : null;
 });
 
 function getCurrentNodeDefaultExpand(): boolean {

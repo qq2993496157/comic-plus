@@ -67,7 +67,6 @@
 .cu-elevator__menu .fold {
   margin: 4px 0;
   width: var(--cu-elevator-menu-size);
-  text-align: center;
   font-size: 14px;
   cursor: pointer;
   background-color: #fff;
@@ -76,6 +75,10 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   transition: color 200ms;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
 }
 
 .cu-elevator__menu .fold:hover {

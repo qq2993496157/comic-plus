@@ -4,7 +4,7 @@
       <div v-if="show" class="cu-backtop" :style="style" @click="backTop">
         <slot>
           <div class="cu-backtop__container">
-            <i class="cu-icon-up-filled"></i>
+            <UpFilled />
           </div>
         </slot>
       </div>
@@ -18,6 +18,7 @@ import { useEventListener } from '@vueuse/core';
 import '../style/backtop.css';
 import { getNextZIndex, isNumber } from '../../../utils';
 import { backtopProps } from './main.props';
+import { UpFilled } from '../../../icons';
 
 defineOptions({
   name: 'CuBacktop'

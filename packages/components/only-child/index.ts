@@ -1,5 +1,5 @@
 import { cloneVNode, Comment, defineComponent, Fragment, h, Text, VNode, warn } from 'vue';
-import { isObject } from '../../../utils';
+import { isObject } from '../../utils';
 
 const wrapTextContent = (s: string | VNode): VNode => {
   return h('span', null, s);
@@ -31,7 +31,7 @@ const findFirstLegitChild = (node: VNode[] | undefined): VNode | null => {
   return null;
 };
 
-const SlotChild = defineComponent({
+const OnlyChild = defineComponent({
   name: 'SlotChild',
   setup(_, { slots, attrs }) {
     return () => {
@@ -52,4 +52,4 @@ const SlotChild = defineComponent({
     };
   }
 });
-export default SlotChild;
+export default OnlyChild;

@@ -5,12 +5,13 @@
     :disabled="disabled || loading"
     @click="$emit('click', $event)"
     :style="buttonStyle">
-    <span
-      v-if="loading"
-      class="is-loading"
-      :class="loadingIcon ?? 'cu-icon-loading'"
-      :style="{ marginRight: $slots.default ? '4px' : '0' }"></span>
-    <span v-else-if="icon" :class="icon" :style="{ marginRight: $slots.default ? '4px' : '0' }"></span>
+    <i
+      :class="[{ 'is-loading': loading }]"
+      :style="{ marginRight: $slots.default ? '4px' : undefined }"
+      v-if="loading || icon">
+      <component v-if="loading" :is="isVueComponent(loadingIcon) ? loadingIcon : Loading" />
+      <component v-else-if="isVueComponent(icon)" :is="icon" />
+    </i>
     <slot></slot>
   </button>
 </template>
@@ -20,8 +21,9 @@ import { inject, computed } from 'vue';
 import '../style/button.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { buttonProps, buttonEmits } from './main.props';
-import { useConfig, colorToRgba, colorBlend } from '../../../utils';
+import { useConfig, colorToRgba, colorBlend, isVueComponent } from '../../../utils';
 import { BUTTONGROUP_PROVIDE } from './type';
+import { Loading } from '../../../icons';
 
 defineOptions({
   name: 'CuButton'

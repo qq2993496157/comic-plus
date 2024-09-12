@@ -38,10 +38,6 @@
   background-color: var(--cu-background-color-light);
 }
 
-.cu-pagination__pages span.button {
-  font-size: 18px;
-}
-
 .cu-pagination .cu-pagination__pages span:hover,
 .cu-pagination .cu-pagination__pages span.current {
   color: var(--cu-color-primary);
@@ -52,17 +48,17 @@
   background-color: var(--cu-color-primary);
 }
 
-.cu-pagination__pages .more i:first-child {
+.cu-pagination__pages .cu-pagination__icon:first-child {
   display: block;
 }
-.cu-pagination__pages .more i:last-child {
+.cu-pagination__pages .cu-pagination__icon:last-child {
   display: none;
 }
 
-.cu-pagination__pages .more:hover i:first-child {
+.cu-pagination__pages .cu-pagination__buttons:hover .cu-pagination__icon:first-child {
   display: none;
 }
-.cu-pagination__pages .more:hover i:last-child {
+.cu-pagination__pages .cu-pagination__buttons:hover .cu-pagination__icon:last-child {
   display: block;
 }
 
@@ -86,7 +82,7 @@
   height: var(--cu-size-small);
 }
 
-.cu-pagination.small .cu-pagination__pages span.button {
+.cu-pagination.small .cu-pagination__pages .cu-pagination__buttons {
   font-size: 14px;
 }
 

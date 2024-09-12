@@ -5,11 +5,6 @@ import type { ComicType2 } from '../../../utils';
 import { instancesAppend, instancesRemove, getMessageInstanceId } from './src/instance';
 import type { MessageInstance } from './src/instance';
 
-/**
- * @description: useMessage
- * @param {*} options
- * @return {*}
- */
 function createInstane(options: MessageOptions): void {
   const container = document.createElement('div');
   const id = getMessageInstanceId();

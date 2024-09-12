@@ -1,8 +1,8 @@
-import { ExtractPropTypes, PropType } from 'vue';
+import { Component, ExtractPropTypes, PropType } from 'vue';
 
 type link = {
   content?: string;
-  icon?: string;
+  icon?: Component;
   href?: string;
   blankTarget?: boolean;
 };

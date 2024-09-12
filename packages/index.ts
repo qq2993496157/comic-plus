@@ -1,4 +1,4 @@
-import { reactive, type Plugin, type Component, type App } from 'vue';
+import { reactive, type Plugin, type App } from 'vue';
 import { colorToRgba, colorBlendArray, toHex, type Config } from './utils';
 import { deepMerge } from './tools';
 import components from './components';
@@ -8,12 +8,11 @@ import { CuLoading, vLoading, useLoading } from './components/loading';
 import { vTooltip, useTooltip } from './components/tooltip';
 import { useInfiniteScroll, vInfiniteScroll } from './components/infinite-scroll';
 import { CuLoadingbar } from './components/loadingbar';
+import icons from './icons';
 
 const plugin = {
   install(app: App, config: Config) {
-    components.forEach((item: Component) => {
-      app.use(item as unknown as { install: () => any });
-    });
+    components.forEach((item) => app.use(item));
 
     app.config.globalProperties.$alert = CuMessageBox.alert;
     app.config.globalProperties.$confirm = CuMessageBox.confirm;
@@ -32,6 +31,12 @@ const plugin = {
     useComicConfig(config);
   }
 } as Plugin;
+
+const installIcons = (app: App, prefix?: string) => {
+  icons.forEach((icon) => {
+    app.component(prefix ? prefix + icon.name : icon.name, icon);
+  });
+};
 
 var assignConfig = reactive({}) as Config;
 
@@ -80,6 +85,7 @@ export default plugin;
 
 export * from './tools/index';
 export * from './components';
+export * from './icons';
 
 export {
   CuMessageBox,
@@ -92,5 +98,6 @@ export {
   vTooltip,
   useInfiniteScroll,
   vInfiniteScroll,
-  CuLoadingbar
+  CuLoadingbar,
+  installIcons
 };

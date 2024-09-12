@@ -1,4 +1,4 @@
-import type { PropType, VNode } from 'vue';
+import type { PropType, Component, VNode } from 'vue';
 import type { ComicType2 } from '../../../../utils';
 
 const confirmOptions = {
@@ -17,7 +17,7 @@ const confirmOptions = {
     type: String,
     default: '确认'
   },
-  icon: String,
+  icon: Object as PropType<Component>,
   color: String,
   modeClose: Boolean,
   escClose: {
@@ -62,7 +62,7 @@ export type ConfirmOptions = {
   readonly center?: boolean;
   readonly cancelButtonText?: string;
   readonly confirmButtonText?: string;
-  readonly icon?: string;
+  readonly icon?: Component;
   readonly color?: string;
   readonly modeClose?: boolean;
   readonly escClose?: boolean;

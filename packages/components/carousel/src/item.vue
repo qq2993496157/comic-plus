@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, inject, onMounted, onBeforeUnmount, computed, ref, watch, nextTick } from 'vue';
+import { getCurrentInstance, inject, onMounted, onBeforeUnmount, computed,} from 'vue';
 import { CAROUSEL_PROVIDE } from './type';
 
 defineOptions({

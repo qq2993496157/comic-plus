@@ -1,4 +1,3 @@
-export * from './hook';
 export * from './color';
 export * from './config';
 export * from './click-outside';

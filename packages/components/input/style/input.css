@@ -48,18 +48,18 @@
   padding-left: 8px;
   color: var(--cu-text-color-light6);
   min-width: 22px;
-  height: 100%;
+  line-height: 1;
   box-sizing: border-box;
 }
 
-.cu-input__content .clearable i {
+.cu-input__content .clearable {
   display: none;
   cursor: pointer;
 }
 
-.cu-input:hover .clearable i {
+.cu-input:hover .clearable {
   display: initial;
 }
-.cu-input__content .clearable i:hover {
-  color: var(--cu-text-color);
+.cu-input__content .clearable:hover {
+  color: var(--cu-text-color-light3);
 }

@@ -16,7 +16,7 @@ export const popoverProps = {
   title: String,
   content: String,
   width: {
-    style: Number,
+    type: Number,
     default: 150
   },
   offset: {

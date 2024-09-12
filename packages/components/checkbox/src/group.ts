@@ -1,6 +1,7 @@
 import { defineComponent, h, provide, ref, computed } from 'vue';
 import { CHECKBOXGROUP_PROVIDE } from './type';
-import { useItemValidate, ArrayMix } from '../../../utils';
+import { ArrayMix } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { checkboxGroupProps, checkboxGroupEmits } from './group.props';
 
 export default defineComponent({

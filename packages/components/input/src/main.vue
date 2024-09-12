@@ -6,7 +6,7 @@
     <span class="cu-input__content">
       <span class="prefix-icon" v-if="prefixIcon || $slots['prefix-icon']">
         <slot name="prefix-icon">
-          <i v-if="prefixIcon" :class="prefixIcon"></i>
+          <component v-if="isVueComponent(prefixIcon)" :is="prefixIcon" />
         </slot>
       </span>
       <input
@@ -23,11 +23,11 @@
         :maxlength="maxlength"
         :minlength="minlength" />
       <span class="clearable" v-if="clearable">
-        <i class="cu-icon-close-one" v-show="modelValue" @click="clear"></i>
+        <CloseOne v-show="modelValue" @click="clear" />
       </span>
       <span class="suffix-icon" v-if="suffixIcon || $slots['suffix-icon']">
         <slot name="suffix-icon">
-          <i v-if="suffixIcon" :class="suffixIcon"></i>
+          <component v-if="isVueComponent(suffixIcon)" :is="suffixIcon" />
         </slot>
       </span>
     </span>
@@ -42,8 +42,10 @@ import { inject, computed } from 'vue';
 import '../style/input.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { useConfig, useItemValidate } from '../../../utils';
+import { isVueComponent, useConfig } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { inputProps, inputEmits } from './main.props';
+import { CloseOne } from '../../../icons';
 defineOptions({
   name: 'CuInput'
 });

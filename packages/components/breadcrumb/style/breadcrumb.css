@@ -4,6 +4,7 @@
   font-size: 14px;
   color: var(--cu-text-color);
   cursor: default;
+  line-height: 1;
 }
 
 .cu-breadcrumb-item {
@@ -12,7 +13,7 @@
 }
 
 .cu-breadcrumb:not(.fill) .cu-breadcrumb__text {
-  color: var(--cu-text-color-light);
+  color: var(--cu-text-color-light4);
 }
 
 .cu-breadcrumb-item a,
@@ -38,7 +39,7 @@
 .cu-breadcrumb-item .cu-breadcrumb__separator {
   margin: 0 4px;
   display: inline-flex;
-  color: var(--cu-text-color-light);
+  color: var(--cu-text-color-light4);
 }
 
 .cu-breadcrumb-item:last-child .cu-breadcrumb__separator {
@@ -50,7 +51,7 @@
   display: inline-flex;
   justify-content: center;
   background-color: var(--cu-breadcrumb-color, var(--cu-background-color-light));
-  border-radius: 4px;
+  border-radius: var(--cu-border-radius);
   padding: 4px 10px 4px 15px;
   -webkit-clip-path: polygon(calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0% 100%, 10px 50%, 0% 0%);
   clip-path: polygon(calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0% 100%, 10px 50%, 0% 0%);

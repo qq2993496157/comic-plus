@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { Component, ExtractPropTypes, PropType } from 'vue';
 import type { TreeKeyProps } from './type';
 
 export type TreeData = Record<string, any>;
@@ -7,7 +7,7 @@ type Load = (node: TreeData, _then: (tree: TreeData[]) => void, _catch: () => vo
 
 export const treeProps = {
   data: Array as PropType<TreeData[]>,
-  icon: String,
+  icon: Object as PropType<Component>,
   selection: Boolean,
   lazy: Boolean,
   load: Function as PropType<Load>,

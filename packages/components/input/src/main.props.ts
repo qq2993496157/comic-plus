@@ -1,11 +1,11 @@
-import type { PropType, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes, Component } from 'vue';
 import type { ComicSize } from '../../../utils';
 
 export const inputProps = {
   modelValue: [String, Number] as PropType<string | number>,
   size: String as PropType<ComicSize>,
-  prefixIcon: String,
-  suffixIcon: String,
+  prefixIcon: [String, Object] as PropType<string | Component>,
+  suffixIcon: [String, Object] as PropType<string | Component>,
   clearable: Boolean,
   placeholder: String,
   type: String,

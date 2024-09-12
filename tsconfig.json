@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["dom", "ESNext", "es5", "es2015.promise", "es2015", "es2017"]
+  }
+}

@@ -7,10 +7,6 @@ const attributes = {
     type: Boolean,
     default: false
   },
-  icon: {
-    type: String,
-    default: 'cu-icon-loading'
-  },
   text: {
     type: String,
     default: undefined

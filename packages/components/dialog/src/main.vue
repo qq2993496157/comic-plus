@@ -14,7 +14,7 @@
           <div>
             <slot name="header"> {{ header }} </slot>
           </div>
-          <i class="cu-icon-close close" @click="close" v-if="showClose"></i>
+          <Close class="close" @click="close" v-if="showClose" />
         </div>
         <div class="cu-dialog__content">
           <slot></slot>
@@ -31,8 +31,9 @@
 import { computed } from 'vue';
 import '../style/dialog.css';
 import { CuMode as Mode } from '../../mode';
-import { usePopup } from '../../../utils';
+import { usePopup } from '../../../hooks';
 import { dialogProps, dialogEmits } from './main.props';
+import { Close } from '../../../icons';
 
 defineOptions({
   name: 'CuDialog'

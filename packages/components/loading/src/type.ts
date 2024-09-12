@@ -1,4 +1,4 @@
-import type { VNode } from 'vue';
+import type { Component, VNode } from 'vue';
 
 export type LoadingInstance = {
   vnode: VNode;
@@ -8,7 +8,7 @@ export type LoadingInstance = {
 };
 
 export type LoadingOptions = {
-  readonly icon?: string;
+  readonly icon?: Component;
   readonly text?: string;
   readonly blur?: boolean;
   readonly background?: string;

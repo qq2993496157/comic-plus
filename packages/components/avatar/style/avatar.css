@@ -9,6 +9,7 @@
   vertical-align: middle;
   cursor: default;
   transition: all 200ms;
+  line-height: 1;
 }
 
 .cu-avatar img {
@@ -16,14 +17,10 @@
   height: 100%;
 }
 
-.cu-avatar .avatar-icon {
-  font-size: 1.5em;
-}
-
 .cu-avatar-group {
   display: inline-flex;
   vertical-align: middle;
-  transition: all 200ms;
+  transition: all 200ms ease;
 }
 
 .cu-avatar-group .cu-avatar {
@@ -35,7 +32,7 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  transition: all 200ms;
+  transition: all 200ms ease;
 }
 
 .cu-avatar-group.mode-tile .cu-avatar-group__container {
@@ -82,7 +79,7 @@
   color: #fff;
   cursor: default;
   background-color: var(--cu-color-primary);
-  transition: all 200ms;
+  transition: all 200ms ease;
   z-index: 2;
 }
 .cu-avatar-group .cu-avatar-group__surplus.can-click:hover {

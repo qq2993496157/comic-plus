@@ -1,6 +1,6 @@
-import { provide, computed, defineComponent, h } from 'vue';
+import { provide, defineComponent, h } from 'vue';
 import '../style/radio.css';
-import { useItemValidate } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { radioGroupProps, radioGroupEmits } from './group.props';
 import { RADIOGROUP_PROVIDE } from './type';
 
@@ -23,8 +23,6 @@ export default defineComponent({
       props
     });
 
-    return () => {
-      return h('span', { class: 'cu-radio-group' }, slots);
-    };
+    return () => h('span', { class: 'cu-radio-group' }, slots);
   }
 });

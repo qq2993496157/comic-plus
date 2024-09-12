@@ -3,7 +3,7 @@ import { SliderProps } from './main.props';
 
 type Mark = {
   label: string;
-  position: 'top' | 'bottom';
+  position?: 'top' | 'bottom';
   style?: CSSProperties;
 };
 

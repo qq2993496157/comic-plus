@@ -5,8 +5,6 @@
 }
 
 .cu-dropdown__trigger {
-  display: inline-flex;
-  align-items: center;
   cursor: pointer;
 }
 

@@ -6,10 +6,10 @@
     <div class="cu-tabs__header">
       <div class="cu-tabs__head">
         <span class="cu-tabs__button left-button" v-if="hasScroll" @click="scrollTo(-1)">
-          <i class="cu-icon-left"></i>
+          <Left />
         </span>
         <span class="cu-tabs__button right-button" v-if="hasScroll" @click="scrollTo(1)">
-          <i class="cu-icon-right"></i>
+          <Right />
         </span>
         <div class="cu-tabs__scroll" ref="tabScrollRef">
           <div class="cu-tabs__list" ref="tabListRef">
@@ -23,11 +23,11 @@
                 <component v-for="item in nav.slots" :is="item"></component>
               </span>
               <span v-else class="cu-tabs__label">
-                <i v-if="nav.icon" :class="nav.icon" class="cu-tabs__icon"></i>
+                <component v-if="isVueComponent(nav.icon)" :is="nav.icon" class="cu-tabs__icon" />
                 {{ nav.label }}
               </span>
               <span class="cu-tabs__closable" v-if="closable">
-                <i class="cu-icon-close-small" @click.stop="emit('tab-remove', nav.name)"></i>
+                <CloseSmall class="close-icon" @click.stop="emit('tab-remove', nav.name)" />
               </span>
               <svg class="cu-tabs__circle" v-if="type === 'circle'" width="8" height="8" viewBox="0 0 8 8" fill="none">
                 <path
@@ -53,6 +53,8 @@ import { provide, ref, reactive, CSSProperties, watch, nextTick, onMounted } fro
 import '../style/tab.css';
 import { tabsProps, tabsEmits } from './main.props';
 import { TABS_PROVIDE, PaneInstance } from './type';
+import { isVueComponent } from '../../../utils';
+import { CloseSmall, Left, Right } from '../../../icons';
 
 defineOptions({
   name: 'CuTabs'

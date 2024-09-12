@@ -21,7 +21,7 @@
     </div>
     <div class="cu-slider__input" v-if="showInput && !props.range">
       <input-number
-        :model-value="props.modelValue"
+        :model-value="(props.modelValue as number)"
         @update:model-value="_emit($event)"
         :max="props.max"
         :min="props.min"

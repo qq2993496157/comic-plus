@@ -12,16 +12,15 @@
         :class="[type ? 'cu-popup--' + type : undefined, { 'is-center': center }, customClass]"
         v-if="visible">
         <div class="cu-popup__head">
-          <div class="title">
-            <i v-if="headIcon" :class="headIcon" :style="{ color }"></i>
-            <span>{{ title }}</span>
-          </div>
-          <i class="cu-icon-close" @click="cancel(distinguishCloseAndCancel ? 'close' : 'cancel')" v-if="showClose"></i>
+          <span class="cu-popup__title">
+            <component v-if="headIcon" class="cu-popup__head--icon" :is="headIcon" :color="color" />{{ title }}
+          </span>
+          <Close class="close-icon" @click="cancel(distinguishCloseAndCancel ? 'close' : 'cancel')" v-if="showClose" />
         </div>
         <div class="cu-popup__content">
           <template v-if="isVNode">
             <div v-if="isString(content)" v-html="content"></div>
-            <component v-else :is="content"></component>
+            <component v-else :is="content" />
           </template>
           <template v-else>
             {{ content }}
@@ -56,18 +55,20 @@ import { ref, onMounted, computed } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
 import '../../style/message-box.css';
 import { CuMode as Mode } from '../../../mode';
-import { usePopup, isString } from '../../../../utils';
-import {CuButton as CButton} from '../../../button';
+import { isString, isVueComponent } from '../../../../utils';
+import { usePopup } from '../../../../hooks';
+import { CuButton as CButton } from '../../../button';
 import { confirmProps } from './main.props';
+import { Caution, Close, Info, Success, Tips, WarningFilled } from '../../../../icons';
 defineOptions({
   name: 'CuConfirm'
 });
 const typeList = {
-  primary: 'cu-icon-tips',
-  info: 'cu-icon-info',
-  success: 'cu-icon-success',
-  warning: 'cu-icon-caution',
-  error: 'cu-icon-warning-filled'
+  primary: Tips,
+  info: Info,
+  success: Success,
+  warning: Caution,
+  error: WarningFilled
 };
 const props = defineProps(confirmProps);
 
@@ -76,9 +77,9 @@ const { visible, showMode, onAfterEnter, close, onAfterLeave } = usePopup(props)
 const TYPE = ref('cancel');
 
 const headIcon = computed(() => {
-  if (!props.showIcon) return false;
-  if (props.icon) return props.icon;
-  return props.type ? typeList[props.type] : '';
+  if (!props.showIcon) return null;
+  if (isVueComponent(props.icon)) return props.icon;
+  return props.type ? typeList[props.type] : null;
 });
 
 function handleModeClose() {

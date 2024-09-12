@@ -8,14 +8,15 @@
         v-for="item in list"
         :key="item.id"
         @click="handleClick(item)">
-        <div class="cu-notice__header" :style="{ color: item.props.color }">
-          <span class="title">
-            <i
-              v-if="item.props.icon || typeList[item.props.type!]"
-              :class="item.props.icon ?? typeList[item.props.type!]"></i>
-            {{ item.props.title }}
-          </span>
-          <i class="cu-icon-close" v-if="item.props.showClose" @click.stop="item.close(item)"></i>
+        <div class="cu-notice__head" :style="{ color: item.props.color }">
+          <span class="cu-notice__title">
+            <component
+              class="cu-notice__head--icon"
+              v-if="isVueComponent(item.props.icon) || typeList[item.props.type!]"
+              :is="item.props.icon ?? typeList[item.props.type!]" />
+            {{ item.props.title }}</span
+          >
+          <Close v-if="item.props.showClose" class="close-icon" @click.stop="item.close(item)" />
         </div>
         <div class="cu-notice__main">
           <template v-if="item.props.isVNode">
@@ -34,16 +35,17 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import type { NoticeInstance } from './instance';
-import { getNextZIndex, isString } from '../../../../utils';
+import { getNextZIndex, isString, isVueComponent } from '../../../../utils';
+import { CloseOne, Close, Info, Success, VolumeNotice, Warning } from '../../../../icons';
 defineOptions({
   name: 'CuNoticeList'
 });
 const typeList = {
-  primary: 'cu-icon-volume-notice',
-  info: 'cu-icon-info',
-  success: 'cu-icon-success',
-  warning: 'cu-icon-warning',
-  error: 'cu-icon-close-one'
+  primary: VolumeNotice,
+  info: Info,
+  success: Success,
+  warning: Warning,
+  error: CloseOne
 };
 
 const props = defineProps({

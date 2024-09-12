@@ -11,7 +11,7 @@
     ]"
     :style="tipStyle"
     ref="tipRef">
-    <i class="cu-tip__icon" v-if="icon" :class="icon"> </i>
+    <component class="cu-tip__icon" v-if="isVueComponent(icon)" :is="icon" />
     <span class="cu-tip__content" ref="tipContentRef">
       <span class="cu-tip__position" :style="{ '--threshold-x': 0 - thresholdX + 'px', animationDuration: duration }">
         <span class="cu-tip-message-box" ref="tipPositionRef">
@@ -19,7 +19,7 @@
         </span>
       </span>
     </span>
-    <i class="cu-tip__close cu-icon-close-one" v-if="closable" @click="emit('close')"> </i>
+    <CloseOne class="cu-tip__close" v-if="closable" @click="emit('close')" />
   </span>
 </template>
 
@@ -27,8 +27,9 @@
 import { onMounted, computed, ref, watch } from 'vue';
 import { useElementSize } from '@vueuse/core';
 import '../style/tip.css';
-import { useConfig, colorBlend, colorToRgba } from '../../../utils';
+import { useConfig, colorBlend, colorToRgba, isVueComponent } from '../../../utils';
 import { tipProps, tipEmits } from './main.props';
+import { CloseOne } from '../../../icons';
 
 defineOptions({
   name: 'CuTip'

@@ -18,11 +18,11 @@
   border-top: 1px dashed var(--cu-border-color);
 }
 
-.cu-collapse-item .cu-icon-right {
+.cu-collapse-item .cu-collapse--icon {
   border-radius: 50%;
   transition: transform 200ms;
 }
-.cu-collapse-item .cu-icon-right.active {
+.cu-collapse-item .cu-collapse--icon.active {
   transform: rotate(90deg);
 }
 

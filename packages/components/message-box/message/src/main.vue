@@ -1,17 +1,17 @@
 <template>
   <transition name="fade-message" @after-leave="destroy?.()" @after-enter="getHeight">
     <span class="cu-message" :uid="id" :class="type ? 'cu-message--' + type : undefined" v-show="show" :style="style">
-      <i :class="icon ?? typeList[type!]" class="prefix-icon" v-if="showIcon"></i>
+      <component :is="isVueComponent(icon) ? icon : typeList[type!]" class="prefix-icon message-icon" v-if="showIcon" />
       <span>
         <template v-if="isVNode">
           <div v-if="isString(content)" v-html="content"></div>
-          <component v-else :is="content"></component>
+          <component v-else :is="content" />
         </template>
         <template v-else>
           {{ content }}
         </template>
       </span>
-      <i class="cu-icon-close-one close" v-if="showClose" @click="closeMessage"></i>
+      <CloseOne class="close-icon message-icon" v-if="showClose" @click="closeMessage" />
     </span>
   </transition>
 </template>
@@ -20,19 +20,20 @@
 import { ref, onMounted, computed, getCurrentInstance } from 'vue';
 import '../../style/message-box.css';
 import { getOffset } from './instance';
-import { colorBlend, colorToRgba, getNextZIndex, isString } from '../../../../utils';
+import { colorBlend, colorToRgba, getNextZIndex, isString, isVueComponent } from '../../../../utils';
 import { messageProps } from './main.props';
+import { CloseOne, Info, Success, Tips, Warning } from '../../../../icons';
 
 defineOptions({
   name: 'CuMessage'
 });
 
 const typeList = {
-  primary: 'cu-icon-tips',
-  info: 'cu-icon-info',
-  success: 'cu-icon-success',
-  warning: 'cu-icon-warning',
-  error: 'cu-icon-close-one'
+  primary: Tips,
+  info: Info,
+  success: Success,
+  warning: Warning,
+  error: CloseOne
 };
 
 const props = defineProps(messageProps);

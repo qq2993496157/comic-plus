@@ -23,12 +23,14 @@
     </template>
 
     <template v-if="type === 'list'">
-      <upload-choose :disabled="disabled" :type="type" @choose="uploadHandleClick">
-        <slot v-if="$slots['default']"></slot>
-        <template #trigger v-if="$slots['trigger']">
-          <slot name="trigger"></slot>
-        </template>
-      </upload-choose>
+      <div class="cu-upload-choose--warpper">
+        <upload-choose :disabled="disabled" :type="type" @choose="uploadHandleClick">
+          <slot v-if="$slots['default']"></slot>
+          <template #trigger v-if="$slots['trigger']">
+            <slot name="trigger"></slot>
+          </template>
+        </upload-choose>
+      </div>
       <div class="cu-upload__tips">
         <slot name="tip"></slot>
       </div>

@@ -8,13 +8,13 @@ export type Prop = {
   separator?: string;
 };
 
-export type CascaderChild = {
+export type CascaderChilds = {
   label?: string;
   value?: string;
-  children?: string;
+  children?: CascaderChilds;
   disabled?: boolean;
   [key: string]: any;
-};
+}[];
 
 export const cascaderProps = {
   modelValue: {
@@ -22,7 +22,7 @@ export const cascaderProps = {
     default: []
   },
   options: {
-    type: Array as PropType<CascaderChild[]>,
+    type: Array as PropType<CascaderChilds>,
     default: []
   },
   size: String as PropType<ComicSize>,

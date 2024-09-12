@@ -1,7 +1,7 @@
 import { ExtractPropTypes, PropType } from 'vue';
 import { ComicSize, ComicDisplay, ComicType } from '../../../utils';
 
-type LayoutKeys = 'numbers' | 'marks' | 'date' | 'second_marks';
+type LayoutKeys = ('numbers' | 'marks' | 'date' | 'second_marks')[];
 
 export const clockProps = {
   type: {
@@ -10,7 +10,7 @@ export const clockProps = {
   },
   size: String as PropType<ComicSize>,
   modules: {
-    type: Array as PropType<LayoutKeys[]>,
+    type: Array as PropType<LayoutKeys>,
     default: ['marks']
   },
   color: String as PropType<ComicType | string>,

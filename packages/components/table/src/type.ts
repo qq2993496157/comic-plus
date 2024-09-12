@@ -1,11 +1,11 @@
-import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue';
+import type { CSSProperties, InjectionKey, Ref } from 'vue';
 import type { TableProps } from './main.props';
 
 export type TableColumn = {
   label?: string;
   prop?: string;
   width?: number;
-  align?: CSSProperties['text-align'];
+  align?: string;
   fixed?: string;
   className?: string | ((row: any, rowIdx: number, col: any, colIdx: number) => string);
 };

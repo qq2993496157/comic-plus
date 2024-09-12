@@ -7,8 +7,10 @@
     ref="colorPickerRef">
     <div class="cu-color-picker__container" :class="{ alpha }">
       <div class="preview__box" :style="{ background: disabled ? undefined : modelValue }"></div>
-      <i class="cu-icon-minus" v-if="!modelValue"></i>
-      <i class="cu-icon-down-filled" v-else></i>
+      <i>
+        <Minus v-if="!modelValue" />
+        <DownFilled v-else color="#fff" />
+      </i>
     </div>
     <popper :show="show" :trigger="colorPickerRef" hide-arrow :offset="0" placement="bottom">
       <div class="cu-color-picker__popper" ref="popperRef">
@@ -51,10 +53,12 @@ import hslSlider from './components/hsl-slider';
 import alphaSlider from './components/alpha-slider';
 import colorPreview from './components/color-preview';
 import presetList from './components/preset';
-import { useClickOutside, useItemValidate, useConfig } from '../../../utils';
+import { useClickOutside, useConfig } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { colorPickerProps, colorPickerEmits } from './main.props';
 import Color from '../utils/color';
 import { COLORPICKER_PROVIDE } from './type';
+import { DownFilled, Minus } from '../../../icons';
 defineOptions({
   name: 'CuColorPicker'
 });

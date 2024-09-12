@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes, Component } from 'vue';
 import type { ComicSize } from '../../../utils';
 
 export const switchProps = {
@@ -12,8 +12,8 @@ export const switchProps = {
   disabled: Boolean,
   square: Boolean,
   inlineText: Boolean,
-  onIcon: String,
-  offIcon: String,
+  onIcon: [String, Object] as PropType<string | Component>,
+  offIcon: [String, Object] as PropType<string | Component>,
   beforeChange: Function as PropType<() => boolean | Promise<any>>,
   loading: Boolean,
   size: String as PropType<ComicSize>

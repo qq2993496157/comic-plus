@@ -1,12 +1,6 @@
 import type { PropType, ExtractPropTypes } from 'vue';
 import type { ComicType } from '../../../utils';
 
-export const STATUS = {
-  success: 'cu-icon-success',
-  warning: 'cu-icon-warning',
-  fail: 'cu-icon-close-one'
-};
-
 type Colors = string | Record<string, string> | ((value: number) => string);
 
 export const progressProps = {

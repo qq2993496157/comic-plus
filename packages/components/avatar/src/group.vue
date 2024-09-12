@@ -10,7 +10,7 @@
         :class="{ 'can-click': clickShowAll }"
         v-if="surplus > 0"
         @click.stop="changeShowAll">
-        <span class="cu-icon-double-left" v-if="showAll"></span>
+        <DoubleLeft v-if="showAll" />
         <template v-else>
           {{ '+' + surplus }}
         </template>
@@ -24,6 +24,7 @@ import { ref, computed, provide, watch } from 'vue';
 import '../style/avatar.css';
 import { avatarGroupProps, avatarGroupEmits } from './group.props';
 import { AVATARGROUP_PROVIDE } from './type';
+import { DoubleLeft } from '../../../icons';
 
 defineOptions({
   name: 'CuAvatarGroup'
@@ -48,7 +49,8 @@ function getGap() {
 }
 
 const surplus = computed(() => {
-  return avatars.value.length - props.count ?? avatars.value.length;
+  let val = avatars.value.length - props.count;
+  return isNaN(val) ? avatars.value.length : val;
 });
 
 function changeShowAll() {

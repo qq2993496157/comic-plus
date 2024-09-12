@@ -1,35 +1,32 @@
 <template>
   <component
     :is="button ? CButton : 'div'"
-    :size="size"
-    :type="buttonType"
-    :disabled="disabled"
+    v-bind="attrs"
     class="cu-dropdown-content"
     :class="{ 'is-disabled': disabled }"
     v-click-outside:[popperRef]="hidePopper"
     ref="dropdownTriggerRef">
     <div class="cu-dropdown__trigger">
-      <template v-if="button">
-        <i :class="buttonIcon"></i>
-      </template>
+      <component v-if="button" :is="isVueComponent(buttonIcon) ? buttonIcon : Down" />
       <slot v-else></slot>
     </div>
-    <popper :show="show" :custom-class="popperClass" :trigger="dropdownTriggerRef">
-      <div ref="popperRef" class="cu-dropdown__popper" @click="chooseAfterHideClick">
-        <slot name="dropdown"></slot>
-      </div>
-    </popper>
   </component>
+  <popper :show="show" :custom-class="popperClass" :trigger="dropdownTriggerRef">
+    <div ref="popperRef" class="cu-dropdown__popper" @click="chooseAfterHideClick">
+      <slot name="dropdown"></slot>
+    </div>
+  </popper>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import '../style/dropdown.css';
 import { CuPopper as Popper } from '../../popper';
 import { CuButton as CButton } from '../../button';
 import { useEventListener } from '@vueuse/core';
-import { useClickOutside } from '../../../utils';
+import { isVueComponent, useClickOutside } from '../../../utils';
 import { dropdownProps } from './main.props';
+import { Down } from '../../../icons';
 
 defineOptions({
   name: 'CuDropdownContent'
@@ -47,6 +44,15 @@ const vClickOutside = useClickOutside();
 const show = ref(false);
 const popperRef = ref(null);
 const dropdownTriggerRef = ref(null);
+
+const attrs = computed(() => {
+  if (!props.button) return null;
+  return {
+    size: props.size,
+    type: props.buttonType,
+    disabled: props.disabled
+  };
+});
 
 const EVENT_TYPE = {
   click: () => {

@@ -13,8 +13,8 @@
         :placeholder="placeholder"
         :disabled="disabled" />
       <span class="suffix-icon" :class="{ 'has-value': useInputValue && clearable }">
-        <i class="cu-icon-down cu-cascader__down"></i>
-        <i class="cu-icon-close-one clearable" v-if="clearable" @click.stop="clear"></i>
+        <Down class="cu-cascader__down" />
+        <CloseOne class="clearable" v-if="clearable" @click.stop="clear" />
       </span>
     </div>
 
@@ -32,7 +32,7 @@
               ]"
               @click="itemHandleClick(null, item)">
               <span>{{ item[optionProps.label] }}</span>
-              <i class="cu-icon-right" v-if="item[optionProps.children]"></i>
+              <Right v-if="item[optionProps.children]" />
             </div>
           </scrollbar>
         </div>
@@ -49,7 +49,7 @@
                 ]"
                 @click="itemHandleClick(item[optionProps.value], child)">
                 <span>{{ child[optionProps.label] }}</span>
-                <i class="cu-icon-right" v-if="child[optionProps.children]"></i>
+                <Right v-if="child[optionProps.children]" />
               </div>
             </scrollbar>
           </div>
@@ -66,9 +66,11 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import { CuScrollbar as Scrollbar } from '../../scrollbar';
-import { deleteAfterIndex, useClickOutside, useItemValidate } from '../../../utils';
-import { useConfig } from '../../../utils';
+import { deleteAfterIndex, useClickOutside, useConfig } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { cascaderProps, cascaderEmits } from './main.props';
+import { Down, CloseOne, Right } from '../../../icons';
+
 defineOptions({
   name: 'CuCascader'
 });

@@ -31,7 +31,7 @@
           i === 0
         "
         @click="loadMore">
-        <i :class="loadLoading ? 'cu-icon-loading' : 'cu-icon-right'"></i>
+        <component :is="loadLoading ? Loading : Right" />
       </span>
       <span>
         <slot :name="td.prop" :row="row">{{ row[td.prop] ?? injectProps.options.empty }}</slot>
@@ -69,6 +69,7 @@ import { CuCheckbox as Checkbox } from '../../../checkbox';
 import { isFunction, isArray } from '../../../../utils';
 import { tableRowProps } from './row.props';
 import { TABLE_PROVIDE, TableData } from '../type';
+import { Loading, Right } from '../../../../icons';
 
 defineOptions({
   name: 'CuTableRow'

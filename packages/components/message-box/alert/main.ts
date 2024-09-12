@@ -3,10 +3,6 @@ import AlertConstructor from './src/main.vue';
 
 import type { AlertOptions } from './src/main.props';
 
-/**
- * @description: _alert
- * @param {*} options
- * @return {*} */
 function _alert(options: AlertOptions): Promise<void> {
   return new Promise<void>((resolve) => {
     const container = document.createElement('div');

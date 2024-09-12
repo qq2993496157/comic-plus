@@ -22,17 +22,17 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.cu-preview-image .cu-icon-close {
+.cu-preview-image .close {
   right: 20px;
   top: 20px;
 }
 
-.cu-preview-image .cu-icon-left {
+.cu-preview-image .left {
   left: 20px;
   top: 50%;
 }
 
-.cu-preview-image .cu-icon-right {
+.cu-preview-image .right {
   right: 20px;
   top: 50%;
 }
@@ -65,26 +65,27 @@
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   z-index: 2;
-  padding: 8px 12px;
+  padding: 10px 20px;
   font-size: 23px;
   line-height: 1;
   border-radius: 10px;
   box-shadow: var(--cu-boxshadow-base);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.cu-preview__tools > i {
-  margin: 0 10px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
+.cu-preview__tools > svg {
   transition: all 200ms;
+  cursor: pointer;
 }
 
 .cu-preview__buttons i:hover {
   border-color: rgba(255, 255, 255, 0.7);
 }
 
-.cu-preview__tools > i:hover {
+.cu-preview__tools > svg:hover {
   transform: scale(1.1);
 }

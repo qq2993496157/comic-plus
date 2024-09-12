@@ -1,16 +1,16 @@
 <template>
   <transition name="cu-fade" @before-enter="lookScroll = true" @after-leave="lookScroll = false">
     <div class="cu-loading" :class="{ blur, glabal }" v-show="visible" :style="style">
-      <i :class="icon" class="is-loading"></i>
-      <span v-if="text" class="cu-loading__text">{{ text }}</span>
+      <component v-if="isVueComponent(icon) || isVNode(icon)" :is="icon" class="is-loading cu-loading__icon" />
+      <span v-if="text" style="margin-top: 4px">{{ text }}</span>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch } from 'vue';
+import { ref, computed, onMounted, nextTick, watch, isVNode } from 'vue';
 import '../style/loading.css';
-import { getMaxZIndex, getNextZIndex, useLookScroll } from '../../../utils';
+import { getMaxZIndex, getNextZIndex, isVueComponent, useLookScroll } from '../../../utils';
 import { loadingProps } from './main.props';
 defineOptions({
   name: 'CuLoading'

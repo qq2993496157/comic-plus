@@ -16,18 +16,20 @@
           </c-select>
         </template>
         <template v-else-if="name === 'pages'">
-          <span class="cu-icon-left button" @click="pagesPrev()" :class="{ disabled: currentPageRef <= 1 }"></span>
+          <span @click="pagesPrev()" :class="{ disabled: currentPageRef <= 1 }">
+            <Left />
+          </span>
           <span :class="{ current: currentPageRef === 1 }" @click="pagesHandleClick(1)">1</span>
-          <span class="more button" v-if="showPrevMore" @click="jumpPage(-5)">
-            <i class="cu-icon-more"></i>
-            <i class="cu-icon-double-left"></i>
+          <span class="cu-pagination__buttons" v-if="showPrevMore" @click="jumpPage(-5)">
+            <More class="cu-pagination__icon" />
+            <DoubleLeft class="cu-pagination__icon" />
           </span>
           <span v-for="num in pager" :class="{ current: num === currentPageRef }" @click="pagesHandleClick(num)">
             {{ num }}
           </span>
-          <span class="more button" v-if="showNextMore" @click="jumpPage(5)">
-            <i class="cu-icon-more"></i>
-            <i class="cu-icon-double-right"></i>
+          <span class="cu-pagination__buttons" v-if="showNextMore" @click="jumpPage(5)">
+            <More class="cu-pagination__icon" />
+            <DoubleRight class="cu-pagination__icon" />
           </span>
           <span
             :class="{ current: currentPageRef === LAST_VALUE }"
@@ -35,10 +37,9 @@
             v-if="LAST_VALUE > 1"
             >{{ LAST_VALUE }}</span
           >
-          <span
-            class="cu-icon-right button"
-            @click="pagesNext()"
-            :class="{ disabled: currentPageRef >= LAST_VALUE }"></span>
+          <span @click="pagesNext()" :class="{ disabled: currentPageRef >= LAST_VALUE }">
+            <Right />
+          </span>
         </template>
         <template v-else-if="name === 'jumper'">
           跳转至<c-input
@@ -62,6 +63,7 @@ import { CuSelect as CSelect } from '../../select/index';
 import { CuOption as COption } from '../../option/index';
 import { CuInput as CInput } from '../../input/index';
 import { paginationProps, paginationEmits } from './main.props';
+import { DoubleLeft, DoubleRight, More, Left, Right } from '../../../icons';
 
 defineOptions({
   name: 'CuPagination'

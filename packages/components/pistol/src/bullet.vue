@@ -4,14 +4,14 @@
     :style="[
       bulletInstance.style,
       pistolStyle,
-      { '--cu-pistol-delay': (injectProps.iteration ? getInstanceIdx * 100 : 0) + 'ms' },
+      { '--cu-pistol-delay': (injectProps.iteration ? getInstanceIdx * (50 + (injectProps.dept ?? 0)) : 0) + 'ms' },
       { '--pistol-custom-color': color ?? injectProps.color }
     ]"
     :class="{ 'is-disabled': disabled }"
     @click="bulletClick">
     <div class="cu-bullet-content">
       <slot>
-        <i :class="icon" class="icon" v-if="icon"></i>
+        <component v-if="isVueComponent(icon)" class="cu-bullet__icon" :is="icon" />
       </slot>
     </div>
   </li>
@@ -21,6 +21,7 @@
 import { inject, getCurrentInstance, reactive, computed, onUnmounted } from 'vue';
 import { bulletProps } from './bullet.props';
 import { PISTOL_PROVIDE } from './type';
+import { isVueComponent } from '../../../utils';
 
 defineOptions({
   name: 'CuBullet'

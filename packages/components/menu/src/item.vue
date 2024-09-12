@@ -5,7 +5,7 @@
     :class="{ 'is-active': active }"
     :tooltip-disabled="tooltipDisabled"
     v-menu-tooltip:right-center="props.label">
-    <span v-if="icon" :class="icon" class="icon"></span>
+    <component v-if="isVueComponent(icon)" :is="icon" class="cu-menu__icon" />
     <span v-show="!injectProps.collapse || submenu">
       <slot>{{ label }}</slot>
     </span>
@@ -18,6 +18,7 @@ import { useTooltip } from '../../tooltip';
 import { useMenu } from '../utils/menu';
 import { menuItemProps } from './item.props';
 import { MENU_PROVIDE, SubmenuProvide } from './type';
+import { isVueComponent } from '../../../utils';
 defineOptions({
   name: 'CuMenuItem'
 });

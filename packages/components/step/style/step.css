@@ -39,6 +39,7 @@
   width: 100%;
   display: flex;
 }
+
 .cu-step-item__header .cu-step-item__text {
   padding: 0 4px;
   text-align: center;
@@ -46,6 +47,12 @@
   z-index: 1;
   background-color: #fff;
 }
+.cu-step-item__header .cu-step-item__icon {
+  padding: 0 4px;
+  z-index: 1;
+  background-color: #fff;
+}
+
 .cu-step-item__header .cu-step-item__line {
   position: absolute;
   left: 0;
@@ -93,9 +100,6 @@
   color: var(--cu-color-danger);
 }
 
-.cu-step-item__header [class^='cu-icon'] {
-  font-size: 18px;
-}
 .cu-step-item__title {
   white-space: nowrap;
 }
@@ -171,11 +175,7 @@
 
 .cu-step-card .card-bridge {
   position: absolute;
-  right: -20px;
-  width: 20px;
-  height: 20px;
-  top: 50%;
-  transform: translate(0%, -50%);
+  right: -21px;
   font-size: 20px;
 }
 
@@ -185,8 +185,8 @@
 
 .cu-step.is-vertical .cu-step-card .card-bridge {
   right: 50%;
-  top: 100%;
-  transform: translate(50%, 0);
+  bottom: -21px;
+  translate: 50% 0;
 }
 
 .cu-step-card .cu-step-item__icon {

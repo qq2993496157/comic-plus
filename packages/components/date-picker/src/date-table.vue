@@ -1,8 +1,12 @@
 <template>
   <div class="cu-date-picker__select">
     <div class="cu-data-picker__select-head">
-      <i class="cu-icon-double-left" @click="pannelType === 'year' ? page-- : tmpYear--"></i>
-      <i class="cu-icon-left" v-if="pannelType === 'date'" @click="prevMonth"></i>
+      <i @click="pannelType === 'year' ? page-- : tmpYear--">
+        <DoubleLeft />
+      </i>
+      <i v-if="pannelType === 'date'" @click="prevMonth">
+        <Left />
+      </i>
       <div class="head-content">
         <span v-show="pannelType === 'year'" class="not-hover">{{
           yearList[0] + '年-' + yearList[yearList.length - 1] + '年'
@@ -10,8 +14,12 @@
         <span v-show="pannelType !== 'year'" @click="pannelType = 'year'">{{ tmpYear + '年' }}</span>
         <span v-show="pannelType === 'date'" @click="pannelType = 'month'">{{ tmpMonth + 1 + '月' }}</span>
       </div>
-      <i class="cu-icon-right" v-if="pannelType === 'date'" @click="nextMonth"></i>
-      <i class="cu-icon-double-right" @click="pannelType === 'year' ? page++ : tmpYear++"></i>
+      <i v-if="pannelType === 'date'" @click="nextMonth">
+        <Right />
+      </i>
+      <i @click="pannelType === 'year' ? page++ : tmpYear++">
+        <DoubleRight />
+      </i>
     </div>
     <div class="cu-data-picker__select-content">
       <div class="cu-data-picker__select-week" v-show="pannelType === 'date'">
@@ -50,6 +58,7 @@
 import { ref, computed, watch, inject } from 'vue';
 import { dateTableProps, dateTableEmits } from './table.props';
 import { DATEPICKER_PROVIDE } from './type';
+import { DoubleLeft, DoubleRight, Left, Right } from '../../../icons';
 defineOptions({
   name: 'DateTable'
 });

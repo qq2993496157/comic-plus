@@ -1,5 +1,5 @@
 import { ref, watch } from 'vue';
-import { isFunction } from '../typescript';
+import { isFunction } from '../utils/typescript';
 
 export function usePopup(props: any, emit?: any) {
   const visible = ref(props.modelValue);

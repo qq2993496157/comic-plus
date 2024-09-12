@@ -1,5 +1,5 @@
 import './theme.css';
-import './comic.css';
+import './common.css';
 import './iconfont/iconfont.css';
 import './transition.css';
 

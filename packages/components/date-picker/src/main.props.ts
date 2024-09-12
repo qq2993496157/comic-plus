@@ -21,10 +21,6 @@ export const datePickerProps = {
   },
   size: String as PropType<ComicSize>,
   range: Boolean,
-  icon: {
-    type: String,
-    default: 'cu-icon-calendar'
-  },
   shortcuts: Array as PropType<Shortcut[]>,
   disabled: Boolean,
   placeholder: String,

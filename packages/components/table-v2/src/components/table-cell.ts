@@ -2,6 +2,7 @@ import { defineComponent, h, PropType, inject } from 'vue';
 import { TABLE_V2_PROVIDE, RenderData, Span, TableData, Column } from '../type';
 import { CuCheckbox as Checkbox } from '../../../checkbox';
 import { isArray, isFunction, isObject } from '../../../../utils';
+import { Loading, Right } from '../../../../icons';
 
 export default defineComponent({
   name: 'TableCell',
@@ -79,7 +80,7 @@ export default defineComponent({
             ],
             onClick: () => emit('change-expand')
           },
-          [props.col.icon ? props.col.icon() : h('i', { class: 'cu-icon-right' })]
+          h(Right)
         );
       } else if (type === 'default') {
         let result = [];
@@ -94,12 +95,8 @@ export default defineComponent({
               : null,
             isTreeNode.value && !props.data.treeExpand ? h('span', { class: 'cu-tabel__placeholder' }) : null,
             props.data.treeExpand
-              ? h('span', {
-                  class: [
-                    'expand-icon',
-                    { 'is-expand': props.data.show },
-                    props.data.loading ? 'cu-icon-loading' : 'cu-icon-right'
-                  ],
+              ? h(props.data.loading ? Loading : Right, {
+                  class: ['expand-icon', { 'is-expand': props.data.show }, { 'is-loading': props.data.loading }],
                   onClick: () => changeShowMore(props.data)
                 })
               : null

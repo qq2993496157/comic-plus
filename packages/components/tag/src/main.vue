@@ -7,7 +7,7 @@
     <span class="cu-tag-content">
       <slot></slot>
     </span>
-    <span class="closeicon cu-icon-close-small" v-if="closable" @click="$emit('close')"> </span>
+    <component class="closeicon" v-if="closable" @click="$emit('close')" :is="tagMode ? CloseSmall : CloseOne" />
   </span>
   <transition v-else name="cu-zoom-x" appear>
     <span
@@ -17,7 +17,7 @@
       <span class="cu-tag-content">
         <slot></slot>
       </span>
-      <span class="closeicon cu-icon-close-small" v-if="closable" @click="handleClose"></span>
+      <component class="closeicon" v-if="closable" @click="handleClose" :is="tagMode ? CloseSmall : CloseOne" />
     </span>
   </transition>
 </template>
@@ -27,6 +27,7 @@ import { computed } from 'vue';
 import '../style/tag.css';
 import { colorBlend, colorToRgba } from '../../../utils';
 import { tagProps, tagEmits } from './main.props';
+import { CloseOne, CloseSmall } from '../../../icons';
 defineOptions({
   name: 'CuTag'
 });
@@ -53,8 +54,7 @@ const customStyle = computed(() => {
   return {
     borderColor: props.color,
     backgroundColor: calcColor,
-    color: tagMode.value ? props.color : '#fff',
-    '--cu-tag-closecolor': calcColor
+    color: tagMode.value ? props.color : '#fff'
   };
 });
 </script>

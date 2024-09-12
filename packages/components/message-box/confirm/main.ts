@@ -3,11 +3,6 @@ import ConfirmConstructor from './src/main.vue';
 
 import type { ConfirmOptions } from './src/main.props';
 
-/**
- * @description: _confirm
- * @param {*} options
- * @return {*}
- */
 function _confirm(options: ConfirmOptions): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const container = document.createElement('div');

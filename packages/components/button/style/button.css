@@ -26,7 +26,6 @@
   color: var(--cu-button-color);
   transition: all 200ms ease;
   outline: none;
-  vertical-align: middle;
 }
 
 .cu-button.large {

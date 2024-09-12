@@ -83,17 +83,12 @@
   transition: background-color 300ms;
 }
 
-.cu-menu-item .icon,
-.cu-sub-menu .icon {
+.cu-menu__icon {
   margin-right: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: var(--cu-menu-base-padding);
 }
 
-.cu-menu.menu-collapse > .cu-menu-item .icon,
-.cu-menu.menu-collapse > .cu-sub-menu .icon {
+.cu-menu.menu-collapse .cu-menu__icon {
   margin-right: 0;
 }
 

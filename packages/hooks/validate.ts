@@ -1,5 +1,5 @@
 import { computed, inject } from 'vue';
-import { FORMITEM_PROVIDE } from '../../components/form/src/type';
+import { FORMITEM_PROVIDE } from '../components/form/src/type';
 
 function flattenArray(a) {
   let n = [];

@@ -2,13 +2,14 @@
   <transition-group name="list" class="cu-upload__list" v-if="type === 'list'" tag="ul">
     <li v-for="(file, index) in previewList" :key="file.uid || file.name">
       <span>
-        <i
-          :class="[uploadFileEnum[file.uid].status, icons[uploadFileEnum[file.uid].status]]"
-          v-if="file.uid && uploadFileEnum[file.uid]"></i>
-        <i class="cu-icon-success-c success" v-else></i>
+        <component
+          v-if="file.uid && uploadFileEnum[file.uid]"
+          :class="uploadFileEnum[file.uid].status"
+          :is="icons[uploadFileEnum[file.uid].status!]" />
+        <CheckOne v-else class="success" />
       </span>
       <span class="filename" :class="uploadFileEnum[file.uid!]?.status">{{ file.name }}</span>
-      <i class="delete cu-icon-delete" @click="remove(file.uid!, index)"> </i>
+      <Delete class="delete" @click="remove(file.uid!, index)" />
       <span class="progress">
         <c-progress
           :progress="uploadFileEnum[file.uid!].progress"
@@ -29,8 +30,8 @@
               :progress="uploadFileEnum[file.uid!].progress || 0" />
           </span>
           <span class="mask" v-else>
-            <i class="cu-icon-zoom-in" @click="previewImg(index)"></i>
-            <i class="cu-icon-delete" @click="remove(file.uid!, index)"></i>
+            <ZoomIn @click="previewImg(index)" />
+            <Delete @click="remove(file.uid!, index)" />
           </span>
         </transition>
         <img :src="file.url" alt="" />
@@ -47,15 +48,16 @@ import type { PropType } from 'vue';
 import { CuProgress as CProgress } from '../../progress';
 import { preview } from '../../preview-image/index';
 import type { FileEnum, UploadFile } from './type';
+import { CheckOne, CloseOne, Delete, Save, Upload, ZoomIn } from '../../../icons';
 
 defineOptions({
   name: 'CuUploadList'
 });
 const icons = {
-  ready: 'cu-icon-save',
-  uploading: 'cu-icon-upload',
-  success: 'cu-icon-check-one',
-  fail: 'cu-icon-close-one'
+  ready: Save,
+  uploading: Upload,
+  success: CheckOne,
+  fail: CloseOne
 };
 
 const props = defineProps({

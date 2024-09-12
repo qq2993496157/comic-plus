@@ -3,12 +3,12 @@
   font-family: inherit;
   box-sizing: border-box;
 }
-[class*=' cu-icon-'],
+[class*='cu-icon-'],
 [class^='cu-icon-'] {
   font-style: normal;
   font-family: 'iconfont' !important;
 }
-@keyframes rotateInfinite {
+/* @keyframes rotateInfinite {
   to {
     transform: rotate(360deg);
   }
@@ -18,4 +18,4 @@
 .cu-icon-loading-one {
   display: inline-block;
   animation: rotateInfinite 2s infinite linear;
-}
+} */

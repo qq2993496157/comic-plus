@@ -13,6 +13,7 @@
   padding-left: 8px;
   color: var(--cu-text-color-light6);
   min-width: 22px;
+  line-height: 1;
   box-sizing: border-box;
 }
 
@@ -30,13 +31,12 @@
 }
 
 .cu-cascader__content .clearable:hover {
-  color: var(--cu-text-color);
+  color: var(--cu-text-color-light3);
 }
 
 .cu-cascader__down {
-  display: inline-block;
   line-height: 1;
-  transition: all 200ms;
+  transition: all 200ms ease;
   transform-origin: center center;
 }
 
@@ -64,10 +64,11 @@
 .cu-cascader__popper .cu-cascader-pane__item {
   height: var(--cu-size-default);
   padding: 0 8px;
-  line-height: var(--cu-size-default);
+  line-height: 1;
   font-size: 13px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   cursor: pointer;
   background-color: #fff;
@@ -94,11 +95,9 @@
 
 .cu-cascader__popper.large .cu-cascader-pane__item {
   height: var(--cu-size-large);
-  line-height: var(--cu-size-large);
   font-size: 14px;
 }
 .cu-cascader__popper.small .cu-cascader-pane__item {
   height: var(--cu-size-small);
-  line-height: var(--cu-size-small);
   font-size: 12px;
 }

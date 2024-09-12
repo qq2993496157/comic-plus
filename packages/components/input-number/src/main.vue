@@ -1,7 +1,7 @@
 <template>
   <span class="cu-input-number" :class="[{ 'is-disabled': disabled }, currentSize]">
     <span class="cu-input-number__minus" :class="{ disabled: currentValue <= min }" @click="valueMinus">
-      <i class="cu-icon-minus"></i>
+      <Minus />
     </span>
     <span class="cu-input-number__content">
       <input
@@ -16,7 +16,7 @@
         @blur="blur" />
     </span>
     <span class="cu-input-number__plus" :class="{ disabled: currentValue >= max }" @click="valuePlus">
-      <i class="cu-icon-plus"></i>
+      <Plus />
     </span>
   </span>
 </template>
@@ -26,8 +26,10 @@ import { ref, inject, computed, watch } from 'vue';
 import '../style/input-number.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { useConfig, useItemValidate, isNumber } from '../../../utils';
+import { useConfig, isNumber } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { inputNumberProps, inputNumberEmits } from './main.props';
+import { Minus, Plus } from '../../../icons';
 defineOptions({
   name: 'CuInputNumber'
 });

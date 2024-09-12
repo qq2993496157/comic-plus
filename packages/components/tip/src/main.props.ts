@@ -1,11 +1,11 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, Component } from 'vue';
 import type { ComicType, ComicSize } from '../../../utils';
 
 export const tipProps = {
   type: String as PropType<ComicType>,
   plain: Boolean,
   size: String as PropType<ComicSize>,
-  icon: String,
+  icon: Object as PropType<Component>,
   rolling: Boolean,
   color: String,
   closable: Boolean,

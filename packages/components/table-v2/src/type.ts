@@ -25,7 +25,6 @@ export type Column = {
   style: CSSProperties;
   default: (...args: any[]) => VNode[];
   header: (...args: any[]) => VNode[];
-  icon: (...args: any[]) => VNode[];
 };
 
 export type RenderData = {

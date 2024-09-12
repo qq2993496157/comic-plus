@@ -1,3 +1,5 @@
+import { Component } from 'vue';
+
 export type ImageFit = 'fill' | 'cover' | 'contain' | 'none' | 'scale-down';
 export type ComicType = 'primary' | 'success' | 'warning' | 'danger' | 'info';
 export type ComicType2 = 'primary' | 'success' | 'warning' | 'error' | 'info';
@@ -79,3 +81,11 @@ export const isPromise = (value: any): value is Promise<any> => value instanceof
  * @see http://comicui.cn/api?name=type
  */
 export const isWindow = (value: any): value is Window => value === window;
+
+/**
+ * @description: 判断是否是Vue组件
+ * @param {any} value
+ */
+export const isVueComponent = (value: any): value is Component => {
+  return typeof value === 'object' && 'setup' in value && 'props' in value;
+};

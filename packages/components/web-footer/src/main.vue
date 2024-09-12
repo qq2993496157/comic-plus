@@ -7,7 +7,7 @@
           v-for="link in links"
           :href="link.href ?? 'javascript:void(0);'"
           :target="link.href && link.blankTarget ? '_blank' : undefined">
-          <i v-if="link.icon" :class="link.icon"></i>{{ link.content }}
+          <component v-if="isVueComponent(link.icon)" :is="link.icon" /> {{ link.content }}
         </a>
       </slot>
     </div>
@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { webFooterProps } from './main.props';
 import '../style/web-footer.css';
+import { isVueComponent } from '../../../utils';
 
 defineOptions({
   name: 'CuWebFooter'

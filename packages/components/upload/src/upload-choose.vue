@@ -3,7 +3,7 @@
     <slot name="trigger">
       <c-button :disabled="disabled" size="small" type="primary" v-if="type === 'list'">选择文件</c-button>
       <div class="cu-upload__trigger" v-else>
-        <i class="cu-icon-plus"></i>
+        <Plus />
       </div>
     </slot>
   </span>
@@ -14,15 +14,12 @@
 </template>
 
 <script setup lang="ts">
-import { useSlots } from 'vue';
 import { CuButton as CButton } from '../../button';
+import { Plus } from '../../../icons';
 
 defineOptions({
   name: 'CuUploadChoose'
 });
-
-const slots = useSlots();
-console.log(slots.default?.());
 
 defineProps({
   type: {

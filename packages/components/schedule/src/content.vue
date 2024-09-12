@@ -2,7 +2,7 @@
   <div class="cu-schedule-content">
     <div class="cu-schedule-content__header">
       <slot :date="date" name="header">
-        <span> <i class="cu-icon-calendar"></i> 日程计划 </span>
+        <span> <Calendar /> 日程计划 </span>
         <span>
           <span>{{ formatDate(date, 'yyyy-MM-dd') }}</span>
         </span>
@@ -31,7 +31,7 @@
       </div>
       <transition name="cu-fade">
         <div class="loading-mask" v-show="props.loading">
-          <i class="cu-icon-loading"></i>
+          <Loading class="is-loading" />
         </div>
       </transition>
     </div>
@@ -43,6 +43,7 @@ import { computed, inject } from 'vue';
 import { SCHEDULE_PROVIDE } from './type';
 import ScheduleCards from './card.vue';
 import { formatDate } from '../../../utils';
+import { Calendar, Loading } from '../../../icons';
 
 const { date, props, spacing } = inject(SCHEDULE_PROVIDE);
 

@@ -60,7 +60,7 @@
   background-color: #fff;
 }
 .cu-table-v2 .cu-table__row.current-row {
-  background-color: var(--cu-table-highlight-color, var(--cu-color-primary-light3));
+  background-color: var(--cu-table-highlight-color, var(--cu-color-primary-light9));
 }
 
 .cu-table-v2--stripe .cu-table__row--stripe-odd {

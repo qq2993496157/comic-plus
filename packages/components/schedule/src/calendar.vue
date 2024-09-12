@@ -3,8 +3,8 @@
     <div class="cu-schedule-calendar__header">
       <span> {{ ty + '年 ' + (tm + 1) + '月' }}</span>
       <span class="cu-schedule-calendar__icons">
-        <i class="cu-icon-up" @click="prevMonth"></i>
-        <i class="cu-icon-down" @click="nextMonth"></i>
+        <Up @click="prevMonth" />
+        <Down @click="nextMonth" />
       </span>
     </div>
     <table class="cu-schedule-calendar__table" cellspacing="5" cellpadding="5">
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { computed, inject, ref, watch, warn } from 'vue';
 import { SCHEDULE_PROVIDE } from './type';
+import { Down, Up } from '../../../icons';
 
 defineOptions({
   name: 'CuCalendar'

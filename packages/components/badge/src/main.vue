@@ -37,7 +37,7 @@ const badgeStyle = computed(() => {
     backgroundColor: props.color,
     '--cu-badge-offsetx': offset[0] ? offset[0] + 'px' : undefined,
     '--cu-badge-offsety': offset[1] ? offset[1] + 'px' : undefined,
-    maxWidth: props.ellipsis ? '100%' : undefined
+    maxWidth: props.ellipsis && !isNumber(props.value) ? '100%' : undefined
   };
 });
 </script>

@@ -4,7 +4,10 @@
     :style="style"
     :class="{ 'is-finish': isFinish, 'is-active': isCurrent && !error, error, 'is-center': injectProps.center }">
     <div class="cu-step-item__header">
-      <span :class="currentIcon" class="cu-step-item__text">{{ currentIcon ? undefined : currentIndex! + 1 }}</span>
+      <span class="cu-step-item__icon" v-if="currentIcon">
+        <component :is="currentIcon" />
+      </span>
+      <span v-else class="cu-step-item__text">{{ currentIndex! + 1 }}</span>
       <span class="cu-step-item__line"></span>
     </div>
     <div class="cu-step-item__main">

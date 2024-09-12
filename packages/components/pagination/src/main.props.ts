@@ -22,7 +22,7 @@ export const paginationProps = {
     default: 7
   },
   layout: {
-    type: Array as PropType<'total' | 'sizes' | 'pages' | 'jumper'[]>,
+    type: Array as PropType<('total' | 'sizes' | 'pages' | 'jumper')[]>,
     default: ['pages']
   },
   size: String as PropType<ComicSize>,

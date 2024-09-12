@@ -1,6 +1,6 @@
 {
   "name": "comic-plus",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "license": "MIT",
   "private": false,
   "main": "lib/index.js",
@@ -44,7 +44,7 @@
     "async-validator": "^4.2.5",
     "axios": "^1.6.8",
     "pnpm": "^8.15.6",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.2",
     "vite": "^5.4.2",
     "vite-plugin-css": "latest",
     "vue": "^3.4.31",

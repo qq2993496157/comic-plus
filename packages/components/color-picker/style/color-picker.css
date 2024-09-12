@@ -8,6 +8,8 @@
   padding: 3px;
   transition: all 200ms;
   position: relative;
+  font-size: 15px;
+  vertical-align: middle;
 }
 
 .cu-color-picker__container {
@@ -36,22 +38,20 @@
 .cu-color-picker.large {
   width: var(--cu-size-large);
   height: var(--cu-size-large);
+  font-size: 17px;
 }
 
 .cu-color-picker.small {
   width: var(--cu-size-small);
   height: var(--cu-size-small);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .cu-color-picker__container i {
   position: relative;
   z-index: 5;
-}
-
-.cu-color-picker__container .cu-icon-minus {
-  font-size: 12px;
-  color: var(--cu-text-color-light);
+  color: var(--cu-text-color-light4);
+  display: inline-flex;
 }
 
 .cu-color-picker__popper {

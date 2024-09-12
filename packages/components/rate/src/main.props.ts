@@ -1,4 +1,4 @@
-import { ExtractPropTypes, PropType } from 'vue';
+import { Component, ExtractPropTypes, PropType } from 'vue';
 import { isNumber } from '../../../utils';
 
 export const rateProps = {
@@ -21,7 +21,7 @@ export const rateProps = {
   showText: Boolean,
   texts: Array as PropType<string[]>,
   icons: {
-    type: [String, Array] as PropType<string | string[]>
+    type: [Object, Array] as PropType<Component | Component[]>
   },
   color: {
     type: String,
@@ -31,8 +31,8 @@ export const rateProps = {
     type: String,
     default: '#999999'
   },
-  variableIcon: Function,
-  variableColor: Function,
+  variableIcon: Function as PropType<(idx: number) => string | Component>,
+  variableColor: Function as PropType<(idx: number) => string>,
   disabled: Boolean
 } as const;
 

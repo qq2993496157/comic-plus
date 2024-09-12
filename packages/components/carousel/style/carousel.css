@@ -29,7 +29,6 @@
   width: 30px;
   height: 60px;
   border-radius: var(--cu-border-radius);
-  /* border: 1px solid var(--cu-border-color); */
   color: #fff;
   font-size: 18px;
   display: flex;

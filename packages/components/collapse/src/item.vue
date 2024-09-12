@@ -6,7 +6,7 @@
           <slot name="label">{{ label }}</slot>
         </span>
         <span class="cu-collapse-item__line"></span>
-        <span class="cu-icon-right" :class="{ active: showItem }"></span>
+        <Right class="cu-collapse--icon" :class="{ active: showItem }" />
       </slot>
     </div>
     <transition-collapse>
@@ -24,6 +24,7 @@ import { inject, computed } from 'vue';
 import { CuTransitionCollapse as TransitionCollapse } from '../../transition-collapse';
 import { collapseItemProps } from './item.props';
 import { COLLAPSE_PROVIDE } from './type';
+import { Right } from '../../../icons';
 
 defineOptions({
   name: 'CuCollapseItem'

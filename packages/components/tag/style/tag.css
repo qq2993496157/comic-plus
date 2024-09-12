@@ -1,6 +1,5 @@
 .cu-tag,
 .cu-tag-complex {
-  --cu-tag-closecolor: var(--cu-text-color);
   padding: 0 8px;
   border-radius: var(--cu-border-radius);
   color: var(--cu-text-color);
@@ -44,16 +43,8 @@
 .cu-tag .closeicon,
 .cu-tag-complex .closeicon {
   margin-left: 4px;
-  background-color: #fff;
-  cursor: pointer;
-  transition: all 100ms;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
   font-size: 14px;
-  color: var(--cu-tag-closecolor);
+  cursor: pointer;
 }
 
 .cu-tag.is-plain {
@@ -73,31 +64,26 @@
   background-color: var(--cu-color-primary);
   border-color: var(--cu-color-primary);
   color: #fff;
-  --cu-tag-closecolor: var(--cu-color-primary);
 }
 .cu-tag--success {
   background-color: var(--cu-color-success);
   border-color: var(--cu-color-success);
   color: #fff;
-  --cu-tag-closecolor: var(--cu-color-success);
 }
 .cu-tag--warning {
   background-color: var(--cu-color-warning);
   border-color: var(--cu-color-warning);
   color: #fff;
-  --cu-tag-closecolor: var(--cu-color-warning);
 }
 .cu-tag--danger {
   background-color: var(--cu-color-danger);
   border-color: var(--cu-color-danger);
   color: #fff;
-  --cu-tag-closecolor: var(--cu-color-danger);
 }
 .cu-tag--info {
   background-color: var(--cu-color-info);
   border-color: var(--cu-color-info);
   color: #fff;
-  --cu-tag-closecolor: var(--cu-color-info);
 }
 
 .cu-tag--primary.is-plain {
@@ -169,12 +155,6 @@
 .cu-tag-complex .cu-tag-content {
   background-color: #ffffff;
   color: var(--cu-text-color);
-}
-
-.cu-tag.is-plain .closeicon,
-.cu-tag.is-light .closeicon {
-  color: inherit;
-  background-color: inherit;
 }
 
 .cu-tag + .cu-tag,

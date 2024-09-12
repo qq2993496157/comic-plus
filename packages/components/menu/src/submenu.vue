@@ -5,14 +5,15 @@
       ref="submenuRef"
       :tooltip-disabled="tooltipDisabled"
       v-menu-tooltip:right-center="props.label">
-      <span v-if="icon" :class="icon" class="icon"></span>
+      <component v-if="isVueComponent(icon)" :is="icon" class="cu-menu__icon" />
       <span v-show="!injectProps.collapse || submenu">
         <slot name="label"> {{ label }} </slot>
       </span>
-      <span
+      <component
         v-show="!injectProps.collapse || submenu"
         class="suffix-icon"
-        :class="[{ unfold }, injectProps.mode === 'horizontal' ? 'cu-icon-down' : 'cu-icon-right']"></span>
+        :is="injectProps.mode === 'horizontal' ? Down : Right"
+        :class="{ unfold }" />
     </div>
     <template v-if="float">
       <menu-popper
@@ -45,6 +46,8 @@ import { CuTransitionCollapse as TransitionCollapse } from '../../transition-col
 import MenuPopper from './menu-popper.vue';
 import { submenuProps } from './submenu.props';
 import { MENU_PROVIDE, SubmenuProvide, MenuItem } from './type';
+import { isVueComponent } from '../../../utils';
+import { Down, Right } from '../../../icons';
 
 defineOptions({
   name: 'CuSubMenu'

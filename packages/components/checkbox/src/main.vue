@@ -6,7 +6,7 @@
     }"
     :class="[{ 'is-disabled': disabled, 'is-check': checked }, currentSize]">
     <input type="checkbox" class="cu-checkbox__input" :checked="checked" :disabled="disabled" @change="changeValue" />
-    <span class="cu-checkbox__inner" :class="{ indeterminate }"></span>
+    <span class="cu-checkbox__inner" :class="{ indeterminate: indeterminate && !checked }"> </span>
     <span class="cu-checkbox__label" v-if="label || $slots.default">
       <slot>{{ label }}</slot>
     </span>
@@ -16,7 +16,8 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import '../style/checkbox.css';
-import { useConfig, useItemValidate, isBoolean } from '../../../utils';
+import { useConfig, isBoolean } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import { checkboxProps, checkboxEmits } from './main.props';
 import { CHECKBOXGROUP_PROVIDE } from './type';
 import { FORM_PROVIDE } from '../../form/src/type';

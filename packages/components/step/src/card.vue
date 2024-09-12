@@ -1,18 +1,17 @@
 <template>
   <div class="cu-step-card" :class="{ 'is-finish': isFinish, 'is-active': isCurrent && !error, error }">
     <div class="cu-step-card__header">
-      <i :class="currentIcon" v-if="currentIcon" class="cu-step-item__icon"></i>
+      <component :is="currentIcon" v-if="currentIcon" class="cu-step-item__icon" />
       <slot name="title">
         {{ title }}
       </slot>
     </div>
-    <i
-      :class="injectProps.direction === 'vertical' ? 'cu-icon-double-down' : 'cu-icon-double-right'"
-      class="card-bridge"></i>
+    <component :is="injectProps.direction === 'vertical' ? DoubleDown : DoubleRight" class="card-bridge" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { DoubleDown, DoubleRight } from '../../../icons';
 import { stepItemProps } from './item.props';
 import { useStepItem } from './use-item';
 defineOptions({

@@ -2,7 +2,7 @@ import { Placement } from '@floating-ui/vue';
 import { effect, type ExtractPropTypes, type PropType, type Ref } from 'vue';
 
 export const popperProps = {
-  trigger: Object as PropType<Ref<any>>,
+  trigger: Object as PropType<Element>,
   show: Boolean,
   hideArrow: Boolean,
   offset: {

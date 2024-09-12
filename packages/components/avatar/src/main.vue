@@ -2,7 +2,7 @@
   <transition name="avatar">
     <span class="cu-avatar" :class="avatarShape ? 'is-' + avatarShape : undefined" :style="avatarStyle" v-show="show">
       <template v-if="src">
-        <i :class="loadType === 'error' ? 'cu-icon-error-picture' : 'cu-icon-picture'" v-if="loadType !== 'loaded'"></i>
+        <component :is="loadType === 'error' ? ErrorPicture : Picture" v-if="loadType !== 'loaded'" />
         <img
           v-show="loadType === 'loaded'"
           :src="src"
@@ -13,7 +13,7 @@
       <template v-else-if="$slots.default">
         <slot></slot>
       </template>
-      <i class="cu-icon-avatar-filled avatar-icon" v-else></i>
+      <AvatarFilled size="1.5em" v-else />
     </span>
   </transition>
 </template>
@@ -24,6 +24,7 @@ import '../style/avatar.css';
 import { randomColor } from '../../../tools';
 import { avatarProps } from './main.props';
 import { AVATARGROUP_PROVIDE } from './type';
+import { AvatarFilled, ErrorPicture, Picture } from '../../../icons';
 
 defineOptions({
   name: 'CuAvatar'

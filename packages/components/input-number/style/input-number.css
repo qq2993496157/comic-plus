@@ -26,7 +26,7 @@
 .cu-input-number .cu-input-number__minus.disabled,
 .cu-input-number .cu-input-number__plus.disabled {
   background-color: var(--cu-background-color-disabled);
-  color: var(--cu-text-color-light5);
+  color: var(--cu-text-color-light7);
   cursor: no-drop;
 }
 
@@ -39,7 +39,8 @@
   align-items: center;
   justify-content: center;
   font-size: inherit;
-  color: var(--cu-text-color);
+  color: var(--cu-text-color-light4);
   background-color: var(--cu-background-color-light);
   cursor: pointer;
+  height: 100%;
 }

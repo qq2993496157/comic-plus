@@ -1,7 +1,7 @@
 <template>
-  <slot-child ref="triggerRef">
+  <only-child ref="triggerRef">
     <slot />
-  </slot-child>
+  </only-child>
   <popper
     :show="show"
     :effect="effect"
@@ -12,8 +12,8 @@
     transition-name="cu-fade">
     <div class="cu-popover__container" :style="containerStyle" ref="popperRef">
       <slot name="content">
-        <div class="cu-popover__title">{{ title }}</div>
-        <div class="cu-popover__content">{{ content }}</div>
+        <div class="cu-popover__title" v-if="title">{{ title }}</div>
+        <div class="cu-popover__content" v-if="content">{{ content }}</div>
       </slot>
     </div>
   </popper>
@@ -23,7 +23,7 @@
 import { computed, ref } from 'vue';
 import '../style/popover.css';
 import { useElementHover, useEventListener, onClickOutside } from '@vueuse/core';
-import SlotChild from './child';
+import OnlyChild from '../../only-child';
 import { CuPopper as Popper } from '../../popper';
 import { isBoolean } from '../../../utils';
 import { popoverProps } from './main.props';

@@ -11,17 +11,16 @@
         class="cu-popup"
         :class="[type ? 'cu-popup--' + type : undefined, { 'is-center': center }, customClass]"
         v-if="visible">
-        <div class="cu-popup__head" :style="{ color }">
-          <div class="title">
-            <i v-if="headIcon" :class="headIcon"></i>
-            <span>{{ title }}</span>
-          </div>
-          <i class="cu-icon-close" @click="close" v-if="showClose"></i>
+        <div class="cu-popup__head">
+          <span class="cu-popup__title">
+            <component v-if="headIcon" class="cu-popup__head--icon" :is="headIcon" :color="color" />{{ title }}
+          </span>
+          <Close class="close-icon" @click="close" v-if="showClose" />
         </div>
         <div class="cu-popup__content">
           <template v-if="isVNode">
             <div v-if="isString(content)" v-html="content"></div>
-            <component v-else :is="content"></component>
+            <component v-else :is="content" />
           </template>
           <template v-else>
             {{ content }}
@@ -46,18 +45,20 @@ import { onMounted, computed } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
 import '../../style/message-box.css';
 import { CuMode as Mode } from '../../../mode';
-import { usePopup, isString } from '../../../../utils';
+import { isString, isVueComponent } from '../../../../utils';
+import { usePopup } from '../../../../hooks';
 import { CuButton } from '../../../button';
 import { alertProps } from './main.props';
+import { Caution, Close, Info, Success, Tips, WarningFilled } from '../../../../icons';
 defineOptions({
   name: 'CuAlert'
 });
 const typeList = {
-  primary: 'cu-icon-tips',
-  info: 'cu-icon-info',
-  success: 'cu-icon-success',
-  warning: 'cu-icon-caution',
-  error: 'cu-icon-warning-filled'
+  primary: Tips,
+  info: Info,
+  success: Success,
+  warning: Caution,
+  error: WarningFilled
 };
 
 const props = defineProps(alertProps);
@@ -65,9 +66,9 @@ const props = defineProps(alertProps);
 const { visible, showMode, onAfterEnter, modeHandleClick, close, onAfterLeave } = usePopup(props);
 
 const headIcon = computed(() => {
-  if (!props.showIcon) return false;
-  if (props.icon) return props.icon;
-  return props.type ? typeList[props.type] : '';
+  if (!props.showIcon) return null;
+  if (isVueComponent(props.icon)) return props.icon;
+  return props.type ? typeList[props.type] : null;
 });
 
 onMounted(() => {

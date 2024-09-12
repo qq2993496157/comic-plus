@@ -1,8 +1,8 @@
-import type { Config } from './typescript';
+import type { ComicSize, Config } from './typescript';
 import { computed, ComputedRef } from 'vue';
 
 interface UseConfig {
-  SIZE?: ComputedRef<string | undefined>;
+  SIZE?: ComputedRef<ComicSize | undefined>;
 }
 
 const useConfig = (): UseConfig => {

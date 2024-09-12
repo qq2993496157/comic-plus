@@ -1,8 +1,8 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType, Component } from 'vue';
 
 export const bulletProps = {
   sign: String,
-  icon: String,
+  icon: Object as PropType<Component>,
   color: String,
   disabled: Boolean
 } as const;

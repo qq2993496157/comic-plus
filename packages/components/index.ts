@@ -87,6 +87,7 @@ import { CuSchedule } from './schedule/index';
 import { CuPopover } from './popover/index';
 import { CuTableV2 } from './table-v2/index';
 import { CuTableColumn } from './table-column/index';
+import { CuContextmenu } from './contextmenu/index';
 
 import type { Plugin } from 'vue';
 
@@ -185,7 +186,8 @@ export default [
   CuSchedule,
   CuPopover,
   CuTableV2,
-  CuTableColumn
+  CuTableColumn,
+  CuContextmenu
 ] as Plugin[];
 
 export {
@@ -283,5 +285,6 @@ export {
   CuSchedule,
   CuPopover,
   CuTableV2,
-  CuTableColumn
+  CuTableColumn,
+  CuContextmenu
 };

@@ -1,5 +1,6 @@
 import { computed, inject } from 'vue';
-import { useItemValidate, useConfig } from '../../../utils';
+import { useConfig } from '../../../utils';
+import { useItemValidate } from '../../../hooks';
 import type { RadioProps, RadioEmits } from './main.props';
 import type { SetupContext } from 'vue';
 import { FORM_PROVIDE } from '../../form/src/type';

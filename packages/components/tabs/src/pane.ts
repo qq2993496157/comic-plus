@@ -1,4 +1,4 @@
-import { defineComponent, h, inject, nextTick, onBeforeUnmount, onMounted, watch } from 'vue';
+import { defineComponent, h, inject, nextTick, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
 import { tabPaneProps } from './pane.props';
 import { TABS_PROVIDE } from './type';
 
@@ -14,7 +14,9 @@ export default defineComponent({
         removeTab(old);
         nextTick(() => {
           addTab({
-            ...props,
+            name: props.name,
+            label: props.label,
+            icon: shallowRef(props.icon),
             slots: slots['label']?.()
           });
         });
@@ -23,7 +25,9 @@ export default defineComponent({
 
     onMounted(() => {
       addTab({
-        ...props,
+        name: props.name,
+        label: props.label,
+        icon: shallowRef(props.icon),
         slots: slots['label']?.()
       });
     });

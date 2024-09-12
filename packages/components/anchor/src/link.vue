@@ -30,7 +30,6 @@ const anchor = inject(ANCHOR_PROVIDE, undefined);
 
 const linkRef = ref(null);
 
-
 anchor?.addLinkItem({
   href: props.href,
   ele: linkRef
@@ -41,12 +40,13 @@ function linkHandleClick() {
     anchor?.handleClick(props.href);
   } else {
     let el = document.querySelector(props.href);
-    let to = el.getBoundingClientRect().top + window.scrollY - props.offset;
-    animateScrollTo(window, window.scrollY, to, 300);
+    if (el) {
+      let to = el.getBoundingClientRect().top + window.scrollY - props.offset;
+      animateScrollTo(window, window.scrollY, to, 300);
+    }
   }
   return false;
 }
-
 
 watch(
   () => props.href,
