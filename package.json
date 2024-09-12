@@ -1,6 +1,6 @@
 {
   "name": "comic-plus",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "license": "MIT",
   "private": false,
   "main": "lib/index.js",
@@ -26,7 +26,7 @@
     "dev": "vite",
     "build:comp": "pnpm run -C packages build",
     "build:style": "pnpm run -C styles build",
-    "build:css": "esno build/buildCss",
+    "build:css": "esno build/build",
     "build:all": "pnpm run -C packages build & esno build/build & pnpm run -C styles build",
     "preview": "vite preview"
   },
