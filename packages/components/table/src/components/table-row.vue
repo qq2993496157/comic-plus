@@ -5,7 +5,7 @@
       :class="{ 'fixed-shadow-left': getStickyIndex.left == -1 }"
       width="40"
       v-if="injectProps.options.selection">
-      <checkbox v-model="isCheck" @change="changeSelection"></checkbox>
+      <checkbox v-model="isCheck" @change="changeSelection" />
     </td>
     <td
       colspan="1"

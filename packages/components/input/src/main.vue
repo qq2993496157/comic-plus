@@ -42,7 +42,7 @@ import { inject, computed } from 'vue';
 import '../style/input.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { isVueComponent, useConfig } from '../../../utils';
+import { isVueComponent, useGlobal } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { inputProps, inputEmits } from './main.props';
 import { CloseOne } from '../../../icons';
@@ -53,11 +53,11 @@ const props = defineProps(inputProps);
 const emit = defineEmits(inputEmits);
 
 const { itemValidate } = useItemValidate();
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 function inputEvent(e: Event) {

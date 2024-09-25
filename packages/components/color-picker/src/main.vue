@@ -14,22 +14,22 @@
     </div>
     <popper :show="show" :trigger="colorPickerRef" hide-arrow :offset="0" placement="bottom">
       <div class="cu-color-picker__popper" ref="popperRef">
-        <pane></pane>
+        <pane />
         <div class="cu-color-picker__huering">
           <div class="flex1">
-            <hsl-slider></hsl-slider>
-            <alpha-slider v-if="alpha"></alpha-slider>
+            <hsl-slider />
+            <alpha-slider v-if="alpha" />
           </div>
-          <color-preview></color-preview>
+          <color-preview />
         </div>
-        <preset-list v-if="predefine" :predefine="predefine"></preset-list>
+        <preset-list v-if="predefine" :predefine="predefine" />
         <div class="cu-color-picker__buttons">
           <c-input
             v-model="colorValue"
             @keyup.enter="convertColors"
             @blur="convertColors"
             size="small"
-            style="width: 140px"></c-input>
+            style="width: 140px" />
           <div class="cu-color-picker__buttonbox">
             <c-button text type="primary" size="small" @click="clear">清空</c-button>
             <c-button type="primary" size="small" @click="confirm">确认</c-button>
@@ -53,7 +53,7 @@ import hslSlider from './components/hsl-slider';
 import alphaSlider from './components/alpha-slider';
 import colorPreview from './components/color-preview';
 import presetList from './components/preset';
-import { useClickOutside, useConfig } from '../../../utils';
+import { useClickOutside, useGlobal } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { colorPickerProps, colorPickerEmits } from './main.props';
 import Color from '../utils/color';
@@ -69,12 +69,12 @@ const emit = defineEmits(colorPickerEmits);
 const popperRef = ref(null);
 const colorPickerRef = ref();
 const { itemValidate } = useItemValidate();
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 
 const show = ref(false);
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 const formatValue = computed(() => {
   return props.format ? props.format : props.alpha ? 'rgb' : 'hex';

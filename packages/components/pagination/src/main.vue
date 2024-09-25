@@ -12,7 +12,7 @@
             style="width: 100px"
             v-if="pageSizes?.length > 0"
             :size="size">
-            <c-option v-for="item in pageSizes" :label="item + '条/页'" :value="item"></c-option>
+            <c-option v-for="item in pageSizes" :label="item + '条/页'" :value="item" />
           </c-select>
         </template>
         <template v-else-if="name === 'pages'">
@@ -48,8 +48,7 @@
             @blur="change"
             @keyup.enter="change"
             style="width: 50px; margin: 0 4px"
-            :size="size"></c-input
-          >页
+            :size="size" />页
         </template>
       </div>
     </div>

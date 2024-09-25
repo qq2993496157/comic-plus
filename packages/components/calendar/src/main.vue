@@ -1,10 +1,10 @@
 <template>
-  <div class="cu-calendar" :class="size ?? SIZE">
+  <div class="cu-calendar" :class="size ?? globalSize">
     <div class="cu-calendar__header" v-if="showHeader">
       <slot name="header" :data="{ year: ty, month: tm + 1 }">
         <span>{{ ty + '年 ' + monthForLang[tm] + '月' }}</span>
         <span>
-          <button-group :size="size ?? SIZE">
+          <button-group :size="size ?? globalSize">
             <c-button @click="prevMonth">上月</c-button>
             <c-button @click="today()">今天</c-button>
             <c-button @click="nextMonth">下月</c-button>
@@ -52,7 +52,7 @@ import { CuButtonGroup as ButtonGroup } from '../../button-group';
 import { CuButton as CButton } from '../../button';
 import '../style/calendar.css';
 import { calendarEmits, calendarProps } from './main.props';
-import { formatDate, useConfig } from '../../../utils';
+import { formatDate, useGlobal } from '../../../utils';
 defineOptions({
   name: 'CuCalendar'
 });
@@ -67,7 +67,7 @@ type DateItem = {
 const props = defineProps(calendarProps);
 const emit = defineEmits(calendarEmits);
 
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 
 const weeks = ref([0, 1, 2, 3, 4, 5, 6]);
 const ty = ref();
@@ -208,11 +208,11 @@ const dateTypeFn = {
 type DateType = keyof typeof dateTypeFn;
 
 function selectDate(value: DateType | Date) {
-  if (value instanceof Date) {
+  if ((value as DateType) in dateTypeFn) {
+    dateTypeFn[value as DateType]?.();
+  } else if (value instanceof Date) {
     dn.value = new Date(value).setHours(0, 0, 0, 0);
     setValue();
-  } else if (value in dateTypeFn) {
-    dateTypeFn[value]?.();
   } else {
     warn('SelectDate can only pass in parameters in Date or specified string format');
     return;

@@ -3,7 +3,7 @@
     <div class="cu-skeleton" :class="{ animated }" v-bind="$attrs">
       <slot name="template" v-for="_ in count">
         <div class="template-default">
-          <skeleton-item v-for="_ in rows"></skeleton-item>
+          <skeleton-item v-for="_ in rows" />
         </div>
       </slot>
     </div>

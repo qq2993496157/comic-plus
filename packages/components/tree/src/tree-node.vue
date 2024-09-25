@@ -20,7 +20,7 @@
     </div>
     <transition-collapse>
       <div class="cu-tree__children" v-show="nodeShow">
-        <tree-node
+        <cu-tree-node
           v-for="(item, index) in childrenList"
           :data="item"
           :parent-node="data"
@@ -31,7 +31,7 @@
           <template #default="{ node, parentNode, childNodes }" v-if="$slots.default">
             <slot :node="node" :parentNode="parentNode" :childNodes="childNodes"></slot>
           </template>
-        </tree-node>
+        </cu-tree-node>
       </div>
     </transition-collapse>
   </div>

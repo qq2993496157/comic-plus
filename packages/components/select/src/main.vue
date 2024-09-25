@@ -49,7 +49,7 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import { CuScrollbar as Scrollbar } from '../../scrollbar';
-import { useConfig, useClickOutside } from '../../../utils';
+import { useGlobal, useClickOutside } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { selectProps, selectEmits } from './main.props';
 import { SelectValue, SELECT_PROVIDE, OptionInstance } from './type';
@@ -63,11 +63,11 @@ const emit = defineEmits(selectEmits);
 const popperRef = ref(null);
 const selectRef = ref(null);
 const { itemValidate } = useItemValidate();
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const show = ref(false);

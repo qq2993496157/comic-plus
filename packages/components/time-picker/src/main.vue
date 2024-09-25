@@ -31,7 +31,7 @@
 
     <popper :show="show" :trigger="timePickerRef">
       <div class="cu-time-picker__popper" ref="popperRef" :class="{ range }">
-        <time-select></time-select>
+        <time-select />
       </div>
     </popper>
   </div>
@@ -44,7 +44,7 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import timeSelect from './time-select.vue';
-import { useConfig, useClickOutside, isArray } from '../../../utils';
+import { useGlobal, useClickOutside, isArray } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { timePickerProps, timePickerEmits } from './main.props';
 import { TIMEPICKER_PROVIDE } from './type';
@@ -59,11 +59,11 @@ const emit = defineEmits(timePickerEmits);
 const popperRef = ref(null);
 const timePickerRef = ref();
 const { itemValidate } = useItemValidate();
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const hasValue = computed(() => {

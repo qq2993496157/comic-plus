@@ -1,4 +1,14 @@
 .cu-button {
+  --cu-button-color: var(--cu-text-color);
+  --cu-button-color-hover: #ffffff;
+  --cu-button-color-disabled: var(--cu-text-color-light5);
+  --cu-button-border: var(--cu-border-color);
+  --cu-button-border-hover: var(--cu-color-primary);
+  --cu-button-border-disabled: var(--cu-border-color);
+  --cu-button-background: #ffffff;
+  --cu-button-background-hover: var(--cu-color-primary);
+  --cu-button-background-disabled: #ffffff;
+  --cu-button-round: calc(var(--cu-size-default) / 2);
   padding: 0 12px;
   border-radius: var(--cu-border-radius);
   border: 1px solid;
@@ -11,21 +21,17 @@
   line-height: 1;
   user-select: none;
   white-space: nowrap;
-  --cu-button-color: var(--cu-text-color);
-  --cu-button-color-hover: #ffffff;
-  --cu-button-color-disabled: var(--cu-text-color-light5);
-  --cu-button-border: var(--cu-border-color);
-  --cu-button-border-hover: var(--cu-color-primary);
-  --cu-button-border-disabled: var(--cu-border-color);
-  --cu-button-background: #ffffff;
-  --cu-button-background-hover: var(--cu-color-primary);
-  --cu-button-background-disabled: #ffffff;
-  --cu-button-round: calc(var(--cu-size-default) / 2);
   background-color: var(--cu-button-background);
   border-color: var(--cu-button-border);
   color: var(--cu-button-color);
-  transition: all 200ms ease;
+  transition: all 200ms;
   outline: none;
+  vertical-align: middle;
+  /* test */
+  /* border-radius: var(--cu-border-radius-base); */
+  /* border-color: #3b3e45 !important; */
+  /* color: #3b3e45 !important; */
+  /* border-width: 2px; */
 }
 
 .cu-button.large {

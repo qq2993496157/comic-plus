@@ -22,7 +22,6 @@
 
 .cu-web-footer__copyright {
   text-align: center;
-  color: var(--cu-text-color);
 }
 
 .cu-web-footer__links ~ .cu-web-footer__copyright {

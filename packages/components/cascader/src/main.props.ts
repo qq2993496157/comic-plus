@@ -30,17 +30,7 @@ export const cascaderProps = {
   clearable: Boolean,
   arbitrarily: Boolean,
   placeholder: String,
-  prop: {
-    type: Object as PropType<Prop>,
-    default: () => {
-      return {
-        children: 'children',
-        label: 'label',
-        value: 'value',
-        separator: '/'
-      };
-    }
-  }
+  prop: Object as PropType<Prop>
 } as const;
 
 export type CascaderProps = ExtractPropTypes<typeof cascaderProps>;

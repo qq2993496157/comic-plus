@@ -114,6 +114,7 @@
 .cu-checkbox-group {
   display: inline-flex;
   flex-wrap: wrap;
+  vertical-align: middle;
 }
 
 .cu-checkbox + .cu-checkbox {

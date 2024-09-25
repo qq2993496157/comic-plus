@@ -24,12 +24,13 @@
   color: var(--cu-color-info);
 }
 .cu-popup__head {
+  padding: 10px 30px 10px 10px;
   min-height: 36px;
   font-size: 15px;
   display: flex;
+  position: relative;
 }
 .cu-popup__head .cu-popup__title {
-  padding: 10px;
   flex: 1;
 }
 .cu-popup__head .cu-popup__head--icon {
@@ -37,8 +38,9 @@
 }
 
 .cu-popup__head .close-icon {
-  margin-top: 8px;
-  margin-right: 8px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
   cursor: pointer;
   color: var(--cu-text-color-light3);
 }
@@ -63,16 +65,10 @@
 }
 
 .cu-popup.is-center .cu-popup__head {
-  padding: 0 30px;
-  position: relative;
+  padding: 10px 30px;
   text-align: center;
 }
-.cu-popup.is-center .cu-popup__head > i {
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-}
+
 .cu-popup.is-center .cu-popup__content {
   text-align: center;
 }

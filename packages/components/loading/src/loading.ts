@@ -25,7 +25,7 @@ type loadingAttributes = { [K in keyof Attributes]: Attributes[K]['default'] };
 
 function createLoading(
   props: {
-    glabal?: boolean;
+    global?: boolean;
     defaultVisible: boolean;
   } & LoadingOptions
 ) {
@@ -71,7 +71,7 @@ function LoadingService(option?: LoadingOptions): LoadingInstance {
   }
   const el: HTMLElement = option?.target ?? document.body;
   let instance = createLoading({
-    glabal: true,
+    global: true,
     defaultVisible: true,
     target: el,
     ...option

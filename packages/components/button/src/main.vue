@@ -21,7 +21,7 @@ import { inject, computed } from 'vue';
 import '../style/button.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { buttonProps, buttonEmits } from './main.props';
-import { useConfig, colorToRgba, colorBlend, isVueComponent } from '../../../utils';
+import { useGlobal, colorToRgba, colorBlend, isVueComponent } from '../../../utils';
 import { BUTTONGROUP_PROVIDE } from './type';
 import { Loading } from '../../../icons';
 
@@ -32,12 +32,12 @@ defineOptions({
 const props = defineProps(buttonProps);
 const emit = defineEmits(buttonEmits);
 
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 const group = inject(BUTTONGROUP_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? group?.props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? group?.props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const buttonExtraClass = computed(() => {

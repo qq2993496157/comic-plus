@@ -72,11 +72,13 @@
 
 .cu-tip .cu-tip__icon {
   margin-right: 8px;
+  font-size: 15px;
 }
 .cu-tip .cu-tip__close {
   margin-left: 8px;
   transition: all 200ms;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .cu-tip.rolling-mode {

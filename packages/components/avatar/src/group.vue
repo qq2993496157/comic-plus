@@ -10,7 +10,7 @@
         :class="{ 'can-click': clickShowAll }"
         v-if="surplus > 0"
         @click.stop="changeShowAll">
-        <DoubleLeft v-if="showAll" />
+        <DoubleLeft v-if="showAll" size="1.5em" />
         <template v-else>
           {{ '+' + surplus }}
         </template>
@@ -39,7 +39,8 @@ const avatars = ref<number[]>([]);
 const style = computed(() => {
   return {
     '--cu-avatar-size': props.size + 'px',
-    '--cu-avatar-gap': getGap() + 'px'
+    '--cu-avatar-gap': getGap() + 'px',
+    fontSize: props.size / 3 + 'px'
   };
 });
 
@@ -49,8 +50,7 @@ function getGap() {
 }
 
 const surplus = computed(() => {
-  let val = avatars.value.length - props.count;
-  return isNaN(val) ? avatars.value.length : val;
+  return avatars.value.length - props.count ?? avatars.value.length;
 });
 
 function changeShowAll() {

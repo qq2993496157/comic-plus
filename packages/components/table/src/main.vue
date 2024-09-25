@@ -7,7 +7,7 @@
       { 'show-left-shadow': tableResize.leftShadow },
       { 'show-right-shadow': tableResize.rightShadow },
       { 'is-selection': options.selection },
-      size ?? SIZE
+      size ?? globalSize
     ]">
     <div class="cu-table__head" :class="headerClassName" ref="tableHeadRef">
       <table :style="{ width: tableResize.width - tableResize.scrollWidth + 'px' }">
@@ -29,7 +29,7 @@
               :class="{ 'fixed-shadow-left': getStickyIndex.left == -1 }"
               width="40"
               v-if="options.selection">
-              <checkbox :model-value="isCheckAll" @change="_changeCheckAll" :indeterminate="indeterminate"></checkbox>
+              <checkbox :model-value="isCheckAll" @change="_changeCheckAll" :indeterminate="indeterminate" />
             </th>
             <th
               class="cu-table__th"
@@ -71,7 +71,7 @@
       @scroll="scroll">
       <div class="cu-table__empty" v-if="data.length === 0">
         <slot name="empty">
-          <empty description="暂无数据"></empty>
+          <empty description="暂无数据" />
         </slot>
       </div>
       <table :style="{ width: tableResize.width - tableResize.scrollWidth + 'px' }" v-else>
@@ -105,7 +105,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, provide, CSSProperties } from 'vue';
 import { useElementSize } from '@vueuse/core';
-import { useConfig, deepEqual } from '../../../utils';
+import { useGlobal, deepEqual } from '../../../utils';
 import '../style/table.css';
 import TableRow from './components/table-row.vue';
 import { CuCheckbox as Checkbox } from '../../checkbox';
@@ -120,7 +120,7 @@ defineOptions({
 const props = defineProps(tableProps);
 const emit = defineEmits(tableEmits);
 
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 
 const tableRef = ref(null);
 const tableHeadRef = ref(null);

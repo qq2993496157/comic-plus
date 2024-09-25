@@ -55,14 +55,14 @@
   height: 100%;
   width: var(--cu-zone-line-weight);
   overflow: hidden;
-  cursor: col-resize;
+  cursor: e-resize;
   transform: translateX(-50%);
 }
 
 .cu-zone.is-vertical > .cu-zone__line {
   width: 100%;
   height: var(--cu-zone-line-weight);
-  cursor: row-resize;
+  cursor: n-resize;
   transform: translateY(-50%);
 }
 

@@ -66,7 +66,7 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import { CuScrollbar as Scrollbar } from '../../scrollbar';
-import { deleteAfterIndex, useClickOutside, useConfig } from '../../../utils';
+import { deleteAfterIndex, useClickOutside, useGlobal } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { cascaderProps, cascaderEmits } from './main.props';
 import { Down, CloseOne, Right } from '../../../icons';
@@ -80,11 +80,11 @@ const emit = defineEmits(cascaderEmits);
 const { itemValidate } = useItemValidate();
 const popperRef = ref(null);
 const cascaderRef = ref();
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const show = ref(false);
@@ -98,11 +98,11 @@ const useInputValue = computed(() => {
 
 const optionProps = computed(() => {
   return Object.assign(
-    {},
     {
       children: 'children',
       label: 'label',
-      value: 'value'
+      value: 'value',
+      separator: '/'
     },
     props.prop
   );

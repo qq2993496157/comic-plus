@@ -1,5 +1,5 @@
-import { reactive, type Plugin, type App } from 'vue';
-import { colorToRgba, colorBlendArray, toHex, type Config } from './utils';
+import { reactive, Plugin, App, shallowRef } from 'vue';
+import { colorToRgba, colorBlendArray, toHex, Config } from './utils';
 import { deepMerge } from './tools';
 import components from './components';
 import CuMessageBox from './components/message-box';
@@ -42,7 +42,9 @@ var assignConfig = reactive({}) as Config;
 
 const useComicConfig = (config: Config): void => {
   setColor(config?.color);
+  const recordLoadingRender = config?.loadingRender || null;
   assignConfig = reactive(deepMerge(assignConfig, config));
+  assignConfig.loadingRender = shallowRef(recordLoadingRender); //对象合并导致Component类型的props出问题 所以这里重新手动赋值
   window['$COMIC'] = assignConfig;
 };
 
@@ -58,21 +60,19 @@ const setColor = (value?: Config['color']): void => {
   } else {
     obj = value;
   }
-  const colors = ['primary', 'success', 'warning', 'danger', 'info'];
+  const colors = ['primary', 'success', 'warning', 'danger', 'info', 'text'];
   colors.forEach((colorKey) => {
     const rgba = colorToRgba(obj[colorKey]) || [];
     if (rgba.length > 0) {
+      const BASE_COLOR_KEY = colorKey === 'text' ? `--cu-text-color` : `--cu-color-${colorKey}`;
       Array.from({ length: 10 }).forEach((_, index) => {
         if (index === 0) {
-          document.documentElement.style.setProperty(`--cu-color-${colorKey}`, getHexColor(rgba));
+          document.documentElement.style.setProperty(BASE_COLOR_KEY, getHexColor(rgba));
         } else if (index === 1) {
-          document.documentElement.style.setProperty(
-            `--cu-color-${colorKey}-light`,
-            getHexColor(colorBlendArray(rgba, 90))
-          );
+          document.documentElement.style.setProperty(`${BASE_COLOR_KEY}-light`, getHexColor(colorBlendArray(rgba, 90)));
         } else {
           document.documentElement.style.setProperty(
-            `--cu-color-${colorKey}-light${index}`,
+            `${BASE_COLOR_KEY}-light${index}`,
             getHexColor(colorBlendArray(rgba, 100 - index * 10))
           );
         }
@@ -89,15 +89,15 @@ export * from './icons';
 
 export {
   CuMessageBox,
-  preview,
   CuLoading,
   vLoading,
+  vTooltip,
+  vInfiniteScroll,
+  CuLoadingbar,
+  preview,
   useLoading,
   useComicConfig,
   useTooltip,
-  vTooltip,
   useInfiniteScroll,
-  vInfiniteScroll,
-  CuLoadingbar,
   installIcons
 };

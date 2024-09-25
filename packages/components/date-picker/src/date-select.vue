@@ -4,10 +4,10 @@
       <span v-for="el in props.shortcuts" @click="pickShortcut(el.value)">{{ el.label }}</span>
     </div>
     <div class="cu-date-table__box" v-if="props.range">
-      <date-table :date="props.modelValue[0]" ref="dateTableRef1"></date-table>
-      <date-table :date="props.modelValue[1]" ref="dateTableRef2"></date-table>
+      <date-table :date="props.modelValue[0]" ref="dateTableRef1" />
+      <date-table :date="props.modelValue[1]" ref="dateTableRef2" />
     </div>
-    <date-table v-else :date="(props.modelValue as ValueAlone)" ref="dateTableRef"></date-table>
+    <date-table v-else :date="(props.modelValue as ValueAlone)" ref="dateTableRef" />
   </div>
   <div class="cu-date-picker__footer">
     <c-button size="small" type="primary" text @click="_confirm">确认</c-button>

@@ -4,7 +4,7 @@
     :class="[
       { 'is-plain': plain },
       type ? 'cu-tip--' + type : undefined,
-      size ?? SIZE,
+      size ?? globalSize,
       { 'hover-pause': isHoverPause },
       { 'rolling-mode': rolling },
       { 'is-rolling': rolling && isRolling }
@@ -27,7 +27,7 @@
 import { onMounted, computed, ref, watch } from 'vue';
 import { useElementSize } from '@vueuse/core';
 import '../style/tip.css';
-import { useConfig, colorBlend, colorToRgba, isVueComponent } from '../../../utils';
+import { useGlobal, colorBlend, colorToRgba, isVueComponent } from '../../../utils';
 import { tipProps, tipEmits } from './main.props';
 import { CloseOne } from '../../../icons';
 
@@ -47,7 +47,7 @@ const duration = ref('25s');
 const isRolling = ref(false);
 const cloendEle = ref<HTMLElement>();
 
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const { width } = useElementSize(tipRef);
 
 watch(width, () => {

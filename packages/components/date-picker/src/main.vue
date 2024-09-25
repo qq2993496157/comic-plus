@@ -30,7 +30,7 @@
     </div>
     <popper :show="show" :trigger="datePickerRef">
       <div class="cu-date-picker__popper" ref="popperRef" :class="[{ 'is-range': range }, currentSize]">
-        <date-select></date-select>
+        <date-select />
       </div>
     </popper>
   </div>
@@ -43,10 +43,11 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import DateSelect from './date-select.vue';
-import { useClickOutside, formatDate, useConfig, isArray } from '../../../utils';
+import { useClickOutside, formatDate, useGlobal, isArray } from '../../../utils';
 import { datePickerProps, datePickerEmits } from './main.props';
 import { DATEPICKER_PROVIDE, type ValueType } from './type';
 import { Calendar, CloseOne } from '../../../icons';
+import { useItemValidate } from '../../../hooks';
 
 defineOptions({
   name: 'CuDatePicker'
@@ -57,11 +58,12 @@ const emit = defineEmits(datePickerEmits);
 const popperRef = ref(null);
 const datePickerRef = ref();
 
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
+const { itemValidate } = useItemValidate();
 const form = inject(FORM_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const vClickOutside = useClickOutside();
@@ -80,6 +82,8 @@ function clear() {
   emit('update:modelValue', props.range ? [] : '');
   emit('clear');
   show.value = false;
+
+  itemValidate('change');
 }
 function onClickOutside() {
   show.value && (show.value = false);

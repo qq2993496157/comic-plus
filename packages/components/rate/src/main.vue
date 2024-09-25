@@ -1,7 +1,7 @@
 <template>
   <div class="cu-rate" :class="{ 'read-only': disabled }">
     <div class="cu-rate__container" ref="rateContainerRef" :style="{ fontSize: calcRateSize + 'px' }">
-      <rate-item v-for="idx in count" :current="idx" @click="itemHandleClick"></rate-item>
+      <rate-item v-for="idx in count" :current="idx" @click="itemHandleClick" />
     </div>
     <span v-if="showText" class="cu-rate__text" :style="{ color: disabled ? activeColor : undefined }">
       <slot name="text" :value="activeIdx"> {{ textContent }}</slot>

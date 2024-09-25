@@ -1,6 +1,7 @@
 .cu-rate {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
 }
 
 .cu-rate__container {

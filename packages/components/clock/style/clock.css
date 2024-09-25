@@ -4,6 +4,7 @@
   --cu-clock-block-height: 13px;
   font-size: 14px;
   display: inline-block;
+  background-color: #ffffff;
 }
 
 .cu-clock.small {

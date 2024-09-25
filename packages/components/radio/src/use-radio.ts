@@ -1,5 +1,5 @@
 import { computed, inject } from 'vue';
-import { useConfig } from '../../../utils';
+import { useGlobal } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import type { RadioProps, RadioEmits } from './main.props';
 import type { SetupContext } from 'vue';
@@ -8,13 +8,13 @@ import { RADIOGROUP_PROVIDE } from './type';
 
 export const useRadio = (props: RadioProps, emit: SetupContext<RadioEmits>['emit']) => {
   const { itemValidate } = useItemValidate();
-  const { SIZE } = useConfig();
+  const { globalSize } = useGlobal();
 
   const radioGroup = inject(RADIOGROUP_PROVIDE, undefined);
   const form = inject(FORM_PROVIDE, undefined);
 
   const currentSize = computed(() => {
-    return props.size ?? radioGroup?.props.size ?? form?.props.size ?? SIZE?.value;
+    return props.size ?? radioGroup?.props.size ?? form?.props.size ?? globalSize?.value;
   });
 
   const isCheck = computed(() => {

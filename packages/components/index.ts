@@ -88,6 +88,7 @@ import { CuPopover } from './popover/index';
 import { CuTableV2 } from './table-v2/index';
 import { CuTableColumn } from './table-column/index';
 import { CuContextmenu } from './contextmenu/index';
+import { CuWatermark } from './watermark/index';
 
 import type { Plugin } from 'vue';
 
@@ -187,7 +188,8 @@ export default [
   CuPopover,
   CuTableV2,
   CuTableColumn,
-  CuContextmenu
+  CuContextmenu,
+  CuWatermark
 ] as Plugin[];
 
 export {
@@ -286,5 +288,6 @@ export {
   CuPopover,
   CuTableV2,
   CuTableColumn,
-  CuContextmenu
+  CuContextmenu,
+  CuWatermark
 };

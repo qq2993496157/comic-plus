@@ -2,7 +2,7 @@
   <ul
     class="cu-anchor"
     ref="anchorRef"
-    :class="[{ 'show-line': showLine }, size ?? SIZE, 'cu-anchor--' + direction]"
+    :class="[{ 'show-line': showLine }, size ?? globalSize, 'cu-anchor--' + direction]"
     :style="anchorStyle">
     <span class="cu-anchor__line" :style="lineStyle"></span>
     <slot></slot>
@@ -13,7 +13,7 @@
 import { computed, onMounted, provide, ref, watch } from 'vue';
 import { useEventListener } from '@vueuse/core';
 import '../style/anchor.css';
-import { debounce, useConfig, isString } from '../../../utils';
+import { debounce, useGlobal, isString } from '../../../utils';
 import { animateScrollTo } from '../utils/scroll';
 import { anchorProps, anchorEmits } from './main.props';
 import { AnchorLinkInstance, ANCHOR_PROVIDE } from './type';
@@ -25,7 +25,7 @@ defineOptions({
 const props = defineProps(anchorProps);
 const emit = defineEmits(anchorEmits);
 
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const currentHref = ref('');
 
 const links: Record<string, AnchorLinkInstance> = {};

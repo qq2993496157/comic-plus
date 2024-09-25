@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { ref, computed, provide, getCurrentInstance } from 'vue';
 import '../style/tree.css';
-import treeNode from './tree-node.vue';
+import TreeNode from './tree-node.vue';
 import emitter from '../../../utils/emitter';
 import { treeProps, treeEmits } from './main.props';
 import { TreeKeyProps, ChildNodeInstance, TREE_PROVIDE } from './type';

@@ -1,11 +1,7 @@
 import { Component, PropType, VNode } from 'vue';
-import { Loading } from '../../../icons';
 
 export const loadingProps = {
-  icon: {
-    type: Object as PropType<Component | VNode>,
-    default: Loading
-  },
+  icon: Object as PropType<Component | VNode>,
   defaultVisible: {
     type: Boolean,
     default: true
@@ -15,7 +11,7 @@ export const loadingProps = {
   background: String,
   color: String,
   target: HTMLElement,
-  glabal: Boolean
+  global: Boolean
 } as const;
 
 export type LoadingProps = {
@@ -26,5 +22,5 @@ export type LoadingProps = {
   readonly background?: string;
   readonly color?: string;
   readonly target?: HTMLElement;
-  readonly glabal?: boolean;
+  readonly global?: boolean;
 };

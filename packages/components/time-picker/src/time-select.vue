@@ -2,14 +2,14 @@
   <div v-if="props.range">
     <div class="rangetime-box">
       <div class="time-title">开始时间</div>
-      <list :time="props.modelValue[0]" ref="listRef1"></list>
+      <list :time="props.modelValue[0]" ref="listRef1" />
     </div>
     <div class="rangetime-box">
       <div class="time-title">结束时间</div>
-      <list :time="props.modelValue[1]" ref="listRef2"></list>
+      <list :time="props.modelValue[1]" ref="listRef2" />
     </div>
   </div>
-  <list v-else :time="(props.modelValue as string)" ref="listRef"></list>
+  <list v-else :time="(props.modelValue as string)" ref="listRef" />
 
   <div class="cu-time-picker__footer">
     <cu-button size="small" type="primary" text @click="_confirm">确认</cu-button>

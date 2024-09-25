@@ -38,6 +38,7 @@
   height: 20px;
   width: 100%;
   display: flex;
+  font-size: 18px;
 }
 
 .cu-step-item__header .cu-step-item__text {
@@ -78,7 +79,8 @@
   padding-right: 10px;
   font-size: 12px;
 }
-.cu-step-item.is-center .cu-step-item .cu-step-item__content {
+
+.cu-step-item.is-center .cu-step-item__content {
   padding-left: 10px;
 }
 
@@ -129,7 +131,7 @@
 .cu-step-card {
   position: relative;
   margin-right: 20px;
-  padding: 2px;
+  padding: 5px 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -190,5 +192,5 @@
 }
 
 .cu-step-card .cu-step-item__icon {
-  margin-right: 4px;
+  margin-right: 5px;
 }

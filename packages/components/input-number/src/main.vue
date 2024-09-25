@@ -26,7 +26,7 @@ import { ref, inject, computed, watch } from 'vue';
 import '../style/input-number.css';
 import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { useConfig, isNumber } from '../../../utils';
+import { useGlobal, isNumber } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { inputNumberProps, inputNumberEmits } from './main.props';
 import { Minus, Plus } from '../../../icons';
@@ -37,11 +37,11 @@ const props = defineProps(inputNumberProps);
 const emit = defineEmits(inputNumberEmits);
 
 const { itemValidate } = useItemValidate();
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 const form = inject(FORM_PROVIDE, undefined);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const currentValue = ref(props.modelValue);

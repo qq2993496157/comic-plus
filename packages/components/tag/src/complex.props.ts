@@ -4,7 +4,7 @@ export const tagComplexProps = {
   type: String,
   size: {
     type: Number,
-    default: 20
+    default: 22
   },
   closable: Boolean,
   transition: Boolean,

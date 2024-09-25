@@ -132,6 +132,10 @@
 .cu-form-item.is-error .cu-time-picker,
 .cu-form-item.is-error .cu-textarea,
 .cu-form-item.is-error .cu-date-picker,
-.cu-form-item.is-error .cu-color-picker {
+.cu-form-item.is-error .cu-color-picker,
+.cu-form-item.is-error .cu-checkbox__inner,
+.cu-form-item.is-error .cu-radio,
+.cu-form-item.is-error .cu-radio-button,
+.cu-form-item.is-error .cu-upload__trigger {
   border-color: var(--cu-color-danger);
 }

@@ -42,7 +42,7 @@ import { CuInputNumber as InputNumber } from '../../input-number';
 import { sliderEmits, sliderProps } from './main.props';
 import { SLIDER_PROVIDE } from './type';
 import { FORM_PROVIDE } from '../../form/src/type';
-import { isArray, useConfig } from '../../../utils';
+import { isArray, useGlobal } from '../../../utils';
 
 defineOptions({
   name: 'CuSlider'
@@ -52,7 +52,7 @@ const props = defineProps(sliderProps);
 const emit = defineEmits(sliderEmits);
 
 const form = inject(FORM_PROVIDE, undefined);
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 
 const sliderMinButtonRef = ref();
 const sliderMaxButtonRef = ref();
@@ -61,7 +61,7 @@ const recordValue = ref(0);
 const recordValue2 = ref(0);
 
 const currentSize = computed(() => {
-  return props.size ?? form?.props.size ?? SIZE?.value;
+  return props.size ?? form?.props.size ?? globalSize?.value;
 });
 
 const sliderValue = computed(() => {

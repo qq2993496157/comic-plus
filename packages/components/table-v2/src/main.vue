@@ -7,14 +7,14 @@
       { 'show-right-shadow': tableStyle.rightShadow.value },
       { 'scroll-table': tableStyle.barWidth.value > 0 },
       { 'cu-table-v2--stripe': stripe },
-      size ?? SIZE
+      size ?? globalSize
     ]"
     :style="style">
     <div class="hidden-column" ref="hiddenColumnRef">
       <slot></slot>
     </div>
     <div class="cu-table-v2--warpper" ref="containerRef" @scroll="tableStyle.onscroll">
-      <table-header v-if="showHeader"></table-header>
+      <table-header v-if="showHeader" />
       <table-body>
         <template v-if="$slots['empty']" #empty>
           <slot name="empty" />
@@ -37,7 +37,7 @@ import TableFooter from './table-footer';
 import { Column, TABLE_V2_PROVIDE } from './type';
 import { tableV2Emits, tableV2Props } from './main.props';
 import { useTable, useTableStyle } from './util';
-import { getCssHeight, isArray, useConfig } from '../../../utils';
+import { getCssHeight, isArray, useGlobal } from '../../../utils';
 defineOptions({
   name: 'CuTableV2'
 });
@@ -46,7 +46,7 @@ const props = defineProps(tableV2Props);
 const emit = defineEmits(tableV2Emits);
 
 const MIN_SIZE = 80;
-const { SIZE } = useConfig();
+const { globalSize } = useGlobal();
 
 const columns = ref<Column[]>([]);
 const hiddenColumnRef = ref();

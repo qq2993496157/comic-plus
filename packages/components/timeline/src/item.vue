@@ -2,7 +2,7 @@
   <li class="cu-timeline-item" :class="{ 'is-reverse': injectProps.cross && reverse }">
     <div class="cu-timeline__axle">
       <slot name="dot">
-        <component v-if="isVueComponent(icon)" :is="icon" :color="color" />
+        <component v-if="isVueComponent(icon)" :is="icon" :style="{ color }" />
         <div v-else class="cu-timeline__dot" :class="{ fill }" :style="{ '--cu-timeline-dotcolor': color }"></div>
       </slot>
       <div class="cu-timeline__line" :class="{ dashed: dashedLine }"></div>

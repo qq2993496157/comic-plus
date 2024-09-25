@@ -4,7 +4,7 @@ export default defineConfig({
   plugins: [vue()],
   base: './',
   build: {
-    minify: false,
+    minify: true,
     target: 'modules',
     outDir: '../theme', // 设置输出目录为项目根目录下的 theme 文件夹
     rollupOptions: {

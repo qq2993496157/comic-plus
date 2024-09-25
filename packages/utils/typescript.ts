@@ -1,6 +1,7 @@
-import { Component } from 'vue';
+import { Component, VNode } from 'vue';
 
 export type ImageFit = 'fill' | 'cover' | 'contain' | 'none' | 'scale-down';
+
 export type ComicType = 'primary' | 'success' | 'warning' | 'danger' | 'info';
 export type ComicType2 = 'primary' | 'success' | 'warning' | 'error' | 'info';
 export type ComicSize = 'large' | 'default' | 'small';
@@ -17,8 +18,10 @@ export type Config = {
         danger?: string;
         warning?: string;
         info?: string;
+        text?: string;
       };
   zIndex?: number;
+  loadingRender?: Component | VNode;
 };
 
 export type Arrayable<T> = T | T[];
