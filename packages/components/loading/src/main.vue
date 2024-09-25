@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch, isVNode, shallowRef } from 'vue';
+import { ref, computed, onMounted, nextTick, watch, isVNode } from 'vue';
 import '../style/loading.css';
 import { getMaxZIndex, getNextZIndex, isVueComponent, useGlobal, useLookScroll } from '../../../utils';
 import { loadingProps } from './main.props';
@@ -41,7 +41,7 @@ const isCanRender = (value: any) => {
 
 const iconRender = computed(() => {
   return isCanRender(props.icon)
-    ? shallowRef(props.icon)
+    ? props.icon
     : isCanRender(globalLoadingRender.value)
     ? globalLoadingRender.value
     : null;
