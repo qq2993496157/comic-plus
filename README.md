@@ -1,6 +1,6 @@
 <p align="center">
  <!-- <img width="200px" src="https://gitee.com/stop_chen/comic-plus_web/raw/master/logo.png"/> -->
- <img width="200px" src="./logo.png"/> 
+ <img width="200px" src="logo.png"/> 
 </p>
 
 <p align="center">Comic Plus | 一个vue3 + ts的UI框架</p>
