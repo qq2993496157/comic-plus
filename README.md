@@ -5,6 +5,7 @@
 <p align="center">Comic Plus | 一个vue3 + ts的UI框架</p>
 
 <p align="center">
+ <img src="https://img.shields.io/badge/license-MIT-green"/>
  <img src="https://img.shields.io/badge/version-1.7.6-red"/>
  <img src="https://img.shields.io/badge/npm-v2.8.3-green"/>
  <img src="https://img.shields.io/badge/typescript-^5.6.2-blue"/>
