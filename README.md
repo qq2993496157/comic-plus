@@ -12,7 +12,7 @@
  <img src="https://img.shields.io/badge/extension for-VsCode-purple"/>
 </p>
 
-#### 安装教程
+## 安装教程
 
 ```shell
 npm install comic-plus
@@ -21,7 +21,7 @@ npm install comic-plus
 npm install comic-plus@version
 ```
 
-#### 使用说明
+## 使用说明
 
 ```JavaScript
 //建议前往官网查看详细使用方式
@@ -60,3 +60,9 @@ import { /* 组件名 */ } from 'comic-plus';
     <img  width="40px" src="https://avatars.githubusercontent.com/u/72653133?v=4" />
   </a>
 </p>
+
+#### 征集
+
+<font size="2">
+  需要一个可以帮我重新设计组件样式配色的UI，项目无偿，但会在开发人员处添加你的署名，并将你的名片挂在该站。
+</font>
