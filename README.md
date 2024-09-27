@@ -1,5 +1,4 @@
 <p align="center">
- <!-- <img width="200px" src="https://gitee.com/stop_chen/comic-plus_web/raw/master/logo.png"/> -->
  <img width="200px" src="logo.png"/> 
 </p>
 
