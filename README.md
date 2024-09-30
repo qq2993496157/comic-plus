@@ -15,10 +15,10 @@
 ## 安装教程
 
 ```shell
-npm install comic-plus
+$ npm install comic-plus
 
 # 指定版本
-npm install comic-plus@version
+$ npm install comic-plus@version
 ```
 
 ## 使用说明
