@@ -123,6 +123,7 @@ function updateValue(value: number | number[]) {
       break;
   }
   emit('update:modelValue', val);
+  itemValidate('change');
   show.value = false;
 }
 

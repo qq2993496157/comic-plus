@@ -1,5 +1,4 @@
 import { DefineComponent, computed, defineComponent, h, provide, warn } from 'vue';
-import { colorToRgba, colorBlend } from '../../../utils';
 
 import Atlas404 from '../svg/404.vue';
 import Atlas500 from '../svg/500.vue';
@@ -57,7 +56,7 @@ export default defineComponent({
       return props.color ?? 'var(--cu-color-primary)';
     });
     const colorLight = computed(() => {
-      return props.color ? colorBlend(colorToRgba(props.color), 10) : 'var(--cu-color-primary-light)';
+      return props.color ? `color-mix(in srgb, ${props.color}, white 70%)` : 'var(--cu-color-primary-light7)';
     });
     const style = computed(() => {
       return {

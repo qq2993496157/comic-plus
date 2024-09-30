@@ -4,6 +4,7 @@
       <slot>
         <a
           class="cu-web-footer__link"
+          :class="{ underline }"
           v-for="link in links"
           :href="link.href ?? 'javascript:void(0);'"
           :target="link.href && link.blankTarget ? '_blank' : undefined">
@@ -28,5 +29,5 @@ defineOptions({
   name: 'CuWebFooter'
 });
 
-const props = defineProps(webFooterProps);
+defineProps(webFooterProps);
 </script>

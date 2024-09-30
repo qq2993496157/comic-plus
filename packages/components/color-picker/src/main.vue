@@ -6,11 +6,10 @@
     @click="handleClick"
     ref="colorPickerRef">
     <div class="cu-color-picker__container" :class="{ alpha }">
-      <div class="preview__box" :style="{ background: disabled ? undefined : modelValue }"></div>
-      <i>
+      <div class="preview__box" :style="{ background: disabled ? undefined : modelValue }">
         <Minus v-if="!modelValue" />
         <DownFilled v-else color="#fff" />
-      </i>
+      </div>
     </div>
     <popper :show="show" :trigger="colorPickerRef" hide-arrow :offset="0" placement="bottom">
       <div class="cu-color-picker__popper" ref="popperRef">

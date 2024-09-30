@@ -24,12 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import { computed, ref } from 'vue';
 import '../style/tip.css';
-import { useGlobal, colorBlend, colorToRgba, isVueComponent } from '../../../utils';
+import { useGlobal, isVueComponent } from '../../../utils';
 import { tipProps, tipEmits } from './main.props';
 import { CloseOne } from '../../../icons';
+import { useResize } from '../../../hooks';
 
 defineOptions({
   name: 'CuTip'
@@ -48,18 +48,13 @@ const isRolling = ref(false);
 const cloendEle = ref<HTMLElement>();
 
 const { globalSize } = useGlobal();
-const { width } = useElementSize(tipRef);
-
-watch(width, () => {
-  determineScroll();
-});
 
 const isHoverPause = computed(() => props.rolling && isRolling.value && props.hoverPause);
 
 const tipStyle = computed(() => {
   if (!props.color) return undefined;
   return {
-    backgroundColor: props.plain ? colorBlend(colorToRgba(props.color), 20) : props.color,
+    backgroundColor: props.plain ? `color-mix(in srgb, ${props.color}, white 90%)` : props.color,
     color: props.plain ? props.color : '#fff'
   };
 });
@@ -84,9 +79,13 @@ function determineScroll() {
   }
 }
 
-onMounted(() => {
-  if (props.rolling) {
-    determineScroll();
-  }
-});
+useResize(
+  tipRef,
+  () => {
+    if (props.rolling) {
+      determineScroll();
+    }
+  },
+  { immediate: true }
+);
 </script>

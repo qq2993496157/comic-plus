@@ -56,11 +56,12 @@
   flex: 1;
 }
 
-.cu-list-meta__content .title {
+.cu-list-meta__title {
   font-size: 14px;
 }
 
-.cu-list-meta__content .description {
+.cu-list-meta__description {
+  margin-top: 4px;
   font-size: 12px;
   color: var(--cu-text-color-light5);
 }

@@ -21,7 +21,7 @@ import { inject, computed } from 'vue';
 import '../style/button.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { buttonProps, buttonEmits } from './main.props';
-import { useGlobal, colorToRgba, colorBlend, isVueComponent } from '../../../utils';
+import { useGlobal, isVueComponent } from '../../../utils';
 import { BUTTONGROUP_PROVIDE } from './type';
 import { Loading } from '../../../icons';
 
@@ -57,53 +57,52 @@ const buttonClassList = computed(() => {
 
 const buttonStyle = computed(() => {
   if (props.color) {
-    const rgba = colorToRgba(props.color);
     if (props.plain) {
       return {
         '--cu-button-color': props.color,
         '--cu-button-color-hover': '#ffffff',
-        '--cu-button-color-disabled': colorBlend(rgba, 60),
+        '--cu-button-color-disabled': `color-mix(in srgb, ${props.color}, white 40%)`,
         '--cu-button-border': props.color,
         '--cu-button-border-hover': props.color,
-        '--cu-button-border-disabled': colorBlend(rgba, 60),
-        '--cu-button-background': colorBlend(rgba, 10),
+        '--cu-button-border-disabled': `color-mix(in srgb, ${props.color}, white 40%)`,
+        '--cu-button-background': `color-mix(in srgb, ${props.color}, white 90%)`,
         '--cu-button-background-hover': props.color,
-        '--cu-button-background-disabled': colorBlend(rgba, 10)
+        '--cu-button-background-disabled': `color-mix(in srgb, ${props.color}, white 90%)`
       };
     } else if (props.light) {
       return {
         '--cu-button-color': props.color,
         '--cu-button-color-hover': props.color,
-        '--cu-button-color-disabled': colorBlend(rgba, 60),
+        '--cu-button-color-disabled': `color-mix(in srgb, ${props.color}, white 40%)`,
         '--cu-button-border': props.color,
         '--cu-button-border-hover': props.color,
-        '--cu-button-border-disabled': colorBlend(rgba, 60),
-        '--cu-button-background-hover': colorBlend(rgba, 10)
+        '--cu-button-border-disabled': `color-mix(in srgb, ${props.color}, white 40%)`,
+        '--cu-button-background-hover': `color-mix(in srgb, ${props.color}, white 90%)`
       };
     } else if (props.text) {
       return {
         '--cu-button-color': props.color,
         '--cu-button-color-hover': props.color,
-        '--cu-button-color-disabled': colorBlend(rgba, 60),
-        '--cu-button-background-hover': colorBlend(rgba, 10),
-        '--cu-button-background-active': colorBlend(rgba, 20)
+        '--cu-button-color-disabled': `color-mix(in srgb, ${props.color}, white 40%)`,
+        '--cu-button-background-hover': `color-mix(in srgb, ${props.color}, white 90%)`,
+        '--cu-button-background-active': `color-mix(in srgb, ${props.color}, white 80%)`
       };
     } else if (props.dashed) {
       return {
         '--cu-button-color-hover': props.color,
         '--cu-button-border-hover': props.color,
-        '--cu-button-border-active': colorBlend(rgba, 20)
+        '--cu-button-border-active': `color-mix(in srgb, ${props.color}, white 80%)`
       };
     } else {
       return {
         '--cu-button-background': props.color,
-        '--cu-button-border-hover': colorBlend(rgba, 70),
+        '--cu-button-border-hover': `color-mix(in srgb, ${props.color}, white 30%)`,
         '--cu-button-border': props.color,
-        '--cu-button-background-hover': colorBlend(rgba, 70),
+        '--cu-button-background-hover': `color-mix(in srgb, ${props.color}, white 30%)`,
         '--cu-button-color': '#ffffff',
-        '--cu-button-border-disabled': colorBlend(rgba, 50),
+        '--cu-button-border-disabled': `color-mix(in srgb, ${props.color}, white 50%)`,
         '--cu-button-color-disabled': '#ffffff',
-        '--cu-button-background-disabled': colorBlend(rgba, 50)
+        '--cu-button-background-disabled': `color-mix(in srgb, ${props.color}, white 50%)`
       };
     }
   }

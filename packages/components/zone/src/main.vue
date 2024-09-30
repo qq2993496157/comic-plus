@@ -12,12 +12,7 @@
     </div>
     <div class="cu-zone__line" :style="{ [start]: left }" ref="lineRef">
       <slot name="line">
-        <div class="cu-zone__defaultline">
-          <span class="default-span"></span>
-          <span class="default-span"></span>
-          <span class="default-span"></span>
-          <span class="default-span"></span>
-        </div>
+        <div class="cu-zone__defaultline"></div>
       </slot>
     </div>
   </div>

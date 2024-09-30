@@ -1,10 +1,9 @@
-import { unrefElement, useElementSize } from '@vueuse/core';
-import { ref, watch, computed, onMounted } from 'vue';
+import { unrefElement } from '@vueuse/core';
+import { ref, computed, onMounted } from 'vue';
 import { Column, UseTableStyleOptions } from '../type';
+import { useResize } from '../../../../hooks';
 
 export const useTableStyle = ({ containerRef, columns, MIN_SIZE }: UseTableStyleOptions) => {
-  const { width, height } = useElementSize(containerRef);
-
   const expandColumn = computed(() => columns.value.find((v) => v.type === 'expand'));
 
   const containerEl = computed(() => {
@@ -69,7 +68,7 @@ export const useTableStyle = ({ containerRef, columns, MIN_SIZE }: UseTableStyle
     return classList;
   };
 
-  watch([width, height], () => {
+  useResize(containerRef, () => {
     getBodyScrollbarWidth();
     updateShadow();
   });

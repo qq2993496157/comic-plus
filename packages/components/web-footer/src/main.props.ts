@@ -8,6 +8,7 @@ type link = {
 };
 
 export const webFooterProps = {
+  underline: Boolean,
   links: Array as PropType<link[]>,
   copyright: String
 } as const;

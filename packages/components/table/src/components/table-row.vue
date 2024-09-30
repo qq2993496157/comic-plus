@@ -44,7 +44,7 @@
         :colspan="columns.length"
         class="cu-table__expand-td"
         :style="{ '--placeholder-left': calcPaddingLeft - 16 + 'px' }">
-        <slot name="expand" :row="row"> </slot>
+        <slot name="expand" :row="row" />
       </td>
     </div>
   </template>
@@ -53,10 +53,10 @@
     <template v-for="(item, idx) in rowChildList" :key="idx">
       <cu-table-row :row="item" :calcPaddingLeft="calcPaddingLeft + 10" :show="showmore">
         <template v-for="td in columns" #[td.prop]="{ row }" :key="td.prop">
-          <slot :name="td.prop" :row="row"> </slot>
+          <slot :name="td.prop" :row="row"/>
         </template>
         <template #expand="{ row }" v-if="injectProps.expand && $slots.expand">
-          <slot name="expand" :row="row"> </slot>
+          <slot name="expand" :row="row"/>
         </template>
       </cu-table-row>
     </template>

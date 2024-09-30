@@ -101,7 +101,6 @@
 .cu-date-picker.large {
   height: var(--cu-size-large);
   line-height: calc(var(--cu-size-large) - 2px);
-  font-size: 14px;
 }
 
 .cu-input.small,

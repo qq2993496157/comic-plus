@@ -1,5 +1,5 @@
 import { reactive, Plugin, App, shallowRef } from 'vue';
-import { colorToRgba, colorBlendArray, toHex, Config } from './utils';
+import { Config } from './utils';
 import { deepMerge } from './tools';
 import components from './components';
 import CuMessageBox from './components/message-box';
@@ -48,10 +48,6 @@ const useComicConfig = (config: Config): void => {
   window['$COMIC'] = assignConfig;
 };
 
-const getHexColor = (rgba: number[]) => {
-  return toHex({ r: rgba[0], g: rgba[1], b: rgba[2] });
-};
-
 const setColor = (value?: Config['color']): void => {
   if (!value) return;
   let obj = {};
@@ -62,21 +58,9 @@ const setColor = (value?: Config['color']): void => {
   }
   const colors = ['primary', 'success', 'warning', 'danger', 'info', 'text'];
   colors.forEach((colorKey) => {
-    const rgba = colorToRgba(obj[colorKey]) || [];
-    if (rgba.length > 0) {
-      const BASE_COLOR_KEY = colorKey === 'text' ? `--cu-text-color` : `--cu-color-${colorKey}`;
-      Array.from({ length: 10 }).forEach((_, index) => {
-        if (index === 0) {
-          document.documentElement.style.setProperty(BASE_COLOR_KEY, getHexColor(rgba));
-        } else if (index === 1) {
-          document.documentElement.style.setProperty(`${BASE_COLOR_KEY}-light`, getHexColor(colorBlendArray(rgba, 90)));
-        } else {
-          document.documentElement.style.setProperty(
-            `${BASE_COLOR_KEY}-light${index}`,
-            getHexColor(colorBlendArray(rgba, 100 - index * 10))
-          );
-        }
-      });
+    const propertyKey = colorKey === 'text' ? `--cu-text-color` : `--cu-color-${colorKey}`;
+    if (obj[colorKey]) {
+      document.documentElement.style.setProperty(propertyKey, obj[colorKey]);
     }
   });
 };

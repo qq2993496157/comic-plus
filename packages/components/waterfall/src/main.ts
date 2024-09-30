@@ -1,9 +1,9 @@
-import { ref, onMounted, onUpdated, watch, defineComponent, h, provide } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import { ref, onUpdated, defineComponent, h, provide, onMounted } from 'vue';
 import '../style/waterfall.css';
-import { findIndexOfMinOrMax, debounce } from '../../../utils';
+import { addClass, debounce, findIndexOfMinOrMax, removeClass } from '../../../utils';
 import { waterfallProps, waterfallEmits } from './main.props';
 import { WATERFALL_PROVIDE } from './type';
+import { useResize } from '../../../hooks';
 
 export default defineComponent({
   name: 'CuWaterfall',
@@ -11,61 +11,81 @@ export default defineComponent({
   emits: waterfallEmits,
   setup(props, { slots, emit }) {
     const waterfallRef = ref(null);
-    const debounceSetStyle = debounce(setWaterfallStyle);
+    const containerWidth = ref(0);
 
-    const { width } = useElementSize(waterfallRef);
-
-    watch(width, () => {
-      debounceSetStyle();
-    });
+    //虽然useResize监听自带防抖，但是不适用这里的情况，因为item组件也需要执行resize效果
+    //所以这里单独写一个dFc 将所有resize触发执行的callback都指向这个dFc以减少开销
+    const dFc = debounce(setWaterfallStyle, 300);
 
     function setWaterfallStyle() {
-      if (!waterfallRef.value || !width.value) return;
+      if (!waterfallRef.value || !containerWidth.value) return;
 
-      let childrenList = new Array();
       let colNum: number;
-      if (props.itemWidth) {
-        colNum = Math.floor((width.value + props.gutter) / (props.itemWidth + props.gutter));
+      if (props.colWidth) {
+        colNum = Math.floor((containerWidth.value + props.gutter) / (props.colWidth + props.gutter));
         colNum = Math.min(colNum, waterfallRef.value.children.length);
       } else {
         colNum = props.col;
       }
-      for (let i = 0; i < colNum; i++) {
-        childrenList.push(0);
-      }
-      let gutterSize = props.gutter;
-      if (props.itemWidth) {
-        gutterSize = (width.value - colNum * props.itemWidth) / (colNum - 1);
-      }
-      let list = Array.from(waterfallRef.value.children);
-      for (let i = 0; i < list.length; i++) {
-        let item: any = list[i];
+
+      let childrenList = new Array(colNum).fill(0); //定义一个子集用于累加每列的高度
+
+      let list = Array.from(waterfallRef.value.children).filter(
+        //防犊子  防止某些傻逼不使用item组件
+        (el: HTMLElement) => el.classList.value.indexOf('cu-waterfall-item') >= 0
+      );
+
+      list.forEach((item: HTMLElement) => {
         let itemRect = item.getBoundingClientRect();
         let maxIdx = findIndexOfMinOrMax(childrenList);
-        let w = props.itemWidth ? props.itemWidth : (width.value - props.gutter * (props.col - 1)) / props.col;
-        let x = maxIdx * w + maxIdx * (gutterSize <= 0 ? props.gutter : gutterSize);
+        let w = (containerWidth.value - props.gutter * (colNum - 1)) / colNum;
+        let x = maxIdx * w + maxIdx * props.gutter;
         let y = childrenList[maxIdx];
+
         item.style.setProperty('width', w + 'px');
-        item.style.setProperty('left', `${x}px`);
-        item.style.setProperty('opacity', 1);
-        item.style.setProperty('top', y - 30 + 'px');
-        item.style.setProperty('transform', `translateY(30px)`);
+        item.style.setProperty('transform', `translate3d(${x}px,${y}px,0px)`);
+        item.style.setProperty('visibility', 'visible');
+
+        item.setAttribute('data-show', 'show');
+
+        addAnimation(item);
         childrenList[maxIdx] += itemRect.height + props.gutter;
-      }
+      });
+
       waterfallRef.value.style.setProperty('height', Math.max(...childrenList) - props.gutter + 'px');
       emit('update');
     }
 
-    onMounted(() => {
-      setWaterfallStyle();
-    });
-    onUpdated(() => {
-      setWaterfallStyle();
+    /**
+     * @description: 执行添加动画class 利用loaded来判断是否是初次加载，如果是就不在执行fadeIn效果
+     * @param {HTMLElement} el
+     * @return {*}
+     */
+    function addAnimation(el: HTMLElement): void {
+      if (el.classList.value.indexOf('loaded') >= 0) return;
+      addClass(el, 'loaded');
+      if (props.fadeIn) addClass(el, 'fadeIn');
+      setTimeout(() => {
+        removeClass(el, 'fadeIn');
+        el.style.setProperty('transition', 'transform 300ms');
+      }, 500);
+    }
+
+    useResize(waterfallRef, (rect) => {
+      containerWidth.value = rect.width;
+      dFc();
     });
 
     provide(WATERFALL_PROVIDE, {
-      updateStyle: debounceSetStyle
+      updateStyle: dFc
     });
+
+    onMounted(() => {
+      containerWidth.value = waterfallRef.value.getBoundingClientRect().width;
+      setWaterfallStyle();
+    });
+
+    onUpdated(dFc);
 
     return () => {
       return h('div', { class: 'cu-waterfall', ref: waterfallRef }, slots);

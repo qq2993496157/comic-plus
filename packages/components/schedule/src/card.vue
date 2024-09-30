@@ -26,10 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, isVNode, nextTick, ref, watch } from 'vue';
+import { computed, inject, isVNode, ref } from 'vue';
 import { SCHEDULE_PROVIDE } from './type';
-import { useElementSize } from '@vueuse/core';
-import { debounce } from '../../../utils';
+import { useResize } from '../../../hooks';
 
 defineOptions({
   name: 'CuScheduleCards'
@@ -63,8 +62,6 @@ const getMaxPx = (number) => {
   return Math.min(Math.max(number, 0), maxHeight.value);
 };
 
-const updateDebounceFold = debounce(updateFold);
-
 const cardStyle = computed(() => {
   return {
     top: getMaxPx((startTime.value - injectProps.start) * spacing.value) + 'px',
@@ -85,9 +82,5 @@ function updateFold() {
   tr.value = isNaN(sum) ? 0 : sum;
 }
 
-const { width, height } = useElementSize(cardRef);
-
-watch([width, height], () => {
-  nextTick(updateDebounceFold);
-});
+useResize(cardRef, updateFold);
 </script>

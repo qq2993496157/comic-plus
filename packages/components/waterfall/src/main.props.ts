@@ -9,7 +9,12 @@ export const waterfallProps = {
     type: Number,
     default: 10
   },
-  itemWidth: Number
+  //itemWidth: Number, 移除
+  colWidth: Number,
+  fadeIn: {
+    type: Boolean,
+    default: true
+  }
 } as const;
 export type WaterfallProps = ExtractPropTypes<typeof waterfallProps>;
 

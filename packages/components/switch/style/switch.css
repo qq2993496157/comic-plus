@@ -7,7 +7,7 @@
   vertical-align: middle;
   --cu-switch-on-color: var(--cu-color-primary);
   --cu-switch-off-color: var(--cu-background-color);
-  --cu-switch-on-disabled: var(--cu-color-primary-light4);
+  --cu-switch-on-disabled: var(--cu-color-primary-light5);
   --cu-switch-off-disabled: var(--cu-background-color-disabled);
   --cu-switch-size: 20px;
   --cu-switch-inner-size: 16px;
@@ -45,7 +45,7 @@
   line-height: 1;
 }
 
-.cu-switch__inner {
+.cu-switch__container {
   display: flex;
   width: 100%;
   min-width: calc(var(--cu-switch-size) * 2);
@@ -82,7 +82,7 @@
   line-height: 1;
 }
 
-.cu-switch__loading-warpper {
+.cu-switch__inner {
   position: absolute;
   top: 1px;
   display: block;
@@ -98,13 +98,13 @@
   justify-content: center;
   color: var(--cu-text-color-light4);
 }
-.cu-switch.is-square .cu-switch__inner {
+.cu-switch.is-square .cu-switch__container {
   border-radius: calc(var(--cu-border-radius) - 1px);
 }
-.cu-switch:not(.is-disabled):active .cu-switch__loading-warpper {
+.cu-switch:not(.is-disabled):active .cu-switch__inner {
   width: var(--cu-switch-active-size);
 }
-.cu-switch.is-on:not(.is-disabled):active .cu-switch__loading-warpper {
+.cu-switch.is-on:not(.is-disabled):active .cu-switch__inner {
   left: calc(100% - var(--cu-switch-active-size) - 2px);
 }
 
@@ -114,24 +114,24 @@
 .cu-switch .cu-switch__label--off {
   margin-right: 6px;
 }
-.cu-switch.is-on .cu-switch__loading-warpper {
+.cu-switch.is-on .cu-switch__inner {
   left: calc(100% - var(--cu-switch-inner-size) - 2px);
   transform-origin: right;
 }
-.cu-switch.is-off .cu-switch__loading-warpper {
+.cu-switch.is-off .cu-switch__inner {
   left: 2px;
   transform-origin: left;
 }
 
-.cu-switch.is-on .cu-switch__inner {
+.cu-switch.is-on .cu-switch__container {
   background-color: var(--cu-switch-on-color);
 }
 
-.cu-switch.is-disabled .cu-switch__inner {
+.cu-switch.is-disabled .cu-switch__container {
   background-color: var(--cu-switch-off-disabled);
 }
 
-.cu-switch.is-on.is-disabled .cu-switch__inner {
+.cu-switch.is-on.is-disabled .cu-switch__container {
   background-color: var(--cu-switch-on-disabled);
 }
 

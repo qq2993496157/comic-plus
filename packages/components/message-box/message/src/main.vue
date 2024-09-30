@@ -20,7 +20,7 @@
 import { ref, onMounted, computed, getCurrentInstance } from 'vue';
 import '../../style/message-box.css';
 import { getOffset } from './instance';
-import { colorBlend, colorToRgba, getNextZIndex, isString, isVueComponent } from '../../../../utils';
+import { getNextZIndex, isString, isVueComponent } from '../../../../utils';
 import { messageProps } from './main.props';
 import { CloseOne, Info, Success, Tips, Warning } from '../../../../icons';
 
@@ -55,7 +55,7 @@ function closeMessage() {
 const style = computed(() => {
   return {
     color: props.color,
-    backgroundColor: colorBlend(colorToRgba(props.color), 10),
+    backgroundColor: `color-mix(in srgb, ${props.color}, white 90%)`,
     top: top.value ? top.value + 'px' : undefined,
     'z-index': zIndex
   };

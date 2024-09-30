@@ -15,8 +15,8 @@ export default defineComponent({
       return h('div', { class: 'cu-list-meta' }, [
         h(CuAvatar, { src: props.avatar, size: props.avatarSize }),
         h('div', { class: 'cu-list-meta__content' }, [
-          h('div', { class: 'title' }, props.title),
-          h('div', { class: 'description' }, props.description)
+          h('div', { class: 'cu-list-meta__title' }, props.title),
+          h('div', { class: 'cu-list-meta__description' }, props.description)
         ])
       ]);
     };

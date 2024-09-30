@@ -13,13 +13,13 @@
         </em>
       </span>
       <input
+        v-else
         type="text"
         class="cu-input__inner"
         readonly
         :value="inputValue"
         :placeholder="placeholder"
-        :disabled="disabled"
-        v-else />
+        :disabled="disabled" />
       <span class="suffix-icon" :class="{ 'has-value': modelValue && clearable }">
         <Down class="cu-select__down" />
         <CloseOne class="clearable" v-if="clearable" @click.stop="clear" />

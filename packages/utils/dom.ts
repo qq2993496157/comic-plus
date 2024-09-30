@@ -23,4 +23,23 @@ const isEmptyElement = (c: any): boolean => {
   );
 };
 
-export { filterEmpty };
+function hasClass(el: HTMLElement, className: string) {
+  const reg = new RegExp(`(^|\\s)${className}(\\s|$)`);
+  return reg.test(el.className);
+}
+
+const addClass = (el: HTMLElement, className: string) => {
+  if (hasClass(el, className)) return;
+  const newClass = el.className.split(/\s+/);
+  newClass.push(className);
+  el.className = newClass.join(' ');
+};
+
+const removeClass = (el: HTMLElement, className: string) => {
+  if (hasClass(el, className)) {
+    const newClass = el.className.split(/\s+/).filter((name) => name !== className);
+    el.className = newClass.join(' ');
+  }
+};
+
+export { filterEmpty, addClass, removeClass };

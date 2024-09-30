@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import '../style/tag.css';
-import { colorBlend, colorToRgba } from '../../../utils';
 import { tagProps, tagEmits } from './main.props';
 import { CloseOne, CloseSmall } from '../../../icons';
 defineOptions({
@@ -47,7 +46,7 @@ const customStyle = computed(() => {
   if (!props.color) return undefined;
   let calcColor =
     tagMode.value === 'plain'
-      ? colorBlend(colorToRgba(props.color), 20)
+      ? `color-mix(in srgb, ${props.color}, white 90%)`
       : tagMode.value === 'light'
       ? '#fff'
       : props.color;

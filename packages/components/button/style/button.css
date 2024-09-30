@@ -27,11 +27,6 @@
   transition: all 200ms;
   outline: none;
   vertical-align: middle;
-  /* test */
-  /* border-radius: var(--cu-border-radius-base); */
-  /* border-color: #3b3e45 !important; */
-  /* color: #3b3e45 !important; */
-  /* border-width: 2px; */
 }
 
 .cu-button.large {

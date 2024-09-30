@@ -3,23 +3,17 @@
     class="cu-switch"
     :style="style"
     :class="[{ 'is-disabled': disabled || loading, 'is-square': square }, status, currentSize]">
-    <input type="checkbox" :checked="isOn" :disabled="disabled" @change="changeValue" />
     <span class="cu-switch__label cu-switch__label--off" v-if="!inlineText && (offIcon || offText)">
       <component v-if="isVueComponent(offIcon)" :is="offIcon" />
       <template v-else>{{ offText }}</template>
     </span>
-    <div class="cu-switch__inner">
+    <div class="cu-switch__container">
       <span v-if="inlineText" class="cu-switch__text">
-        <span v-if="isOn">
-          <component v-if="isVueComponent(onIcon)" :is="onIcon" />
-          <template v-else>{{ onText }}</template>
-        </span>
-        <span v-else>
-          <component v-if="isVueComponent(offIcon)" :is="offIcon" />
-          <template v-else>{{ offText }}</template>
-        </span>
+        <component :is="isOn ? (isVueComponent(onIcon) ? onIcon : 'span') : isVueComponent(offIcon) ? offIcon : 'span'">
+          {{ isOn ? onText : offText }}
+        </component>
       </span>
-      <span class="cu-switch__loading-warpper">
+      <span class="cu-switch__inner">
         <Loading v-if="loading" class="is-loading" />
       </span>
     </div>
@@ -27,13 +21,15 @@
       <component v-if="isVueComponent(onIcon)" :is="onIcon" />
       <template v-else>{{ onText }}</template>
     </span>
+
+    <input type="checkbox" :checked="isOn" :disabled="disabled" @change="changeValue" />
   </label>
 </template>
 
 <script setup lang="ts">
 import { computed, warn, inject } from 'vue';
 import '../style/switch.css';
-import { useGlobal, colorToRgba, colorBlend, isBoolean, isPromise, isVueComponent } from '../../../utils';
+import { useGlobal, isBoolean, isPromise, isVueComponent } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { switchProps, switchEmits } from './main.props';
 import { FORM_PROVIDE } from '../../form/src/type';
@@ -62,14 +58,11 @@ const status = computed(() => {
 });
 
 const style = computed(() => {
-  const onc = props.onColor ? colorToRgba(props.onColor) : undefined;
-  const offc = props.offColor ? colorToRgba(props.offColor) : undefined;
-
   return {
     '--cu-switch-on-color': props.onColor,
     '--cu-switch-off-color': props.offColor,
-    '--cu-switch-on-disabled': onc ? colorBlend(onc, 50) : undefined,
-    '--cu-switch-off-disabled': offc ? colorBlend(offc, 50) : undefined
+    '--cu-switch-on-disabled': props.onColor ? `color-mix(in srgb, ${props.onColor}, white 50%)` : undefined,
+    '--cu-switch-off-disabled': props.onColor ? `color-mix(in srgb, ${props.offColor}, white 50%)` : undefined
   };
 });
 

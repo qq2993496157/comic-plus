@@ -1,18 +1,15 @@
-import { defineComponent, h, ref, watch, inject } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import { defineComponent, h, ref, inject } from 'vue';
 import { WATERFALL_PROVIDE } from './type';
+import { useResize } from '../../../hooks';
 export default defineComponent({
   name: 'CuWaterfallItem',
   setup(_, { slots }) {
-    const waterfallItem = ref(null);
-    const { width, height } = useElementSize(waterfallItem);
+    const waterfallItemRef = ref(null);
 
     const { updateStyle } = inject(WATERFALL_PROVIDE);
 
-    watch([width, height], () => {
-      updateStyle();
-    });
+    useResize(waterfallItemRef, updateStyle);
 
-    return () => h('div', { class: 'cu-waterfall-item', ref: waterfallItem }, slots);
+    return () => h('div', { class: 'cu-waterfall-item', ref: waterfallItemRef }, slots);
   }
 });

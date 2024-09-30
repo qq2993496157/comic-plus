@@ -1,4 +1,4 @@
-import { InjectionKey } from 'vue';
+import { InjectionKey, Ref } from 'vue';
 
 export type waterfallProvide = {
   updateStyle: () => void;

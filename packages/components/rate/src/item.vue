@@ -16,7 +16,7 @@
         :fill="active ? activeColor : injectProps.disabled ? 'var(--cu-background-color)' : 'none'"
         :stroke="active ? activeColor : injectProps.disabled ? 'var(--cu-background-color)' : injectProps.unColor"
         :stroke-width="active ? 0 : 2"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round" />
     </svg>
     <span
       class="mask-rate"
@@ -39,7 +39,7 @@
           :fill="activeColor"
           :stroke="injectProps.disabled ? activeColor : injectProps.unColor"
           stroke-width="2"
-          stroke-linejoin="round"></path>
+          stroke-linejoin="round" />
       </svg>
     </span>
   </span>

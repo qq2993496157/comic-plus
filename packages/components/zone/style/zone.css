@@ -44,10 +44,6 @@
 .cu-zone .cu-zone__defaultline {
   height: 100%;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--cu-background-color-light);
   border: 1px solid var(--cu-border-color);
 }
 
@@ -74,12 +70,25 @@
 .cu-zone.is-horizontal > .cu-zone__line .cu-zone__defaultline {
   border-top: 0;
   border-bottom: 0;
-  flex-direction: column;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--cu-border-color),
+    var(--cu-border-color) 10px,
+    #fff 10px,
+    #fff 20px
+  );
 }
 
 .cu-zone.is-vertical > .cu-zone__line .cu-zone__defaultline {
   border-left: 0;
   border-right: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--cu-border-color),
+    var(--cu-border-color) 10px,
+    #fff 10px,
+    #fff 20px
+  );
 }
 
 .cu-zone > .cu-zone__line .default-span {

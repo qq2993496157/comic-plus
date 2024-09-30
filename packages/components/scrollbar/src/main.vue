@@ -1,7 +1,7 @@
 <template>
   <div class="cu-scrollbar" :class="display" :style="{ height }">
-    <div class="cu-scrollbar__container" :style="{ 'max-height': maxHeight }" ref="barContainerRef" @scroll="onScroll">
-      <div ref="containerDivRef">
+    <div class="cu-scrollbar__container" :style="{ 'max-height': maxHeight }" ref="scrollRef" @scroll="onScroll">
+      <div ref="containerRef">
         <slot></slot>
       </div>
     </div>
@@ -12,9 +12,10 @@
 
 <script lang="ts" setup>
 import { ref, computed, nextTick, onMounted, watch } from 'vue';
-import { useEventListener, useElementSize } from '@vueuse/core';
+import { useEventListener } from '@vueuse/core';
 import '../style/scrollbar.css';
 import { scrollbarProps, scrollbarEmits } from './main.props';
+import { useResize } from '../../../hooks';
 defineOptions({
   name: 'CuScrollbar'
 });
@@ -22,8 +23,8 @@ defineOptions({
 const props = defineProps(scrollbarProps);
 const emit = defineEmits(scrollbarEmits);
 
-const barContainerRef = ref<HTMLElement>();
-const containerDivRef = ref<HTMLElement>();
+const scrollRef = ref<HTMLElement>();
+const containerRef = ref<HTMLElement>();
 
 const barTop = ref(0);
 const barLeft = ref(0);
@@ -42,18 +43,13 @@ watch(
     computedShowThumb();
   }
 );
-const { width: cWidth, height: cHeight } = useElementSize(barContainerRef);
-const { width: dWidth, height: dHeight } = useElementSize(containerDivRef);
 
-watch([cWidth, cHeight, dWidth, dHeight], () => {
-  resateScrollBar();
-});
+useResize(scrollRef, resateScrollBar);
+useResize(containerRef, resateScrollBar);
 
 function computedShowThumb() {
-  hasThumby.value =
-    props.display === 'never' ? false : barContainerRef.value?.offsetHeight < barContainerRef.value?.scrollHeight;
-  hasThumbx.value =
-    props.display === 'never' ? false : barContainerRef.value?.offsetWidth < barContainerRef.value?.scrollWidth;
+  hasThumby.value = props.display === 'never' ? false : scrollRef.value?.offsetHeight < scrollRef.value?.scrollHeight;
+  hasThumbx.value = props.display === 'never' ? false : scrollRef.value?.offsetWidth < scrollRef.value?.scrollWidth;
 }
 
 const thumbyStyle = computed(() => {
@@ -99,27 +95,27 @@ function mousedownx(e) {
   clearUp = useEventListener(document, 'mouseup', up);
 }
 function movey(e) {
-  let offsetTop = barContainerRef.value.getBoundingClientRect().top;
+  let offsetTop = scrollRef.value.getBoundingClientRect().top;
   setTop(e.clientY - offsetTop);
 }
 
 function movex(e) {
-  let offsetLeft = barContainerRef.value.getBoundingClientRect().left;
+  let offsetLeft = scrollRef.value.getBoundingClientRect().left;
   setLeft(e.clientX - offsetLeft);
 }
 
 function setTop(offsetY: number) {
-  let top = (offsetY / barContainerRef.value?.offsetHeight) * barContainerRef.value?.scrollHeight;
-  top -= (barHeight.value / 2 / barContainerRef.value?.offsetHeight) * barContainerRef.value?.scrollHeight;
-  barContainerRef.value.scrollTo({
+  let top = (offsetY / scrollRef.value?.offsetHeight) * scrollRef.value?.scrollHeight;
+  top -= (barHeight.value / 2 / scrollRef.value?.offsetHeight) * scrollRef.value?.scrollHeight;
+  scrollRef.value.scrollTo({
     top: top
   });
 }
 
 function setLeft(offsetX: number) {
-  let left = (offsetX / barContainerRef.value?.offsetWidth) * barContainerRef.value?.scrollWidth;
-  left -= (barWidth.value / 2 / barContainerRef.value?.offsetWidth) * barContainerRef.value?.scrollWidth;
-  barContainerRef.value.scrollTo({
+  let left = (offsetX / scrollRef.value?.offsetWidth) * scrollRef.value?.scrollWidth;
+  left -= (barWidth.value / 2 / scrollRef.value?.offsetWidth) * scrollRef.value?.scrollWidth;
+  scrollRef.value.scrollTo({
     left: left
   });
 }
@@ -132,7 +128,7 @@ function up() {
 
 async function resateScrollBar() {
   await nextTick();
-  const dom = barContainerRef.value;
+  const dom = scrollRef.value;
   if (!dom) return;
   barHeight.value = (dom.offsetHeight / dom.scrollHeight) * dom.offsetHeight;
   barWidth.value = (dom.offsetWidth / dom.scrollWidth) * dom.offsetWidth;
@@ -149,21 +145,21 @@ async function resateScrollBar() {
 }
 
 function setBarTop(top: number, beh?) {
-  barContainerRef.value.scrollTo({
+  scrollRef.value.scrollTo({
     top,
     behavior: beh ?? 'smooth'
   });
 }
 
 function setBarLeft(left: number, beh?) {
-  barContainerRef.value.scrollTo({
+  scrollRef.value.scrollTo({
     left,
     behavior: beh ?? 'smooth'
   });
 }
 
 function getScrollEvent() {
-  return barContainerRef.value;
+  return scrollRef.value;
 }
 
 defineExpose({ setBarTop, setBarLeft, getScrollEvent, hasThumby, hasThumbx });

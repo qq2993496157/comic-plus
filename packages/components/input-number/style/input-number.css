@@ -8,7 +8,6 @@
 .cu-input-number .cu-input__inner {
   text-align: center;
 }
-
 .cu-input-number .cu-input-number__minus {
   border-right: 1px solid transparent;
   border-radius: var(--cu-border-radius) 0 0 var(--cu-border-radius);
