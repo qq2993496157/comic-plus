@@ -1,6 +1,6 @@
 import { computed, defineComponent, getCurrentInstance, h, inject, onUnmounted, reactive } from 'vue';
 import { tableColumnProps } from './column.props';
-import { Column, TABLE_V2_PROVIDE } from '../type';
+import { Column, TABLE_PROVIDE } from '../type';
 import { isBoolean } from '../../../../utils';
 
 export default defineComponent({
@@ -8,7 +8,7 @@ export default defineComponent({
   props: tableColumnProps,
   setup(props, { slots }) {
     const instance = getCurrentInstance()!;
-    const { addColumn, removeColumn } = inject(TABLE_V2_PROVIDE);
+    const { addColumn, removeColumn } = inject(TABLE_PROVIDE);
 
     const colName = 'cu-table-column__key_' + instance.uid;
 

@@ -7,7 +7,7 @@
     ref="colorPickerRef">
     <div class="cu-color-picker__container" :class="{ alpha }">
       <div class="preview__box" :style="{ background: disabled ? undefined : modelValue }">
-        <Minus v-if="!modelValue" />
+        <CloseSmall v-if="!modelValue" />
         <DownFilled v-else color="#fff" />
       </div>
     </div>
@@ -57,7 +57,7 @@ import { useItemValidate } from '../../../hooks';
 import { colorPickerProps, colorPickerEmits } from './main.props';
 import Color from '../utils/color';
 import { COLORPICKER_PROVIDE } from './type';
-import { DownFilled, Minus } from '../../../icons';
+import { CloseSmall, DownFilled } from '../../../icons';
 defineOptions({
   name: 'CuColorPicker'
 });

@@ -42,4 +42,5 @@
   background-color: var(--cu-background-color-light);
   cursor: pointer;
   height: 100%;
+  user-select: none;
 }

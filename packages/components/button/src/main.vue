@@ -6,6 +6,7 @@
     @click="$emit('click', $event)"
     :style="buttonStyle">
     <i
+      class="cu-button__icon"
       :class="[{ 'is-loading': loading }]"
       :style="{ marginRight: $slots.default ? '4px' : undefined }"
       v-if="loading || icon">

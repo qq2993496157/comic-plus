@@ -66,10 +66,22 @@ import '../../form-common.css';
 import { FORM_PROVIDE } from '../../form/src/type';
 import { CuPopper as Popper } from '../../popper';
 import { CuScrollbar as Scrollbar } from '../../scrollbar';
-import { deleteAfterIndex, useClickOutside, useGlobal } from '../../../utils';
+import { useClickOutside, useGlobal } from '../../../utils';
 import { useItemValidate } from '../../../hooks';
 import { cascaderProps, cascaderEmits } from './main.props';
 import { Down, CloseOne, Right } from '../../../icons';
+
+/**
+ * @description: 截取指定下标前的内容并返回新数组
+ * @param {any[]} arr
+ * @param {number} index
+ */
+const deleteAfterIndex = (arr: any[], index: number): any[] => {
+  if (index >= 0 && index < arr.length) {
+    arr.splice(index + 1, arr.length - index - 1);
+  }
+  return arr;
+};
 
 defineOptions({
   name: 'CuCascader'

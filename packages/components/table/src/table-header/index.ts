@@ -1,5 +1,5 @@
 import { defineComponent, h, inject } from 'vue';
-import { TABLE_V2_PROVIDE } from '../type';
+import { Column, TABLE_PROVIDE } from '../type';
 import { CuCheckbox as Checkbox } from '../../../checkbox';
 import TableColgroup from '../components/table-colgroup';
 import { isFunction } from '../../../../utils';
@@ -8,9 +8,9 @@ export default defineComponent({
   name: 'TableHeader',
   setup() {
     const { props, columns, isAllSelected, indeterminate, getFixedIndex, selectAll, getCellClass } =
-      inject(TABLE_V2_PROVIDE);
+      inject(TABLE_PROVIDE);
 
-    const helpRender = (col) => {
+    const helpRender = (col: Column) => {
       const type = col.props.type;
       if (type === 'selection') {
         return h(Checkbox, {
@@ -29,7 +29,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          class: 'cu-table-v2__header'
+          class: 'cu-table__header'
         },
         h(
           'table',

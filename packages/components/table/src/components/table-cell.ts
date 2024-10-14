@@ -1,5 +1,5 @@
 import { defineComponent, h, PropType, inject } from 'vue';
-import { TABLE_V2_PROVIDE, RenderData, Span, TableData, Column } from '../type';
+import { TABLE_PROVIDE, RenderData, Span, TableData, Column } from '../type';
 import { CuCheckbox as Checkbox } from '../../../checkbox';
 import { isArray, isFunction, isObject } from '../../../../utils';
 import { Loading, Right } from '../../../../icons';
@@ -25,7 +25,7 @@ export default defineComponent({
       selectRow,
       getCellClass,
       changeShowMore
-    } = inject(TABLE_V2_PROVIDE);
+    } = inject(TABLE_PROVIDE);
 
     function setSpanAttrbuilt() {
       let span = {

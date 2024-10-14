@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref, computed, inject, getCurrentInstance, onBeforeUnmount, onMounted } from 'vue';
 import '../style/avatar.css';
-import { randomColor } from '../../../tools';
+import { randomColor } from '../../../utils';
 import { avatarProps } from './main.props';
 import { AVATARGROUP_PROVIDE } from './type';
 import { AvatarFilled, ErrorPicture, Picture } from '../../../icons';

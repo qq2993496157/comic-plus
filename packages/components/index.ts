@@ -22,7 +22,6 @@ import { CuTimePicker } from './time-picker/index';
 import { CuDatePicker } from './date-picker/index';
 import { CuColorPicker } from './color-picker/index';
 import { CuUpload } from './upload/index';
-import { CuTable } from './table/index';
 import { CuTag } from './tag/index';
 import { CuTagComplex } from './tag-complex/index';
 import { CuCollapse } from './collapse/index';
@@ -85,7 +84,7 @@ import { CuTimelineItem } from './timeline-item/index';
 import { CuCalendar } from './calendar/index';
 import { CuSchedule } from './schedule/index';
 import { CuPopover } from './popover/index';
-import { CuTableV2 } from './table-v2/index';
+import { CuTable } from './table/index';
 import { CuTableColumn } from './table-column/index';
 import { CuContextmenu } from './contextmenu/index';
 import { CuWatermark } from './watermark/index';
@@ -121,7 +120,6 @@ export default [
   CuDatePicker,
   CuColorPicker,
   CuUpload,
-  CuTable,
   CuTag,
   CuTagComplex,
   CuCollapse,
@@ -186,7 +184,7 @@ export default [
   CuCalendar,
   CuSchedule,
   CuPopover,
-  CuTableV2,
+  CuTable,
   CuTableColumn,
   CuContextmenu,
   CuWatermark
@@ -221,7 +219,6 @@ export {
   CuDatePicker,
   CuColorPicker,
   CuUpload,
-  CuTable,
   CuTag,
   CuTagComplex,
   CuCollapse,
@@ -286,7 +283,7 @@ export {
   CuCalendar,
   CuSchedule,
   CuPopover,
-  CuTableV2,
+  CuTable,
   CuTableColumn,
   CuContextmenu,
   CuWatermark

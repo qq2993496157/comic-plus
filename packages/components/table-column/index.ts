@@ -1,5 +1,5 @@
 import { withInstall } from '../../utils';
 
-import TableColumn from '../table-v2/src/table-column';
+import TableColumn from '../table/src/table-column';
 
 export const CuTableColumn = withInstall(TableColumn);

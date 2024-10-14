@@ -1,5 +1,5 @@
 import { inject, defineComponent, h, PropType } from 'vue';
-import { RenderData, TABLE_V2_PROVIDE } from '../type';
+import { RenderData, TABLE_PROVIDE } from '../type';
 
 export default defineComponent({
   name: 'ExpandRow',
@@ -7,7 +7,7 @@ export default defineComponent({
     data: Object as PropType<RenderData>
   },
   setup(props) {
-    const { columns, expandColumn } = inject(TABLE_V2_PROVIDE);
+    const { columns, expandColumn } = inject(TABLE_PROVIDE);
 
     return () => {
       return h(

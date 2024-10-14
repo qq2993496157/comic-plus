@@ -1,61 +1,67 @@
-import type { CSSProperties, InjectionKey, Ref } from 'vue';
-import type { TableProps } from './main.props';
+import { CSSProperties, ComputedRef, InjectionKey, Ref, VNode } from 'vue';
+import { TableColumnProps } from './table-column/column.props';
+import { tableEmits, tableProps } from './main.props';
+import { UseTableReturn, UseTableStyleReturn } from './util';
 
-export type TableColumn = {
-  label?: string;
-  prop?: string;
-  width?: number;
-  align?: string;
-  fixed?: string;
-  className?: string | ((row: any, rowIdx: number, col: any, colIdx: number) => string);
-};
+export type TableData = Record<string, any>;
 
-export type TableOption = {
-  column: TableColumn[];
-  border?: boolean;
-  selection?: boolean;
-  headStyle?: CSSProperties;
-  bodyStyle?: CSSProperties;
-  stripe?: boolean;
-  stripeColors?: string[];
-  empty?: string;
-};
-
-export type Tableresize = {
-  width: number;
-  height: number;
-  flexWidth: number;
-  leftShadow: boolean;
-  rightShadow: boolean;
-  scrollWidth: number;
-};
+export type Span =
+  | number[]
+  | {
+      rowspan: number;
+      colspan: number;
+    };
 
 export type TreeProps = {
-  children: string;
-  hasChildren?: string;
+  children?: string;
+  hasChildren?: boolean;
 };
 
-export type TableData = {
-  rowClassName?: string;
-  [key: string]: any;
-};
-
-export type RowOptions = {
+export type Column = {
   uid: number;
-  isCheck: Ref<boolean>;
-  row: TableData;
-  updateCheck: (ckeck: boolean) => void;
+  props: TableColumnProps;
+  type: TableColumnProps['type'];
+  fixed: 'left' | 'right' | null;
+  style: CSSProperties;
+  default: (...args: any[]) => VNode[];
+  header: (...args: any[]) => VNode[];
 };
 
-export type Load = (data: TableData, _then: (arr: TableData[]) => void) => void;
+export type RenderData = {
+  row: TableData;
+  selection: boolean;
+  _key?: any;
+  _parentKey?: any;
+  _level?: number;
+  show?: boolean;
+  display?: boolean;
+  treeExpand?: boolean;
+  loading?: boolean;
+  hasChildren?: () => boolean;
+  expand?: () => boolean;
+};
+
+export type UseTableOptions = {
+  props: tableProps;
+  emit: tableEmits;
+  columns: Ref<Column[]>;
+};
+export type UseTableStyleOptions = {
+  containerRef: Ref<HTMLElement>;
+  props: tableProps;
+  columns: Ref<Column[]>;
+  MIN_SIZE: number;
+};
+
+export type ColumnRecord = Record<string, Column>;
 
 export type TableProvide = {
-  props: TableProps;
-  checkList: Ref<TableData[]>;
-  treeProps: TreeProps;
-  changeSelection: () => void;
-  addOption: (row: RowOptions) => void;
-  removeOption: (uid: number) => void;
-};
+  props: tableProps;
+  columns: Ref<Column[]>;
+  getFixedIndex: ComputedRef<{ left: number; right: number }>;
+  addColumn: (column: Column) => void;
+  removeColumn: (id: number) => void;
+} & UseTableStyleReturn &
+  UseTableReturn;
 
 export const TABLE_PROVIDE: InjectionKey<TableProvide> = Symbol('TABLE_PROVIDE');

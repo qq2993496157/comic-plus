@@ -10,16 +10,6 @@ export type ComicDir = 'vertical' | 'horizontal';
 
 export type Config = {
   size?: ComicSize;
-  color?:
-    | string
-    | {
-        primary?: string;
-        success?: string;
-        danger?: string;
-        warning?: string;
-        info?: string;
-        text?: string;
-      };
   zIndex?: number;
   loadingRender?: Component | VNode;
 };

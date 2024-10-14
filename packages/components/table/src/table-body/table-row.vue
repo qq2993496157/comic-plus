@@ -78,7 +78,7 @@
 
 <script setup lang="ts">
 import { PropType, computed, inject, ref } from 'vue';
-import { TABLE_V2_PROVIDE, RenderData, Span } from '../type';
+import { TABLE_PROVIDE, RenderData, Span } from '../type';
 import { CuCheckbox as Checkbox } from '../../../checkbox';
 import { isArray, isFunction, isObject } from '../../../../utils';
 import expandRow from '../components/expand-row';
@@ -107,7 +107,7 @@ const {
   getCellClass,
   clickRow,
   changeShowMore
-} = inject(TABLE_V2_PROVIDE);
+} = inject(TABLE_PROVIDE);
 
 function getStripeClass(number) {
   if (!props.stripe) return;

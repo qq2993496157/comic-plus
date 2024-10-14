@@ -64,15 +64,14 @@
 }
 .cu-radio__inner::after {
   content: '';
-  display: block;
   width: 10px;
   height: 10px;
   position: absolute;
   left: 2px;
   top: 2px;
   border-radius: 50%;
-  display: none;
   transition: all 200ms;
+  transform: scale(0);
 }
 
 .cu-radio.large .cu-radio__inner::after {
@@ -108,7 +107,7 @@
 
 .cu-radio input:not(:disabled):checked ~ .cu-radio__inner::after {
   background-color: var(--cu-radio-active-color);
-  display: block;
+  transform: scale(1);
 }
 
 .cu-radio input:not(:disabled):checked ~ .cu-radio__label {

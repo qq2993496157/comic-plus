@@ -6,9 +6,8 @@
  * @LastEditTime: 2024-08-20 11:40:53
 -->
 
-
 <!-- <template>
-  <div class="cu-table-v2__footer">
+  <div class="cu-table__footer">
     <table cellspacing="0" cellpadding="0">
       <table-colgroup />
       <tfoot>
@@ -38,7 +37,7 @@
 
 <script setup lang="ts">
 import { computed, inject, isVNode, ref } from 'vue';
-import { TABLE_V2_PROVIDE } from '../type';
+import { TABLE_PROVIDE } from '../type';
 import TableColgroup from '../components/table-colgroup';
 
 defineOptions({
@@ -59,7 +58,7 @@ const defaultSummaryMethod = ({ columns, datas }) => {
   return sum;
 };
 
-const { props, columns, getFixedIndex, getCellClass } = inject(TABLE_V2_PROVIDE);
+const { props, columns, getFixedIndex, getCellClass } = inject(TABLE_PROVIDE);
 
 const params = ref({
   columns: columns.value.map((v) => v.props),

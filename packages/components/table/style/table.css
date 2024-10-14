@@ -1,68 +1,11 @@
 .cu-table {
-  position: relative;
   width: 100%;
   color: var(--cu-text-color-light);
-  border-bottom: 1px solid var(--cu-border-color);
   overflow: hidden;
-  font-size: 14px;
-}
-.cu-table table {
-  min-width: 100%;
-  border-spacing: 0;
-  table-layout: fixed;
-}
-
-.cu-table table th,
-.cu-table table td {
-  text-align: left;
-  padding: 8px 12px;
-  background-color: inherit;
-}
-.cu-table.is-border {
-  border-top: 1px solid;
-  border-left: 1px solid;
-  border-right: 1px solid;
-  border-color: var(--cu-border-color);
-}
-.cu-table .cu-table__body {
-  background-color: #fff;
   position: relative;
-  overflow: auto;
-  margin-bottom: -1px;
-}
-
-.cu-table .cu-table__head {
-  background-color: #fff;
-  overflow-x: scroll;
-  scrollbar-width: none;
-}
-
-.cu-table table,
-.cu-table tbody,
-.cu-table thead,
-.cu-table .cu-table__row {
-  background-color: inherit;
-}
-
-.cu-table__row th,
-.cu-table__row td {
-  position: relative;
-  border-bottom: 1px solid;
-  border-color: var(--cu-border-color);
-}
-
-.cu-table .cu-table__expand {
-  width: 100%;
-  overflow: hidden;
-  display: table-row;
-}
-
-.cu-table .cu-table__expand .cu-table__expand-td {
-  overflow: hidden;
-  display: table-cell;
-  width: 100%;
-  border-bottom: 1px solid;
-  border-color: var(--cu-border-color);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .cu-table .cu-table__row {
@@ -75,66 +18,156 @@
 
 .cu-table.small table th,
 .cu-table.small table td {
-  padding: 4px 10px;
+  padding: 6px 0;
 }
 .cu-table.small .cu-table__row {
   height: calc(var(--cu-size-small) + 8px);
   font-size: 12px;
 }
 
-.cu-table.is-border .cu-table__td,
-.cu-table.is-border .cu-table__th {
-  border-right: 1px solid;
-  border-color: var(--cu-border-color);
+.hidden-column {
+  display: none;
 }
-.cu-table .cu-table__body:not(.scrolly-body) .cu-table__td:last-child,
-.cu-table .cu-table__th:last-child {
+
+.cu-table table {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  /* font-weight: normal; */
+  table-layout: fixed;
+}
+
+.cu-table table th,
+.cu-table table td {
+  /* font-weight: normal; */
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cu-border-color);
+  text-align: left;
+  background-color: inherit;
+}
+
+.cu-table tfoot th {
+  border-top: 1px solid var(--cu-border-color);
+}
+
+.cu-table__body .cu-table__row {
+  background-color: #fff;
+  transition: filter 250ms ease;
+}
+
+.cu-table__footer .cu-table__row,
+.cu-table__header .cu-table__row {
+  background-color: #fff;
+}
+.cu-table .cu-table__row.current-row {
+  background-color: var(--cu-table-highlight-color, var(--cu-color-primary-light9));
+}
+
+.cu-table--stripe .cu-table__row--stripe-odd {
+  background-color: var(--cu-table-stripe-color1, #ffffff);
+}
+
+.cu-table--stripe .cu-table__row--stripe-even {
+  background-color: var(--cu-table-stripe-color2, #fafafa);
+}
+
+.cu-table--border {
+  position: relative;
+  border: 1px solid var(--cu-border-color);
+  border-bottom: 0;
+}
+.cu-table--border::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--cu-border-color);
+}
+
+.cu-table--border table th,
+.cu-table--border table td {
+  border-right: 1px solid var(--cu-border-color);
+  min-width: 0;
+}
+
+.cu-table--border:not(.scroll-table) .cu-table__td:last-child,
+.cu-table--border:not(.scroll-table) .cu-table__th:last-child {
   border-right: 0;
 }
 
-.cu-table .cu-table__expand td,
-.cu-table:not(.is-selection) .cu-table__body.table-expand .cu-table__row .cu-table__td:first-child,
-.cu-table.is-selection .cu-table__body.table-expand .cu-table__row .cu-table__td:nth-child(2) {
-  padding-left: var(--cu-table-td-paddingleft);
-}
-
-.cu-table .cu-table__body .cu-table__td .cu-table__td-placeholder {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  transition: transform 200ms;
+.cu-table--warpper {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
 }
 
-.cu-table .cu-table__body.is-stripe .cu-table__row:nth-of-type(odd) {
-  background-color: var(--stripe-odd) !important;
+.cu-table__header {
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  z-index: 1;
 }
-.cu-table .cu-table__body.is-stripe .cu-table__row:nth-of-type(even) {
-  background-color: var(--stripe-even) !important;
+.cu-table__body {
+  flex: 1;
+  position: relative;
+  z-index: 0;
 }
-.cu-table .cu-table__body .cu-table__row {
-  transition: filter 200ms;
+
+.cu-table__footer {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  position: sticky;
+  bottom: 0;
+  margin-top: -1px;
 }
-.cu-table .cu-table__body .cu-table__row:hover {
+
+.cu-table__cell {
+  padding: 0 10px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.cu-table__cell.is-center {
+  text-align: center;
+}
+
+.cu-table__cell.is-left {
+  text-align: left;
+}
+
+.cu-table__cell.is-right {
+  text-align: right;
+}
+
+.cu-table__cell .expand-icon {
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+.cu-table__cell .expand-icon.is-expand {
+  transform: rotate(90deg);
+}
+
+.cu-table__body .cu-table__row:hover {
   filter: brightness(0.97);
 }
 
-.cu-table .cu-table__body .cu-table__td .cu-table__td-placeholder.unfold {
-  transform: translateY(-50%) rotate(90deg);
-}
-
-.cu-table .cu-table__th.checkbox,
-.cu-table .cu-table__td.checkbox {
-  text-align: center;
-}
-
 .cu-table__empty {
-  line-height: 40px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--cu-text-color-light);
   width: 100%;
+}
+
+.cu-table__empty_default {
+  line-height: 60px;
+  text-align: center;
 }
 
 .cu-table .fixed-left {
@@ -174,4 +207,17 @@
 }
 .cu-table.show-right-shadow .cu-table__row .fixed-right.fixed-shadow-right::before {
   box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.25);
+}
+
+.cu-table__indent {
+  display: inline-block;
+}
+
+.cu-tabel__placeholder {
+  display: inline-block;
+  width: 20px;
+}
+
+.cu-table [class*='cu-table__row--level-'] .expand-icon {
+  margin-right: 4px;
 }

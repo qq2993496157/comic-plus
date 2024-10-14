@@ -28,6 +28,9 @@
   outline: none;
   vertical-align: middle;
 }
+.cu-button__icon {
+  display: inline-flex;
+}
 
 .cu-button.large {
   height: var(--cu-size-large);

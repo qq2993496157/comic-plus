@@ -1,11 +1,11 @@
 import { defineComponent, h, inject, ref } from 'vue';
-import { TABLE_V2_PROVIDE } from '../type';
+import { TABLE_PROVIDE } from '../type';
 import TableColgroup from '../components/table-colgroup';
 
 export default defineComponent({
   name: 'TableFooter',
   setup() {
-    const { props, columns, getFixedIndex, getCellClass } = inject(TABLE_V2_PROVIDE);
+    const { props, columns, getFixedIndex, getCellClass } = inject(TABLE_PROVIDE);
 
     const defaultSummaryMethod = ({ columns, datas }) => {
       const sum = columns.map((col, idx) => {
@@ -32,7 +32,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          class: 'cu-table-v2__footer'
+          class: 'cu-table__footer'
         },
         h(
           'table',

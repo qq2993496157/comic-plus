@@ -10,7 +10,7 @@ export const tableColumnProps = {
   align: String as PropType<'left' | 'right' | 'center'>,
   width: {
     type: String,
-    default: (value) => {
+    default: (value: any) => {
       //由于type设置了默认值，因此 width需要放在type下面，否则当前的value中的type会永远是default
       return ['expand', 'index', 'selection'].includes(value.type) ? '50' : null;
     }

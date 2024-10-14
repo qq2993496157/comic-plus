@@ -1,27 +1,27 @@
 import { inject, defineComponent, h } from 'vue';
-import { TABLE_V2_PROVIDE } from '../type';
+import { TABLE_PROVIDE } from '../type';
 import TableColgroup from '../components/table-colgroup';
 import TableRow from '../components/table-row';
 
 export default defineComponent({
   name: 'TableBody',
   setup(_, { slots }) {
-    const { renderData } = inject(TABLE_V2_PROVIDE);
+    const { renderData } = inject(TABLE_PROVIDE);
 
     return () => {
       return h(
         'div',
         {
-          class: 'cu-table-v2__body'
+          class: 'cu-table__body'
         },
         [
           renderData.value.length === 0
             ? h(
                 'div',
                 {
-                  class: 'cu-table-v2__empty'
+                  class: 'cu-table__empty'
                 },
-                [slots['empty']?.() || h('div', { class: 'cu-table-v2__empty_default' }, '暂无数据')]
+                [slots['empty']?.() || h('div', { class: 'cu-table__empty_default' }, '暂无数据')]
               )
             : null,
           h(

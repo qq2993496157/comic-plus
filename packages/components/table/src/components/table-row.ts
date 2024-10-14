@@ -1,5 +1,5 @@
 import { PropType, computed, inject, ref, defineComponent, h } from 'vue';
-import { TABLE_V2_PROVIDE, RenderData } from '../type';
+import { TABLE_PROVIDE, RenderData } from '../type';
 import { isFunction } from '../../../../utils';
 import expandRow from './expand-row';
 import tableCell from './table-cell';
@@ -11,14 +11,14 @@ export default defineComponent({
     rowIndex: Number
   },
   setup(props) {
-    const { props: injectProps, columns, rowSelection, clickRow } = inject(TABLE_V2_PROVIDE);
+    const { props: injectProps, columns, rowSelection, clickRow } = inject(TABLE_PROVIDE);
 
     const showExpand = ref(false);
     const row = computed(() => props.data.row!);
 
-    function getStripeClass(number) {
+    function getStripeClass(n: number) {
       if (!injectProps.stripe) return;
-      return 'cu-table__row--stripe-' + ((number + 1) % 2 === 0 ? 'even' : 'odd');
+      return 'cu-table__row--stripe-' + ((n + 1) % 2 === 0 ? 'even' : 'odd');
     }
 
     return () => {

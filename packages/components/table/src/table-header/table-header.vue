@@ -6,9 +6,8 @@
  * @LastEditTime: 2024-08-20 11:48:02
 -->
 
-
 <!-- <template>
-  <div class="cu-table-v2__header">
+  <div class="cu-table__header">
     <table cellspacing="0" cellpadding="0">
       <table-colgroup />
       <thead>
@@ -54,7 +53,7 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-import { TABLE_V2_PROVIDE } from '../type';
+import { TABLE_PROVIDE } from '../type';
 import { CuCheckbox as Checkbox } from '../../../checkbox';
 import TableColgroup from '../components/table-colgroup';
 import { isFunction } from '../../../../utils';
@@ -64,5 +63,5 @@ defineOptions({
 });
 
 const { props, columns, isAllSelected, indeterminate, getFixedIndex, selectAll, getCellClass } =
-  inject(TABLE_V2_PROVIDE);
+  inject(TABLE_PROVIDE);
 </script> -->

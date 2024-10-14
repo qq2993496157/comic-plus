@@ -1,9 +1,29 @@
 import { ref, onUpdated, defineComponent, h, provide, onMounted } from 'vue';
 import '../style/waterfall.css';
-import { addClass, debounce, findIndexOfMinOrMax, removeClass } from '../../../utils';
+import { addClass, debounce, removeClass } from '../../../utils';
 import { waterfallProps, waterfallEmits } from './main.props';
 import { WATERFALL_PROVIDE } from './type';
 import { useResize } from '../../../hooks';
+
+/**
+ * @description: 找出数组最大值或最小值的下标
+ * @param {number[]} arr 数组
+ * @param {boolean} flag  true为最大值 false为最小值  默认false
+ * @return {number}
+ */
+const findIndexOfMinOrMax = (arr: number[], flag?: boolean): number => {
+  if (arr.length === 0) {
+    return -1;
+  }
+  let flagValue: number;
+  if (flag) {
+    flagValue = Math.max(...arr);
+  } else {
+    flagValue = Math.min(...arr);
+  }
+  const index = arr.indexOf(flagValue);
+  return index;
+};
 
 export default defineComponent({
   name: 'CuWaterfall',

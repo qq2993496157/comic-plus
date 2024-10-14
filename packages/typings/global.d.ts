@@ -56,8 +56,6 @@ declare module 'vue' {
 
     CuUpload: typeof import('../components/index')['CuUpload'];
 
-    CuTable: typeof import('../components/index')['CuTable'];
-
     CuTag: typeof import('../components/index')['CuTag'];
 
     CuTagComplex: typeof import('../components/index')['CuTagComplex'];
@@ -186,7 +184,7 @@ declare module 'vue' {
 
     CuPopover: typeof import('../components/index')['CuPopover'];
 
-    CuTableV2: typeof import('../components/index')['CuTableV2'];
+    CuTable: typeof import('../components/index')['CuTable'];
 
     CuTableColumn: typeof import('../components/index')['CuTableColumn'];
 

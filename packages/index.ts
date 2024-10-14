@@ -1,6 +1,5 @@
 import { reactive, Plugin, App, shallowRef } from 'vue';
 import { Config } from './utils';
-import { deepMerge } from './tools';
 import components from './components';
 import CuMessageBox from './components/message-box';
 import { preview } from './components/preview-image';
@@ -41,33 +40,14 @@ const installIcons = (app: App, prefix?: string) => {
 var assignConfig = reactive({}) as Config;
 
 const useComicConfig = (config: Config): void => {
-  setColor(config?.color);
   const recordLoadingRender = config?.loadingRender || null;
-  assignConfig = reactive(deepMerge(assignConfig, config));
+  assignConfig = reactive(Object.assign(assignConfig, config));
   assignConfig.loadingRender = shallowRef(recordLoadingRender); //对象合并导致Component类型的props出问题 所以这里重新手动赋值
   window['$COMIC'] = assignConfig;
 };
 
-const setColor = (value?: Config['color']): void => {
-  if (!value) return;
-  let obj = {};
-  if (typeof value === 'string') {
-    obj['primary'] = value;
-  } else {
-    obj = value;
-  }
-  const colors = ['primary', 'success', 'warning', 'danger', 'info', 'text'];
-  colors.forEach((colorKey) => {
-    const propertyKey = colorKey === 'text' ? `--cu-text-color` : `--cu-color-${colorKey}`;
-    if (obj[colorKey]) {
-      document.documentElement.style.setProperty(propertyKey, obj[colorKey]);
-    }
-  });
-};
-
 export default plugin;
 
-export * from './tools/index';
 export * from './components';
 export * from './icons';
 

@@ -4,23 +4,6 @@
   box-sizing: border-box;
 }
 
-[class*='cu-icon-'],
-[class^='cu-icon-'] {
-  font-style: normal;
-  font-family: 'iconfont' !important;
-}
-/* @keyframes rotateInfinite {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.is-loading,
-.cu-icon-loading,
-.cu-icon-loading-one {
-  display: inline-block;
-  animation: rotateInfinite 2s infinite linear;
-} */
-
 .cu-fade-enter-active,
 .cu-fade-leave-active {
   transition: opacity 200ms ease-in-out !important;

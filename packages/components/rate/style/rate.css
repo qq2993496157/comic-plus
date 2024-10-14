@@ -7,7 +7,6 @@
 .cu-rate__container {
   display: flex;
   align-items: center;
-  transition: all 200ms;
 }
 
 .cu-rate-item {

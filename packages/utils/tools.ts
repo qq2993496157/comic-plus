@@ -2,7 +2,6 @@
  * @description: 防抖
  * @param {Function} func
  * @param {number} interval
- * @see http://comicui.cn/api?name=throttle
  */
 function debounce(func: (...args: any) => void, interval: number = 200): (...args: any) => void {
   if (typeof func !== 'function') {
@@ -21,7 +20,6 @@ function debounce(func: (...args: any) => void, interval: number = 200): (...arg
  * @description: 节流
  * @param {Function} func
  * @param {number} interval
- * @see http://comicui.cn/api?name=throttle
  */
 function throttle(func: (...args: any) => void, interval: number = 500): (...args: any) => void {
   if (typeof func !== 'function') {
@@ -38,18 +36,6 @@ function throttle(func: (...args: any) => void, interval: number = 500): (...arg
     }
   };
 }
-
-/**
- * @description: 截取指定下标前的内容并返回新数组
- * @param {any[]} arr
- * @param {number} index
- */
-const deleteAfterIndex = (arr: any[], index: number): any[] => {
-  if (index >= 0 && index < arr.length) {
-    arr.splice(index + 1, arr.length - index - 1);
-  }
-  return arr;
-};
 
 /**
  * @description: 补0操作
@@ -97,47 +83,6 @@ const formatDate = (timestamp: any, fmt?: string): string => {
 };
 
 /**
- * @description: 找出数组最大值或最小值的下标
- * @param {number[]} arr 数组
- * @param {boolean} flag  true为最大值 false为最小值  默认false
- * @return {number}
- */
-const findIndexOfMinOrMax = (arr: number[], flag?: boolean): number => {
-  if (arr.length === 0) {
-    return -1;
-  }
-  let flagValue: number;
-  if (flag) {
-    flagValue = Math.max(...arr);
-  } else {
-    flagValue = Math.min(...arr);
-  }
-  const index = arr.indexOf(flagValue);
-  return index;
-};
-
-/**
- * @description: 根据指定字段将深度递归的数组拍扁
- * @param {any} arr
- * @param {string} key
- * @return {*}
- */
-const flattenArray = (arr: any[], key: string): any[] => {
-  const newArray = JSON.parse(JSON.stringify(arr));
-
-  const result: any[] = [];
-  function flatten(obj) {
-    result.push(obj);
-    if (obj[key]) {
-      obj[key].forEach((child) => flatten(child));
-      // delete obj[key];
-    }
-  }
-  newArray.forEach((obj) => flatten(obj));
-  return result;
-};
-
-/**
  * @description: 判断两个对象是否相等 包含proxy代理的对象
  * @param {any} o1
  * @param {any} o2
@@ -177,14 +122,17 @@ const getCssHeight = (height: any): any => {
   }
 };
 
-export {
-  debounce,
-  throttle,
-  deleteAfterIndex,
-  repairZero,
-  formatDate,
-  findIndexOfMinOrMax,
-  flattenArray,
-  deepEqual,
-  getCssHeight
+/**
+ * @description: 生成随机颜色
+ * @return {*}
+ */
+const randomColor = (): string => {
+  return (
+    '#' +
+    Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padEnd(6, '0')
+  );
 };
+
+export { debounce, throttle, repairZero, formatDate, deepEqual, getCssHeight, randomColor };
