@@ -1,7 +1,7 @@
 <template>
   <div
     class="cu-carousel"
-    :class="[direction ? 'is-' + direction : undefined]"
+    :class="[direction ? 'is-' + direction : undefined, { 'outside-indicator': indicatorPosition === 'outside' }]"
     @mouseenter="mouseenter"
     @mouseleave="mouseleave">
     <div class="cu-carousel__container" :style="{ height }">
@@ -9,24 +9,22 @@
         <slot></slot>
       </transition-group>
     </div>
-    <div class="cu-carousel__tools">
-      <div class="cu-carousel__buttons" :class="arrow" v-if="arrow != 'never'">
-        <i class="left" v-if="direction === 'horizontal'" @click="changeActive(-1)">
-          <Left />
-        </i>
-        <i class="right" v-if="direction === 'horizontal'" @click="changeActive(1)">
-          <Right />
-        </i>
-        <i class="top" v-if="direction === 'vertical'" @click="changeActive(-1)">
-          <Up />
-        </i>
-        <i class="bottom" v-if="direction === 'vertical'" @click="changeActive(1)">
-          <Down />
-        </i>
-      </div>
-      <div class="cu-carousel__indicator" :class="arrow" v-if="showIndicator">
-        <span v-for="dot in itemKeyList" :key="dot" @click="dotClick(dot)" :class="{ active: current === dot }"></span>
-      </div>
+    <div class="cu-carousel__buttons" :class="arrow" v-if="arrow != 'never'">
+      <i class="left" v-if="direction === 'horizontal'" @click="changeActive(-1)">
+        <Left />
+      </i>
+      <i class="right" v-if="direction === 'horizontal'" @click="changeActive(1)">
+        <Right />
+      </i>
+      <i class="top" v-if="direction === 'vertical'" @click="changeActive(-1)">
+        <Up />
+      </i>
+      <i class="bottom" v-if="direction === 'vertical'" @click="changeActive(1)">
+        <Down />
+      </i>
+    </div>
+    <div class="cu-carousel__indicator" v-if="indicatorPosition !== 'none'">
+      <span v-for="dot in itemKeyList" :key="dot" @click="dotClick(dot)" :class="{ active: current === dot }"></span>
     </div>
   </div>
 </template>
@@ -103,7 +101,7 @@ function setActiveIndex(num: number): void {
 }
 
 function dotClick(dot: number) {
-  if (props.arrow === 'never') return;
+  // if (props.arrow === 'never') return;
   let index = itemKeyList.value.findIndex((v) => v === dot);
   flag.value = index >= active.value;
   active.value = index;

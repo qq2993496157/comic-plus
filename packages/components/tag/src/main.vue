@@ -2,8 +2,13 @@
   <span
     v-if="!transition"
     class="cu-tag"
-    :class="[type ? 'cu-tag--' + type : undefined, tagMode ? 'is-' + tagMode : undefined, { 'is-border': border }]"
-    :style="[{ height: size + 'px' }, customStyle]">
+    :class="[
+      type ? 'cu-tag--' + type : undefined,
+      tagMode ? 'is-' + tagMode : undefined,
+      { 'is-border': border },
+      { 'is-round': round }
+    ]"
+    :style="[{ '--tag-size': size + 'px' }, customStyle]">
     <span class="cu-tag-content">
       <slot></slot>
     </span>
@@ -12,8 +17,13 @@
   <transition v-else name="cu-zoom-x" appear>
     <span
       class="cu-tag"
-      :class="[type ? 'cu-tag--' + type : undefined, tagMode ? 'is-' + tagMode : undefined, { 'is-border': border }]"
-      :style="[{ height: size + 'px' }, customStyle]">
+      :class="[
+        type ? 'cu-tag--' + type : undefined,
+        tagMode ? 'is-' + tagMode : undefined,
+        { 'is-border': border },
+        { 'is-round': round }
+      ]"
+      :style="[{ '--tag-size': size + 'px' }, customStyle]">
       <span class="cu-tag-content">
         <slot></slot>
       </span>

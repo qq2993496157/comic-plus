@@ -9,11 +9,11 @@
     ]"
     :class="{ 'is-disabled': disabled }"
     @click="bulletClick">
-    <div class="cu-bullet-content">
-      <slot>
+    <slot>
+      <div class="cu-bullet-content">
         <component v-if="isVueComponent(icon)" class="cu-bullet__icon" :is="icon" />
-      </slot>
-    </div>
+      </div>
+    </slot>
   </li>
 </template>
 

@@ -75,3 +75,76 @@
 .cu-calendar__cell:hover {
   background-color: var(--cu-color-primary-light9);
 }
+
+.cu-calendar__schedules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 0 -9px;
+}
+
+.cu-calendar__schedules li {
+  height: 20px;
+  /* width: 100%; */
+  margin-top: 4px;
+  color: #fff;
+  border-top: 1px solid var(--cu-border-color);
+  border-bottom: 1px solid var(--cu-border-color);
+}
+
+.cu-calendar__schedules li.is-start {
+  margin-left: 4px;
+  /* border-radius: 2px 0 0 2px; */
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-left: 1px solid var(--cu-border-color);
+}
+
+.cu-calendar__schedules li.is-end {
+  margin-right: 4px;
+  /* border-radius: 0 2px 2px 0; */
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-right: 1px solid var(--cu-border-color);
+}
+
+.cu-calendar--floatCard {
+  transition: transform 100ms ease;
+  color: var(--cu-text-color);
+  max-width: 300px;
+  background-color: #fff;
+  border-radius: var(--cu-border-radius);
+  pointer-events: none;
+  box-shadow: 0 0px 1px rgba(200, 200, 200, 1), 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.cu-calendar--floatCard .floatCard__container {
+  padding: 8px 10px;
+  border-radius: inherit;
+  border: 1px solid var(--cu-border-color);
+  position: relative;
+  background-color: color-mix(in srgb, var(--card-color), white 90%);
+  overflow: hidden;
+}
+
+.cu-calendar--floatCard .floatCard__container::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--card-color);
+}
+
+.cu-calendar--floatCard .floatCard__content {
+  font-size: 14px;
+}
+
+.cu-calendar--floatCard .floatCard__time {
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: right;
+}

@@ -52,6 +52,11 @@
   padding: 0 4px;
   z-index: 1;
   background-color: #fff;
+  display: flex;
+}
+
+.cu-step.is-vertical .cu-step-item__header .cu-step-item__icon {
+  padding: 4px 0;
 }
 
 .cu-step-item__header .cu-step-item__line {
@@ -109,6 +114,7 @@
 .cu-step.is-vertical .cu-step-item .cu-step-item__main {
   flex: 1;
   padding-bottom: 20px;
+  padding-left: 5px;
 }
 
 .cu-step.is-vertical .cu-step-item .cu-step-item__header {
@@ -118,7 +124,7 @@
 .cu-step.is-vertical .cu-step-item__header .cu-step-item__text {
   width: 100%;
   height: fit-content;
-  padding: 0;
+  padding: 4px 0;
 }
 .cu-step.is-vertical .cu-step-item__header .cu-step-item__line {
   left: 9px;

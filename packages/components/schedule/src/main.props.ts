@@ -28,6 +28,18 @@ export const scheduleProps = {
   emptyText: {
     type: String,
     default: '暂无日程'
+  },
+  showLine: {
+    type: Boolean,
+    default: true
+  },
+  showTime: {
+    type: Boolean,
+    default: true
+  },
+  cardColor: {
+    type: Boolean,
+    default: true
   }
 } as const;
 

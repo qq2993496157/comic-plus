@@ -9,7 +9,8 @@ export const tagComplexProps = {
   closable: Boolean,
   transition: Boolean,
   color: String,
-  title: String
+  title: String,
+  round: Boolean
 } as const;
 export type TagComplexProps = ExtractPropTypes<typeof tagComplexProps>;
 

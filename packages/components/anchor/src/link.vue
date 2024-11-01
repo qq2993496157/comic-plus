@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { inject, onUnmounted, ref, watch } from 'vue';
 import '../style/anchor.css';
-import { animateScrollTo } from '../utils/scroll';
+import { animateScrollTo, elAnimation } from '../utils/scroll';
 import { ANCHOR_PROVIDE } from './type';
 import { anchorLinkProps } from './link.props';
 
@@ -37,12 +37,17 @@ anchor?.addLinkItem({
 
 function linkHandleClick() {
   if (anchor) {
-    anchor?.handleClick(props.href);
+    anchor?.handleClick(props.href, true);
   } else {
     let el = document.querySelector(props.href);
     if (el) {
       let to = el.getBoundingClientRect().top + window.scrollY - props.offset;
-      animateScrollTo(window, window.scrollY, to, 300);
+      animateScrollTo(window, window.scrollY, to, props.duration);
+
+      // 1.8.1版本开始支持闪烁动画
+      if (props.anchorAnimation) {
+        elAnimation(el, props.duration);
+      }
     }
   }
   return false;

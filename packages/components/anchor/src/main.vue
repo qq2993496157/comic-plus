@@ -14,7 +14,7 @@ import { computed, onMounted, provide, ref, watch } from 'vue';
 import { useEventListener } from '@vueuse/core';
 import '../style/anchor.css';
 import { debounce, useGlobal, isString } from '../../../utils';
-import { animateScrollTo } from '../utils/scroll';
+import { animateScrollTo, elAnimation } from '../utils/scroll';
 import { anchorProps, anchorEmits } from './main.props';
 import { AnchorLinkInstance, ANCHOR_PROVIDE } from './type';
 
@@ -65,11 +65,11 @@ const lineStyle = computed(() => {
   }
 });
 
-function handleClick(href: string) {
+function handleClick(href: string, animate?) {
   if (!href) return;
   hashChangeFlag = true;
   setCurrentAnchor(href);
-  scrollTo(href);
+  scrollTo(href, animate);
 }
 
 function setCurrentAnchor(href: string) {
@@ -114,7 +114,7 @@ function getCurrentAnchor() {
 
 let clearAnimate: (() => void) | null = null;
 
-function scrollTo(id: string) {
+function scrollTo(id: string, animate?) {
   let el = document.querySelector(id);
   if (el) {
     if (clearAnimate) clearAnimate();
@@ -123,6 +123,11 @@ function scrollTo(id: string) {
     let to = el.getBoundingClientRect().top - getContainerOffsetTop() + from - props.offset;
 
     clearAnimate = animateScrollTo(containerEl.value, from, to, props.duration);
+
+    // 1.8.1版本开始支持闪烁动画
+    if (animate && props.anchorAnimation) {
+      elAnimation(el, props.duration);
+    }
   }
 }
 
@@ -209,7 +214,9 @@ provide(ANCHOR_PROVIDE, {
   handleClick
 });
 
-defineExpose({
-  changeAnchor: handleClick
-});
+// 1.8.1版本移除该导出属性，没什么用，文档也没写
+// 可用 《 window.location.hash = 锚点 》  代替
+// defineExpose({
+//   changeAnchor: handleClick
+// });
 </script>

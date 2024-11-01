@@ -13,7 +13,12 @@ export const anchorLinkProps = {
   offset: {
     type: Number,
     default: 0
-  }
+  },
+  duration: {
+    type: Number,
+    default: 500
+  },
+  anchorAnimation: Boolean
 } as const;
 
 export type AnchorLinkProps = ExtractPropTypes<typeof anchorLinkProps>;

@@ -28,6 +28,7 @@ const targetRect = useElementBounding(containerEl);
 const { height: windowHeight } = useWindowSize();
 
 const isFixed = computed<boolean>(() => {
+  if (props.disabled) return false;
   if (!containerEl.value) {
     return props.position === 'top' ? refT.value < props.offset : refB.value + props.offset >= windowHeight.value;
   } else {

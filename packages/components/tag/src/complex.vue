@@ -2,8 +2,8 @@
   <span
     v-if="!transition"
     class="cu-tag-complex"
-    :class="type ? 'cu-tag--' + type : undefined"
-    :style="{ height: size + 'px', borderColor: props.color }">
+    :class="[type ? 'cu-tag--' + type : undefined, { 'is-round': round }]"
+    :style="{ '--tag-size': size + 'px', borderColor: props.color }">
     <span class="cu-tag-content">
       <slot></slot>
     </span>
@@ -15,8 +15,8 @@
   <transition v-else name="cu-zoom-x" appear>
     <span
       class="cu-tag-complex"
-      :class="type ? 'cu-tag--' + type : undefined"
-      :style="{ height: size + 'px', borderColor: props.color }">
+      :class="[type ? 'cu-tag--' + type : undefined, { 'is-round': round }]"
+      :style="{ '--tag-size': size + 'px', borderColor: props.color }">
       <span class="cu-tag-content">
         <slot></slot>
       </span>

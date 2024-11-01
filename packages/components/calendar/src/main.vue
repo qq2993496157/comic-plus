@@ -1,5 +1,5 @@
 <template>
-  <div class="cu-calendar" :class="size ?? globalSize">
+  <div class="cu-calendar" ref="calendarRef" :class="size ?? globalSize">
     <div class="cu-calendar__header" v-if="showHeader">
       <slot name="header" :data="{ year: ty, month: tm + 1 }">
         <span>{{ ty + '年 ' + monthForLang[tm] + '月' }}</span>
@@ -28,21 +28,26 @@
             :class="{ 'is-prev': day.isPrevMonth, 'is-next': day.isNextMonth, 'is-today': isSelect(day) }"
             @click="selectDay(day)">
             <div class="cu-calendar__cell">
+              <p class="cu-calendar__date" v-if="showDay">{{ day.value }}</p>
+              <schedules-list v-if="openSchedule" :data="filterSchedules" :day="day" @mouse-in="dFc" @mouse-out="dFc" />
               <slot
                 name="day"
                 :data="{
                   isSelected: isSelect(day),
                   day: day.value,
                   type: day.isPrevMonth ? 'prev-month' : day.isNextMonth ? 'next-month' : 'current-month',
-                  date: dateFormat(day)
-                }"
-                >{{ day.value }}</slot
-              >
+                  date: formatDate(day.date, 'yyyy-MM-dd')
+                }"></slot>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+    <float-card v-if="openSchedule" :data="currentSchedule" :card-width="cardWidth" :trigger="calendarRef">
+      <template v-if="$slots['schedule-card']" #default="{ data }">
+        <slot name="schedule-card" :data="data" />
+      </template>
+    </float-card>
   </div>
 </template>
 
@@ -50,22 +55,21 @@
 import { computed, ref, warn, watch } from 'vue';
 import { CuButtonGroup as ButtonGroup } from '../../button-group';
 import { CuButton as CButton } from '../../button';
+import SchedulesList from './schedules.vue';
+import FloatCard from './float-card.vue';
 import '../style/calendar.css';
 import { calendarEmits, calendarProps } from './main.props';
-import { formatDate, useGlobal } from '../../../utils';
+import { debounce, formatDate, useGlobal } from '../../../utils';
+import { DateItem } from './type';
+import { useSchedules } from '../util';
+
 defineOptions({
   name: 'CuCalendar'
 });
 
-type DateItem = {
-  isPrevMonth?: boolean;
-  isNextMonth?: boolean;
-  isCurMonth?: boolean;
-  value: number;
-};
-
 const props = defineProps(calendarProps);
 const emit = defineEmits(calendarEmits);
+const calendarRef = ref();
 
 const { globalSize } = useGlobal();
 
@@ -91,6 +95,10 @@ const monthForLang = {
 
 const weekForLang = { 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六' };
 
+const currentSchedule = ref();
+
+const dFc = debounce((val) => (currentSchedule.value = val), 300);
+
 function setValue() {
   let time = new Date(dn.value);
 
@@ -106,7 +114,8 @@ const dates = computed(() => {
   let dl: DateItem[] = Array.from({ length: tml }, (val, index) => {
     return {
       isCurMonth: true,
-      value: index + 1
+      value: index + 1,
+      date: new Date(ty.value, tm.value, index + 1)
     };
   });
   let fd = new Date(ty.value, tm.value, 1).getDay();
@@ -115,14 +124,16 @@ const dates = computed(() => {
   for (i = ld; i > ld - fd; --i) {
     dl.unshift({
       isPrevMonth: true,
-      value: i
+      value: i,
+      date: new Date(ty.value, tm.value - 1, i)
     });
   }
 
   for (i = 0, len = dl.length; i + len < 42; ++i) {
     dl.push({
       isNextMonth: true,
-      value: i + 1
+      value: i + 1,
+      date: new Date(ty.value, tm.value + 1, i)
     });
   }
   let result: DateItem[][] = [];
@@ -142,6 +153,8 @@ const dates = computed(() => {
 
   return result;
 });
+
+const { filterSchedules } = useSchedules(props, { year: ty, month: tm, dates });
 
 function prevMonth() {
   tm.value === 0 ? (--ty.value, (tm.value = 11)) : --tm.value;
@@ -189,13 +202,13 @@ function selectDay(item: DateItem) {
   dn.value = new Date(ty.value, tm.value, item.value).setHours(0, 0, 0, 0);
 }
 
-function dateFormat(day) {
-  let mon = tm.value;
-  day.isPrevMonth && mon--;
-  day.isNextMonth && mon++;
-  let time: number = new Date(ty.value, mon, day.value).setHours(0, 0, 0, 0);
-  return formatDate(time, 'yyyy-MM-dd');
-}
+// function dateFormat(day) {
+//   let mon = tm.value;
+//   day.isPrevMonth && mon--;
+//   day.isNextMonth && mon++;
+//   let time: number = new Date(ty.value, mon, day.value).setHours(0, 0, 0, 0);
+//   return formatDate(time, 'yyyy-MM-dd');
+// }
 
 const dateTypeFn = {
   'prev-year': prevYear,

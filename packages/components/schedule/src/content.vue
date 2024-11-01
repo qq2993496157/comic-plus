@@ -12,12 +12,12 @@
       <div class="cu-schedule-list--scroll">
         <ul class="cu-schedule-list">
           <li v-for="el in timeList" class="cu-schedule-list__li" :style="{ height: spacing + 'px' }">
-            <span class="cu-schedule-list__time">
+            <span class="cu-schedule-list__time" v-if="props.showTime">
               <span>{{ (el.key < 10 ? '0' + el.key : el.key) + ':00' }}</span>
             </span>
-            <span class="cu-schedule-list__line"></span>
+            <span class="cu-schedule-list__line" v-if="props.showLine"></span>
           </li>
-          <div class="cu-schedule-cards--warpper">
+          <div class="cu-schedule-cards--warpper" :style="{ paddingLeft: props.showTime ? undefined : '0' }">
             <schedule-cards v-for="(item, idx) in cardForArr" :data="item" :key="idx">
               <template #card="{ data }" v-if="$slots['card']">
                 <slot name="card" :data="data" />
@@ -42,7 +42,7 @@
 import { computed, inject } from 'vue';
 import { SCHEDULE_PROVIDE } from './type';
 import ScheduleCards from './card.vue';
-import { formatDate } from '../../../utils';
+import { formatDate, randomColor } from '../../../utils';
 import { Calendar, Loading } from '../../../icons';
 
 const { date, props, spacing } = inject(SCHEDULE_PROVIDE);
@@ -75,18 +75,18 @@ function getNumber(t) {
 }
 
 const cardForArr = computed(() => {
-  let arr = props.schedules ?? [];
-  arr = arr
+  let arr = props.schedules
     .map((v, index) => {
-      v.getTimes = v.time.split('~').map((v) => {
-        return getNumber(Number(v.replace(/:/g, '.')));
-      });
-      v._index = index;
-      return v;
+      return {
+        ...v,
+        _index: index,
+        color: props.cardColor ? v.color ?? randomColor() : undefined,
+        getTimes: v.time.split('~').map((v) => {
+          return getNumber(Number(v.replace(/:/g, '.')));
+        })
+      };
     })
-    .sort((a, b) => {
-      return a.getTimes[0] - b.getTimes[0];
-    });
+    .sort((a, b) => a.getTimes[0] - b.getTimes[0]);
   let chunkArr = [];
 
   if (arr.length > 0) {
@@ -112,7 +112,6 @@ const cardForArr = computed(() => {
       }
     }
   }
-
   return chunkArr;
 });
 </script>

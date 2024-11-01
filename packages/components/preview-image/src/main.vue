@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue';
-import { useDraggable } from '@vueuse/core';
+import { useDraggable, useEventListener } from '@vueuse/core';
 import '../style/preview-image.css';
 import { CuMode as Mode } from '../../mode';
 import { previewImageProps } from './main.props';
@@ -99,6 +99,14 @@ function getInitialPosition() {
     y: (window.innerHeight - imageBoxRef.value.getBoundingClientRect().height) / 2
   };
 }
+
+useEventListener(window, 'keydown', (e) => {
+  e.preventDefault()
+
+  if(e.keyCode === 27){
+    showPreview.value = false
+  }
+});
 
 onMounted(() => {
   showMode.value = true;

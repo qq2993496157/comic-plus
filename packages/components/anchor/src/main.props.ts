@@ -21,7 +21,8 @@ export const anchorProps = {
   duration: {
     type: Number,
     default: 500
-  }
+  },
+  anchorAnimation: Boolean
 } as const;
 
 export type AnchorProps = ExtractPropTypes<typeof anchorProps>;

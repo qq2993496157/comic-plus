@@ -8,6 +8,7 @@
 
 .cu-carousel__container {
   width: 100%;
+  flex: 1;
   position: relative;
   overflow: hidden;
 }
@@ -20,8 +21,19 @@
   height: 100%;
 }
 
-.cu-carousel__tools {
-  height: 0;
+.cu-carousel__buttons {
+  position: absolute;
+}
+
+.cu-carousel.is-horizontal .cu-carousel__buttons {
+  width: 100%;
+  top: 50%;
+}
+
+.cu-carousel.is-vertical .cu-carousel__buttons {
+  height: 100%;
+  right: 30px;
+  top: 0;
 }
 
 .cu-carousel__buttons i {
@@ -42,26 +54,26 @@
 }
 .cu-carousel__buttons .left {
   left: 10px;
-  top: calc(50% - 15px);
+  top: calc(50% - 30px);
   transform: translate(calc(-100% - 14px), 0);
 }
 .cu-carousel__buttons .right {
   right: 10px;
-  top: calc(50% - 15px);
+  top: calc(50% - 30px);
   transform: translate(calc(100% + 14px), 0);
 }
 
 .cu-carousel__buttons .top {
   height: 30px;
-  right: 30px;
   top: 12px;
+  right: 0;
   transform: translate(0, calc(-100% - 16px));
 }
 
 .cu-carousel__buttons .bottom {
   height: 30px;
-  right: 30px;
   bottom: 12px;
+  right: 0;
   transform: translate(0, calc(100% + 16px));
 }
 
@@ -73,9 +85,28 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.cu-carousel.outside-indicator.is-horizontal .cu-carousel__indicator {
+  position: relative;
+  bottom: auto;
+  margin-top: 4px;
+}
+
+.cu-carousel.outside-indicator.is-vertical {
+  display: flex;
+}
+
+.cu-carousel.outside-indicator.is-vertical .cu-carousel__indicator {
+  position: relative;
+  right: auto;
+  margin-left: 4px;
+  transform: translateY(0);
+}
+
 .cu-carousel__indicator {
   position: absolute;
   display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 100;
 }
 
@@ -88,8 +119,9 @@
   transition: all 200ms;
   cursor: pointer;
 }
-.cu-carousel__indicator.never span {
-  cursor: default;
+
+.outside-indicator .cu-carousel__indicator span {
+  background-color: #999999;
 }
 
 .cu-carousel.is-horizontal .cu-carousel__indicator {
@@ -118,7 +150,7 @@
   opacity: 1;
   transform: scaleY(1.5);
 }
-.cu-carousel__indicator:not(.never) span:hover {
+.cu-carousel__indicator span:hover {
   opacity: 1;
 }
 

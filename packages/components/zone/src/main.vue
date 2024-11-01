@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, watchEffect } from 'vue';
 import '../style/zone.css';
 import { useEventListener } from '@vueuse/core';
 import { isNumber } from '../../../utils';

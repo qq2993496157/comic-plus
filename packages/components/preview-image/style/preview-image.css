@@ -13,7 +13,7 @@
   height: 40px;
   font-size: 20px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   color: #fff;
   z-index: 2;
@@ -62,7 +62,7 @@
   left: 50%;
   bottom: 80px;
   transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   z-index: 2;
   padding: 10px 20px;

@@ -13,7 +13,8 @@ export const tagProps = {
   },
   closable: Boolean,
   transition: Boolean,
-  color: String
+  color: String,
+  round:Boolean
 } as const;
 export type TagProps = ExtractPropTypes<typeof tagProps>;
 

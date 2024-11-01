@@ -1,5 +1,6 @@
 import { ExtractPropTypes, PropType } from 'vue';
 import { ComicSize } from '../../../utils';
+import { Schedules } from './type';
 
 export const calendarProps = {
   modelValue: Date,
@@ -11,7 +12,16 @@ export const calendarProps = {
   showHeader: {
     type: Boolean,
     default: true
-  }
+  },
+  showDay: {
+    type: Boolean,
+    default: true
+  },
+  openSchedule: Boolean,
+  schedules: {
+    type: Array as PropType<Schedules>
+  },
+  cardWidth: Number
 } as const;
 
 export type CalendarProps = ExtractPropTypes<typeof calendarProps>;

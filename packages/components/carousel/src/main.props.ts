@@ -22,9 +22,13 @@ export const carouselProps = {
     type: String as PropType<ComicDir>,
     default: 'horizontal'
   },
-  showIndicator: {
-    type: Boolean,
-    default: true
+  // showIndicator: {
+  //   type: Boolean,
+  //   default: true
+  // },
+  indicatorPosition: {
+    type: String as PropType<'default' | 'outside' | 'none'>,
+    default: 'default'
   },
   defaultIndex: Number,
   pauseOnHover: {

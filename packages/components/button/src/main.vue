@@ -8,7 +8,7 @@
     <i
       class="cu-button__icon"
       :class="[{ 'is-loading': loading }]"
-      :style="{ marginRight: $slots.default ? '4px' : undefined }"
+      :style="{ marginRight: $slots.default ? '8px' : undefined }"
       v-if="loading || icon">
       <component v-if="loading" :is="isVueComponent(loadingIcon) ? loadingIcon : Loading" />
       <component v-else-if="isVueComponent(icon)" :is="icon" />

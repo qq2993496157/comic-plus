@@ -40,3 +40,11 @@ export function animateScrollTo(container: HTMLElement | Window, from: number, t
     handle && caf(handle);
   };
 }
+
+export function elAnimation(el: Element, duration?: number) {
+  const time = 1000 + (duration ?? 0);
+  el.classList.add('cu-anchor--animation');
+  setTimeout(() => {
+    el.classList.remove('cu-anchor--animation');
+  }, time);
+}

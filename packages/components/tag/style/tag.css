@@ -5,7 +5,7 @@
   color: var(--cu-text-color);
   line-height: 1;
   font-size: 12px;
-  height: 20px;
+  height: var(--tag-size, 20px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +16,12 @@
   vertical-align: middle;
   overflow: hidden;
   border-color: var(--cu-border-color);
+  transition: all 320ms ease;
+}
+
+.cu-tag.is-round,
+.cu-tag-complex.is-round {
+  border-radius: calc(var(--tag-size, 20px) / 2);
 }
 
 .cu-tag-complex {

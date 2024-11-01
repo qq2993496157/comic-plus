@@ -99,3 +99,19 @@
 .cu-anchor.large .cu-anchor-link {
   font-size: 14px;
 }
+
+@keyframes flash {
+  0%,
+  50%,
+  to {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+.cu-anchor--animation {
+  animation: flash 800ms 300ms;
+}

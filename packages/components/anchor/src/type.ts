@@ -4,7 +4,7 @@ import type { AnchorProps } from './main.props';
 export type AnchorProvide = {
   props: AnchorProps;
   currentHref: Ref<string>;
-  handleClick: (href: string) => void;
+  handleClick: (href: string,animate?:boolean) => void;
   addLinkItem: (item: AnchorLinkInstance) => void;
   removeLinkItem: (href: string) => void;
 };

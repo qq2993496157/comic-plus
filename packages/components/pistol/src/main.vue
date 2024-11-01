@@ -11,7 +11,9 @@
     :style="{ '--cu-pistol-size': props.size + 'px' }">
     <div class="cu-pistol__container" ref="pistolContainerRef" :style="pistolStyle">
       <slot>
-        <component class="default-icon" :is="isVueComponent(icon) ? icon : HamburgerButton" />
+        <div class="cu-pistol__defaultwarpper">
+          <component class="default-icon" :is="isVueComponent(icon) ? icon : HamburgerButton" />
+        </div>
       </slot>
     </div>
     <ul class="cu-pistol__magazine" :class="props.direction">

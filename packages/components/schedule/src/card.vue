@@ -6,14 +6,13 @@
       :class="{ 'is-shadow': injectProps.cardShadow }"
       :style="{
         ...cardStyleFn(card),
-        '--x': 0 - tr * idx + 'px',
-        backgroundColor: `var(--cu-color-${colors[card._index % 4]})`
+        '--x': 0 - tr * idx + 'px'
       }"
       :key="card.time + idx">
       <slot name="card" :data="card">
         <component v-if="isVNode(card.content!)" :is="card.content!"></component>
         <template v-else>
-          <div class="cu-schedule-defaultcard">
+          <div class="cu-schedule-defaultcard" :style="{ '--card-color': card.color }">
             <div class="cu-schedule-defaultcard__content">
               {{ card.content! }}
             </div>
